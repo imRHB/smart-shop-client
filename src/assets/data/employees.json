@@ -1,0 +1,70 @@
+[
+  {
+    "_id": 1,
+    "name": "Md. Najmul",
+    "img": "https://i.ibb.co/n3mvg8R/user1.png",
+    "position": "Manager",
+    "role": "Admin",
+    "employeeId": "1234",
+    "phone": "01777777777",
+    "email": "najmul@gmail.com",
+    "address": "Uttara, Dhaka",
+    "salary": "25000"
+  },
+  {
+    "_id": 2,
+    "name": "Md. Rakib",
+    "img": "https://i.ibb.co/7kWk9pN/user3.png",
+    "position": "Sales Executive",
+    "role": "General",
+    "employeeId": "1235",
+    "phone": "01777777778",
+    "email": "rakib@gmail.com",
+    "address": "Nikunjo, Dhaka",
+    "salary": "15000"
+  },
+  {
+    "_id": 3,
+    "name": "Md. Mahfuz",
+    "img": "https://i.ibb.co/n3mvg8R/user1.png",
+    "position": "Sales Executive",
+    "employeeId": "1236",
+    "phone": "01777777779",
+    "email": "mahfuz@gmail.com",
+    "address": "Rampura, Dhaka",
+    "salary": "15000"
+  },
+  {
+    "_id": 4,
+    "name": "Maria Munni",
+    "img": "https://i.ibb.co/9yCNRGy/user2.png",
+    "position": "Sales Executive",
+    "employeeId": "1237",
+    "phone": "01777777787",
+    "email": "maria@munni.com",
+    "address": "Dhanmondi, Dhaka",
+    "salary": "15000"
+  },
+  {
+    "_id": 5,
+    "name": "Mr. Zahid",
+    "img": "https://i.ibb.co/n3mvg8R/user1.png",
+    "position": "Sales Executive",
+    "employeeId": "1238",
+    "phone": "01777777797",
+    "email": "zahid@gmail.com",
+    "address": "Badda, Dhaka",
+    "salary": "15000"
+  },
+  {
+    "_id": 6,
+    "name": "Mrs. Meem",
+    "img": "https://i.ibb.co/9yCNRGy/user2.png",
+    "position": "Sales Executive",
+    "employeeId": "1234",
+    "phone": "01777777877",
+    "email": "meem@gmail.com",
+    "address": "Gazipur, Dhaka",
+    "salary": "15000"
+  }
+]

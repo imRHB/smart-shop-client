@@ -1,0 +1,92 @@
+[
+  {
+    "_id": 1,
+    "name": "Md. Akash",
+    "customerId": "01777777777",
+    "phone": "01777777777",
+    "email": "najmul@gmail.com",
+    "address": "Uttara, Dhaka",
+    "createdAt": "07 Feb, 2021"
+  },
+  {
+    "_id": 2,
+    "name": "Md. Jibon",
+    "customerId": "01777777767",
+    "phone": "01777777767",
+    "email": "jibon@gmail.com",
+    "address": "Nikunjo, Dhaka",
+    "createdAt": "07 Feb, 2021"
+  },
+  {
+    "_id": 3,
+    "name": "Mr. Masud",
+    "customerId": "01777777777",
+    "phone": "01777777777",
+    "email": "masud@gmail.com",
+    "address": "Farmgate, Dhaka",
+    "createdAt": "07 Feb, 2021"
+  },
+  {
+    "_id": 4,
+    "name": "Md. Kamal",
+    "customerId": "01777777797",
+    "phone": "01777777797",
+    "email": "kamal@gmail.com",
+    "address": "Malibag, Dhaka",
+    "createdAt": "07 Feb, 2021"
+  },
+  {
+    "_id": 5,
+    "name": "Mr. Farid",
+    "customerId": "01777777788",
+    "phone": "01777777788",
+    "email": "farid@gmail.com",
+    "address": "Gulshan, Dhaka",
+    "createdAt": "07 Feb, 2021"
+  },
+  {
+    "_id": 6,
+    "name": "Md. Billal",
+    "customerId": "01777775777",
+    "phone": "01777775777",
+    "email": "billal@gmail.com",
+    "address": "Notun Bazar, Dhaka",
+    "createdAt": "07 Feb, 2021"
+  },
+  {
+    "_id": 7,
+    "name": "Md. Rana",
+    "customerId": "01777777799",
+    "phone": "01777777799",
+    "email": "rana@gmail.com",
+    "address": "Banani, Dhaka",
+    "createdAt": "07 Feb, 2021"
+  },
+  {
+    "_id": 8,
+    "name": "Md. Asad",
+    "customerId": "01877777777",
+    "phone": "01877777777",
+    "email": "asad@gmail.com",
+    "address": "Gulshan, Dhaka",
+    "createdAt": "07 Feb, 2021"
+  },
+  {
+    "_id": 9,
+    "name": "Mrs. Sadia",
+    "customerId": "01977777797",
+    "phone": "01977777797",
+    "email": "sadia@gmail.com",
+    "address": "Banani, Dhaka",
+    "createdAt": "07 Feb, 2021"
+  },
+  {
+    "_id": 10,
+    "name": "Mrs. Bristy",
+    "customerId": "01577777788",
+    "phone": "01577777788",
+    "email": "bristy@gmail.com",
+    "address": "Dhanmondhi, Dhaka",
+    "createdAt": "07 Feb, 2021"
+  }
+]

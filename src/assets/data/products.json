@@ -1,0 +1,233 @@
+[
+  {
+    "_id": 1,
+    "name": "New Alu (Potato)",
+    "category": "Vegetables",
+    "img": "https://i.ibb.co/Qn9np7V/veg-alu.jpg",
+    "productId": "0525509283",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1 kg",
+    "price": 18,
+    "salePrice": 15
+  },
+  {
+    "_id": 2,
+    "name": "Tomato Long Sweet(Local)",
+    "category": "Vegetables",
+    "img": "https://i.ibb.co/6N2gLR5/veg-tomato.jpg",
+    "productId": "0525509284",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1 kg",
+    "price": 38,
+    "salePrice": 35
+  },
+  {
+    "_id": 3,
+    "name": "Cauliflower (Fulcopy)",
+    "category": "Vegetables",
+    "img": "https://i.ibb.co/gyN4vzy/veg-fulcopy.jpg",
+    "productId": "0525509285",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "Per piece",
+    "price": 35,
+    "salePrice": 32
+  },
+  {
+    "_id": 4,
+    "name": "Capsicum(Green)",
+    "category": "Vegetables",
+    "img": "https://i.ibb.co/3mGrnR7/veg-capsicum-green.jpg",
+    "productId": "0525509286",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1 kg",
+    "price": 135,
+    "salePrice": 120
+  },
+  {
+    "_id": 5,
+    "name": "Lemon Round (Lebu Gol)",
+    "category": "Vegetables",
+    "img": "https://i.ibb.co/m05qrdV/veg-lemon-round.jpg",
+    "productId": "0525509287",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "Per piece",
+    "price": 9,
+    "salePrice": 8
+  },
+  {
+    "_id": 6,
+    "name": "Malta",
+    "category": "Fruits",
+    "img": "https://i.ibb.co/pWKB8zk/fruit-malta.jpg",
+    "productId": "0525509288",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1 kg",
+    "price": 270,
+    "salePrice": 255
+  },
+  {
+    "_id": 7,
+    "name": "Pomegranate (Dalim)",
+    "category": "Fruits",
+    "img": "https://i.ibb.co/J70ts64/fruit-dalim.jpg",
+    "productId": "0525509289",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1 kg",
+    "price": 380,
+    "salePrice": 370
+  },
+  {
+    "_id": 8,
+    "name": "Apple (Green Apple)",
+    "category": "Fruits",
+    "img": "https://i.ibb.co/b3H1qFZ/fruit-apple.jpg",
+    "productId": "0525509290",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1 kg",
+    "price": 220,
+    "salePrice": 210
+  },
+  {
+    "_id": 9,
+    "name": "Orange (South Africa)",
+    "category": "Fruits",
+    "img": "https://i.ibb.co/Gthrjy7/fruit-orange.jpg",
+    "productId": "0525509291",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1 kg",
+    "price": 270,
+    "salePrice": 260
+  },
+  {
+    "_id": 10,
+    "name": "Green Grapes (Angur Sobuj)",
+    "category": "Fruits",
+    "img": "https://i.ibb.co/bL7vWL8/fruit-angur.jpg",
+    "productId": "0525509292",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1 kg",
+    "price": 280,
+    "salePrice": 270
+  },
+  {
+    "_id": 11,
+    "name": "Beef Premium Cube",
+    "category": "Meat",
+    "img": "https://i.ibb.co/ZVx4V7y/meat-beef.jpg",
+    "productId": "0525509293",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1 kg",
+    "price": 600,
+    "salePrice": 590
+  },
+  {
+    "_id": 12,
+    "name": "Khashir Mangsho (Kg)",
+    "category": "Meat",
+    "img": "https://i.ibb.co/zRsthh6/meat-khasi.jpg",
+    "productId": "0525509294",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1 kg",
+    "price": 900,
+    "salePrice": 890
+  },
+  {
+    "_id": 13,
+    "name": "Golda (Chingri) Medium (30-40 PCs/ Kg)",
+    "category": "Fish",
+    "img": "https://i.ibb.co/xqyFRCd/fish-goldha.jpg",
+    "productId": "0525509295",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1 kg",
+    "price": 750,
+    "salePrice": 720
+  },
+  {
+    "_id": 14,
+    "name": "Rui Deshi (P)-1.5 To 1.99kg",
+    "category": "Fish",
+    "img": "https://i.ibb.co/xgwWy2r/fish-rui.jpg",
+    "productId": "0525509296",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1 kg",
+    "price": 320,
+    "salePrice": 300
+  },
+  {
+    "_id": 15,
+    "name": "Frutika Mango Drink 250 Ml",
+    "category": "Beverages",
+    "img": "https://i.ibb.co/FgRfnDw/drink-frutika.jpg",
+    "productId": "0525509297",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "250 ml",
+    "price": 25,
+    "salePrice": 24
+  },
+  {
+    "_id": 16,
+    "name": "Garden Fresh Mango Fruit Drink 500ml",
+    "category": "Beverages",
+    "img": "https://i.ibb.co/YhyMvxD/drink-mango-500.jpg",
+    "productId": "0525509298",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "500 ml",
+    "price": 40,
+    "salePrice": 38
+  },
+  {
+    "_id": 17,
+    "name": "Mountain Dew Pet Bottle 600ml",
+    "category": "Beverages",
+    "img": "https://i.ibb.co/gD9mpwG/drink-mountain.jpg",
+    "productId": "0525509299",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "600 ml",
+    "price": 35,
+    "salePrice": 34
+  },
+  {
+    "_id": 18,
+    "name": "7 Up Lemon Flavor 1.25Ltr",
+    "category": "Beverages",
+    "img": "https://i.ibb.co/yh1FV7b/drink-7up.png",
+    "productId": "0525509300",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "1.25 Ltr",
+    "price": 60,
+    "salePrice": 58
+  },
+  {
+    "_id": 19,
+    "name": "Mr. Energy Biscuit 240g",
+    "category": "Biscuit",
+    "img": "https://i.ibb.co/kSx9Zjc/biscuit-energy.jpg",
+    "productId": "0525509301",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "240 gm",
+    "price": 40,
+    "salePrice": 38
+  },
+  {
+    "_id": 20,
+    "name": "Danish Florida Orange Biscuits 70±5g",
+    "category": "Biscuit",
+    "img": "https://i.ibb.co/KmGytBH/biscuit-danish.jpg",
+    "productId": "0525509302",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "70±5 gm",
+    "price": 10,
+    "salePrice": 9
+  },
+  {
+    "_id": 21,
+    "name": "GoldMark Yo Yo Vanilla Cream Biscuit 56g",
+    "category": "Biscuit",
+    "img": "https://i.ibb.co/Cmf9FQc/biscuit-goldmark.jpg",
+    "productId": "0525509303",
+    "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
+    "unit": "56 gm",
+    "price": 10,
+    "salePrice": 9
+  }
+]
