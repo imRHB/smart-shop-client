@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import UpdateProduct from './pages/Dashboard/UpdateProduct/UpdateProduct';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <p>Don't forget to remove your component before git push</p>
 
       {/* TEST YOUR COMPONENT HERE */}
-
+<UpdateProduct></UpdateProduct>
     </div>
   );
 }
