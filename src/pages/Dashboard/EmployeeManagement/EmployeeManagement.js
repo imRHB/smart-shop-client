@@ -14,7 +14,7 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from "@mui/material/TablePagination";
-import { Container } from "@mui/material";
+import { Container, TextField } from "@mui/material";
 import styles from "./EmployeeManagement.module.css";
 import employees from "../../../assets/data/employees.json";
 
@@ -117,6 +117,17 @@ const EmployeeManagement = () => {
 
   return (
     <Container sx={{ width: "100%" }}>
+   
+      {/* <Paper>
+        <Box>
+         <Typography variant="h5" sx={{}}>
+            Category Name 
+         </Typography>
+         <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+
+
+        </Box>
+      </Paper> */}
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
