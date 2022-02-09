@@ -15,7 +15,7 @@ function Row(props) {
 
     return (
         <React.Fragment>
-            <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+            <TableRow hover sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                 <TableCell component="th" scope="row">
                     {supplier._id}
                 </TableCell>
@@ -42,37 +42,39 @@ const ManageSupplier = () => {
     };
     return (
         <Container sx={{ width: "100%" }}>
-            <TableContainer component={Paper}>
-                <Table aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
+            <Paper elevation={3}>
+                <TableContainer component={Paper}>
+                    <Table aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
 
-                            <TableCell>SL.</TableCell>
-                            <TableCell align="center">Supplier Name</TableCell>
-                            <TableCell align="center">Address</TableCell>
-                            <TableCell align="center">Mobile</TableCell>
-                            <TableCell align="center">Balance</TableCell>
-                            <TableCell align="center">Action</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {suppliers
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((supplier) => (
-                                <Row key={supplier._id} supplier={supplier} />
-                            ))}
-                    </TableBody>
-                </Table>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 15]}
-                    component="div"
-                    count={suppliers.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            </TableContainer>
+                                <TableCell>SL.</TableCell>
+                                <TableCell align="center">Supplier Name</TableCell>
+                                <TableCell align="center">Address</TableCell>
+                                <TableCell align="center">Mobile</TableCell>
+                                <TableCell align="center">Balance</TableCell>
+                                <TableCell align="center">Action</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {suppliers
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((supplier) => (
+                                    <Row key={supplier._id} supplier={supplier} />
+                                ))}
+                        </TableBody>
+                    </Table>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 15]}
+                        component="div"
+                        count={suppliers.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </TableContainer>
+            </Paper>
         </Container>
     );
 };
