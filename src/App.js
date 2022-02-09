@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Payment from './pages/Dashboard/Accounts/Payment/Payment';
 
 function App() {
   return (
