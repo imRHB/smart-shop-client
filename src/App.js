@@ -1,17 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import AddSupplier from './pages/Dashboard/AddSupplier/AddSupplier';
 
 function App() {
   return (
     <div className="">
-      {/* <h1>Smart Shop</h1>
+      <h1>Smart Shop</h1>
       <p>POS Management System</p>
       <p>Please Test Your Component Here</p>
-      <p>Don't forget to remove your component before git push</p> */}
+      <p>Don't forget to remove your component before git push</p>
 
       {/* TEST YOUR COMPONENT HERE */}
-      <AddSupplier />
+
     </div>
   );
 }
