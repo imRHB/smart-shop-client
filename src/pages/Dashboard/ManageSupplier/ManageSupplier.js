@@ -64,16 +64,17 @@ const ManageSupplier = () => {
                                 ))}
                         </TableBody>
                     </Table>
-                    <TablePagination
-                        rowsPerPageOptions={[5, 10, 15]}
-                        component="div"
-                        count={suppliers.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        onPageChange={handleChangePage}
-                        onRowsPerPageChange={handleChangeRowsPerPage}
-                    />
                 </TableContainer>
+
+                <TablePagination
+                    rowsPerPageOptions={[5, 10, 15]}
+                    component="div"
+                    count={suppliers.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
             </Paper>
         </Container>
     );
