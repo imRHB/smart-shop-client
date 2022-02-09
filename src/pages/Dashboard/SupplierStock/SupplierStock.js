@@ -68,6 +68,12 @@ const SupplierStock = () => {
                                 .map((product) => (
                                     <Row key={product._id} product={product} />
                                 ))}
+                            <TableRow >
+                                <TableCell align='right' colSpan={6}>Grand Total</TableCell>
+                                <TableCell align='center'>Total</TableCell>
+                                <TableCell align='center'>Total</TableCell>
+                                <TableCell align='center'>Total</TableCell>
+                            </TableRow>
                         </TableBody>
                     </Table>
                     <TablePagination
