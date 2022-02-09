@@ -28,9 +28,9 @@ const CreateProduct = () => {
     
 </div>
 <div className='text-end m-3'>
-<Link to="/manageProducts">
+{/* <Link to="/manageProducts"> */}
 <button  style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'>Manage Product</button>
-</Link>
+{/* </Link> */}
 </div>
             <div style={{ marginTop: '60px' }} className='container '>
 
