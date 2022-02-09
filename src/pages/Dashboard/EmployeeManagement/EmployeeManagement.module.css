@@ -1,0 +1,76 @@
+.tableContainer {
+  background-color: #f1f3f6;
+  padding: 17px;
+  border-radius: 5px;
+}
+.tableHover:hover {
+  background-color: #cffcb6;
+}
+
+.tableHeader {
+  background-color: #001e3c;
+}
+
+.tableCell {
+  color: #fff !important;
+  font-weight: 700 !important;
+}
+
+.editIcon {
+  background-color: #003366;
+  color: #fff;
+  font-weight: 700;
+  padding: 5px;
+  border-radius: 3px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.deleteIcon {
+  background-color: #ee101b;
+  color: #fff;
+  font-weight: 700;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.assignmentIcon {
+  font-size: 56px;
+  color: #fff;
+  background-color: #001e3c;
+  margin-right: 15px;
+}
+
+.designationBtn {
+  background-color: #003366;
+  color: #fff;
+  text-transform: capitalize;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: 5px;
+}
+
+.designationBtn:hover {
+  background-color: #003366;
+  color: #fff;
+}
+
+.addEmployeeBtn {
+  background-color: #45c203;
+  color: #fff;
+  text-transform: capitalize;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.addEmployeeBtn:hover {
+  background-color: #45c203;
+  color: #fff;
+}
+
+.topContainer {
+  background-color: #f1f3f6;
+  padding: 17px;
+  border-radius: 5px;
+}
