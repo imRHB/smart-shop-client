@@ -7,23 +7,11 @@ import AppsIcon from "@mui/icons-material/Apps";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MessageIcon from "@mui/icons-material/Message";
 import PostAddIcon from "@mui/icons-material/PostAdd";
-import { makeStyles } from "@material-ui/core";
+// import { makeStyles } from "@material-ui/core";
 // import useAuth from "../../../hooks/useAuth";
-
-const useStyles = makeStyles(() => ({
-  link: {
-    color: "#878787 !important",
-    textTransform: "none !important",
-    "&:hover": {
-      color: "#251D58 !important",
-      fontWeight: "600",
-    },
-  },
-}));
 
 const SidebarNavigation = () => {
   //   const { logOut } = useAuth();
-  const classes = useStyles();
   const [admin, setAdmin] = React.useState(true);
   //   const [loading, setLoading] = React.useState(false);
   //   const email = sessionStorage.getItem("email");
@@ -56,7 +44,7 @@ const SidebarNavigation = () => {
             to={`/dashboard/add-product`}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <AppsIcon sx={{ mr: 2 }} /> Add Product
             </Button>
           </NavLink>
@@ -66,7 +54,7 @@ const SidebarNavigation = () => {
             to={`/dashboard/manage-product`}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <AddIcon sx={{ mr: 2 }} /> Manage Product
             </Button>
           </NavLink>
@@ -76,7 +64,7 @@ const SidebarNavigation = () => {
             to={`/dashboard/manage-customer`}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <PersonAddAlt1Icon sx={{ mr: 2 }} /> Manage Customer
             </Button>
           </NavLink>
@@ -86,7 +74,7 @@ const SidebarNavigation = () => {
             to={`/dashboard/credit-customer`}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <PersonAddAlt1Icon sx={{ mr: 2 }} /> Credit Customer
             </Button>
           </NavLink>
@@ -96,7 +84,7 @@ const SidebarNavigation = () => {
             to={`/dashboard/add-supplier`}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <PersonAddAlt1Icon sx={{ mr: 2 }} /> Add Supplier
             </Button>
           </NavLink>
@@ -106,7 +94,7 @@ const SidebarNavigation = () => {
             to={`/dashboard/manage-supplier`}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <PersonAddAlt1Icon sx={{ mr: 2 }} /> Manage Supplier
             </Button>
           </NavLink>
@@ -116,7 +104,7 @@ const SidebarNavigation = () => {
             to={`/dashboard/stock-report`}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <PersonAddAlt1Icon sx={{ mr: 2 }} /> Stock Report
             </Button>
           </NavLink>
@@ -126,7 +114,7 @@ const SidebarNavigation = () => {
             to={`/dashboard/supplier-stock-report`}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <PersonAddAlt1Icon sx={{ mr: 2 }} /> Stock Report(Supplier Wise)
             </Button>
           </NavLink>
@@ -136,7 +124,7 @@ const SidebarNavigation = () => {
             to={`/dashboard/product-stock-report`}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <PersonAddAlt1Icon sx={{ mr: 2 }} /> Stock Report(Product Wise)
             </Button>
           </NavLink>
@@ -146,7 +134,7 @@ const SidebarNavigation = () => {
             to={`/dashboard/add-employee`}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <PersonAddAlt1Icon sx={{ mr: 2 }} /> Add Employee
             </Button>
           </NavLink>
@@ -156,7 +144,7 @@ const SidebarNavigation = () => {
             to={`/dashboard/manage-employee`}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <PersonAddAlt1Icon sx={{ mr: 2 }} /> Manage Employee
             </Button>
           </NavLink>
@@ -166,7 +154,7 @@ const SidebarNavigation = () => {
             to={`/dashboard/expense-item`}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <PersonAddAlt1Icon sx={{ mr: 2 }} /> Expense Item
             </Button>
           </NavLink>
@@ -179,7 +167,7 @@ const SidebarNavigation = () => {
             sx={{ mx: "auto" }}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <PostAddIcon sx={{ mr: 2 }} /> POS
             </Button>
           </NavLink>
@@ -189,7 +177,7 @@ const SidebarNavigation = () => {
             style={{ textDecoration: "none" }}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <MessageIcon sx={{ mr: 2 }} />
               Add New Invoice
             </Button>
@@ -200,7 +188,7 @@ const SidebarNavigation = () => {
             style={{ textDecoration: "none" }}
             activeClassName="active"
           >
-            <Button className={classes.link}>
+            <Button>
               <MessageIcon sx={{ mr: 2 }} />
               Manage Invoice
             </Button>
@@ -209,7 +197,7 @@ const SidebarNavigation = () => {
       )}
       <br />
       <NavLink style={{ textDecoration: "none" }} to="/">
-        <Button onClick={""} className={classes.link}>
+        <Button onClick={""}>
           <LogoutIcon sx={{ mr: 2 }} />
           Logout
         </Button>
