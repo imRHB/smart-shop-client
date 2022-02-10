@@ -15,13 +15,13 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from "@mui/material/TablePagination";
 import { Button, Container, Grid, TextField } from "@mui/material";
-import products from "../../../assets/data/products.json";
-// import './ManageProducts.css'
+import expenses from "../../../assets/data/expenses.json";
+
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 
 function Row(props) {
-    const { product } = props;
+    const { expense } = props;
     const [open, setOpen] = React.useState(false);
 
     return (
@@ -29,9 +29,9 @@ function Row(props) {
             <TableRow className="colunm" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
               
                 <TableCell width="15%" align="center" component="th" scope="row">
-                    {product._id}
+                    {expense._id}
                 </TableCell>
-                <TableCell align="center">{product.name}</TableCell>
+                <TableCell align="center">{expense.item}</TableCell>
 
                 <TableCell align="center"> 
 
@@ -49,19 +49,6 @@ function Row(props) {
     );
 }
 
-Row.propTypes = {
-    product: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        img: PropTypes.string.isRequired,
-        position: PropTypes.string.isRequired,
-        role: PropTypes.string.isRequired,
-        productId: PropTypes.string.isRequired,
-        phone: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-        address: PropTypes.string.isRequired,
-        salary: PropTypes.string.isRequired,
-    }).isRequired,
-};
 
 const ExpenseItem = () => {
     const [page, setPage] = React.useState(0);
@@ -140,10 +127,10 @@ const ExpenseItem = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody >
-                            {products
+                            {expenses
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((product) => (
-                                    <Row key={product._id} product={product} />
+                                .map((expense) => (
+                                    <Row key={expense._id} expense={expense} />
                                 ))}
                         </TableBody>
                     </Table>
@@ -153,7 +140,7 @@ const ExpenseItem = () => {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 15]}
                     component="div"
-                    count={products.length}
+                    count={expenses.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}
