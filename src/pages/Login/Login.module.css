@@ -1,0 +1,79 @@
+.loginPage{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginPage, .submitButton:hover{
+    background-color: #00346c;
+}
+
+.inputFields, .submitButton{
+    border-radius: 0;
+}
+
+.userLoginSection{
+    background-color: #ffffff;
+    padding: 20px 50px 50px 50px;
+    text-align: start;
+    border-radius: 8px;
+}
+.inputLabels{
+    font-size: 13px;
+    color: #454545;
+    font-weight: 500;
+
+}
+.inputFieldGroup{
+    position: relative;
+}
+.formIcon{
+    position: absolute;
+    top: 40px;
+    left: 10px;
+}
+.userLoginSection h4, p{
+    text-align: center;
+}
+
+.userLoginSection h4{
+   color: #00346c;
+   margin-top: 30px;
+}
+
+.userLoginSection p{
+    color: #6b6b6c;
+    margin-bottom: 40px;
+}
+
+.siteLogo{
+    height: 70px;
+    display: block;
+    margin: auto;
+}
+
+.inputFields{
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid black;
+    width: 300px;
+    padding-left: 30px;
+}
+
+.submitButton{
+    background-color: #52a4f8;
+    color: black;
+    font-weight: 600;
+    border: none;
+    transition: 0.5s;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .inputFields{
+        width: 200px;
+    }
+}
