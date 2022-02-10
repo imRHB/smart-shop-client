@@ -36,37 +36,37 @@
 }
 
 .assignmentIcon {
-  font-size: 56px;
-  color: #fff;
-  background-color: #001e3c;
-  margin-right: 15px;
+  font-size: 56px !important;
+  color: #fff !important;
+  background-color: #001e3c !important;
+  margin-right: 15px !important;
 }
 
 .designationBtn {
-  background-color: #003366;
-  color: #fff;
-  text-transform: capitalize;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-right: 5px;
+  background-color: #003366 !important;
+  color: #fff !important;
+  text-transform: capitalize !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  margin-right: 5px !important;
 }
 
 .designationBtn:hover {
-  background-color: #003366;
-  color: #fff;
+  background-color: #003366 !important;
+  color: #fff !important;
 }
 
 .addEmployeeBtn {
-  background-color: #45c203;
-  color: #fff;
-  text-transform: capitalize;
-  padding-left: 15px;
-  padding-right: 15px;
+  background-color: #45c203 !important;
+  color: #fff !important;
+  text-transform: capitalize !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
 }
 
 .addEmployeeBtn:hover {
-  background-color: #45c203;
-  color: #fff;
+  background-color: #45c203 !important;
+  color: #fff !important;
 }
 
 .topContainer {

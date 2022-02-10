@@ -14,15 +14,10 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from "@mui/material/TablePagination";
-<<<<<<< HEAD
 import { Button, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-=======
-import { Container, TextField } from "@mui/material";
-import styles from "./EmployeeManagement.module.css";
->>>>>>> 67fdee1b3d66d1784793d9103e565c492d418cc3
 import employees from "../../../assets/data/employees.json";
 import styles from "./EmployeeManagement.module.css";
 
@@ -130,7 +125,6 @@ const EmployeeManagement = () => {
   };
 
   return (
-<<<<<<< HEAD
     <Container sx={{ width: "100%", mb: 5 }}>
       <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
         <Typography>
@@ -198,54 +192,6 @@ const EmployeeManagement = () => {
           />
         </Typography>
       </Box>
-=======
-    <Container sx={{ width: "100%" }}>
-   
-      {/* <Paper>
-        <Box>
-         <Typography variant="h5" sx={{}}>
-            Category Name 
-         </Typography>
-         <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-
-
-        </Box>
-      </Paper> */}
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell>SL.</TableCell>
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Image</TableCell>
-              <TableCell align="center">Email</TableCell>
-              <TableCell align="center">Phone</TableCell>
-              <TableCell align="center">Position</TableCell>
-              <TableCell align="center">Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {employees
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((employee) => (
-                <Row key={employee._id} employee={employee} />
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Typography className="mt-3">
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 15]}
-          component="div"
-          count={employees.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Typography>
->>>>>>> 67fdee1b3d66d1784793d9103e565c492d418cc3
     </Container>
   );
 };
