@@ -2,13 +2,13 @@ import { Container, Typography } from '@mui/material';
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import { useForm } from 'react-hook-form';
-import DatePicker from '@mui/lab/DatePicker';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
 
 const Payment = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const [value, setValue] = React.useState(null);
     const currencies = [
         {
             value: 'USD',
@@ -39,14 +39,13 @@ const Payment = () => {
                                 Date <span>*</span>
                             </Typography>
 
-
-                            {/* <DatePicker
-                                label="Basic example"
-                                // value={value}
+                            <TextField
+                                required
+                                id="outlined-required"
+                                label="Date"
+                                type="date"
                                 {...register("date", { required: true })}
-                                renderInput={(params) => <TextField {...params} />}
-                            /> */}
-
+                            />
                         </div>
                         <div>
                             <Typography variant="h6" component="h2">
@@ -57,7 +56,7 @@ const Payment = () => {
                                 id="outlined-select-currency"
                                 select
                                 label="Select"
-
+                                {...register("category", { required: true })}
                                 helperText="Please select your currency"
                             >
                                 {currencies.map((option) => (
