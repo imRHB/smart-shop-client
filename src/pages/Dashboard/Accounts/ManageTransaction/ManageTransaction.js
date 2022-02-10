@@ -36,7 +36,6 @@ function Row(props) {
                 <TableCell align="center">{transaction.account}</TableCell>
                 <TableCell align="center">BDT {transaction.receipt}</TableCell>
                 <TableCell align="center">BDT {transaction.pay}</TableCell>
-
                 <TableCell align="center">
                     <EditIcon className={`${styles.editIcon}`} />
                     <Delete className={`${styles.deleteIcon}`} />
@@ -46,7 +45,6 @@ function Row(props) {
         </React.Fragment>
     );
 }
-
 
 const ManageTransaction = () => {
     const [page, setPage] = React.useState(0);
