@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import AddEmployee from "./pages/Dashboard/AddEmployee/AddEmployee";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <p>Don't forget to remove your component before git push</p>
 
       {/* TEST YOUR COMPONENT HERE */}
+      <AddEmployee />
     </div>
   );
 }
