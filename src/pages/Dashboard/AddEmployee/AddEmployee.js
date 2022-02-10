@@ -82,7 +82,7 @@ const AddEmployee = () => {
     formData.append("address2", address2);
     formData.append("image", image[0]);
 
-    // fetch("https://mighty-savannah-90389.herokuapp.com/addblog", {
+    // fetch("", {
     //   method: "POST",
     //   body: formData,
     // })
