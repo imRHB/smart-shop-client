@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "date": "2021-11-24",
+        "item": "Snacks",
+        "cost": 120
+    },
+    {
+        "id": 2,
+        "date": "2021-11-13",
+        "item": "Lunch",
+        "cost": 300
+    },
+    {
+        "id": 3,
+        "date": "2021-12-20",
+        "item": "Snacks",
+        "cost": 100
+    },
+    {
+        "id": 4,
+        "date": "2021-10-8",
+        "item": "Snacks",
+        "cost": 150
+    },
+    {
+        "id": 5,
+        "date": "2021-11-18",
+        "item": "Lunch",
+        "cost": 420
+    },
+    {
+        "id": 6,
+        "date": "2021-11-30",
+        "item": "Breakfast",
+        "cost": 80
+    },
+    {
+        "id": 7,
+        "date": "2021-12-14",
+        "item": "Breakfast",
+        "cost": 100
+    },
+    {
+        "id": 8,
+        "date": "2021-12-10",
+        "item": "Dinner",
+        "cost": 360
+    },
+    {
+        "id": 9,
+        "date": "2021-12-16",
+        "item": "Snacks",
+        "cost": 100
+    },
+    {
+        "id": 10,
+        "date": "2021-12-16",
+        "item": "Breakfast",
+        "cost": 70
+    }
+]
