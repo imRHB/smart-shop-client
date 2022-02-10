@@ -10,6 +10,7 @@ function App() {
       <p>Don't forget to remove your component before git push</p>
 
       {/* TEST YOUR COMPONENT HERE */}
+
     </div>
   );
 }
