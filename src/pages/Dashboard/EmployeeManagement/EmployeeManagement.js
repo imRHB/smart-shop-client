@@ -14,9 +14,12 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from "@mui/material/TablePagination";
-import { Container } from "@mui/material";
-import styles from "./EmployeeManagement.module.css";
+import { Button, Container } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import Delete from "@mui/icons-material/Delete";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import employees from "../../../assets/data/employees.json";
+import styles from "./EmployeeManagement.module.css";
 
 function Row(props) {
   const { employee } = props;
@@ -24,7 +27,10 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+      <TableRow
+        className={`${styles.tableHover}`}
+        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+      >
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -38,6 +44,9 @@ function Row(props) {
           {employee._id}
         </TableCell>
         <TableCell align="center">{employee.name}</TableCell>
+        <TableCell align="center">{employee.position}</TableCell>
+        <TableCell align="center">{employee.phone}</TableCell>
+        <TableCell align="center">{employee.email}</TableCell>
         <TableCell align="center">
           <img
             style={{ width: "70px", height: "70px" }}
@@ -46,10 +55,10 @@ function Row(props) {
             // loading="lazy"
           />
         </TableCell>
-        <TableCell align="center">{employee.email}</TableCell>
-        <TableCell align="center">{employee.phone}</TableCell>
-        <TableCell align="center">{employee.position}</TableCell>
-        <TableCell align="center">{"Edit | Delete"}</TableCell>
+        <TableCell align="center">
+          <EditIcon className={`${styles.editIcon}`} />
+          <Delete className={`${styles.deleteIcon}`} />
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -116,41 +125,73 @@ const EmployeeManagement = () => {
   };
 
   return (
-    <Container sx={{ width: "100%" }}>
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell>SL.</TableCell>
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Image</TableCell>
-              <TableCell align="center">Email</TableCell>
-              <TableCell align="center">Phone</TableCell>
-              <TableCell align="center">Position</TableCell>
-              <TableCell align="center">Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {employees
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((employee) => (
-                <Row key={employee._id} employee={employee} />
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Typography className="mt-3">
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 15]}
-          component="div"
-          count={employees.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Typography>
+    <Container sx={{ width: "100%", mb: 5 }}>
+      <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
+        <Typography>
+          <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
+        </Typography>
+        <Typography>
+          <span style={{ fontSize: "26px" }}>HRM</span> <br />{" "}
+          <span style={{ color: "#969494" }}>Manage Employee</span>
+        </Typography>
+      </Box>
+      <Box sx={{ textAlign: "right", my: 2 }}>
+        <Button className={`${styles.designationBtn}`}>Designation</Button>
+        <Button className={`${styles.addEmployeeBtn}`}>Add Employee</Button>
+      </Box>
+      <Box className={`${styles.tableContainer}`}>
+        <Typography sx={{ fontWeight: "bold" }}>Manage Employee</Typography>
+        <hr />
+        <TableContainer
+          component={Paper}
+          sx={{ border: 1, borderColor: "grey.300" }}
+        >
+          <Table aria-label="simple table">
+            <TableHead className={`${styles.tableHeader}`}>
+              <TableRow>
+                <TableCell />
+                <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Name
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Designation
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Phone
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Email
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Picture
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Action
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {employees
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((employee) => (
+                  <Row key={employee._id} employee={employee} />
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Typography className="mt-3">
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 15]}
+            component="div"
+            count={employees.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Typography>
+      </Box>
     </Container>
   );
 };
