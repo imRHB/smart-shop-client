@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import ManageTransaction from './pages/Dashboard/Accounts/ManageTransaction/ManageTransaction';
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <p>Don't forget to remove your component before git push</p>
 
       {/* TEST YOUR COMPONENT HERE */}
+      <ManageTransaction />
     </div>
   );
 }
