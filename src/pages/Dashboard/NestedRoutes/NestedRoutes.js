@@ -1,11 +1,38 @@
-import React from 'react';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import AddEmployee from "../AddEmployee/AddEmployee";
+import AddSupplier from "../AddSupplier/AddSupplier";
+import CreateProduct from "../CreateProduct/CreateProduct";
+import CustomerManagement from "../CustomerManagement/CustomerManagement";
+import CustomerStatus from "../CustomerManagement/CustomerStatus/CustomerStatus";
+import EmployeeManagement from "../EmployeeManagement/EmployeeManagement";
+import ExpenseItem from "../Expense/ExpenseItem";
+import ManageProducts from "../ManageProducts/ManageProducts";
+import ManageSupplier from "../ManageSupplier/ManageSupplier";
+import ProductStock from "../ProductStock/ProductStock";
+import StockManagements from "../StockManagement/StockManagements";
+import SupplierStock from "../SupplierStock/SupplierStock";
 
 const NestedRoutes = () => {
-    return (
-        <div>
-            <h3>Nested Routes</h3>
-        </div>
-    );
+  return (
+    <>
+      {/* Admin Routes */}
+      <Routes>
+        <Route path="add-product" element={<CreateProduct />}></Route>
+        <Route path="manage-product" element={<ManageProducts />}></Route>
+        <Route path="manage-customer" element={<CustomerManagement />}></Route>
+        <Route path="credit-customer" element={<CustomerStatus />}></Route>
+        <Route path="add-supplier" element={<AddSupplier />}></Route>
+        <Route path="manage-supplier" element={<ManageSupplier />}></Route>
+        <Route path="stock-report" element={<StockManagements />}></Route>
+        <Route path="supplier-stock-report" element={<SupplierStock />}></Route>
+        <Route path="product-stock-report" element={<ProductStock />}></Route>
+        <Route path="add-employee" element={<AddEmployee />}></Route>
+        <Route path="manage-employee" element={<EmployeeManagement />}></Route>
+        <Route path="expense-item" element={<ExpenseItem />}></Route>
+      </Routes>
+    </>
+  );
 };
 
 export default NestedRoutes;
