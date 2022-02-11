@@ -10,34 +10,37 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import SendIcon from '@mui/icons-material/Send';
 import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import TabContext from '@mui/lab/TabContext';
+
 
 
 const Payment = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    // const [value, setValue] = React.useState(null);
-    // const currencies = [
-    //     {
-    //         value: 'USD',
-    //         label: '$',
-    //     }, {
-    //         value: 'EUR',
-    //         label: '€',
-    //     }, {
-    //         value: 'BTC',
-    //         label: '฿',
-    //     }, {
-    //         value: 'JPY',
-    //         label: '¥',
-    //     },
-    // ];
+
+    const categories = [
+        {
+            value: '1',
+            label: 'Customer',
+        }, {
+            value: '2',
+            label: 'Supplier',
+        }
+    ];
+
+    const [category, setCategory] = React.useState('');
+
+    const handleCategoryChange = (event) => {
+        setCategory(event.target.value);
+    };
+
     const [value, setValue] = React.useState('1');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
     return (
         <Container sx={{ width: "100%", mb: 5 }}>
             <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
@@ -64,69 +67,84 @@ const Payment = () => {
                         <Box sx={{ display: 'flex', justifyContent: "center" }}>
                             <TabList onChange={handleChange} aria-label="lab API tabs example" >
                                 <Typography sx={{ fontWeight: "bold", marginTop: 2, marginRight: 3 }}>Choose Transaction</Typography>
-                                <Tab label="Item One" value="1" />
-                                <Tab label="Item Two" value="2" />
+                                <Tab label="Payment" value="1" />
+                                <Tab label="Receipt" value="2" />
                             </TabList>
                         </Box>
-                        <form>
-
+                        <form className={`${styles.paymentForm} ${'shadow'}`}>
                             <Grid container spacing={4} columns={16} sx={{ marginTop: 2, marginBottom: 2 }}>
-                                <Grid item xs={8}>
+                                <Grid item md={8} sx={16}>
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
-                                        <Typography sx={{ fontWeight: "bold" }}>Date<span style={{ color: "#f44336" }}>*</span></Typography>
+                                        <Typography sx={{ fontWeight: "bold" }} variant="f6">Date<span style={{ color: "#f44336" }}>*</span></Typography>
 
-                                        <TextField id="outlined-basic" size="small" type="date" sx={{ width: '350px' }} label="Choose Date" variant="outlined" {...register("name", { required: true })} />
+                                        <input type="date" {...register("date", { required: true })} style={{ width: '300px', padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+
                                     </Box>
 
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
-                                        <Typography sx={{ fontWeight: "bold" }}>Transaction Category<span style={{ color: "#f44336" }}>*</span></Typography>
+                                        <Typography sx={{ fontWeight: "bold" }} variant="f6">Transaction Category<span style={{ color: "#f44336" }}>*</span></Typography>
 
-                                        <TextField id="outlined-basic" size="small" sx={{ width: '350px' }} label="Supplier Contact No." variant="outlined" {...register("contact", { required: true })} />
+                                        <TextField id="outlined-basic" size="small" sx={{ width: '300px' }} label="Select Category" variant="outlined"
+                                            select
+                                            value={category}
+                                            onChange={handleCategoryChange}
+                                            {...register("category", { required: true })}
+                                        >
+                                            {categories.map((option) => (
+                                                <MenuItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))}
+                                        </TextField>
+                                    </Box>
+
+                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
+                                        <Typography sx={{ fontWeight: "bold" }} variant="f6">Transaction Mode<span style={{ color: "#f44336" }}>*</span></Typography>
+
+                                        <TextField id="outlined-basic" size="small" sx={{ width: '300px' }} label="Select Mode" variant="outlined" {...register("mode", { required: true })} />
                                     </Box>
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
-                                        <Typography sx={{ fontWeight: "bold" }}>Transaction Mode<span style={{ color: "#f44336" }}>*</span></Typography>
+                                        <Typography sx={{ fontWeight: "bold" }} variant="f6">Cheque/Pay Order No<span style={{ color: "#f44336" }}>*</span></Typography>
 
-                                        <TextField id="outlined-basic" size="small" sx={{ width: '350px' }} label="Supplier Contact No." variant="outlined" {...register("contact", { required: true })} />
-                                    </Box>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
-                                        <Typography sx={{ fontWeight: "bold" }}>Cheque/Pay Order No<span style={{ color: "#f44336" }}>*</span></Typography>
-
-                                        <TextField id="outlined-basic" size="small" sx={{ width: '350px' }} label="Supplier Contact No." variant="outlined" {...register("contact", { required: true })} />
+                                        <TextField id="outlined-basic" size="small" sx={{ width: '300px' }} label="Pay Mode" variant="outlined" {...register("payMode", { required: true })} />
                                     </Box>
 
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <Typography sx={{ fontWeight: "bold" }}>Bank Name<span style={{ color: "#f44336" }}>*</span></Typography>
+                                        <Typography sx={{ fontWeight: "bold" }} variant="f6">Bank Name<span style={{ color: "#f44336" }}>*</span></Typography>
 
-                                        <TextField id="outlined-basic" size="small" sx={{ width: '350px' }} label="Supplier Contact No." variant="outlined" {...register("contact", { required: true })} />
+                                        <TextField id="outlined-basic" size="small" sx={{ width: '300px' }} label="Bank Name" variant="outlined" {...register("bank", { required: true })} />
                                     </Box>
                                 </Grid>
-                                <Grid item xs={8}>
+                                <Grid item md={8} sx={16}>
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
-                                        <Typography sx={{ fontWeight: "bold" }}>Description<span style={{ color: "#f44336" }}>*</span></Typography>
+                                        <Typography sx={{ fontWeight: "bold" }} variant="f6">Description<span style={{ color: "#f44336" }}>*</span></Typography>
 
-                                        <TextField id="outlined-basic" size="small" sx={{ width: '350px' }} label="Supplier Name" variant="outlined" {...register("name", { required: true })} />
+                                        <TextField id="outlined-basic" size="small" sx={{ width: '300px' }} label="Description" variant="outlined" {...register("desc", { required: true })} />
                                     </Box>
 
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
-                                        <Typography sx={{ fontWeight: "bold" }}>Select Option Name<span style={{ color: "#f44336" }}>*</span></Typography>
+                                        <Typography sx={{ fontWeight: "bold" }} variant="f6">Select Option Name<span style={{ color: "#f44336" }}>*</span></Typography>
 
-                                        <TextField id="outlined-basic" size="small" sx={{ width: '350px' }} label="Supplier Contact No." variant="outlined" {...register("contact", { required: true })} />
+                                        <TextField id="outlined-basic" size="small" sx={{ width: '300px' }} label="Supplier Contact No." variant="outlined" {...register("contact", { required: true })} />
                                     </Box>
 
-
-
-                                    <TabPanel value="1">
+                                    <TabPanel value="1" sx={{ m: 0, p: 0 }}>
                                         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                            <Typography sx={{ fontWeight: "bold" }}>Payment Amount<span style={{ color: "#f44336" }}>*</span></Typography>
-                                            <TextField id="outlined-basic" size="small" sx={{ width: '350px' }} label="Supplier Contact No." variant="outlined" {...register("contact", { required: true })} />
+                                            <Typography sx={{ fontWeight: "bold" }} variant="f6">Payment Amount<span style={{ color: "#f44336" }}>*</span></Typography>
+
+                                            <TextField id="outlined-basic" size="small" sx={{ width: '300px' }} label="Payment Amount" variant="outlined" {...register("amount", { required: true })} />
                                         </Box>
                                     </TabPanel>
-                                    <TabPanel value="2">
+
+
+
+                                    <TabPanel value="2" sx={{ m: 0, p: 0 }}>
                                         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                            <Typography sx={{ fontWeight: "bold" }}>Receipt Amount<span style={{ color: "#f44336" }}>*</span></Typography>
-                                            <TextField id="outlined-basic" size="small" sx={{ width: '350px' }} label="Supplier Contact No." variant="outlined" {...register("contact", { required: true })} />
+                                            <Typography sx={{ fontWeight: "bold" }} variant="f6">Receipt Amount<span style={{ color: "#f44336" }}>*</span></Typography>
+                                            <TextField id="outlined-basic" size="small" sx={{ width: '300px' }} label="Receipt Amount" variant="outlined" {...register("amount", { required: true })} />
                                         </Box>
                                     </TabPanel>
+
 
 
                                     <Box sx={{ textAlign: "right" }}>
@@ -137,7 +155,7 @@ const Payment = () => {
 
                         </form>
 
-                    </TabContext>
+                    </TabContext  >
 
                 </Box>
 
