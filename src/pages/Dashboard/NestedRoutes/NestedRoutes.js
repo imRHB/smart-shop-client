@@ -12,6 +12,10 @@ import ManageSupplier from "../ManageSupplier/ManageSupplier";
 import ProductStock from "../ProductStock/ProductStock";
 import StockManagements from "../StockManagement/StockManagements";
 import SupplierStock from "../SupplierStock/SupplierStock";
+//==============import your component here====================//
+// import TestComponent from "../TestComponent/TestComponent";
+import TestComponent from "../TestComponent/TestComponent";
+//==============import your component here===================//
 
 const NestedRoutes = () => {
   return (
@@ -30,6 +34,11 @@ const NestedRoutes = () => {
         <Route path="add-employee" element={<AddEmployee />}></Route>
         <Route path="manage-employee" element={<EmployeeManagement />}></Route>
         <Route path="expense-item" element={<ExpenseItem />}></Route>
+
+        {/*===================TEST YOUR COMPONENT HERE=====================*/}
+        {/* <Route path="expense-item" element={<TestComponent />}></Route> */}
+        <Route path="test-component" element={<TestComponent />}></Route>
+        {/*===================TEST YOUR COMPONENT HERE====================*/}
       </Routes>
     </>
   );

@@ -81,6 +81,16 @@ const SidebarNavigation = () => {
           <br />
           <NavLink
             style={{ textDecoration: "none" }}
+            to={`/dashboard/test-component`}
+            activeClassName="active"
+          >
+            <Button>
+              <PersonAddAlt1Icon sx={{ mr: 2 }} /> Test Component
+            </Button>
+          </NavLink>
+          <br />
+          <NavLink
+            style={{ textDecoration: "none" }}
             to={`/dashboard/add-supplier`}
             activeClassName="active"
           >
