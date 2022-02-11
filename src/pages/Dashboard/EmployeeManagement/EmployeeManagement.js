@@ -52,7 +52,7 @@ function Row(props) {
             style={{ width: "70px", height: "70px" }}
             src={employee.img}
             alt="Product"
-            // loading="lazy"
+          // loading="lazy"
           />
         </TableCell>
         <TableCell align="center">
