@@ -13,7 +13,7 @@ import defaultUser from "../../../assets/images/user.png";
 import SidebarNavigation from "../SidebarNavigation/SidebarNavigation";
 import NestedRoutes from "../NestedRoutes/NestedRoutes";
 
-const drawerWidth = 200;
+const drawerWidth = 230;
 
 const DashboardHome = (props) => {
   //   const { user } = useAuth();
