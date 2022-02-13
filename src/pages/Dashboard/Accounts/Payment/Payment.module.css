@@ -1,38 +1,7 @@
-.tableContainer {
-  background-color: #f1f3f6;
+.paymentContainer{
+    background-color: #f1f3f6;
   padding: 17px;
   border-radius: 5px;
-}
-.tableHover:hover {
-  background-color: #cffcb6;
-}
-
-.tableHeader {
-  background-color: #001e3c;
-}
-
-.tableCell {
-  color: #fff !important;
-  font-weight: 700 !important;
-}
-
-.editIcon {
-  background-color: #003366;
-  color: #fff;
-  font-weight: 700;
-  padding: 5px;
-  border-radius: 3px;
-  margin-right: 5px;
-  cursor: pointer;
-}
-
-.deleteIcon {
-  background-color: #ee101b;
-  color: #fff;
-  font-weight: 700;
-  padding: 5px;
-  border-radius: 3px;
-  cursor: pointer;
 }
 
 .assignmentIcon {
@@ -42,21 +11,22 @@
   margin-right: 15px !important;
 }
 
-.designationBtn {
+.paymentBtn {
   background-color: #003366 !important;
   color: #fff !important;
   text-transform: capitalize !important;
   padding-left: 15px !important;
   padding-right: 15px !important;
   margin-right: 5px !important;
+  margin-left: 5px !important;
 }
 
-.designationBtn:hover {
-  background-color: #003366 !important;
+.paymentBtn:hover {
+  background-color: #004a94 !important;
   color: #fff !important;
 }
 
-.addEmployeeBtn {
+.receiptBtn {
   background-color: #45c203 !important;
   color: #fff !important;
   text-transform: capitalize !important;
@@ -64,8 +34,8 @@
   padding-right: 15px !important;
 }
 
-.addEmployeeBtn:hover {
-  background-color: #45c203 !important;
+.receiptBtn:hover {
+  background-color: #2b7b00 !important;
   color: #fff !important;
 }
 
@@ -73,4 +43,11 @@
   background-color: #f1f3f6;
   padding: 17px;
   border-radius: 5px;
+}
+
+.paymentForm{
+  background-color:#e4e4e4;
+  padding: 5px 30px 30px 30px;
+  margin: 15px 30px 30px 30px;
+  
 }

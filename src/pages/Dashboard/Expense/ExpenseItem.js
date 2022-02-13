@@ -15,13 +15,13 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from "@mui/material/TablePagination";
 import { Button, Container, Grid, TextField } from "@mui/material";
-import products from "../../../assets/data/products.json";
-import "./ManageProducts.css";
+import expenses from "../../../assets/data/expenses.json";
+
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 
 function Row(props) {
-  const { product } = props;
+  const { expense } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -30,79 +30,39 @@ function Row(props) {
         className="colunm"
         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       >
-        <TableCell width="8%">
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
+        <TableCell width="15%" align="center" component="th" scope="row">
+          {expense._id}
         </TableCell>
-        <TableCell width="15%" align="start" component="th" scope="row">
-          {product._id}
-        </TableCell>
-        <TableCell align="center">{product.name}</TableCell>
+        <TableCell align="center">{expense.item}</TableCell>
 
         <TableCell align="center">
-          <EditIcon />
-          <DeleteForeverIcon sx={{ marginLeft: "15px" }} />
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                Products Details
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="start">SL.</TableCell>
-                    <TableCell width="50%" align="center">
-                      Description
-                    </TableCell>
-                    <TableCell align="center">Unit</TableCell>
-                    <TableCell align="center">Price</TableCell>
-                    <TableCell align="center">SellPrice</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow key={product._id}>
-                    <TableCell component="th" scope="row">
-                      {product._id}
-                    </TableCell>
-                    <TableCell align="start">{product.description}</TableCell>
-                    <TableCell align="center">{product.unit}</TableCell>
-                    <TableCell align="center">{product.price}</TableCell>
-                    <TableCell align="center">{product.salePrice}</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
+          <Button>
+            <EditIcon
+              sx={{
+                marginLeft: "25px",
+                backgroundColor: "green",
+                borderRadius: "5px",
+                color: "yellow",
+              }}
+            />
+          </Button>
+
+          <Button>
+            <DeleteForeverIcon
+              sx={{
+                backgroundColor: "red",
+                borderRadius: "5px",
+                color: "white",
+              }}
+            />
+          </Button>
         </TableCell>
       </TableRow>
     </React.Fragment>
   );
 }
 
-Row.propTypes = {
-  product: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    position: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
-    productId: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    salary: PropTypes.string.isRequired,
-  }).isRequired,
-};
-
-const ManageProducts = () => {
+const ExpenseItem = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -120,11 +80,13 @@ const ManageProducts = () => {
       <Box sx={{ marginBottom: "30px" }}>
         <div className="d-flex justify-content-between  border">
           <div className="text-start ms-2 p-2 ">
-            <h5>SUITE</h5>
-            <small className="">New Products</small>
+            <h5>Add Expense Item</h5>
+            <small className="">Expense</small>
           </div>
           <div>
-            <p className="text-primary fw-bold border p-1">PRODUCTS/SUITE</p>
+            <small className="text-primary fw-bold border p-1">
+              Add Expense Item
+            </small>
           </div>
         </div>
       </Box>
@@ -134,7 +96,7 @@ const ManageProducts = () => {
             variant="h6"
             sx={{ borderBottom: "1px solid lightGray", color: "gray" }}
           >
-            Category toevoegen
+            Add Expense Item
           </Typography>
           <Grid sx={{ padding: "20px" }} container spacing={2}>
             <Grid item xs={4}>
@@ -142,7 +104,7 @@ const ManageProducts = () => {
                 variant="small"
                 sx={{ fontWeight: "bold", color: "gray" }}
               >
-                Category Name *
+                Expence Name *
               </Typography>
             </Grid>
             <Grid item xs={8} sx={{ marginBottom: "50px" }}>
@@ -173,8 +135,23 @@ const ManageProducts = () => {
                 margin: "10px",
               }}
             >
-              Manage Category
+              Expense Item
             </Typography>
+            <Box sx={{ display: "flex", padding: "5px" }}>
+              <Typography
+                variant="small"
+                sx={{ margin: "10px", fontWeight: "bold", color: "gray" }}
+              >
+                Search
+              </Typography>
+              <input
+                className="p-2 mb-3"
+                type="search"
+                placeholder="Seacrh Here"
+                name=""
+                id=""
+              />
+            </Box>
           </Box>
           <TableContainer
             component={Paper}
@@ -183,17 +160,22 @@ const ManageProducts = () => {
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow className="colunm">
-                  <TableCell />
-                  <TableCell>SL.</TableCell>
-                  <TableCell align="center">Category Name</TableCell>
-                  <TableCell align="center">Action</TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }} align="center">
+                    SL.
+                  </TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }} align="center">
+                    Expense Item
+                  </TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }} align="center">
+                    Action
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {products
+                {expenses
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((product) => (
-                    <Row key={product._id} product={product} />
+                  .map((expense) => (
+                    <Row key={expense._id} expense={expense} />
                   ))}
               </TableBody>
             </Table>
@@ -203,7 +185,7 @@ const ManageProducts = () => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 15]}
             component="div"
-            count={products.length}
+            count={expenses.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -215,4 +197,4 @@ const ManageProducts = () => {
   );
 };
 
-export default ManageProducts;
+export default ExpenseItem;

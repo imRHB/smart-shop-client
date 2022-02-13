@@ -13,14 +13,14 @@ import { Button, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import suppliers from "../../../assets/data/supplier.json";
-import styles from "./ManageSupplier.module.css";
+import transactions from "../../../../assets/data/transaction.json";
+import styles from "./ManageTransaction.module.css";
 import MenuIcon from '@mui/icons-material/Menu';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 
 
 function Row(props) {
-    const { supplier } = props;
+    const { transaction } = props;
 
     return (
         <React.Fragment>
@@ -30,12 +30,12 @@ function Row(props) {
             >
 
                 <TableCell component="th" scope="row">
-                    {supplier._id}
+                    {transaction._id}
                 </TableCell>
-                <TableCell align="center">{supplier.name}</TableCell>
-                <TableCell align="center">{supplier.address}</TableCell>
-                <TableCell align="center">{supplier.contact}</TableCell>
-                <TableCell align="center">BDT {supplier.balance}</TableCell>
+                <TableCell align="center">{transaction.name}</TableCell>
+                <TableCell align="center">{transaction.account}</TableCell>
+                <TableCell align="center">BDT {transaction.receipt}</TableCell>
+                <TableCell align="center">BDT {transaction.pay}</TableCell>
                 <TableCell align="center">
                     <EditIcon className={`${styles.editIcon}`} />
                     <Delete className={`${styles.deleteIcon}`} />
@@ -46,8 +46,7 @@ function Row(props) {
     );
 }
 
-
-const ManageSupplier = () => {
+const ManageTransaction = () => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -59,6 +58,7 @@ const ManageSupplier = () => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+
     return (
         <Container sx={{ width: "100%", mb: 5 }}>
             <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
@@ -66,18 +66,18 @@ const ManageSupplier = () => {
                     <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
                 </Typography>
                 <Typography>
-                    <span style={{ fontSize: "26px" }}>Manage Supplier</span> <br />{" "}
-                    <span style={{ color: "#969494" }}>Manage your Supplier</span>
+                    <span style={{ fontSize: "26px" }}>ACCOUNTS</span> <br />{" "}
+                    <span style={{ color: "#969494" }}>Manage Transaction</span>
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "right", my: 2 }}>
-                <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>Add Supplier</Button>
-                <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>Supplier Ledger</Button>
-                <Button className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>Supplier Payment</Button>
-                <Button className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>Supplier Sales Details</Button>
+                <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>Create Account</Button>
+                <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>Manage Account</Button>
+                <Button className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>Payment</Button>
+                <Button className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>Receipt</Button>
             </Box>
             <Box className={`${styles.tableContainer}`}>
-                <Typography sx={{ fontWeight: "bold" }}>Manage Supplier</Typography>
+                <Typography sx={{ fontWeight: "bold" }}>Manage Transaction</Typography>
                 <hr />
                 <TableContainer
                     component={Paper}
@@ -89,16 +89,16 @@ const ManageSupplier = () => {
 
                                 <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Supplier Name
+                                    Name
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Address
+                                    Account Name
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Mobile
+                                    Receipt Amount
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Balance
+                                    Paid
                                 </TableCell>
 
                                 <TableCell align="center" className={`${styles.tableCell}`}>
@@ -107,10 +107,10 @@ const ManageSupplier = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {suppliers
+                            {transactions
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((supplier) => (
-                                    <Row key={supplier._id} supplier={supplier} />
+                                .map((transaction) => (
+                                    <Row key={transaction._id} transaction={transaction} />
                                 ))}
                         </TableBody>
                     </Table>
@@ -119,7 +119,7 @@ const ManageSupplier = () => {
                     className="mt-3"
                     rowsPerPageOptions={[5, 10, 15]}
                     component="div"
-                    count={suppliers.length}
+                    count={transactions.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}
@@ -127,8 +127,7 @@ const ManageSupplier = () => {
                 />
             </Box>
         </Container>
-
-
     );
 };
-export default ManageSupplier;
+
+export default ManageTransaction;

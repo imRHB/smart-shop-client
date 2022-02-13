@@ -76,7 +76,6 @@ function Row(props) {
                                         <TableCell align="center">{user.phone}</TableCell>
 
                                         <TableCell align="center">{user.address}</TableCell>
-
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -120,7 +119,6 @@ const CustomerManagement = () => {
             <h2 className={`${styles.title}`}>Customer Management</h2>
             <TableContainer component={Paper}>
                 <Table aria-label="simple table">
-
                     <TableHead>
                         <TableRow>
                             <TableCell />
