@@ -46,6 +46,7 @@ function Row(props) {
                     loading="lazy"
                     />
                 </TableCell> */}
+                {/* table details */}
                 <TableCell align="center">{user.email}</TableCell>
                 <TableCell align="center">{user.phone}</TableCell>
                 <TableCell align="center">{user.address}</TableCell>
