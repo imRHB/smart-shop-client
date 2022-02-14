@@ -14,7 +14,10 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from "@mui/material/TablePagination";
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import Delete from "@mui/icons-material/Delete";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import styles from "./CustomerManagement.module.css";
 import users from "../../../assets/data/users.json";
 
@@ -24,7 +27,10 @@ function Row(props) {
 
     return (
         <React.Fragment>
-            <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+            <TableRow
+                className={`${styles.tableHover}`}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
                 <TableCell>
                     <IconButton
                         aria-label="expand row"
@@ -38,34 +44,29 @@ function Row(props) {
                     {user._id}
                 </TableCell>
                 <TableCell align="center">{user.name}</TableCell>
-                {/* <TableCell align="center">
-                    <img
-                        style={{ width: "70px", height: "70px" }}
-                        src={user.img}
-                        alt="Product"
-                    loading="lazy"
-                    />
-                </TableCell> */}
-                {/* table details */}
-                <TableCell align="center">{user.email}</TableCell>
-                <TableCell align="center">{user.phone}</TableCell>
                 <TableCell align="center">{user.address}</TableCell>
-                {/* <TableCell align="center">{user.position}</TableCell> */}
-                <TableCell align="center">{"Edit | Delete"}</TableCell>
+                <TableCell align="center">{user.phone}</TableCell>
+                <TableCell align="center">{user.email}</TableCell>
+                <TableCell align="center">
+                    <EditIcon className={`${styles.editIcon}`} />
+                    <Delete className={`${styles.deleteIcon}`} />
+                </TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
                             <Typography variant="h6" gutterBottom component="div">
-                                User Details
+                                Customer Details
                             </Typography>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell align="center">Name</TableCell>
                                         <TableCell align="center">Phone</TableCell>
+                                        <TableCell align="center">Position</TableCell>
                                         <TableCell align="center">Address</TableCell>
+                                        <TableCell align="center">Salary</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -74,8 +75,9 @@ function Row(props) {
                                             {user.name}
                                         </TableCell>
                                         <TableCell align="center">{user.phone}</TableCell>
-
+                                        <TableCell align="center">{user.position}</TableCell>
                                         <TableCell align="center">{user.address}</TableCell>
+
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -90,14 +92,11 @@ function Row(props) {
 Row.propTypes = {
     user: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        /* img: PropTypes.string.isRequired, */
-        position: PropTypes.string.isRequired,
         role: PropTypes.string.isRequired,
-        userId: PropTypes.string.isRequired,
         phone: PropTypes.string.isRequired,
         email: PropTypes.string.isRequired,
         address: PropTypes.string.isRequired,
-        salary: PropTypes.string.isRequired,
+
     }).isRequired,
 };
 
@@ -115,42 +114,71 @@ const CustomerManagement = () => {
     };
 
     return (
-        <Container sx={{ width: "100%" }}>
-            <h2 className={`${styles.title}`}>Customer Management</h2>
-            <TableContainer component={Paper}>
-                <Table aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell />
-                            <TableCell>SL.</TableCell>
-                            <TableCell align="center">Name</TableCell>
-                            {/* <TableCell align="center">Image</TableCell> */}
-                            <TableCell align="center">Email</TableCell>
-                            <TableCell align="center">Phone</TableCell>
-                            <TableCell align="center">Address</TableCell>
-                            <TableCell align="center">Action</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {users
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((user) => (
-                                <Row key={user._id} user={user} />
-                            ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <Typography className="mt-3">
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 15]}
-                    component="div"
-                    count={users.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            </Typography>
+        <Container sx={{ width: "100%", mb: 5 }}>
+            <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
+                <Typography>
+                    <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
+                </Typography>
+                <Typography>
+                    <span style={{ fontSize: "26px" }}>Manager</span> <br />{" "}
+                    <span style={{ color: "#969494" }}>Manage Customer</span>
+                </Typography>
+            </Box>
+            <Box sx={{ textAlign: "right", my: 2 }}>
+
+                <Button className={`${styles.addEmployeeBtn}`}>Add Customer</Button>
+            </Box>
+            <Box className={`${styles.tableContainer}`}>
+                <Typography sx={{ fontWeight: "bold" }}>Manage Customer</Typography>
+                <hr />
+                <TableContainer
+                    component={Paper}
+                    sx={{ border: 1, borderColor: "grey.300" }}
+                >
+                    <Table aria-label="simple table">
+                        <TableHead className={`${styles.tableHeader}`}>
+                            <TableRow>
+                                <TableCell />
+                                <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Name
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Address
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Phone
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Email
+                                </TableCell>
+
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Action
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {users
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((user) => (
+                                    <Row key={user._id} user={user} />
+                                ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <Typography className="mt-3">
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 15]}
+                        component="div"
+                        count={users.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </Typography>
+            </Box>
         </Container>
     );
 };
