@@ -131,8 +131,8 @@ const EmployeeManagement = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>HRM</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Manage Employee</span>
+          <span style={{ fontSize: "26px", marginLeft: "-77px" }}>HRM</span>{" "}
+          <br /> <span style={{ color: "#969494" }}>Manage Employee</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
@@ -140,7 +140,9 @@ const EmployeeManagement = () => {
         <Button className={`${styles.addEmployeeBtn}`}>Add Employee</Button>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Manage Employee</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+          Manage Employee
+        </Typography>
         <hr />
         <TableContainer
           component={Paper}
