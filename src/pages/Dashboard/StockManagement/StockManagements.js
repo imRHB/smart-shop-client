@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -13,17 +13,21 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from "@mui/material/TablePagination";
-import { Container } from "@mui/material";
+import { Button, Container, TextField } from "@mui/material";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import products from "../../../assets/data/products.json";
+import styles from "./StockManagements.module.css";
 
 function Row(props) {
     const { product } = props;
-
     const [open, setOpen] = React.useState(false);
 
     return (
         <React.Fragment>
-            <TableRow hover sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+            <TableRow
+                className={`${styles.tableHover}`}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
                 <TableCell>
                     <IconButton
                         aria-label="expand row"
@@ -37,26 +41,24 @@ function Row(props) {
                     {product._id}
                 </TableCell>
                 <TableCell align="center">{product.name}</TableCell>
-                <TableCell align="center">
-                    {product.category}
-                </TableCell>
-                <TableCell align="center">10</TableCell>
-                <TableCell align="center">50</TableCell>
-                <TableCell align="center">35</TableCell>
-                <TableCell align="center">15</TableCell>
+                <TableCell align="center">{product.category}</TableCell>
+                <TableCell align="center">{10}</TableCell>
+                <TableCell align="center">{50}</TableCell>
+                <TableCell align="center">{35}</TableCell>
+                <TableCell align="center">{15}</TableCell>
                 <TableCell align="center">{product.price}</TableCell>
                 <TableCell align="center">{product.salePrice}</TableCell>
             </TableRow>
-            <TableRow hover>
+            <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
                             <Typography variant="h6" gutterBottom component="div">
-                                Product Summary
+                                product Details
                             </Typography>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
-                                    <TableRow hover>
+                                    <TableRow>
                                         <TableCell align="center">Product Name</TableCell>
                                         <TableCell align="center">Category</TableCell>
                                         <TableCell align="center">Supplier Price</TableCell>
@@ -64,13 +66,13 @@ function Row(props) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    <TableRow hover key={product._id}>
+                                    <TableRow key={product._id}>
                                         <TableCell component="th" scope="row">
                                             {product.name}
                                         </TableCell>
                                         <TableCell align="center">{product.category}</TableCell>
-                                        <TableCell align="center">BDT {product.price}</TableCell>
-                                        <TableCell align="center">BDT {product.salePrice}</TableCell>
+                                        <TableCell align="center">{product.price}</TableCell>
+                                        <TableCell align="center">{product.salePrice}</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -85,6 +87,7 @@ function Row(props) {
 
 const StockManagements = () => {
     const [page, setPage] = React.useState(0);
+    const [open, setOpen] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     const handleChangePage = (event, newPage) => {
@@ -97,22 +100,68 @@ const StockManagements = () => {
     };
 
     return (
-        <Container sx={{ width: "100%" }}>
-            <Paper>
-                <TableContainer component={Paper}>
+        <Container sx={{ width: "100%", mb: 5 }}>
+            <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 1 }}>
+                <Typography>
+                    <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
+                </Typography>
+                <Typography>
+                    <span style={{ fontSize: "26px" }}>
+                        Stock Report</span> <br />{" "}
+                    <span style={{ color: "#969494" }}>All Stock Report</span>
+                </Typography>
+            </Box>
+            <Box sx={{ textAlign: "left", mb: 1 }}>
+                <Button className={`${styles.btn}`} onClick={() => setOpen(!open)}>Filter</Button>
+                <Collapse in={open} sx={{ mt: 2, mb: 2 }} timeout="auto" unmountOnExit className={`${styles.tableContainer}`}>
+                    <form >
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <Typography sx={{ textAlign: "left", mr: 2 }} style={{ fontSize: "17px" }} >
+                                Search By Product:
+                            </Typography>
+                            <TextField size="small" id="outlined-basic" label="Product Name" sx={{ mr: 1 }} variant="outlined" />
+                            <Button className={`${styles.btn}`}>Search</Button>
+                        </Box>
+                    </form>
+                </Collapse>
+            </Box>
+
+            <Box className={`${styles.tableContainer}`}>
+                <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>Stock Report</Typography>
+                <hr />
+                <TableContainer
+                    component={Paper}
+                    sx={{ border: 1, borderColor: "grey.300" }}
+                >
                     <Table aria-label="simple table">
-                        <TableHead>
-                            <TableRow hover>
+                        <TableHead className={`${styles.tableHeader}`}>
+                            <TableRow>
                                 <TableCell />
-                                <TableCell>SL.</TableCell>
-                                <TableCell align="center">Product Name</TableCell>
-                                <TableCell align="center">Category</TableCell>
-                                <TableCell align="center">Quantity per carton</TableCell>
-                                <TableCell align="center">In Ctn.</TableCell>
-                                <TableCell align="center">Out Ctn.</TableCell>
-                                <TableCell align="center">Stock</TableCell>
-                                <TableCell align="center">Supplier Price</TableCell>
-                                <TableCell align="center">Supplier Price</TableCell>
+                                <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Products    Name
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Category
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Quantity per carton
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    In Ctn.
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Out Ctn.
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Stock
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Supplier Price
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Sale Price
+                                </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -123,6 +172,8 @@ const StockManagements = () => {
                                 ))}
                         </TableBody>
                     </Table>
+                </TableContainer>
+                <Typography className="mt-3">
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 15]}
                         component="div"
@@ -132,9 +183,8 @@ const StockManagements = () => {
                         onPageChange={handleChangePage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
-                </TableContainer>
-
-            </Paper>
+                </Typography>
+            </Box>
         </Container>
     );
 };
