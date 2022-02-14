@@ -6,6 +6,7 @@ import CustomerManagement from "../CustomerManagement/CustomerManagement";
 import CustomerStatus from "../CustomerManagement/CustomerStatus/CustomerStatus";
 import ExpenseItem from "../Expense/ExpenseItem";
 import AddEmployee from "../HRM/AddEmployee/AddEmployee";
+import Designation from "../HRM/Designation/Designation";
 import EmployeeManagement from "../HRM/EmployeeManagement/EmployeeManagement";
 import ManageProducts from "../ManageProducts/ManageProducts";
 import ManageSupplier from "../ManageSupplier/ManageSupplier";
@@ -37,7 +38,7 @@ const NestedRoutes = () => {
 
         {/*===================TEST YOUR COMPONENT HERE=====================*/}
         {/* <Route path="expense-item" element={<TestComponent />}></Route> */}
-        <Route path="test-component" element={<TestComponent />}></Route>
+        <Route path="test-component" element={<Designation />}></Route>
         {/*===================TEST YOUR COMPONENT HERE====================*/}
       </Routes>
     </>
