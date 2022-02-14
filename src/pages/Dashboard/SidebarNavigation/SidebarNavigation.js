@@ -141,6 +141,16 @@ const SidebarNavigation = () => {
           <br />
           <NavLink
             style={{ textDecoration: "none" }}
+            to={`/dashboard/designation`}
+            activeClassName="active"
+          >
+            <Button>
+              <PersonAddAlt1Icon sx={{ mr: 2 }} /> Designation
+            </Button>
+          </NavLink>
+          <br />
+          <NavLink
+            style={{ textDecoration: "none" }}
             to={`/dashboard/add-employee`}
             activeClassName="active"
           >

@@ -6,6 +6,7 @@ import CustomerManagement from "../CustomerManagement/CustomerManagement";
 import CustomerStatus from "../CustomerManagement/CustomerStatus/CustomerStatus";
 import ExpenseItem from "../Expense/ExpenseItem";
 import AddEmployee from "../HRM/AddEmployee/AddEmployee";
+import Designation from "../HRM/Designation/Designation";
 import EmployeeManagement from "../HRM/EmployeeManagement/EmployeeManagement";
 import ManageProducts from "../ManageProducts/ManageProducts";
 import ManageSupplier from "../ManageSupplier/ManageSupplier";
@@ -31,6 +32,7 @@ const NestedRoutes = () => {
         <Route path="stock-report" element={<StockManagements />}></Route>
         <Route path="supplier-stock-report" element={<SupplierStock />}></Route>
         <Route path="product-stock-report" element={<ProductStock />}></Route>
+        <Route path="designation" element={<Designation />}></Route>
         <Route path="add-employee" element={<AddEmployee />}></Route>
         <Route path="manage-employee" element={<EmployeeManagement />}></Route>
         <Route path="expense-item" element={<ExpenseItem />}></Route>
