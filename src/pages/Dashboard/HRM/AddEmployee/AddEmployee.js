@@ -5,7 +5,7 @@ import { Button, Container, Grid, Input } from "@mui/material";
 import { useForm } from "react-hook-form";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
-import cloudImage from "../../../assets/images/cloud-upload.png";
+import cloudImage from "../../../../assets/images/cloud-upload.png";
 import styles from "./AddEmployee.module.css";
 
 const AddEmployee = () => {
