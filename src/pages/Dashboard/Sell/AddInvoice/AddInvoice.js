@@ -167,8 +167,10 @@ const AddInvoice = () => {
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>Total Discount:</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "right", fontWeight: "bold" }}>Total Discount:</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <input type="text" placeholder='0.00' {...register("totalDiscount", { required: true })} style={{ width: "60px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        </TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell />
@@ -177,13 +179,15 @@ const AddInvoice = () => {
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>Grand Total:</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", fontWeight: "bold", textAlign: "right" }}>Grand Total:</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <input type="text" placeholder='0' {...register("grandTotal", { required: true })} style={{ width: "60px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        </TableCell>
                                     </TableRow>
 
                                     <TableRow>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <Button variant="contained" color="success">
+                                            <Button variant="contained" sx={{ borderRadius: "0" }} className={`${styles.receiptBtn}`} color="success">
                                                 Add New Item
                                             </Button></TableCell>
                                         <TableCell />
@@ -191,16 +195,18 @@ const AddInvoice = () => {
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>Paid Amount:</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", fontWeight: "bold" }}>Paid Amount:</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <input type="text" placeholder='0.00' {...register("paid", { required: true })} style={{ width: "60px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        </TableCell>
                                     </TableRow>
 
                                     <TableRow>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <Button variant="contained" color="success">
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}>
+                                            <Button sx={{ borderRadius: "0" }} className={`${styles.paymentBtn}`} variant="contained" color="success">
                                                 Submit
                                             </Button>
-                                            <Button variant="contained" color="success">
+                                            <Button sx={{ borderRadius: "0" }} variant="contained" color="success">
                                                 Full Paid
                                             </Button>
                                         </TableCell>
@@ -209,8 +215,10 @@ const AddInvoice = () => {
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>Due:</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", fontWeight: "bold", textAlign: "right" }}>Due:</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <input type="text" placeholder='0' {...register("grandTotal", { required: true })} style={{ width: "60px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        </TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
