@@ -18,7 +18,7 @@ import { Button, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import employees from "../../../assets/data/employees.json";
+import employees from "../../../../assets/data/employees.json";
 import styles from "./EmployeeManagement.module.css";
 
 function Row(props) {
@@ -52,7 +52,7 @@ function Row(props) {
             style={{ width: "70px", height: "70px" }}
             src={employee.img}
             alt="Product"
-          // loading="lazy"
+            // loading="lazy"
           />
         </TableCell>
         <TableCell align="center">

@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import AddEmployee from "../AddEmployee/AddEmployee";
 import AddSupplier from "../AddSupplier/AddSupplier";
 import CreateProduct from "../CreateProduct/CreateProduct";
 import CustomerManagement from "../CustomerManagement/CustomerManagement";
 import CustomerStatus from "../CustomerManagement/CustomerStatus/CustomerStatus";
-import EmployeeManagement from "../EmployeeManagement/EmployeeManagement";
 import ExpenseItem from "../Expense/ExpenseItem";
+import AddEmployee from "../HRM/AddEmployee/AddEmployee";
+import EmployeeManagement from "../HRM/EmployeeManagement/EmployeeManagement";
 import ManageProducts from "../ManageProducts/ManageProducts";
 import ManageSupplier from "../ManageSupplier/ManageSupplier";
 import ProductStock from "../ProductStock/ProductStock";
