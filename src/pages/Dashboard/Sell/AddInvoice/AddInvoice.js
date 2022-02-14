@@ -15,6 +15,8 @@ import Paper from "@mui/material/Paper";
 import TableRow from "@mui/material/TableRow";
 import Delete from "@mui/icons-material/Delete";
 import Collapse from "@mui/material/Collapse";
+import FormControl, { useFormControl } from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 const AddInvoice = () => {
     const {
@@ -125,77 +127,33 @@ const AddInvoice = () => {
                                     <TableRow>
 
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <TextField
-                                                id="outlined-basic"
-                                                size="small"
-                                                label="Customer Name"
-                                                variant="outlined"
-                                                {...register("name", { required: true })}
-                                            />
-                                        </TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <TextField
-                                                id="outlined-basic"
-                                                size="small"
 
-                                                label="Customer Name"
-                                                variant="outlined"
-                                                {...register("name", { required: true })}
-                                            />
+                                            <input type="text" placeholder="Product Name" {...register("product", { required: true })} style={{ padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        </TableCell>
+
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <input type="text" {...register("ctn", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        </TableCell>
+
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <input type="number" {...register("carton", { required: true })} style={{ width: "50px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
                                         </TableCell>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <TextField
-                                                id="outlined-basic"
-                                                size="small"
-                                                label="Customer Name"
-                                                variant="outlined"
-                                                {...register("name", { required: true })}
-                                            />
+                                            <input type="text" placeholder='0' {...register("quantity", { required: true })} style={{ width: "50px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        </TableCell>
+
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <input type="text" {...register("item", { required: true })} style={{ width: "80px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        </TableCell>
+
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <input type="text" placeholder='rating' {...register("rate", { required: true })} style={{ width: "50px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
                                         </TableCell>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <TextField
-                                                id="outlined-basic"
-                                                size="small"
-                                                label="Customer Name"
-                                                variant="outlined"
-                                                {...register("name", { required: true })}
-                                            />
+                                            <input type="text" placeholder='0.00' {...register("discount", { required: true })} style={{ width: "60px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
                                         </TableCell>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <TextField
-                                                id="outlined-basic"
-                                                size="small"
-                                                label="Customer Name"
-                                                variant="outlined"
-                                                {...register("name", { required: true })}
-                                            />
-                                        </TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <TextField
-                                                id="outlined-basic"
-                                                size="small"
-                                                label="Customer Name"
-                                                variant="outlined"
-                                                {...register("name", { required: true })}
-                                            />
-                                        </TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <TextField
-                                                id="outlined-basic"
-                                                size="small"
-                                                label="Customer Name"
-                                                variant="outlined"
-                                                {...register("name", { required: true })}
-                                            />
-                                        </TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <TextField
-                                                id="outlined-basic"
-                                                size="small"
-                                                label="Customer Name"
-                                                variant="outlined"
-                                                {...register("name", { required: true })}
-                                            />
+                                            <input type="text" placeholder='0' {...register("total", { required: true })} style={{ width: "60px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
                                         </TableCell>
                                         <TableCell align="center" > <Delete color="error" className={`${styles.deleteIcon}`} /></TableCell>
 
