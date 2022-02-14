@@ -14,6 +14,7 @@ import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
 import TableRow from "@mui/material/TableRow";
 import Delete from "@mui/icons-material/Delete";
+import Collapse from "@mui/material/Collapse";
 
 const AddInvoice = () => {
     const {
@@ -22,6 +23,8 @@ const AddInvoice = () => {
         reset,
         formState: { errors },
     } = useForm();
+    const [open, setOpen] = React.useState(false);
+
     return (
         <Container sx={{ width: "100%", mb: 5 }}>
             <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
@@ -55,23 +58,27 @@ const AddInvoice = () => {
                                 variant="outlined"
                                 {...register("name", { required: true })}
                             />
-                            <Button sx={{ borderRadius: 0, marginTop: '2px' }} className={`${styles.paymentBtn}`}>New Customer</Button>
+                            <Button sx={{ borderRadius: 0, marginTop: '2px' }} onClick={() => setOpen(!open)} className={`${styles.paymentBtn}`}>New Customer
+
+                            </Button>
                         </Box>
 
+                        <Collapse in={open} timeout="auto" >
+                            <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
 
-                        <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+                                <Typography sx={{ textAlign: "start" }}>Address <span>*</span></Typography>
 
-                            <Typography sx={{ textAlign: "start" }}>Address <span>*</span></Typography>
+                                <TextField
+                                    size="small"
+                                    id="outlined-basic"
+                                    sx={{ width: "400px" }}
+                                    label="Customer Address"
+                                    variant="outlined"
+                                    {...register("address", { required: true })}
+                                />
+                            </Box>
+                        </Collapse>
 
-                            <TextField
-                                size="small"
-                                id="outlined-basic"
-                                sx={{ width: "400px" }}
-                                label="Customer Address"
-                                variant="outlined"
-                                {...register("address", { required: true })}
-                            />
-                        </Box>
 
                         <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
                             <Typography sx={{ textAlign: "start" }}>Date<span>*</span></Typography>
@@ -117,14 +124,79 @@ const AddInvoice = () => {
                                 <TableBody>
                                     <TableRow>
 
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <TextField
+                                                id="outlined-basic"
+                                                size="small"
+                                                label="Customer Name"
+                                                variant="outlined"
+                                                {...register("name", { required: true })}
+                                            />
+                                        </TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <TextField
+                                                id="outlined-basic"
+                                                size="small"
+
+                                                label="Customer Name"
+                                                variant="outlined"
+                                                {...register("name", { required: true })}
+                                            />
+                                        </TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <TextField
+                                                id="outlined-basic"
+                                                size="small"
+                                                label="Customer Name"
+                                                variant="outlined"
+                                                {...register("name", { required: true })}
+                                            />
+                                        </TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <TextField
+                                                id="outlined-basic"
+                                                size="small"
+                                                label="Customer Name"
+                                                variant="outlined"
+                                                {...register("name", { required: true })}
+                                            />
+                                        </TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <TextField
+                                                id="outlined-basic"
+                                                size="small"
+                                                label="Customer Name"
+                                                variant="outlined"
+                                                {...register("name", { required: true })}
+                                            />
+                                        </TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <TextField
+                                                id="outlined-basic"
+                                                size="small"
+                                                label="Customer Name"
+                                                variant="outlined"
+                                                {...register("name", { required: true })}
+                                            />
+                                        </TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <TextField
+                                                id="outlined-basic"
+                                                size="small"
+                                                label="Customer Name"
+                                                variant="outlined"
+                                                {...register("name", { required: true })}
+                                            />
+                                        </TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <TextField
+                                                id="outlined-basic"
+                                                size="small"
+                                                label="Customer Name"
+                                                variant="outlined"
+                                                {...register("name", { required: true })}
+                                            />
+                                        </TableCell>
                                         <TableCell align="center" > <Delete color="error" className={`${styles.deleteIcon}`} /></TableCell>
 
 
