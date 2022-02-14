@@ -13,6 +13,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
 import TableRow from "@mui/material/TableRow";
+import Delete from "@mui/icons-material/Delete";
 
 const AddInvoice = () => {
     const {
@@ -41,43 +42,42 @@ const AddInvoice = () => {
                 <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>Add New Invoice</Typography>
                 <hr />
 
-                <form className={`${styles.paymentForm} ${'shadow'}`}>
-
-                    <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                        <Typography sx={{ textAlign: "start" }}>Customer Name<span>*</span></Typography>
-
-                        <TextField
-                            id="outlined-basic"
-                            size="small"
-                            sx={{ width: "400px" }}
-                            label="Customer Name"
-                            variant="outlined"
-                            {...register("name", { required: true })}
-                        />
-                        <Button sx={{ borderRadius: 0, marginTop: '2px' }} className={`${styles.paymentBtn}`}>New Customer</Button>
-                    </Box>
-
-
-                    <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-
-                        <Typography sx={{ textAlign: "start" }}>Address <span>*</span></Typography>
-
-                        <TextField
-                            size="small"
-                            id="outlined-basic"
-                            sx={{ width: "400px" }}
-                            label="Customer Address"
-                            variant="outlined"
-                            {...register("address", { required: true })}
-                        />
-                    </Box>
-
-                    <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                        <Typography sx={{ textAlign: "start" }}>Date<span>*</span></Typography>
-
-                        <input type="date" {...register("date", { required: true })} style={{ width: '400px', padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
-                    </Box>
+                <form className={`${'shadow'}`}>
                     <Box className={`${styles.tableContainer}`}>
+                        <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+                            <Typography sx={{ textAlign: "start" }}>Customer Name<span>*</span></Typography>
+
+                            <TextField
+                                id="outlined-basic"
+                                size="small"
+                                sx={{ width: "400px" }}
+                                label="Customer Name"
+                                variant="outlined"
+                                {...register("name", { required: true })}
+                            />
+                            <Button sx={{ borderRadius: 0, marginTop: '2px' }} className={`${styles.paymentBtn}`}>New Customer</Button>
+                        </Box>
+
+
+                        <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+
+                            <Typography sx={{ textAlign: "start" }}>Address <span>*</span></Typography>
+
+                            <TextField
+                                size="small"
+                                id="outlined-basic"
+                                sx={{ width: "400px" }}
+                                label="Customer Address"
+                                variant="outlined"
+                                {...register("address", { required: true })}
+                            />
+                        </Box>
+
+                        <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+                            <Typography sx={{ textAlign: "start" }}>Date<span>*</span></Typography>
+
+                            <input type="date" {...register("date", { required: true })} style={{ width: '400px', padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                        </Box>
                         <TableContainer
                             component={Paper}
                             sx={{ border: 1, borderColor: "grey.300" }}
@@ -125,7 +125,8 @@ const AddInvoice = () => {
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
-                                        <TableCell align="center">hello</TableCell>
+                                        <TableCell align="center" > <Delete color="error" className={`${styles.deleteIcon}`} /></TableCell>
+
 
                                     </TableRow>
                                     <TableRow>
@@ -136,40 +137,49 @@ const AddInvoice = () => {
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-
-                                        <TableCell />
-                                        <TableCell />
-                                        <TableCell />
-                                        <TableCell />
-                                        <TableCell />
-                                        <TableCell />
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>Total Discount:</TableCell>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
                                     </TableRow>
                                     <TableRow>
-
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
+                                        <TableCell />
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>Grand Total:</TableCell>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
                                     </TableRow>
-                                    <TableRow>
 
+                                    <TableRow>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <Button variant="contained" color="success">
+                                                Add New Item
+                                            </Button></TableCell>
+                                        <TableCell />
+                                        <TableCell />
+                                        <TableCell />
+                                        <TableCell />
+                                        <TableCell />
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>Paid Amount:</TableCell>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
+                                    </TableRow>
+
+                                    <TableRow>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
+                                            <Button variant="contained" color="success">
+                                                Submit
+                                            </Button>
+                                            <Button variant="contained" color="success">
+                                                Full Paid
+                                            </Button>
+                                        </TableCell>
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>Due:</TableCell>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>hello</TableCell>
                                     </TableRow>
                                 </TableBody>
