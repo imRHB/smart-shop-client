@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
-import styles from "./AddInvoice.module.css";
+import styles from "./PosInvoice.module.css";
 import TextField from "@mui/material/TextField";
 import { Box, Button, Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -16,8 +16,7 @@ import TableRow from "@mui/material/TableRow";
 import Delete from "@mui/icons-material/Delete";
 import Collapse from "@mui/material/Collapse";
 
-const AddInvoice = () => {
-
+const PosInvoice = () => {
     const [open, setOpen] = React.useState(false);
     const [toggle, setToggle] = useState(false);
     const [tableRow, setTableRow] = useState(1);
@@ -41,16 +40,16 @@ const AddInvoice = () => {
                 </Typography>
                 <Typography>
                     <span style={{ fontSize: "26px" }}>ADD NEW INVOICE</span> <br />{" "}
-                    <span style={{ color: "#969494" }}>Add New Invoice</span>
+                    <span style={{ color: "#969494" }}>Add new pos invoice</span>
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "right", my: 2 }}>
                 <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>Manage Invoice</Button>
-                <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>POS</Button>
+                <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>Add New Invoice</Button>
             </Box>
 
             <Box className={`${styles.paymentContainer}`}>
-                <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>Add New Invoice</Typography>
+                <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>New POS invoice</Typography>
                 <hr />
 
                 <form className={`${'shadow'}`}>
@@ -244,4 +243,4 @@ const AddInvoice = () => {
     );
 };
 
-export default AddInvoice;
+export default PosInvoice;
