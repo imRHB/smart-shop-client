@@ -1,54 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import axios from "axios";
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { Container } from "react-bootstrap";
+import useProducts from "./CustomTestHooks/useProducts";
 
 const CrudTest = () => {
-    const [users, setUsers] = useState([]);
+    const products = useProducts();
+    console.log(products);
 
-    const [name, setName] = useState('');
+    const { register, handleSubmit } = useForm();
+    const onSubmit = data => {
+        console.log(data);
 
-    console.log(users);
+        fetch('http://localhost:5000/designations', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
 
-    /* useEffect(() => {
-        axios.get('https://jsonplaceholder.typicode.com/users')
-            .then(res => {
-                setUsers(res.data);
-            })
-    }, []); */
-
-    const handleOnBlur = (e) => {
-        const name = e.target.value;
-        setName(name);
     };
 
-    const handleAdd = () => {
-        console.log('clicked');
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        console.log(e.target.value);
-    };
 
     return (
         <div>
             <Container>
                 <h1 className="text-center my-5 fw-bold">CURD Operation Test</h1>
 
-                {
-                    users.map(user => <h4>
-                        {user.name}
-                    </h4>)
-                }
+                <ul>
+                    {
+                        products.map(product => <li>
+                            {product.name}
+                        </li>)
+                    }
+                </ul>
 
-                <div>
-                    <p>{name}</p>
-                </div>
-
-                <form onSubmit={handleSubmit}>
-                    <input type="text" placeholder="Name" onBlur={handleOnBlur} />
-                    <button type="submit">ADD</button>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    {/* <input type="text" {...register("item", { required: true })} placeholder="Expense Item" /> */}
+                    {/* <select {...register("item")}>
+                        <option value="">Select Expanse...</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="snacks">Snacks</option>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="electricity">Electricity</option>
+                        <option value="salary">Salary</option>
+                        <option value="Advanture">Bounus</option>
+                        <option value="Advanture">Food</option>
+                        <option value="Advanture">Shop</option>
+                        <option value="Advanture">Water</option>
+                        <option value="Advanture">Gass</option>
+                    </select> */}
+                    <br />
+                    {/* <input type="date" {...register("date")} placeholder="Date" /> */}
+                    <br />
+                    <input type="text" {...register("designation", { required: true })} placeholder="Designation Name" />
+                    <br />
+                    <input type="text" {...register("details", { required: true })} placeholder="Designation Details" />
+                    <br />
+                    {/* <input type="number" {...register("balance")} placeholder="Balance" /> */}
+                    <br />
+                    <input type="submit" />
                 </form>
             </Container>
         </div>
