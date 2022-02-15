@@ -30,12 +30,12 @@ function Row(props) {
             >
 
                 <TableCell component="th" scope="row">
-                    {supplier._id}
+                    {invoice._id}
                 </TableCell>
-                <TableCell align="center">{supplier.name}</TableCell>
-                <TableCell align="center">{supplier.address}</TableCell>
-                <TableCell align="center">{supplier.contact}</TableCell>
-                <TableCell align="center">BDT {supplier.balance}</TableCell>
+                <TableCell align="center">{invoice.item}</TableCell>
+                <TableCell align="center">{invoice.name}</TableCell>
+                <TableCell align="center">{invoice.date}</TableCell>
+                <TableCell align="center">BDT {invoice.amount}</TableCell>
                 <TableCell align="center">
                     <EditIcon className={`${styles.editIcon}`} />
                     <Delete className={`${styles.deleteIcon}`} />

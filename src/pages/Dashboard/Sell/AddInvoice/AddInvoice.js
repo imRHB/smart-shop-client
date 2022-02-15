@@ -238,7 +238,7 @@ const AddInvoice = () => {
                                         <TableCell />
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", fontWeight: "bold", textAlign: "right", p: 1 }}>Due:</TableCell>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <input type="text" placeholder='0' {...register("grandTotal", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
+                                            <input type="text" placeholder='0' {...register("due", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>

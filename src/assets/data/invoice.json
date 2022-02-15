@@ -1,82 +1,72 @@
 [
   {
     "_id": 1,
-    "name": "Md. Najmul",
-    "contact": "+8801723456789",
-    "address": "Dhaka, Bangladesh",
-    "details": "",
-    "balance": "1000"
+    "name": "Afsana Meem",
+    "item": "800",
+    "date": "12 FEB 2022",
+    "total": "10500"
   },
   {
     "_id": 2,
-    "name": "Md. Rakib",
-    "contact": "+8801723456789",
-    "address": "Dhaka, Bangladesh",
-    "details": "",
-    "balance": "2000"
+    "name": "Afsana Meem",
+    "item": "800",
+    "date": "12 FEB 2022",
+    "total": "10500"
   },
   {
     "_id": 3,
-    "name": "Md. Zahid",
-    "contact": "+8801723456789",
-    "address": "Dhaka, Bangladesh",
-    "details": "",
-    "balance": "2500"
+    "name": "Afsana Meem",
+    "item": "800",
+    "date": "12 FEB 2022",
+    "total": "10500"
   },
   {
     "_id": 4,
-    "name": "Maria Munni",
-    "contact": "+8801723456789",
-    "address": "Pabna, Bangladesh",
-    "details": "",
-    "balance": "3500"
+    "name": "Afsana Meem",
+    "item": "800",
+    "date": "12 FEB 2022",
+    "total": "10500"
   },
   {
     "_id": 5,
-    "name": "Munni Khatun",
-    "contact": "+8801723456789",
-    "address": "Pabna, Bangladesh",
-    "details": "",
-    "balance": "3500"
+    "name": "Afsana Meem",
+    "item": "800",
+    "date": "12 FEB 2022",
+    "total": "10500"
   },
   {
     "_id": 6,
-    "name": "Maria Munni",
-    "contact": "+8801723456789",
-    "address": "Pabna, Bangladesh",
-    "details": "",
-    "balance": "4500"
+    "name": "Afsana Meem",
+    "item": "800",
+    "date": "12 FEB 2022",
+    "total": "10500"
   },
   {
     "_id": 7,
-    "name": "Maria Munni",
-    "contact": "+8801723456789",
-    "address": "Pabna, Bangladesh",
-    "details": "",
-    "balance": "1200"
+    "name": "Afsana Meem",
+    "item": "800",
+    "date": "12 FEB 2022",
+    "total": "10500"
   },
   {
     "_id": 8,
-    "name": "Maria Munni",
-    "contact": "+8801723456789",
-    "address": "Pabna, Bangladesh",
-    "details": "",
-    "balance": "900"
+    "name": "Afsana Meem",
+    "item": "800",
+    "date": "12 FEB 2022",
+    "total": "10500"
   },
   {
     "_id": 9,
     "name": "Afsana Meem",
-    "contact": "+8801723456789",
-    "address": "Madaripur, Bangladesh",
-    "details": "",
-    "balance": "2000"
+    "item": "800",
+    "date": "12 FEB 2022",
+    "total": "10500"
   },
   {
     "_id": 10,
     "name": "Afsana Meem",
-    "contact": "+8801723456789",
-    "address": "Barisal, Bangladesh",
-    "details": "",
-    "balance": "1500"
+    "item": "800",
+    "date": "12 FEB 2022",
+    "total": "10500"
   }
 ]
