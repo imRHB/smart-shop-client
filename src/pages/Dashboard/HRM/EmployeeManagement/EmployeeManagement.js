@@ -18,7 +18,7 @@ import { Button, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import employees from "../../../assets/data/employees.json";
+import employees from "../../../../assets/data/employees.json";
 import styles from "./EmployeeManagement.module.css";
 
 function Row(props) {
@@ -52,7 +52,7 @@ function Row(props) {
             style={{ width: "70px", height: "70px" }}
             src={employee.img}
             alt="Product"
-          // loading="lazy"
+            // loading="lazy"
           />
         </TableCell>
         <TableCell align="center">
@@ -131,8 +131,8 @@ const EmployeeManagement = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>HRM</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Manage Employee</span>
+          <span style={{ fontSize: "26px", marginLeft: "-77px" }}>HRM</span>{" "}
+          <br /> <span style={{ color: "#969494" }}>Manage Employee</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
@@ -140,7 +140,9 @@ const EmployeeManagement = () => {
         <Button className={`${styles.addEmployeeBtn}`}>Add Employee</Button>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Manage Employee</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+          Manage Employee
+        </Typography>
         <hr />
         <TableContainer
           component={Paper}

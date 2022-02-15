@@ -1,9 +1,39 @@
-.topContainer {
+.tableContainer {
   background-color: #f1f3f6;
   padding: 17px;
   border-radius: 5px;
 }
+.tableHover:hover {
+  background-color: #cffcb6;
+}
 
+.tableHeader {
+  background-color: #001e3c;
+}
+
+.tableCell {
+  color: #fff !important;
+  font-weight: 700 !important;
+}
+
+.editIcon {
+  background-color: #003366;
+  color: #fff;
+  font-weight: 700;
+  padding: 5px;
+  border-radius: 3px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.deleteIcon {
+  background-color: #ee101b;
+  color: #fff;
+  font-weight: 700;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
 
 .assignmentIcon {
   font-size: 56px !important;
@@ -11,7 +41,6 @@
   background-color: #001e3c !important;
   margin-right: 15px !important;
 }
-
 
 .paymentBtn {
   background-color: #003366 !important;
@@ -41,52 +70,8 @@
   color: #fff !important;
 }
 
-.paymentContainer{
-    background-color: #f1f3f6;
+.topContainer {
+  background-color: #f1f3f6;
   padding: 17px;
   border-radius: 5px;
 }
-
-.paymentForm{
-  background-color:#e4e4e4;
-  padding: 5px 30px 30px 30px;
-  margin: 15px 30px 30px 30px;
-  
-}
-
-.addSupplier form{
-    background-color: rgb(255, 255, 255);
-    padding: 50px;
-}
-
-.addSupplierField{
-   
-    line-height: 10px;
-}
-
-.addSupplierField span{
-    color: red;
-}
-.addAnotherButton, .addSupplierButton{
-    color: rgb(255, 255, 255);
-    font-weight: 600;
-    border: none;
-    transition: 0.5s;
-}
-
-.addSupplierButton{
-    background-color: #642dfc;
-}
-
-.addSupplierButton:hover{
-    background-color: #26008f;
-}
-.addAnotherButton{
-   background-color: #008993; 
-}
-
-.addAnotherButton:hover{
-    background-color: #00484d; 
-}
-
-         

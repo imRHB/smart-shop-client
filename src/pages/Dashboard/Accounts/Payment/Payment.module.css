@@ -1,5 +1,5 @@
-.tableContainer {
-  background-color: #f1f3f6;
+.paymentContainer{
+    background-color: #f1f3f6;
   padding: 17px;
   border-radius: 5px;
 }
@@ -11,21 +11,22 @@
   margin-right: 15px !important;
 }
 
-.designationBtn {
+.paymentBtn {
   background-color: #003366 !important;
   color: #fff !important;
   text-transform: capitalize !important;
   padding-left: 15px !important;
   padding-right: 15px !important;
   margin-right: 5px !important;
+  margin-left: 5px !important;
 }
 
-.designationBtn:hover {
-  background-color: #003366 !important;
+.paymentBtn:hover {
+  background-color: #004a94 !important;
   color: #fff !important;
 }
 
-.manageEmployeeBtn {
+.receiptBtn {
   background-color: #45c203 !important;
   color: #fff !important;
   text-transform: capitalize !important;
@@ -33,8 +34,8 @@
   padding-right: 15px !important;
 }
 
-.manageEmployeeBtn:hover {
-  background-color: #45c203 !important;
+.receiptBtn:hover {
+  background-color: #2b7b00 !important;
   color: #fff !important;
 }
 
@@ -44,20 +45,9 @@
   border-radius: 5px;
 }
 
-.resetBtn {
-  background-color: #e7575e !important;
-  color: #fff !important;
-  text-transform: capitalize !important;
-  padding-left: 25px !important;
-  padding-right: 25px !important;
-  margin-right: 5px !important;
-}
-
-.saveBtn {
-  background-color: #003366 !important;
-  color: #fff !important;
-  text-transform: capitalize !important;
-  padding-left: 25px !important;
-  padding-right: 25px !important;
-  margin-right: 5px !important;
+.paymentForm{
+  background-color:#e4e4e4;
+  padding: 5px 30px 30px 30px;
+  margin: 15px 30px 30px 30px;
+  
 }
