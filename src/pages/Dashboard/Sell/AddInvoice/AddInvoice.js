@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import styles from "./AddInvoice.module.css";
 import TextField from "@mui/material/TextField";
@@ -15,8 +15,6 @@ import Paper from "@mui/material/Paper";
 import TableRow from "@mui/material/TableRow";
 import Delete from "@mui/icons-material/Delete";
 import Collapse from "@mui/material/Collapse";
-import FormControl, { useFormControl } from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
 
 const AddInvoice = () => {
     const {
@@ -26,6 +24,12 @@ const AddInvoice = () => {
         formState: { errors },
     } = useForm();
     const [open, setOpen] = React.useState(false);
+
+    const [toggle, setToggle] = useState(false);
+
+    const buttonToggle = () => {
+        setToggle(!toggle)
+    }
 
     return (
         <Container sx={{ width: "100%", mb: 5 }}>
@@ -60,8 +64,11 @@ const AddInvoice = () => {
                                 variant="outlined"
                                 {...register("name", { required: true })}
                             />
-                            <Button sx={{ borderRadius: 0, marginTop: '2px' }} onClick={() => setOpen(!open)} className={`${styles.paymentBtn}`}>New Customer
-
+                            <Button sx={{ borderRadius: 0, marginTop: '2px' }} onClick={() => {
+                                setOpen(!open)
+                                buttonToggle()
+                            }} className={`${styles.paymentBtn}`}>
+                                {toggle ? 'Old Customer' : 'New Customer'}
                             </Button>
                         </Box>
 
@@ -128,32 +135,34 @@ const AddInvoice = () => {
 
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
 
-                                            <input type="text" placeholder="Product Name" {...register("product", { required: true })} style={{ padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                            <input type="text" placeholder="Product Name" {...register("product", { required: true })} style={{ padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                         </TableCell>
 
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <input type="text" {...register("ctn", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}>
+                                            <input type="text" placeholder='Available Ctn.' {...register("ctn", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                         </TableCell>
 
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <input type="number" {...register("carton", { required: true })} style={{ width: "50px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}>
+                                            <input type="number" placeholder='0'  {...register("carton", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                         </TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <input type="text" placeholder='0' {...register("quantity", { required: true })} style={{ width: "50px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
-                                        </TableCell>
-
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <input type="text" {...register("item", { required: true })} style={{ width: "80px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}>
+                                            <input type="text" placeholder='0' {...register("quantity", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                         </TableCell>
 
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <input type="text" placeholder='rating' {...register("rate", { required: true })} style={{ width: "50px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}>
+                                            <input type="text" placeholder='0' {...register("item", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                         </TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <input type="text" placeholder='0.00' {...register("discount", { required: true })} style={{ width: "60px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}>
+                                            <input type="text" placeholder='Rating' {...register("rate", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                         </TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <input type="text" placeholder='0' {...register("total", { required: true })} style={{ width: "60px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}>
+                                            <input type="text" placeholder='0.00' {...register("discount", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
+                                        </TableCell>
+
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}>
+                                            <input type="text" placeholder='0' {...register("total", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                         </TableCell>
                                         <TableCell align="center" > <Delete color="error" className={`${styles.deleteIcon}`} /></TableCell>
 
@@ -168,8 +177,8 @@ const AddInvoice = () => {
                                         <TableCell />
                                         <TableCell />
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "right", fontWeight: "bold" }}>Total Discount:</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <input type="text" placeholder='0.00' {...register("totalDiscount", { required: true })} style={{ width: "60px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}>
+                                            <input type="text" placeholder='0.00' {...register("totalDiscount", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                         </TableCell>
                                     </TableRow>
                                     <TableRow>
@@ -180,8 +189,8 @@ const AddInvoice = () => {
                                         <TableCell />
                                         <TableCell />
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", fontWeight: "bold", textAlign: "right" }}>Grand Total:</TableCell>
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <input type="text" placeholder='0' {...register("grandTotal", { required: true })} style={{ width: "60px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}>
+                                            <input type="text" placeholder='0' {...register("grandTotal", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                         </TableCell>
                                     </TableRow>
 
@@ -195,9 +204,9 @@ const AddInvoice = () => {
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", fontWeight: "bold" }}>Paid Amount:</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", fontWeight: "bold", p: 1 }}>Paid Amount:</TableCell>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <input type="text" placeholder='0.00' {...register("paid", { required: true })} style={{ width: "60px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                            <input type="text" placeholder='0.00' {...register("paid", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                         </TableCell>
                                     </TableRow>
 
@@ -215,9 +224,9 @@ const AddInvoice = () => {
                                         <TableCell />
                                         <TableCell />
                                         <TableCell />
-                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", fontWeight: "bold", textAlign: "right" }}>Due:</TableCell>
+                                        <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", fontWeight: "bold", textAlign: "right", p: 1 }}>Due:</TableCell>
                                         <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
-                                            <input type="text" placeholder='0' {...register("grandTotal", { required: true })} style={{ width: "60px", padding: "8px", backgroundColor: "#e4e4e4", border: "1px solid #aeaeae", borderRadius: "3px" }} />
+                                            <input type="text" placeholder='0' {...register("grandTotal", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
