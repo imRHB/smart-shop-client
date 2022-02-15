@@ -171,6 +171,26 @@ const SidebarNavigation = () => {
           <br />
           <NavLink
             style={{ textDecoration: "none" }}
+            to={`/dashboard/add-office-person`}
+            activeClassName="active"
+          >
+            <Button>
+              <PersonAddAlt1Icon sx={{ mr: 2 }} /> Add Office Person
+            </Button>
+          </NavLink>
+          <br />
+          <NavLink
+            style={{ textDecoration: "none" }}
+            to={`/dashboard/manage-office-loan`}
+            activeClassName="active"
+          >
+            <Button>
+              <PersonAddAlt1Icon sx={{ mr: 2 }} /> Manage Office Loan
+            </Button>
+          </NavLink>
+          <br />
+          <NavLink
+            style={{ textDecoration: "none" }}
             to={`/dashboard/expense-item`}
             activeClassName="active"
           >
