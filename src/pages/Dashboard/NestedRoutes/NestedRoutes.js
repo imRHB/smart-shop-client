@@ -10,7 +10,8 @@ import EmployeeManagement from "../HRM/EmployeeManagement/EmployeeManagement";
 import ManageProducts from "../ManageProducts/ManageProducts";
 import ManageSupplier from "../ManageSupplier/ManageSupplier";
 import ProductStock from "../ProductStock/ProductStock";
-import PosInvoice from "../Sell/PosInvoice/PosInvoice";
+import AddInvoice from "../Sell/AddInvoice/AddInvoice";
+import ManageInvoice from "../Sell/ManageInvoice/ManageInvoice";
 import StockManagements from "../StockManagement/StockManagements";
 import SupplierStock from "../SupplierStock/SupplierStock";
 //==============import your component here====================//
@@ -38,7 +39,7 @@ const NestedRoutes = () => {
 
         {/*===================TEST YOUR COMPONENT HERE=====================*/}
         {/* <Route path="expense-item" element={<TestComponent />}></Route> */}
-        <Route path="test-component" element={<PosInvoice />}></Route>
+        <Route path="test-component" element={<AddInvoice />}></Route>
         {/*===================TEST YOUR COMPONENT HERE====================*/}
       </Routes>
     </>

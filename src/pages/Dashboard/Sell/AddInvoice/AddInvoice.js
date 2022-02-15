@@ -170,7 +170,14 @@ const AddInvoice = () => {
                                                 <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}>
                                                     <input type="text" placeholder='0' {...register("total", { required: true })} style={{ width: "70px", padding: "8px", backgroundColor: "#f1f3f6", border: "1px solid #aeaeae" }} />
                                                 </TableCell>
-                                                <TableCell onClick={() => setTableRow(tableRow - 1)} align="center" > <Delete color="error" className={`${styles.deleteIcon}`} /></TableCell>
+                                                <TableCell onClick={() => {
+                                                    if (tableRow <= 1) {
+                                                        alert("There only one row you can't delete.")
+                                                    } else {
+                                                        setTableRow(tableRow - 1)
+                                                    }
+
+                                                }} align="center" > <Delete color="error" className={`${styles.deleteIcon}`} /></TableCell>
                                             </TableRow>
                                         );
                                     })}
