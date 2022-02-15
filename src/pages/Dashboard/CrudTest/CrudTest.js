@@ -1,12 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Container } from "react-bootstrap";
-import useProducts from "./CustomTestHooks/useProducts";
 
 const CrudTest = () => {
-    const products = useProducts();
-    console.log(products);
-
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
         console.log(data);
@@ -26,14 +22,6 @@ const CrudTest = () => {
         <div>
             <Container>
                 <h1 className="text-center my-5 fw-bold">CURD Operation Test</h1>
-
-                <ul>
-                    {
-                        products.map(product => <li>
-                            {product.name}
-                        </li>)
-                    }
-                </ul>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {/* <input type="text" {...register("item", { required: true })} placeholder="Expense Item" /> */}
