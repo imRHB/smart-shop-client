@@ -14,10 +14,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import invoices from "../../../../assets/data/invoice.json";
-import styles from "./ManageSupplier.module.css";
+import styles from "./ManageInvoice.module.css";
 import MenuIcon from '@mui/icons-material/Menu';
-import ReceiptIcon from '@mui/icons-material/Receipt';
-
 
 function Row(props) {
     const { invoice } = props;
@@ -35,7 +33,7 @@ function Row(props) {
                 <TableCell align="center">{invoice.item}</TableCell>
                 <TableCell align="center">{invoice.name}</TableCell>
                 <TableCell align="center">{invoice.date}</TableCell>
-                <TableCell align="center">BDT {invoice.amount}</TableCell>
+                <TableCell align="center">BDT {invoice.total}</TableCell>
                 <TableCell align="center">
                     <EditIcon className={`${styles.editIcon}`} />
                     <Delete className={`${styles.deleteIcon}`} />
@@ -66,18 +64,17 @@ const ManageInvoice = () => {
                     <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
                 </Typography>
                 <Typography>
-                    <span style={{ fontSize: "26px" }}>Manage Supplier</span> <br />{" "}
-                    <span style={{ color: "#969494" }}>Manage your Supplier</span>
+                    <span style={{ fontSize: "26px" }}>MANAGE INVOICE</span> <br />{" "}
+                    <span style={{ color: "#969494" }}>Manage your Invoice</span>
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "right", my: 2 }}>
-                <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>Add Supplier</Button>
-                <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>Supplier Ledger</Button>
-                <Button className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>Supplier Payment</Button>
-                <Button className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>Supplier Sales Details</Button>
+                <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>Add New Invoice</Button>
+                <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>POS</Button>
+
             </Box>
             <Box className={`${styles.tableContainer}`}>
-                <Typography sx={{ fontWeight: "bold" }}>Manage Supplier</Typography>
+                <Typography sx={{ fontWeight: "bold" }}>Manage Invoice</Typography>
                 <hr />
                 <TableContainer
                     component={Paper}
@@ -89,16 +86,16 @@ const ManageInvoice = () => {
 
                                 <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Supplier Name
+                                    Sell No.
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Address
+                                    Customer Name
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Mobile
+                                    Date
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Balance
+                                    Total Amount
                                 </TableCell>
 
                                 <TableCell align="center" className={`${styles.tableCell}`}>
