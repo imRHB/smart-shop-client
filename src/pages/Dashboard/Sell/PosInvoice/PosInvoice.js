@@ -55,6 +55,21 @@ const PosInvoice = () => {
                 <form className={`${'shadow'}`}>
                     <Box className={`${styles.tableContainer}`}>
                         <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+
+                            <Typography sx={{ textAlign: "start" }}>Barcode<span>*</span></Typography>
+
+                            <TextField
+                                size="small"
+                                id="outlined-basic"
+                                sx={{ width: "400px" }}
+                                placeholder="Barcode or QR code scan here"
+                                label="Barcode/QR Code"
+                                variant="outlined"
+                                {...register("barcode", { required: true })}
+                            />
+                        </Box>
+
+                        <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
                             <Typography sx={{ textAlign: "start" }}>Customer Name<span>*</span></Typography>
 
                             <TextField
