@@ -1,3 +1,9 @@
+.topContainer {
+  background-color: #f1f3f6;
+  padding: 17px;
+  border-radius: 5px;
+}
+
 .tableContainer {
   background-color: #f1f3f6;
   padding: 17px;
@@ -11,7 +17,7 @@
   margin-right: 15px !important;
 }
 
-.designationBtn {
+.addEmployeeBtn {
   background-color: #003366 !important;
   color: #fff !important;
   text-transform: capitalize !important;
@@ -20,7 +26,7 @@
   margin-right: 5px !important;
 }
 
-.designationBtn:hover {
+.addEmployeeBtn:hover {
   background-color: #003366 !important;
   color: #fff !important;
 }
@@ -36,28 +42,4 @@
 .manageEmployeeBtn:hover {
   background-color: #45c203 !important;
   color: #fff !important;
-}
-
-.topContainer {
-  background-color: #f1f3f6;
-  padding: 17px;
-  border-radius: 5px;
-}
-
-.resetBtn {
-  background-color: #e7575e !important;
-  color: #fff !important;
-  text-transform: capitalize !important;
-  padding-left: 25px !important;
-  padding-right: 25px !important;
-  margin-right: 5px !important;
-}
-
-.saveBtn {
-  background-color: #003366 !important;
-  color: #fff !important;
-  text-transform: capitalize !important;
-  padding-left: 25px !important;
-  padding-right: 25px !important;
-  margin-right: 5px !important;
 }

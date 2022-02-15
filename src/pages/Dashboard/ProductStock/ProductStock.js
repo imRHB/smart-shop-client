@@ -1,22 +1,24 @@
 import React from 'react';
 import Table from "@mui/material/Table";
+import Box from "@mui/material/Box";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import TablePagination from "@mui/material/TablePagination";
-import { Container, Link } from "@mui/material";
+import { Container, Link, Typography } from "@mui/material";
 import products from "../../../assets/data/products.json";
+import styles from "./ProductStock.module.css"
 
 function Row(props) {
     const { product } = props;
 
     return (
         <React.Fragment>
-            <TableRow hover sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+            <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }} className={`${styles.tableHover}`}>
 
                 <TableCell component="th" scope="row">
                     21/02/2018                </TableCell>
@@ -51,22 +53,33 @@ const ProductStock = () => {
 
     return (
         <Container sx={{ width: "100%" }}>
-            <Paper>
-                <TableContainer component={Paper}>
+            <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
+                <Typography>
+                    <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
+                </Typography>
+                <Typography>
+                    <span style={{ fontSize: "26px" }}>Stock Report (Product Wise)</span> <br />{" "}
+                    <span style={{ color: "#969494" }}>Stock Report (Product Wise)</span>
+                </Typography>
+            </Box>
+            <Box className={`${styles.tableContainer}`}>
+                <Typography sx={{ fontWeight: "bold", textAlign: 'left' }}>Stock Report (Product Wise)</Typography>
+                <hr />
+                <TableContainer component={Paper} sx={{ border: 1, borderColor: "grey.300" }}>
                     <Table aria-label="simple table">
-                        <TableHead>
+                        <TableHead className={`${styles.tableHeader}`}>
                             <TableRow hover>
-                                <TableCell align="center">Date</TableCell>
-                                <TableCell align="center">Suite</TableCell>
-                                <TableCell align="center">Price</TableCell>
-                                <TableCell align="center">Quantity per carton</TableCell>
-                                <TableCell align="center">In Ctn.</TableCell>
-                                <TableCell align="center">Out Ctn.</TableCell>
-                                <TableCell align="center">In Qnty.</TableCell>
-                                <TableCell align="center">Out Qnty.</TableCell>
-                                <TableCell align="center">Total Price</TableCell>
-                                <TableCell align="center">Total Sales</TableCell>
-                                <TableCell align="center">Stock</TableCell>
+                                <TableCell className={`${styles.tableCell}`} align="center">Date</TableCell>
+                                <TableCell className={`${styles.tableCell}`} align="center">Suite</TableCell>
+                                <TableCell className={`${styles.tableCell}`} align="center">Price</TableCell>
+                                <TableCell className={`${styles.tableCell}`} align="center">Quantity per carton</TableCell>
+                                <TableCell className={`${styles.tableCell}`} align="center">In Ctn.</TableCell>
+                                <TableCell className={`${styles.tableCell}`} align="center">Out Ctn.</TableCell>
+                                <TableCell className={`${styles.tableCell}`} align="center">In Qnty.</TableCell>
+                                <TableCell className={`${styles.tableCell}`} align="center">Out Qnty.</TableCell>
+                                <TableCell className={`${styles.tableCell}`} align="center">Total Price</TableCell>
+                                <TableCell className={`${styles.tableCell}`} align="center">Total Sales</TableCell>
+                                <TableCell className={`${styles.tableCell}`} align="center">Stock</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -88,7 +101,7 @@ const ProductStock = () => {
                     />
                 </TableContainer>
 
-            </Paper>
+            </Box>
         </Container>
     );
 };

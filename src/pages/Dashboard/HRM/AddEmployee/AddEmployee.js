@@ -5,7 +5,8 @@ import { Button, Container, Grid, Input } from "@mui/material";
 import { useForm } from "react-hook-form";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
-import cloudImage from "../../../assets/images/cloud-upload.png";
+import designations from "../../../../assets/data/designations.json";
+import cloudImage from "../../../../assets/images/cloud-upload.png";
 import styles from "./AddEmployee.module.css";
 
 const AddEmployee = () => {
@@ -18,32 +19,7 @@ const AddEmployee = () => {
         setCountries(result.data);
       });
   });
-  const designations = [
-    {
-      _id: 1,
-      name: "Manager",
-    },
-    {
-      _id: 2,
-      name: "Store",
-    },
-    {
-      _id: 3,
-      name: "Sales Executive",
-    },
-    {
-      _id: 4,
-      name: "HR",
-    },
-    {
-      _id: 5,
-      name: "Programer",
-    },
-    {
-      _id: 6,
-      name: "Designer",
-    },
-  ];
+
   const {
     register,
     handleSubmit,
@@ -104,8 +80,8 @@ const AddEmployee = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>HRM</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Add Employee</span>
+          <span style={{ fontSize: "26px", marginLeft: "-46px" }}>HRM</span>{" "}
+          <br /> <span style={{ color: "#969494" }}>Add Employee</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
@@ -115,7 +91,9 @@ const AddEmployee = () => {
         </Button>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Add Employee</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+          Add Employee
+        </Typography>
         <hr />
         <div className="mt-2">
           <div className="form-container">
