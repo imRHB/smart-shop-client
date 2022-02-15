@@ -10,6 +10,8 @@ import Designation from "../HRM/Designation/Designation";
 import EmployeeManagement from "../HRM/EmployeeManagement/EmployeeManagement";
 import ManageProducts from "../ManageProducts/ManageProducts";
 import ManageSupplier from "../ManageSupplier/ManageSupplier";
+import AddOfficePerson from "../OfficeLoan/AddOfficePerson/AddOfficePerson";
+import ManageOfficeLoan from "../OfficeLoan/ManageOfficeLoan/ManageOfficeLoan";
 import ProductStock from "../ProductStock/ProductStock";
 import StockManagements from "../StockManagement/StockManagements";
 import SupplierStock from "../SupplierStock/SupplierStock";
@@ -35,6 +37,8 @@ const NestedRoutes = () => {
         <Route path="designation" element={<Designation />}></Route>
         <Route path="add-employee" element={<AddEmployee />}></Route>
         <Route path="manage-employee" element={<EmployeeManagement />}></Route>
+        <Route path="add-office-person" element={<AddOfficePerson />}></Route>
+        <Route path="manage-office-loan" element={<ManageOfficeLoan />}></Route>
         <Route path="expense-item" element={<ExpenseItem />}></Route>
 
         {/*===================TEST YOUR COMPONENT HERE=====================*/}
