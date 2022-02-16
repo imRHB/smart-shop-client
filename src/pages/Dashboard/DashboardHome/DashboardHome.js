@@ -13,7 +13,7 @@ import defaultUser from "../../../assets/images/user.png";
 import SidebarNavigation from "../SidebarNavigation/SidebarNavigation";
 import NestedRoutes from "../NestedRoutes/NestedRoutes";
 
-const drawerWidth = 230;
+const drawerWidth = 270;
 
 const DashboardHome = (props) => {
   //   const { user } = useAuth();
@@ -66,7 +66,7 @@ const DashboardHome = (props) => {
           </span>
         </Typography>
       </NavLink>
-      <Toolbar />
+      {/* <Toolbar /> */}
       <SidebarNavigation />
     </div>
   );
@@ -75,7 +75,7 @@ const DashboardHome = (props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} style={{ overflowY: "scroll" }}>
       <CssBaseline />
       <AppBar
         elevation={0}
@@ -163,6 +163,7 @@ const DashboardHome = (props) => {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              // overflowY: "unset",
             },
           }}
           open
