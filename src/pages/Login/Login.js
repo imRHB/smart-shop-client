@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-  const { user, setUser, userLogin, setError, getUserEmail, getUserPassword } = useAuth();
+  const { user, setUsers, userLogin, setError, getUserEmail, getUserPassword } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,15 +18,14 @@ const Login = () => {
 
   const userLoginWithEmailPass = (e) => {
     e.preventDefault();
+
     userLogin()
       .then((result) => {
-        setUser(result.user)
-        console.log(user);
+        setUsers(result.user)
         navigate(redirect);
-        alert("user login successfully")
       })
-      .catch((error) => {
-        setError(error.message)
+      .catch((err) => {
+        setError(err.message)
       })
   }
 
@@ -53,7 +52,7 @@ const Login = () => {
           <FontAwesomeIcon icon={faUserAlt} className={`${styles.formIcon}`} />
           <Form.Control
             type="email"
-            placeholder="Your Username"
+            placeholder="Your Email"
             className={`${styles.inputFields}`}
             name='email'
             onBlur={getUserEmail}
