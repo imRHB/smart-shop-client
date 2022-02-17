@@ -4,12 +4,37 @@ import { Button, Form } from "react-bootstrap";
 import logo from "../../assets/images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { useLocation, useNavigate } from 'react-router-dom';
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+  const { user, setUser, userLogin, setError } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const redirect = location?.state?.from || '/dashboard';
+
+  //handle user login with email and password
+
+  const userLoginWithEmailPass = (e) => {
+    e.preventDefault();
+    userLogin()
+      .then((result) => {
+        setUser(result.user)
+        console.log(user);
+        navigate(redirect);
+      })
+      .catch((error) => {
+        setError(error.message)
+      })
+  }
+
   return (
+
     <div className={`${styles.loginPage}`}>
+
       {/* login form */}
-      <Form className={`${styles.userLoginSection} ${"shadow"}`}>
+      <Form onSubmit={userLoginWithEmailPass} className={`${styles.userLoginSection} ${"shadow"}`}>
         {/* logo and title */}
         <img src={logo} alt="logo" className={`${styles.siteLogo} ${"mb-3"}`} />
 
