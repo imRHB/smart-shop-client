@@ -14,27 +14,13 @@ const useFirebase = () => {
     const registerWithEmailAndPassword = (email, password) => {
         setIsLoading(true);
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(result => {
-
-            })
-            .catch(error => {
-                setError(error.message);
-            })
-            .finally(() => setIsLoading(false));
+        return createUserWithEmailAndPassword(auth, email, password)
     };
 
     const loginWithEmailAndPassword = (email, password) => {
         setIsLoading(true);
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then(result => {
-
-            })
-            .catch(error => {
-                setError(error.message);
-            })
-            .finally(() => setIsLoading(false));
+        return signInWithEmailAndPassword(auth, email, password)
     };
 
     useEffect(() => {
@@ -52,7 +38,7 @@ const useFirebase = () => {
         })
 
         return () => unsubscribed;
-    }, [auth]);
+    }, [isLoading, auth]);
 
     const logout = () => {
         setIsLoading(true);
