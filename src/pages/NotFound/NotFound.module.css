@@ -1,0 +1,11 @@
+.notFound {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.redirUrl:hover {
+    text-decoration: none;
+    color: #000080;
+    background-color: #DDF;
+}
