@@ -23,6 +23,7 @@ const Login = () => {
         setUser(result.user)
         console.log(user);
         navigate(redirect);
+        alert("user login successfully")
       })
       .catch((error) => {
         setError(error.message)
