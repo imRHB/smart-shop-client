@@ -4,17 +4,20 @@ import "./App.css";
 import DashboardHome from "./pages/Dashboard/DashboardHome/DashboardHome";
 import NotFound from "./pages/NotFound/NotFound";
 import Login from "./pages/Login/Login";
+import AuthProvider from "./contexts/AuthProvider";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard/*" element={<DashboardHome />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard/*" element={<DashboardHome />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
