@@ -19,6 +19,14 @@ const useFirebase = () => {
 
     //create and sign in user with email and password
 
+    const getUserEmail = e => {
+        setEmail(e.target.value);
+
+    };
+    const getUserPassword = e => {
+        setPassword(e.target.value);
+
+    };
 
     //registration
 
@@ -83,6 +91,8 @@ const useFirebase = () => {
         user,
         setUsers,
         error,
+        getUserEmail,
+        getUserPassword,
         setError,
         email,
         handleResetPassword,
