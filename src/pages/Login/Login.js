@@ -8,13 +8,25 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-  // const { user, setUser } = useAuth();
+  const { setUser, userLogin, setError } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
   const redirect = location?.state?.from || '/dashboard';
 
   //handle user login with email and password
+
+  const userLoginWithEmailPass = (e) => {
+    e.preventDefault();
+    userLogin()
+      .then((result) => {
+        setUser(result.user)
+        navigate(redirect);
+      })
+      .catch((error) => {
+        setError(error.message)
+      })
+  }
 
 
 
@@ -23,7 +35,7 @@ const Login = () => {
     <div className={`${styles.loginPage}`}>
 
       {/* login form */}
-      <Form className={`${styles.userLoginSection} ${"shadow"}`}>
+      <Form onSubmit={userLoginWithEmailPass} className={`${styles.userLoginSection} ${"shadow"}`}>
         {/* logo and title */}
         <img src={logo} alt="logo" className={`${styles.siteLogo} ${"mb-3"}`} />
 
