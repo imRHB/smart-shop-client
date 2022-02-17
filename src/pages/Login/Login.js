@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-  const { setUser, userLogin, setError } = useAuth();
+  const { user, setUser, userLogin, setError } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,14 +21,13 @@ const Login = () => {
     userLogin()
       .then((result) => {
         setUser(result.user)
+        console.log(user);
         navigate(redirect);
       })
       .catch((error) => {
         setError(error.message)
       })
   }
-
-
 
   return (
 
