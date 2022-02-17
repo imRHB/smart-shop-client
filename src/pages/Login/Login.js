@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-  const { user, setUser, userLogin, setError } = useAuth();
+  const { user, setUser, userLogin, setError, getUserEmail, getUserPassword } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -55,6 +55,8 @@ const Login = () => {
             type="email"
             placeholder="Your Username"
             className={`${styles.inputFields}`}
+            name='email'
+            onBlur={getUserEmail}
           />
         </Form.Group>
 
@@ -68,6 +70,8 @@ const Login = () => {
             type="password"
             placeholder="Your Password"
             className={`${styles.inputFields}`}
+            name='password'
+            onBlur={getUserPassword}
           />
         </Form.Group>
 
