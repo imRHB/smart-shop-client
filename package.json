@@ -33,6 +33,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-stars": "^2.2.5",
+    "recharts": "^2.1.9",
     "styled-components": "^5.3.3",
     "sweetalert2": "^11.4.0",
     "sweetalert2-react-content": "^4.2.0",
