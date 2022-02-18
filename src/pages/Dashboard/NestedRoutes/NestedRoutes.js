@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ManageTransaction from "../Accounts/ManageTransaction/ManageTransaction";
 import Payment from "../Accounts/Payment/Payment";
+import AddExpense from "../AddExpense/AddExpense";
 import AddSupplier from "../AddSupplier/AddSupplier";
 import CreateProduct from "../CreateProduct/CreateProduct";
 import CustomerManagement from "../CustomerManagement/CustomerManagement";
@@ -61,13 +62,13 @@ const NestedRoutes = () => {
         {/*============ Accounts Department All Routes Start ==============*/}
         <Route path="payment" element={<Payment />}></Route>
         <Route path="manage-transition" element={<ManageTransaction />}></Route>
-        {/*============ Accounts Department All Routes Start ==============*/}
+        {/*============ Accounts Department All Routes End ==============*/}
 
         {/*============ Stock Department All Routes Start ==============*/}
         <Route path="stock-report" element={<StockManagements />}></Route>
         <Route path="supplier-stock-report" element={<SupplierStock />}></Route>
         <Route path="product-stock-report" element={<ProductStock />}></Route>
-        {/*============ Stock Department All Routes Start ==============*/}
+        {/*============ Stock Department All Routes End ==============*/}
 
         {/*============ Report Department All Routes Start ==============*/}
         <Route path="purchase-report" element={<PurchaseReport />}></Route>
@@ -81,14 +82,23 @@ const NestedRoutes = () => {
         ></Route>
         <Route path="today-report" element={<TodaysReport />}></Route>
         <Route path="sales-report" element={<SalesReport />}></Route>
-        {/*============ Report Department All Routes Start ==============*/}
+        {/*============ Report Department All Routes End ==============*/}
 
+        {/*============ HRM Department All Routes Start ==============*/}
         <Route path="designation" element={<Designation />}></Route>
         <Route path="add-employee" element={<AddEmployee />}></Route>
         <Route path="manage-employee" element={<EmployeeManagement />}></Route>
+        {/*============ HRM Department All Routes End ==============*/}
+
+        {/*============ Office Loan Department All Routes Start ==============*/}
         <Route path="add-office-person" element={<AddOfficePerson />}></Route>
         <Route path="manage-office-loan" element={<ManageOfficeLoan />}></Route>
+        {/*============ Office Loan Department All Routes End ==============*/}
+
+        {/*============ Expense Department All Routes Start ==============*/}
         <Route path="expense-item" element={<ExpenseItem />}></Route>
+        <Route path="add-expense" element={<AddExpense />}></Route>
+        {/*============ Expense Department All Routes End ==============*/}
 
         {/*===================TEST YOUR COMPONENT HERE=====================*/}
         {/* <Route path="expense-item" element={<TestComponent />}></Route> */}
