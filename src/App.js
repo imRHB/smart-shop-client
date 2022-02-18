@@ -1,18 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import CrudTest from "./pages/Dashboard/CrudTest/CrudTest";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import DashboardHome from "./pages/Dashboard/DashboardHome/DashboardHome";
+import NotFound from "./pages/NotFound/NotFound";
+import Login from "./pages/Login/Login";
+import AuthProvider from "./contexts/AuthProvider";
 
 function App() {
   return (
-    <div className="">
-      <h1>Smart Shop</h1>
-      <p>POS Management System</p>
-      <p>Please Test Your Component Here</p>
-      <p>Don't forget to remove your component before git push</p>
-
-      {/* TEST YOUR COMPONENT HERE */}
-      <CrudTest />
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard/*" element={<DashboardHome />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
