@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import ManageTransaction from "../Accounts/ManageTransaction/ManageTransaction";
 import AddSupplier from "../AddSupplier/AddSupplier";
 import CreateProduct from "../CreateProduct/CreateProduct";
 import CustomerManagement from "../CustomerManagement/CustomerManagement";
@@ -29,16 +30,32 @@ const NestedRoutes = () => {
     <>
       {/* Admin Routes */}
       <Routes>
+        {/*============ Sell Department All Routes Start ==============*/}
         <Route path="add-new-invoice" element={<AddInvoice />}></Route>
         <Route path="manage-invoice" element={<ManageInvoice />}></Route>
         <Route path="pos" element={<PosInvoice />}></Route>
+        {/*============ Sell Department All Routes End ==============*/}
+
+        {/*============ Product Department All Routes Start ==============*/}
         <Route path="add-product" element={<CreateProduct />}></Route>
         <Route path="manage-product" element={<ManageProducts />}></Route>
+        {/*============ Product Department All Routes End ==============*/}
+
+        {/*============ Customer Department All Routes Start ==============*/}
         <Route path="add-customer" element={<UpdateCustomer />}></Route>
         <Route path="manage-customer" element={<CustomerManagement />}></Route>
         <Route path="credit-customer" element={<CustomerStatus />}></Route>
+        {/*============ Customer Department All Routes End ==============*/}
+
+        {/*============ Supplier Department All Routes Start ==============*/}
         <Route path="add-supplier" element={<AddSupplier />}></Route>
         <Route path="manage-supplier" element={<ManageSupplier />}></Route>
+        {/*============ Supplier Department All Routes End ==============*/}
+
+        {/*============ Accounts Department All Routes Start ==============*/}
+        <Route path="manage-transition" element={<ManageTransaction />}></Route>
+        {/*============ Accounts Department All Routes Start ==============*/}
+
         <Route path="stock-report" element={<StockManagements />}></Route>
         <Route path="supplier-stock-report" element={<SupplierStock />}></Route>
         <Route path="product-stock-report" element={<ProductStock />}></Route>
