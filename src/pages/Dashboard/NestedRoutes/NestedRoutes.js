@@ -8,6 +8,7 @@ import CreateProduct from "../CreateProduct/CreateProduct";
 import CustomerManagement from "../CustomerManagement/CustomerManagement";
 import CustomerStatus from "../CustomerManagement/CustomerStatus/CustomerStatus";
 import UpdateCustomer from "../CustomerManagement/UpdateCustomer/UpdateCustomer";
+import Dashboard from "../Dashboard/Dashboard";
 import ExpenseItem from "../Expense/ExpenseItem";
 import AddEmployee from "../HRM/AddEmployee/AddEmployee";
 import Designation from "../HRM/Designation/Designation";
@@ -42,6 +43,7 @@ const NestedRoutes = () => {
     <>
       {/* Admin Routes */}
       <Routes>
+        <Route path="/" element={<Dashboard />}></Route>
         {/*============ Sell Department All Routes Start ==============*/}
         <Route path="add-new-invoice" element={<AddInvoice />}></Route>
         <Route path="manage-invoice" element={<ManageInvoice />}></Route>
