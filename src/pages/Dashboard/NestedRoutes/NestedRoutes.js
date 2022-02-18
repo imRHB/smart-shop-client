@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ManageTransaction from "../Accounts/ManageTransaction/ManageTransaction";
+import Payment from "../Accounts/Payment/Payment";
 import AddSupplier from "../AddSupplier/AddSupplier";
 import CreateProduct from "../CreateProduct/CreateProduct";
 import CustomerManagement from "../CustomerManagement/CustomerManagement";
@@ -53,6 +54,7 @@ const NestedRoutes = () => {
         {/*============ Supplier Department All Routes End ==============*/}
 
         {/*============ Accounts Department All Routes Start ==============*/}
+        <Route path="payment" element={<Payment />}></Route>
         <Route path="manage-transition" element={<ManageTransaction />}></Route>
         {/*============ Accounts Department All Routes Start ==============*/}
 
