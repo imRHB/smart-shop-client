@@ -17,6 +17,7 @@ import ManageSupplier from "../ManageSupplier/ManageSupplier";
 import AddOfficePerson from "../OfficeLoan/AddOfficePerson/AddOfficePerson";
 import ManageOfficeLoan from "../OfficeLoan/ManageOfficeLoan/ManageOfficeLoan";
 import AddLoan from "../PersonalLoan/AddLoan/AddLoan";
+import AddPayment from "../PersonalLoan/AddPayment/AddPayment";
 import AddPerson from "../PersonalLoan/AddPerson/AddPerson";
 import ManageLoan from "../PersonalLoan/ManageLoan/ManageLoan";
 import ManagePerson from "../PersonalLoan/ManagePerson/ManagePerson";
@@ -109,6 +110,7 @@ const NestedRoutes = () => {
         <Route path="manage-person" element={<ManagePerson />}></Route>
         <Route path="add-personal-loan" element={<AddLoan />}></Route>
         <Route path="manage-personal-loan" element={<ManageLoan />}></Route>
+        <Route path="add-payment" element={<AddPayment />}></Route>
         {/*============ Personal Loan Department All Routes End ==============*/}
 
         {/*===================TEST YOUR COMPONENT HERE=====================*/}
