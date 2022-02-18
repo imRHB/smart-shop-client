@@ -16,6 +16,7 @@ import ManageSupplier from "../ManageSupplier/ManageSupplier";
 import AddOfficePerson from "../OfficeLoan/AddOfficePerson/AddOfficePerson";
 import ManageOfficeLoan from "../OfficeLoan/ManageOfficeLoan/ManageOfficeLoan";
 import ProductStock from "../ProductStock/ProductStock";
+import PurchaseReport from "../Report/PurchaseReport/PurchaseReport";
 import AddInvoice from "../Sell/AddInvoice/AddInvoice";
 import ManageInvoice from "../Sell/ManageInvoice/ManageInvoice";
 import PosInvoice from "../Sell/PosInvoice/PosInvoice";
@@ -58,9 +59,16 @@ const NestedRoutes = () => {
         <Route path="manage-transition" element={<ManageTransaction />}></Route>
         {/*============ Accounts Department All Routes Start ==============*/}
 
+        {/*============ Stock Department All Routes Start ==============*/}
         <Route path="stock-report" element={<StockManagements />}></Route>
         <Route path="supplier-stock-report" element={<SupplierStock />}></Route>
         <Route path="product-stock-report" element={<ProductStock />}></Route>
+        {/*============ Stock Department All Routes Start ==============*/}
+
+        {/*============ Report Department All Routes Start ==============*/}
+        <Route path="purchase-report" element={<PurchaseReport />}></Route>
+        {/*============ Report Department All Routes Start ==============*/}
+
         <Route path="designation" element={<Designation />}></Route>
         <Route path="add-employee" element={<AddEmployee />}></Route>
         <Route path="manage-employee" element={<EmployeeManagement />}></Route>
