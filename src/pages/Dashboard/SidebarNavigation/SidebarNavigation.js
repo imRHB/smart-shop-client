@@ -21,6 +21,7 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import SettingsIcon from "@mui/icons-material/Settings";
 import BuildIcon from "@mui/icons-material/Build";
+import LogoutIcon from "@mui/icons-material/Logout";
 import QuizIcon from "@mui/icons-material/Quiz";
 import Filter1Icon from "@mui/icons-material/Filter1";
 import Filter2Icon from "@mui/icons-material/Filter2";
@@ -30,11 +31,11 @@ import Filter5Icon from "@mui/icons-material/Filter5";
 import Filter6Icon from "@mui/icons-material/Filter6";
 import Filter7Icon from "@mui/icons-material/Filter7";
 import styles from "./SidebarNavigation.module.css";
+import useAuth from "../../../hooks/useAuth";
 // import { makeStyles } from "@material-ui/core";
-// import useAuth from "../../../hooks/useAuth";
 
 const SidebarNavigation = () => {
-  //   const { logOut } = useAuth();
+  const { logOut } = useAuth();
   const [admin, setAdmin] = React.useState(true);
   //   const [loading, setLoading] = React.useState(false);
   //   const email = sessionStorage.getItem("email");
@@ -223,7 +224,7 @@ const SidebarNavigation = () => {
               </Button>
             </AccordionSummary>
             <AccordionDetails sx={{ background: "#012C56 !important" }}>
-              <NavLink
+              {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/product-category`}
                 activeClassName="active"
@@ -239,7 +240,7 @@ const SidebarNavigation = () => {
                   <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
                   Category
                 </Button>
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-product`}
@@ -253,7 +254,7 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
+                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
                   Product
                 </Button>
               </NavLink>
@@ -270,7 +271,7 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
+                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
                   Product
                 </Button>
               </NavLink>
@@ -365,7 +366,7 @@ const SidebarNavigation = () => {
                   Customer
                 </Button>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/paid-customer`}
                 activeClassName="active"
@@ -381,7 +382,7 @@ const SidebarNavigation = () => {
                   <Filter4Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Paid
                   Customer
                 </Button>
-              </NavLink>
+              </NavLink> */}
             </AccordionDetails>
           </Accordion>
           {/*======= Customer Nav Menu End ======*/}
@@ -456,7 +457,7 @@ const SidebarNavigation = () => {
                   Supplier
                 </Button>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/supplier-ledger`}
                 activeClassName="active"
@@ -506,13 +507,13 @@ const SidebarNavigation = () => {
                   <Filter5Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
                   Supplier Sales Details
                 </Button>
-              </NavLink>
+              </NavLink> */}
             </AccordionDetails>
           </Accordion>
           {/*======= Supplier Nav Menu End ======*/}
 
           {/*======= Purchase Nav Menu Start ======*/}
-          <Accordion
+          {/* <Accordion
             TransitionProps={{ unmountOnExit: true }}
             sx={{
               background: "#003366 !important",
@@ -582,7 +583,7 @@ const SidebarNavigation = () => {
                 </Button>
               </NavLink>
             </AccordionDetails>
-          </Accordion>
+          </Accordion> */}
           {/*======= Purchase Nav Menu End ======*/}
 
           {/*======= Accounts Nav Menu Start ======*/}
@@ -621,7 +622,7 @@ const SidebarNavigation = () => {
               </Button>
             </AccordionSummary>
             <AccordionDetails sx={{ background: "#012C56 !important" }}>
-              <NavLink
+              {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/create-account`}
                 activeClassName="active"
@@ -654,7 +655,7 @@ const SidebarNavigation = () => {
                   <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
                   Account
                 </Button>
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/payment`}
@@ -668,11 +669,11 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Payment
+                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Payment
                 </Button>
               </NavLink>
               <br />
-              <NavLink
+              {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/receipt`}
                 activeClassName="active"
@@ -687,7 +688,7 @@ const SidebarNavigation = () => {
                 >
                   <Filter4Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Receipt
                 </Button>
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-transition`}
@@ -701,11 +702,11 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter5Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
+                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
                   Transition
                 </Button>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/account-closing`}
                 activeClassName="active"
@@ -737,7 +738,7 @@ const SidebarNavigation = () => {
                   <Filter7Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Account
                   Report
                 </Button>
-              </NavLink>
+              </NavLink> */}
             </AccordionDetails>
           </Accordion>
           {/*======= Accounts Nav Menu End ======*/}
@@ -959,7 +960,7 @@ const SidebarNavigation = () => {
           {/*======= Report Nav Menu End ======*/}
 
           {/*======= Bank Nav Menu Start ======*/}
-          <Accordion
+          {/* <Accordion
             TransitionProps={{ unmountOnExit: true }}
             sx={{
               background: "#003366 !important",
@@ -1046,7 +1047,7 @@ const SidebarNavigation = () => {
                 </Button>
               </NavLink>
             </AccordionDetails>
-          </Accordion>
+          </Accordion> */}
           {/*======= Bank Nav Menu End ======*/}
 
           {/*======= HRM Nav Menu Start ======*/}
@@ -1210,7 +1211,7 @@ const SidebarNavigation = () => {
                   Expense
                 </Button>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-expense`}
                 activeClassName="active"
@@ -1243,7 +1244,7 @@ const SidebarNavigation = () => {
                   <Filter4Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Expense
                   Statement
                 </Button>
-              </NavLink>
+              </NavLink> */}
             </AccordionDetails>
           </Accordion>
           {/*======= Expense Nav Menu End ======*/}
@@ -1448,7 +1449,7 @@ const SidebarNavigation = () => {
           {/*======= Personal Loan Nav Menu End ======*/}
 
           {/*======= Role Permission Nav Menu Start ======*/}
-          <Accordion
+          {/* <Accordion
             TransitionProps={{ unmountOnExit: true }}
             sx={{
               background: "#003366 !important",
@@ -1569,11 +1570,11 @@ const SidebarNavigation = () => {
                 </Button>
               </NavLink>
             </AccordionDetails>
-          </Accordion>
+          </Accordion> */}
           {/*======= Role Permission Nav Menu End ======*/}
 
           {/*======= Software Setting Nav Menu Start ======*/}
-          <Accordion
+          {/* <Accordion
             TransitionProps={{ unmountOnExit: true }}
             sx={{
               background: "#003366 !important",
@@ -1729,7 +1730,7 @@ const SidebarNavigation = () => {
                 </Button>
               </NavLink>
             </AccordionDetails>
-          </Accordion>
+          </Accordion> */}
           {/*======= Software Setting Nav Menu End ======*/}
 
           {/*======= Test Component Nav Menu Start ======*/}
@@ -1757,6 +1758,38 @@ const SidebarNavigation = () => {
                 >
                   <QuizIcon sx={{ mr: 2, fontSize: "24px" }} />
                   Test Component
+                </Button>
+              </NavLink>
+            </AccordionSummary>
+          </Accordion>
+          {/*======= Test Component Nav Menu End ======*/}
+
+          {/*======= Logout Nav Menu Start ======*/}
+          <Accordion
+            TransitionProps={{ unmountOnExit: true }}
+            sx={{
+              background: "#003366 !important",
+              boxShadow: "none !important",
+              marginTop: "0 !important",
+            }}
+          >
+            <AccordionSummary>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to="/"
+                activeClassName="active"
+              >
+                <Button
+                  onClick={logOut}
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "300",
+                    fontSize: "16px",
+                  }}
+                >
+                  <LogoutIcon sx={{ mr: 2, fontSize: "24px" }} />
+                  LogOut
                 </Button>
               </NavLink>
             </AccordionSummary>
