@@ -16,6 +16,7 @@ import ManageProducts from "../ManageProducts/ManageProducts";
 import ManageSupplier from "../ManageSupplier/ManageSupplier";
 import AddOfficePerson from "../OfficeLoan/AddOfficePerson/AddOfficePerson";
 import ManageOfficeLoan from "../OfficeLoan/ManageOfficeLoan/ManageOfficeLoan";
+import AddPerson from "../PersonalLoan/AddPerson/AddPerson";
 import ProductStock from "../ProductStock/ProductStock";
 import ProductSalesReport from "../Report/ProductSalesReport/ProductSalesReport";
 import ProfitReportInvoice from "../Report/ProfitReportInvoice/ProfitReportInvoice";
@@ -99,6 +100,10 @@ const NestedRoutes = () => {
         <Route path="expense-item" element={<ExpenseItem />}></Route>
         <Route path="add-expense" element={<AddExpense />}></Route>
         {/*============ Expense Department All Routes End ==============*/}
+
+        {/*============ Personal Loan Department All Routes Start ==============*/}
+        <Route path="add-person" element={<AddPerson />}></Route>
+        {/*============ Personal Loan Department All Routes End ==============*/}
 
         {/*===================TEST YOUR COMPONENT HERE=====================*/}
         {/* <Route path="expense-item" element={<TestComponent />}></Route> */}
