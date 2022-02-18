@@ -17,6 +17,7 @@ import AddOfficePerson from "../OfficeLoan/AddOfficePerson/AddOfficePerson";
 import ManageOfficeLoan from "../OfficeLoan/ManageOfficeLoan/ManageOfficeLoan";
 import ProductStock from "../ProductStock/ProductStock";
 import ProductSalesReport from "../Report/ProductSalesReport/ProductSalesReport";
+import ProfitReportInvoice from "../Report/ProfitReportInvoice/ProfitReportInvoice";
 import PurchaseReport from "../Report/PurchaseReport/PurchaseReport";
 import AddInvoice from "../Sell/AddInvoice/AddInvoice";
 import ManageInvoice from "../Sell/ManageInvoice/ManageInvoice";
@@ -71,6 +72,10 @@ const NestedRoutes = () => {
         <Route
           path="sales-report-product"
           element={<ProductSalesReport />}
+        ></Route>
+        <Route
+          path="profit-report-invoice"
+          element={<ProfitReportInvoice />}
         ></Route>
         {/*============ Report Department All Routes Start ==============*/}
 
