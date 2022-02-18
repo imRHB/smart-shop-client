@@ -888,7 +888,7 @@ const SidebarNavigation = () => {
               </NavLink>
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/sales-report`}
+                to={`/dashboard/sales-report-product`}
                 activeClassName="active"
               >
                 <Button
