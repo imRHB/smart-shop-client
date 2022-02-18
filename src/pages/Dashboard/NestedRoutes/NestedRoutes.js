@@ -15,6 +15,7 @@ import ManageOfficeLoan from "../OfficeLoan/ManageOfficeLoan/ManageOfficeLoan";
 import ProductStock from "../ProductStock/ProductStock";
 import AddInvoice from "../Sell/AddInvoice/AddInvoice";
 import ManageInvoice from "../Sell/ManageInvoice/ManageInvoice";
+import PosInvoice from "../Sell/PosInvoice/PosInvoice";
 import StockManagements from "../StockManagement/StockManagements";
 import SupplierStock from "../SupplierStock/SupplierStock";
 //==============import your component here====================//
@@ -29,6 +30,7 @@ const NestedRoutes = () => {
       <Routes>
         <Route path="add-new-invoice" element={<AddInvoice />}></Route>
         <Route path="manage-invoice" element={<ManageInvoice />}></Route>
+        <Route path="pos" element={<PosInvoice />}></Route>
         <Route path="add-product" element={<CreateProduct />}></Route>
         <Route path="manage-product" element={<ManageProducts />}></Route>
         <Route path="manage-customer" element={<CustomerManagement />}></Route>
