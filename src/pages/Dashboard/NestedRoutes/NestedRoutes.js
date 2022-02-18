@@ -13,6 +13,7 @@ import ManageSupplier from "../ManageSupplier/ManageSupplier";
 import AddOfficePerson from "../OfficeLoan/AddOfficePerson/AddOfficePerson";
 import ManageOfficeLoan from "../OfficeLoan/ManageOfficeLoan/ManageOfficeLoan";
 import ProductStock from "../ProductStock/ProductStock";
+import AddInvoice from "../Sell/AddInvoice/AddInvoice";
 import StockManagements from "../StockManagement/StockManagements";
 import SupplierStock from "../SupplierStock/SupplierStock";
 //==============import your component here====================//
@@ -25,6 +26,7 @@ const NestedRoutes = () => {
     <>
       {/* Admin Routes */}
       <Routes>
+        <Route path="add-new-invoice" element={<AddInvoice />}></Route>
         <Route path="add-product" element={<CreateProduct />}></Route>
         <Route path="manage-product" element={<ManageProducts />}></Route>
         <Route path="manage-customer" element={<CustomerManagement />}></Route>
