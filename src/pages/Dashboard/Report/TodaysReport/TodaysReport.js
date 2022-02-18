@@ -61,7 +61,7 @@ const TodaysReport = () => {
           </Table>
         </TableContainer>
       </Box>
-      <Box className={`${styles.tableContainer}`} sx={{ mt: 2 }}>
+      <Box className={`${styles.tableContainer}`} sx={{ mt: 6 }}>
         <Typography sx={{ fontWeight: "bold" }}>
           Todays Purchase Report
         </Typography>
