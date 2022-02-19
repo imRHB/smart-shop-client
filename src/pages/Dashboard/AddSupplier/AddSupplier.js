@@ -61,6 +61,7 @@ const AddSupplier = () => {
 
                 <TextField
                   id="outlined-basic"
+                  size="small"
                   sx={{ width: "400px" }}
                   label="Supplier Name"
                   variant="outlined"
@@ -75,6 +76,7 @@ const AddSupplier = () => {
 
                 <TextField
                   id="outlined-basic"
+                  size="small"
                   sx={{ width: "400px" }}
                   label="Supplier Contact No."
                   variant="outlined"
@@ -88,6 +90,7 @@ const AddSupplier = () => {
                 </Typography>
                 <TextField
                   id="outlined-textarea"
+                  size="small"
                   label="Supplier Address"
                   sx={{ width: "400px" }}
                   multiline
@@ -103,6 +106,7 @@ const AddSupplier = () => {
 
                 <TextField
                   id="outlined-textarea"
+                  size="small"
                   label="Supplier Details"
                   multiline
                   sx={{ width: "400px" }}
@@ -118,6 +122,7 @@ const AddSupplier = () => {
                 <TextField
                   id="outlined-textarea"
                   label="Balance"
+                  size="small"
                   multiline
                   sx={{ width: "400px" }}
                   {...register("balance", { required: true })}
