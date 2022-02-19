@@ -1,0 +1,32 @@
+[
+  {
+    "_id": 1,
+    "name": "Manager",
+    "detail": "Manage all the sales and purchase work"
+  },
+  {
+    "_id": 2,
+    "name": "Store",
+    "detail": "The store manager"
+  },
+  {
+    "_id": 3,
+    "name": "Sales Executive",
+    "detail": "Handle sales operation"
+  },
+  {
+    "_id": 4,
+    "name": "HR",
+    "detail": "Handle human resource management"
+  },
+  {
+    "_id": 5,
+    "name": "Programer",
+    "detail": "Manage full website"
+  },
+  {
+    "_id": 6,
+    "name": "Designer",
+    "detail": "Graphic Designer"
+  }
+]
