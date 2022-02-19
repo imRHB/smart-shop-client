@@ -13,6 +13,9 @@ import Tab from "@mui/material/Tab";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 
 const Payment = () => {
   const {
@@ -22,12 +25,16 @@ const Payment = () => {
     formState: { errors },
   } = useForm();
 
-
-
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const [category, setCategory] = React.useState('');
+
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
   };
 
   return (
@@ -63,13 +70,8 @@ const Payment = () => {
         <Box>
           <TabContext value={value}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <TabList
-                onChange={handleChange}
-                aria-label="lab API tabs example"
-              >
-                <Typography
-                  sx={{ fontWeight: "bold", marginTop: 2, marginRight: 3 }}
-                >
+              <TabList onChange={handleChange} aria-label="lab API tabs example" >
+                <Typography sx={{ fontWeight: "bold", marginTop: 2, marginRight: 3 }} >
                   Choose Transaction
                 </Typography>
                 <Tab label="Payment" value="1" />
@@ -86,7 +88,7 @@ const Payment = () => {
               >
                 <Grid item md={8} sx={16}>
                   <Box className={`${styles.inputContainer}`}>
-                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
+                    <Typography className={`${styles.inputTitle}`} variant="f6">
                       Date<span style={{ color: "#f44336" }}>*</span>
                     </Typography>
 
@@ -103,27 +105,32 @@ const Payment = () => {
                   </Box>
 
                   <Box className={`${styles.inputContainer}`}>
-                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
+                    <Typography className={`${styles.inputTitle}`} variant="f6">
                       Transaction Category
                       <span style={{ color: "#f44336" }}>*</span>
                     </Typography>
-
-                    <TextField
-                      id="outlined-basic"
-                      size="small"
-                      className={`${styles.inputFields}`}
-                      label="Select Category"
-                      variant="outlined"
-                      select
-
-                      {...register("category", { required: true })}
-                    >
-
-                    </TextField>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Select Category</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        size="small"
+                        className={`${styles.inputFields}`}
+                        label="Select Category"
+                        {...register("category", { required: true })}
+                        value={category}
+                        onChange={handleCategoryChange}
+                      >
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                      </Select>
+                    </FormControl>
                   </Box>
 
+
                   <Box className={`${styles.inputContainer}`}>
-                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
+                    <Typography className={`${styles.inputTitle}`} variant="f6">
                       Transaction Mode
                       <span style={{ color: "#f44336" }}>*</span>
                     </Typography>
@@ -138,7 +145,7 @@ const Payment = () => {
                     />
                   </Box>
                   <Box className={`${styles.inputContainer}`}>
-                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
+                    <Typography className={`${styles.inputTitle}`} variant="f6">
                       Cheque/Pay Order No
                       <span style={{ color: "#f44336" }}>*</span>
                     </Typography>
@@ -154,7 +161,7 @@ const Payment = () => {
                   </Box>
 
                   <Box className={`${styles.inputContainer}`}>
-                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
+                    <Typography className={`${styles.inputTitle}`} variant="f6">
                       Bank Name<span style={{ color: "#f44336" }}>*</span>
                     </Typography>
 
@@ -170,7 +177,7 @@ const Payment = () => {
                 </Grid>
                 <Grid item md={8} sx={16}>
                   <Box className={`${styles.inputContainer}`}>
-                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
+                    <Typography className={`${styles.inputTitle}`} variant="f6">
                       Description<span style={{ color: "#f44336" }}>*</span>
                     </Typography>
 
@@ -185,7 +192,7 @@ const Payment = () => {
                   </Box>
 
                   <Box className={`${styles.inputContainer}`}>
-                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
+                    <Typography className={`${styles.inputTitle}`} variant="f6">
                       Select Option Name
                       <span style={{ color: "#f44336" }}>*</span>
                     </Typography>
@@ -202,7 +209,7 @@ const Payment = () => {
 
                   <TabPanel value="1" sx={{ m: 0, p: 0 }}>
                     <Box className={`${styles.inputContainer}`}>
-                      <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
+                      <Typography className={`${styles.inputTitle}`} variant="f6">
                         Payment Amount
                         <span style={{ color: "#f44336" }}>*</span>
                       </Typography>
@@ -220,7 +227,7 @@ const Payment = () => {
 
                   <TabPanel value="2" sx={{ m: 0, p: 0 }}>
                     <Box className={`${styles.inputContainer}`}>
-                      <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
+                      <Typography className={`${styles.inputTitle}`} variant="f6">
                         Receipt Amount
                         <span style={{ color: "#f44336" }}>*</span>
                       </Typography>

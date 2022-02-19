@@ -64,3 +64,7 @@
   width: 350px;
    background-color: #e4e4e4;
 }
+.inputTitle{
+  font-weight: bold;
+  padding-bottom: 10px;
+}
