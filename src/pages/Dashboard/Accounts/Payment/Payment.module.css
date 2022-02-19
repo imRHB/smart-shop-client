@@ -11,6 +11,7 @@
   margin-right: 15px !important;
 }
 
+
 .paymentBtn {
   background-color: #003366 !important;
   color: #fff !important;
@@ -50,4 +51,20 @@
   padding: 5px 30px 30px 30px;
   margin: 15px 30px 30px 30px;
   
+}
+.inputContainer{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 13px;
+  background-color: #f1f3f6;
+  padding: 20px;
+  border-radius: 6px;
+}
+.inputFields{
+  width: 350px;
+   background-color: #e4e4e4;
+}
+.inputTitle{
+  font-weight: bold;
+  padding-bottom: 10px;
 }
