@@ -22,22 +22,7 @@ const Payment = () => {
     formState: { errors },
   } = useForm();
 
-  // const categories = [
-  //   {
-  //     value: "1",
-  //     label: "Customer",
-  //   },
-  //   {
-  //     value: "2",
-  //     label: "Supplier",
-  //   },
-  // ];
 
-  const [category, setCategory] = React.useState("");
-
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
 
   const [value, setValue] = React.useState("1");
 
@@ -73,7 +58,7 @@ const Payment = () => {
       </Box>
 
       <Box className={`${styles.paymentContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Add Payment</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>Add Payment</Typography>
         <hr />
         <Box>
           <TabContext value={value}>
@@ -100,16 +85,7 @@ const Payment = () => {
                 sx={{ marginTop: 2, marginBottom: 2 }}
               >
                 <Grid item md={8} sx={16}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      marginBottom: 2,
-                      backgroundColor: '#f1f3f6',
-                      padding: "20px",
-                      borderRadius: "6px"
-                    }}
-                  >
+                  <Box className={`${styles.inputContainer}`}>
                     <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Date<span style={{ color: "#f44336" }}>*</span>
                     </Typography>
@@ -117,27 +93,16 @@ const Payment = () => {
                     <input
                       type="date"
                       {...register("date", { required: true })}
+                      className={`${styles.inputFields}`}
                       style={{
-                        width: "350px",
                         padding: "8px",
-                        backgroundColor: "#e4e4e4",
                         border: "1px solid #aeaeae",
                         borderRadius: "3px",
-
                       }}
                     />
                   </Box>
 
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      marginBottom: 2,
-                      backgroundColor: '#f1f3f6',
-                      padding: "20px",
-                      borderRadius: "6px"
-                    }}
-                  >
+                  <Box className={`${styles.inputContainer}`}>
                     <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Transaction Category
                       <span style={{ color: "#f44336" }}>*</span>
@@ -146,32 +111,18 @@ const Payment = () => {
                     <TextField
                       id="outlined-basic"
                       size="small"
-                      sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
+                      className={`${styles.inputFields}`}
                       label="Select Category"
                       variant="outlined"
                       select
-                      value={category}
-                      onChange={handleCategoryChange}
+
                       {...register("category", { required: true })}
                     >
-                      {/* {categories.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))} */}
+
                     </TextField>
                   </Box>
 
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      marginBottom: 2,
-                      backgroundColor: '#f1f3f6',
-                      padding: "20px",
-                      borderRadius: "6px"
-                    }}
-                  >
+                  <Box className={`${styles.inputContainer}`}>
                     <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Transaction Mode
                       <span style={{ color: "#f44336" }}>*</span>
@@ -180,22 +131,13 @@ const Payment = () => {
                     <TextField
                       id="outlined-basic"
                       size="small"
-                      sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
+                      className={`${styles.inputFields}`}
                       label="Select Mode"
                       variant="outlined"
                       {...register("mode", { required: true })}
                     />
                   </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      marginBottom: 2,
-                      backgroundColor: '#f1f3f6',
-                      padding: "20px",
-                      borderRadius: "6px"
-                    }}
-                  >
+                  <Box className={`${styles.inputContainer}`}>
                     <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Cheque/Pay Order No
                       <span style={{ color: "#f44336" }}>*</span>
@@ -204,23 +146,14 @@ const Payment = () => {
                     <TextField
                       id="outlined-basic"
                       size="small"
-                      sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
+                      className={`${styles.inputFields}`}
                       label="Pay Mode"
                       variant="outlined"
                       {...register("payMode", { required: true })}
                     />
                   </Box>
 
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      marginBottom: 2,
-                      backgroundColor: '#f1f3f6',
-                      padding: "20px",
-                      borderRadius: "6px"
-                    }}
-                  >
+                  <Box className={`${styles.inputContainer}`}>
                     <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Bank Name<span style={{ color: "#f44336" }}>*</span>
                     </Typography>
@@ -228,7 +161,7 @@ const Payment = () => {
                     <TextField
                       id="outlined-basic"
                       size="small"
-                      sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
+                      className={`${styles.inputFields}`}
                       label="Bank Name"
                       variant="outlined"
                       {...register("bank", { required: true })}
@@ -236,16 +169,7 @@ const Payment = () => {
                   </Box>
                 </Grid>
                 <Grid item md={8} sx={16}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      marginBottom: 2,
-                      backgroundColor: '#f1f3f6',
-                      padding: "20px",
-                      borderRadius: "6px"
-                    }}
-                  >
+                  <Box className={`${styles.inputContainer}`}>
                     <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Description<span style={{ color: "#f44336" }}>*</span>
                     </Typography>
@@ -253,23 +177,14 @@ const Payment = () => {
                     <TextField
                       id="outlined-basic"
                       size="small"
-                      sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
+                      className={`${styles.inputFields}`}
                       label="Description"
                       variant="outlined"
                       {...register("desc", { required: true })}
                     />
                   </Box>
 
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      marginBottom: 2,
-                      backgroundColor: '#f1f3f6',
-                      padding: "20px",
-                      borderRadius: "6px"
-                    }}
-                  >
+                  <Box className={`${styles.inputContainer}`}>
                     <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Select Option Name
                       <span style={{ color: "#f44336" }}>*</span>
@@ -278,7 +193,7 @@ const Payment = () => {
                     <TextField
                       id="outlined-basic"
                       size="small"
-                      sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
+                      className={`${styles.inputFields}`}
                       label="Supplier Contact No."
                       variant="outlined"
                       {...register("contact", { required: true })}
@@ -286,16 +201,7 @@ const Payment = () => {
                   </Box>
 
                   <TabPanel value="1" sx={{ m: 0, p: 0 }}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        marginBottom: 2,
-                        backgroundColor: '#f1f3f6',
-                        padding: "20px",
-                        borderRadius: "6px"
-                      }}
-                    >
+                    <Box className={`${styles.inputContainer}`}>
                       <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                         Payment Amount
                         <span style={{ color: "#f44336" }}>*</span>
@@ -304,7 +210,7 @@ const Payment = () => {
                       <TextField
                         id="outlined-basic"
                         size="small"
-                        sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
+                        className={`${styles.inputFields}`}
                         label="Payment Amount"
                         variant="outlined"
                         {...register("amount", { required: true })}
@@ -313,13 +219,7 @@ const Payment = () => {
                   </TabPanel>
 
                   <TabPanel value="2" sx={{ m: 0, p: 0 }}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        marginBottom: 2
-                      }}
-                    >
+                    <Box className={`${styles.inputContainer}`}>
                       <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                         Receipt Amount
                         <span style={{ color: "#f44336" }}>*</span>
@@ -327,7 +227,7 @@ const Payment = () => {
                       <TextField
                         id="outlined-basic"
                         size="small"
-                        sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
+                        className={`${styles.inputFields}`}
                         label="Receipt Amount"
                         variant="outlined"
                         {...register("amount", { required: true })}
