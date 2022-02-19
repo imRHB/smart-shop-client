@@ -104,10 +104,13 @@ const Payment = () => {
                     sx={{
                       display: "flex",
                       flexDirection: "column",
-                      marginBottom: 2
+                      marginBottom: 2,
+                      backgroundColor: '#f1f3f6',
+                      padding: "20px",
+                      borderRadius: "6px"
                     }}
                   >
-                    <Typography sx={{ fontWeight: "bold" }} variant="f6">
+                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Date<span style={{ color: "#f44336" }}>*</span>
                     </Typography>
 
@@ -120,6 +123,7 @@ const Payment = () => {
                         backgroundColor: "#e4e4e4",
                         border: "1px solid #aeaeae",
                         borderRadius: "3px",
+
                       }}
                     />
                   </Box>
@@ -129,9 +133,12 @@ const Payment = () => {
                       display: "flex",
                       flexDirection: "column",
                       marginBottom: 2,
+                      backgroundColor: '#f1f3f6',
+                      padding: "20px",
+                      borderRadius: "6px"
                     }}
                   >
-                    <Typography sx={{ fontWeight: "bold" }} variant="f6">
+                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Transaction Category
                       <span style={{ color: "#f44336" }}>*</span>
                     </Typography>
@@ -139,7 +146,7 @@ const Payment = () => {
                     <TextField
                       id="outlined-basic"
                       size="small"
-                      sx={{ width: "350px" }}
+                      sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
                       label="Select Category"
                       variant="outlined"
                       select
@@ -160,9 +167,12 @@ const Payment = () => {
                       display: "flex",
                       flexDirection: "column",
                       marginBottom: 2,
+                      backgroundColor: '#f1f3f6',
+                      padding: "20px",
+                      borderRadius: "6px"
                     }}
                   >
-                    <Typography sx={{ fontWeight: "bold" }} variant="f6">
+                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Transaction Mode
                       <span style={{ color: "#f44336" }}>*</span>
                     </Typography>
@@ -170,7 +180,7 @@ const Payment = () => {
                     <TextField
                       id="outlined-basic"
                       size="small"
-                      sx={{ width: "350px" }}
+                      sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
                       label="Select Mode"
                       variant="outlined"
                       {...register("mode", { required: true })}
@@ -181,9 +191,12 @@ const Payment = () => {
                       display: "flex",
                       flexDirection: "column",
                       marginBottom: 2,
+                      backgroundColor: '#f1f3f6',
+                      padding: "20px",
+                      borderRadius: "6px"
                     }}
                   >
-                    <Typography sx={{ fontWeight: "bold" }} variant="f6">
+                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Cheque/Pay Order No
                       <span style={{ color: "#f44336" }}>*</span>
                     </Typography>
@@ -191,7 +204,7 @@ const Payment = () => {
                     <TextField
                       id="outlined-basic"
                       size="small"
-                      sx={{ width: "350px" }}
+                      sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
                       label="Pay Mode"
                       variant="outlined"
                       {...register("payMode", { required: true })}
@@ -202,17 +215,20 @@ const Payment = () => {
                     sx={{
                       display: "flex",
                       flexDirection: "column",
-                      marginBottom: 2
+                      marginBottom: 2,
+                      backgroundColor: '#f1f3f6',
+                      padding: "20px",
+                      borderRadius: "6px"
                     }}
                   >
-                    <Typography sx={{ fontWeight: "bold" }} variant="f6">
+                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Bank Name<span style={{ color: "#f44336" }}>*</span>
                     </Typography>
 
                     <TextField
                       id="outlined-basic"
                       size="small"
-                      sx={{ width: "350px" }}
+                      sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
                       label="Bank Name"
                       variant="outlined"
                       {...register("bank", { required: true })}
@@ -225,16 +241,19 @@ const Payment = () => {
                       display: "flex",
                       flexDirection: "column",
                       marginBottom: 2,
+                      backgroundColor: '#f1f3f6',
+                      padding: "20px",
+                      borderRadius: "6px"
                     }}
                   >
-                    <Typography sx={{ fontWeight: "bold" }} variant="f6">
+                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Description<span style={{ color: "#f44336" }}>*</span>
                     </Typography>
 
                     <TextField
                       id="outlined-basic"
                       size="small"
-                      sx={{ width: "350px" }}
+                      sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
                       label="Description"
                       variant="outlined"
                       {...register("desc", { required: true })}
@@ -246,9 +265,12 @@ const Payment = () => {
                       display: "flex",
                       flexDirection: "column",
                       marginBottom: 2,
+                      backgroundColor: '#f1f3f6',
+                      padding: "20px",
+                      borderRadius: "6px"
                     }}
                   >
-                    <Typography sx={{ fontWeight: "bold" }} variant="f6">
+                    <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                       Select Option Name
                       <span style={{ color: "#f44336" }}>*</span>
                     </Typography>
@@ -256,7 +278,7 @@ const Payment = () => {
                     <TextField
                       id="outlined-basic"
                       size="small"
-                      sx={{ width: "350px" }}
+                      sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
                       label="Supplier Contact No."
                       variant="outlined"
                       {...register("contact", { required: true })}
@@ -268,10 +290,13 @@ const Payment = () => {
                       sx={{
                         display: "flex",
                         flexDirection: "column",
-                        marginBottom: 2
+                        marginBottom: 2,
+                        backgroundColor: '#f1f3f6',
+                        padding: "20px",
+                        borderRadius: "6px"
                       }}
                     >
-                      <Typography sx={{ fontWeight: "bold" }} variant="f6">
+                      <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                         Payment Amount
                         <span style={{ color: "#f44336" }}>*</span>
                       </Typography>
@@ -279,7 +304,7 @@ const Payment = () => {
                       <TextField
                         id="outlined-basic"
                         size="small"
-                        sx={{ width: "350px" }}
+                        sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
                         label="Payment Amount"
                         variant="outlined"
                         {...register("amount", { required: true })}
@@ -295,14 +320,14 @@ const Payment = () => {
                         marginBottom: 2
                       }}
                     >
-                      <Typography sx={{ fontWeight: "bold" }} variant="f6">
+                      <Typography sx={{ fontWeight: "bold", marginBottom: "10px" }} variant="f6">
                         Receipt Amount
                         <span style={{ color: "#f44336" }}>*</span>
                       </Typography>
                       <TextField
                         id="outlined-basic"
                         size="small"
-                        sx={{ width: "350px" }}
+                        sx={{ width: "350px", backgroundColor: "#e4e4e4" }}
                         label="Receipt Amount"
                         variant="outlined"
                         {...register("amount", { required: true })}
@@ -313,7 +338,7 @@ const Payment = () => {
                   <Box sx={{ textAlign: "right" }}>
                     <Button
                       className={`${styles.paymentBtn}`}
-                      sx={{ my: 2 }}
+                      sx={{ my: 5, width: "100%", fontWeight: "bold" }}
                       endIcon={<SendIcon />}
                     >
                       Submit
