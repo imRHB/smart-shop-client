@@ -15,7 +15,7 @@ const TotalReports = () => {
                         <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 'bold' }}>
                             Total Customer
                         </Typography>
-                        <Box sx={{ display: "flex" }}>
+                        <Box className={`${styles.reports}`}>
                             <Box>
                                 <h2>m</h2>
                             </Box>
