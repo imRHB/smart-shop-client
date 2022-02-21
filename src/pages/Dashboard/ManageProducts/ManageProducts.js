@@ -42,8 +42,8 @@ function Row(props) {
                 <TableCell align="center">{product.name}</TableCell>
 
                 <TableCell align="center"> 
-               <EditIcon /> 
-            <DeleteForeverIcon sx={{marginLeft:'15px'}}/>
+               <EditIcon sx={{backgroundColor:'#002447', color:'white', padding:'2px', borderRadius:'5px'}}/> 
+            <DeleteForeverIcon sx={{marginLeft:'15px',backgroundColor:'red', color:'white', padding:'2px', borderRadius:'5px'}}/>
                     </TableCell>
             </TableRow>
             <TableRow>
@@ -55,7 +55,7 @@ function Row(props) {
                             </Typography>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
-                                    <TableRow>
+                                    <TableRow >
                                         <TableCell align="start">SL.</TableCell>
                                         <TableCell width="50%" align="center">Description</TableCell>
                                         <TableCell align="center">Unit</TableCell>
@@ -113,9 +113,9 @@ const ManageProducts = () => {
     };
 
     return (
-        <Box >
+        <Box>
             <Box sx={{marginBottom:'30px'}}>
-           <div className='d-flex justify-content-between  border'>
+           <div style={{backgroundColor:'white'}} className='d-flex justify-content-between  border'>
                 <div className='text-start ms-2 p-2 '>
                     <h5>SUITE</h5>
                     <small className=''>New Products</small>
@@ -129,7 +129,7 @@ const ManageProducts = () => {
             <Container sx={{ width: "100%" }}>
            
 
-            <Box sx={{ boxShadow: '0px 0px 01px 2px whiteSmoke', }}>
+            <Box sx={{ boxShadow: '0px 0px 01px 2px whiteSmoke', backgroundColor:'white' }}>
                 <Typography variant="h6" sx={{ borderBottom: '1px solid lightGray', color: 'gray' }}>
                     Category toevoegen
                 </Typography>
@@ -141,7 +141,7 @@ const ManageProducts = () => {
                     </Grid>
                     <Grid item xs={8} sx={{ marginBottom: '50px' }}>
                         <TextField sx={{ width: '50%' }} id="outlined-basic" label="Category Name" variant="outlined" />
-                        <Button variant="contained" sx={{ marginLeft: '20px', marginBottom: '10px' }}>Save</Button>
+                        <Button variant="contained" sx={{ marginLeft: '20px', marginBottom: '10px',backgroundColor:'#002447' }}>Save</Button>
                     </Grid>
                 </Grid>
 
@@ -159,11 +159,11 @@ const ManageProducts = () => {
 
                     <Table aria-label="simple table">
                         <TableHead>
-                            <TableRow className="colunm">
+                            <TableRow sx={{backgroundColor:'#002447', color:'white'}}>
                                 <TableCell />
-                                <TableCell  >SL.</TableCell>
-                                <TableCell align="center">Category Name</TableCell>
-                                <TableCell align="center">Action</TableCell>
+                                <TableCell sx={{ color:'white', fontWeight:'bold'}}  >SL.</TableCell>
+                                <TableCell  sx={{ color:'white', fontWeight:'bold'}}  align="center">Category Name</TableCell>
+                                <TableCell  sx={{ color:'white', fontWeight:'bold'}}  align="center">Action</TableCell>
 
                             </TableRow>
                         </TableHead>
