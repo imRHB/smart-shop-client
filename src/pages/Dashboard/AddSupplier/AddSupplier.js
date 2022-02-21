@@ -43,7 +43,7 @@ const AddSupplier = () => {
       </Box>
 
       <Box className={`${styles.paymentContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Add Supplier</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>Add Supplier</Typography>
         <hr />
 
         <form className={`${styles.paymentForm} ${"shadow"}`}>
@@ -55,13 +55,14 @@ const AddSupplier = () => {
           >
             <Grid item md={8} sx={16}>
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>
+                <Typography className={`${styles.addSupplierFieldLabel}`}>
                   Supplier Name <span>*</span>
                 </Typography>
 
                 <TextField
                   id="outlined-basic"
-                  sx={{ width: "400px" }}
+                  size="small"
+                  className={`${styles.supplierTextField}`}
                   label="Supplier Name"
                   variant="outlined"
                   {...register("name", { required: true })}
@@ -69,13 +70,14 @@ const AddSupplier = () => {
               </Box>
 
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>
+                <Typography className={`${styles.addSupplierFieldLabel}`}>
                   Supplier Contact No. <span>*</span>
                 </Typography>
 
                 <TextField
                   id="outlined-basic"
-                  sx={{ width: "400px" }}
+                  size="small"
+                  className={`${styles.supplierTextField}`}
                   label="Supplier Contact No."
                   variant="outlined"
                   {...register("contact", { required: true })}
@@ -83,13 +85,14 @@ const AddSupplier = () => {
               </Box>
 
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>
+                <Typography className={`${styles.addSupplierFieldLabel}`}>
                   Supplier Address<span>*</span>
                 </Typography>
                 <TextField
                   id="outlined-textarea"
+                  size="small"
                   label="Supplier Address"
-                  sx={{ width: "400px" }}
+                  className={`${styles.supplierTextField}`}
                   multiline
                   {...register("address", { required: true })}
                 />
@@ -97,33 +100,35 @@ const AddSupplier = () => {
             </Grid>
             <Grid item md={8} sx={16}>
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>
+                <Typography className={`${styles.addSupplierFieldLabel}`}>
                   Supplier Details<span>*</span>
                 </Typography>
 
                 <TextField
                   id="outlined-textarea"
+                  size="small"
                   label="Supplier Details"
                   multiline
-                  sx={{ width: "400px" }}
+                  className={`${styles.supplierTextField}`}
                   {...register("details", { required: true })}
                 />
               </Box>
 
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>
+                <Typography className={`${styles.addSupplierFieldLabel}`}>
                   Previous Balance<span>*</span>
                 </Typography>
 
                 <TextField
                   id="outlined-textarea"
                   label="Balance"
+                  size="small"
                   multiline
-                  sx={{ width: "400px" }}
+                  className={`${styles.supplierTextField}`}
                   {...register("balance", { required: true })}
                 />
               </Box>
-              <Box className="d-flex justify-content-between mt-4">
+              <Box className="d-flex justify-content-around mt-5">
                 <Button type="submit" className={`${styles.addSupplierButton}`}>
                   Save Supplier
                 </Button>
