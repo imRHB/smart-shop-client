@@ -57,15 +57,6 @@ export const saveEmployeeToDB = (data) =>
     onSuccess: addEmployeeToDB.type,
   });
 
-// // Update (upsert) employee info to db for Google Login
-// export const upsertEmployee = (data) =>
-//   apiCallBegan({
-//     url,
-//     data,
-//     method: "put",
-//     onSuccess: addEmployeeToDB.type,
-//   });
-
 // Check an employee role is admin or not
 export const checkAdminStatus = (email) =>
   apiCallBegan({
