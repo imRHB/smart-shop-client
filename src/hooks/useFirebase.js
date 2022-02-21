@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
+  updateProfile,
 } from "firebase/auth";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -15,7 +16,6 @@ import {
   setAuthError,
   setLoading,
   setEmployee,
-  updateProfile,
   checkAdminStatus,
 } from "../store/employee";
 
@@ -69,7 +69,7 @@ const useFirebase = () => {
 
   // Login with email and password
   const loginWithEmailAndPassword = (email, password, navigate, location) => {
-    dispatch(setLoading({ loading: true }));
+    // dispatch(setLoading({ loading: true }));
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         // Empty error for successfully login
@@ -83,7 +83,7 @@ const useFirebase = () => {
       })
       .finally(() => {
         // Update loading status
-        dispatch(setLoading({ loading: false }));
+        // dispatch(setLoading({ loading: false }));
       });
   };
 
