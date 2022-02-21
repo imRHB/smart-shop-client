@@ -55,13 +55,13 @@ const TodaysReport = () => {
                 <TableCell colSpan={3} align="right" sx={{ borderRight: 1 }}>
                   Total Sales:
                 </TableCell>
-                <TableCell align="right">Dynamic total </TableCell>
+                <TableCell align="right">BDT 0.00</TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
       </Box>
-      <Box className={`${styles.tableContainer}`} sx={{ mt: 2 }}>
+      <Box className={`${styles.tableContainer}`} sx={{ mt: 6 }}>
         <Typography sx={{ fontWeight: "bold" }}>
           Todays Purchase Report
         </Typography>
@@ -92,7 +92,7 @@ const TodaysReport = () => {
                 <TableCell colSpan={3} align="right" sx={{ borderRight: 1 }}>
                   Total Purchase:
                 </TableCell>
-                <TableCell align="right">Dynamic total </TableCell>
+                <TableCell align="right">BDT 0.00</TableCell>
               </TableRow>
             </TableBody>
           </Table>

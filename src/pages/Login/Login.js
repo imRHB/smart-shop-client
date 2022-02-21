@@ -76,10 +76,10 @@ const Login = () => {
 
         {/* save password checkbox and forgot password button */}
         <div
-          className={`${"d-flex flex-xxl-column justify-content-between mb-5"}`}
+          className={`${"d-flex flex-column flex-md-row justify-content-between mb-5"}`}
         >
           <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label=" Remember me" />
+            <Form.Check type="checkbox" label="Remember me" />
           </Form.Group>
           <Button variant="none" className={`${"m-0 p-0"}`}>
             Forgot Password?
