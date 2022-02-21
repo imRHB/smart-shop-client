@@ -18,12 +18,14 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     // Login user using email and password
     loginWithEmailAndPassword(data.email, data.password, navigate, location);
     console.log(data);
+    reset();
   };
 
   // //handle user login with email and password
@@ -115,7 +117,7 @@ const Login = () => {
           Login
         </Button>
         {loading && (
-          <div className="text-center mt-4">
+          <div className="text-center mt-2">
             <div className="spinner-border text-primary"></div>
           </div>
         )}
