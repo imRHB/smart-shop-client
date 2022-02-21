@@ -69,13 +69,13 @@ const useFirebase = () => {
 
   // Login with email and password
   const loginWithEmailAndPassword = (email, password, navigate, location) => {
-    // dispatch(setLoading({ loading: true }));
+    dispatch(setLoading({ loading: true }));
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         // Empty error for successfully login
         dispatch(setAuthError({ error: "" }));
         // Redirect employee to the page where they come from
-        redirectInitialPage(navigate, location);
+        navigate(location?.state?.from || "/dashboard");
       })
       .catch((error) => {
         // Set error to the error
@@ -83,7 +83,7 @@ const useFirebase = () => {
       })
       .finally(() => {
         // Update loading status
-        // dispatch(setLoading({ loading: false }));
+        dispatch(setLoading({ loading: false }));
       });
   };
 
