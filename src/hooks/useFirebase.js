@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
+  updateProfile,
 } from "firebase/auth";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -15,7 +16,6 @@ import {
   setAuthError,
   setLoading,
   setEmployee,
-  updateProfile,
   checkAdminStatus,
 } from "../store/employee";
 
@@ -75,7 +75,7 @@ const useFirebase = () => {
         // Empty error for successfully login
         dispatch(setAuthError({ error: "" }));
         // Redirect employee to the page where they come from
-        redirectInitialPage(navigate, location);
+        navigate(location?.state?.from || "/dashboard");
       })
       .catch((error) => {
         // Set error to the error
