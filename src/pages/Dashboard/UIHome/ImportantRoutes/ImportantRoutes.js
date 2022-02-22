@@ -9,6 +9,9 @@ import { NavLink } from 'react-router-dom';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import StrollerIcon from '@mui/icons-material/Stroller';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import TodayIcon from '@mui/icons-material/Today';
 
 
 const ImportantRoutes = () => {
@@ -104,7 +107,7 @@ const ImportantRoutes = () => {
                         <Box className={`${styles.reports}`}>
                             <Box>
                                 <SellIcon sx={{
-                                    fontSize: "65px", color: "#3eb7e0", marginBottom: "10px"
+                                    fontSize: "65px", color: "rgb(55 204 73)", marginBottom: "10px"
                                 }} />
                             </Box>
                             <Box>
@@ -124,8 +127,8 @@ const ImportantRoutes = () => {
                         <Box className={`${styles.reports}`}>
                             <Box>
 
-                                <PeopleAltIcon sx={{
-                                    fontSize: "65px", color: "#2b6989", marginBottom: "10px"
+                                <SummarizeIcon sx={{
+                                    fontSize: "65px", color: "rgb(30 141 180)", marginBottom: "10px"
                                 }} />
                             </Box>
                             <Box>
@@ -145,8 +148,8 @@ const ImportantRoutes = () => {
                         <Box className={`${styles.reports}`}>
                             <Box>
 
-                                <PeopleAltIcon sx={{
-                                    fontSize: "65px", color: "#2b6989", marginBottom: "10px"
+                                <InventoryIcon sx={{
+                                    fontSize: "65px", color: "(0 6 79)", marginBottom: "10px"
                                 }} />
                             </Box>
                             <Box>
@@ -166,8 +169,8 @@ const ImportantRoutes = () => {
                         <Box className={`${styles.reports}`}>
                             <Box>
 
-                                <PeopleAltIcon sx={{
-                                    fontSize: "65px", color: "#2b6989", marginBottom: "10px"
+                                <TodayIcon sx={{
+                                    fontSize: "65px", color: "rgb(250 200 102)", marginBottom: "10px"
                                 }} />
                             </Box>
                             <Box>
