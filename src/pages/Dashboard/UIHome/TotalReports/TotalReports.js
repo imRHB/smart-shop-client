@@ -34,11 +34,11 @@ const TotalReports = () => {
                         <Box className={`${styles.reports}`}>
                             <Box>
                                 <AnimatedNumber
-                                    value="200"
+                                    value="570"
                                     formatValue={formatValue}
                                     onChange={handleChange}
                                     className={`${styles.animatedNum}`}
-                                    duration="10000"
+                                    duration="7000"
 
                                 />
                                 <ArrowDropUpIcon sx={{
@@ -61,11 +61,11 @@ const TotalReports = () => {
                         <Box className={`${styles.reports}`}>
                             <Box>
                                 <AnimatedNumber
-                                    value="200"
+                                    value="790"
                                     formatValue={formatValue}
                                     onChange={handleChange}
                                     className={`${styles.animatedNum}`}
-                                    duration="10000"
+                                    duration="7000"
                                 />
                                 <ArrowDropUpIcon sx={{
                                     fontSize: "30px", color: "#2b6989"
@@ -87,11 +87,11 @@ const TotalReports = () => {
                         <Box className={`${styles.reports}`}>
                             <Box>
                                 <AnimatedNumber
-                                    value="100"
+                                    value="350"
                                     formatValue={formatValue}
                                     onChange={handleChange}
                                     className={`${styles.animatedNum}`}
-                                    duration="10000"
+                                    duration="7000"
                                 />
                                 <ArrowDropUpIcon sx={{
                                     fontSize: "30px", color: "#2b6989"
@@ -113,11 +113,11 @@ const TotalReports = () => {
                         <Box className={`${styles.reports}`}>
                             <Box>
                                 <AnimatedNumber
-                                    value="300"
+                                    value="1220"
                                     formatValue={formatValue}
                                     onChange={handleChange}
                                     className={`${styles.animatedNum}`}
-                                    duration="10000"
+                                    duration="7000"
                                 />
                                 <ArrowDropUpIcon sx={{
                                     fontSize: "30px", color: "#2b6989"
