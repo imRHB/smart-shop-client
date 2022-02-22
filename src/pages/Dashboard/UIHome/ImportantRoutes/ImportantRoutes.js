@@ -23,7 +23,7 @@ const ImportantRoutes = () => {
                         <Box className={`${styles.reports}`}>
                             <Box>
                                 <SellIcon sx={{
-                                    fontSize: "60px", color: "#3eb7e0", marginBottom: "10px"
+                                    fontSize: "50px", color: "#3eb7e0", marginBottom: "10px"
                                 }} />
                             </Box>
                             <Box>
@@ -44,7 +44,7 @@ const ImportantRoutes = () => {
                             <Box>
 
                                 <ReceiptIcon sx={{
-                                    fontSize: "65px", color: "rgb(120 185 83)", marginBottom: "10px"
+                                    fontSize: "50px", color: "rgb(120 185 83)", marginBottom: "10px"
                                 }} />
                             </Box>
                             <Box>
@@ -65,7 +65,7 @@ const ImportantRoutes = () => {
                             <Box>
 
                                 <ShoppingBasketIcon sx={{
-                                    fontSize: "65px", color: "rgb(255 59 114)", marginBottom: "10px"
+                                    fontSize: "50px", color: "rgb(255 59 114)", marginBottom: "10px"
                                 }} />
                             </Box>
                             <Box>
@@ -86,7 +86,7 @@ const ImportantRoutes = () => {
                             <Box>
 
                                 <StrollerIcon sx={{
-                                    fontSize: "65px", color: "rgb(34 0 234)", marginBottom: "10px"
+                                    fontSize: "50px", color: "rgb(34 0 234)", marginBottom: "10px"
                                 }} />
                             </Box>
                             <Box>
@@ -107,7 +107,7 @@ const ImportantRoutes = () => {
                         <Box className={`${styles.reports}`}>
                             <Box>
                                 <SellIcon sx={{
-                                    fontSize: "65px", color: "rgb(55 204 73)", marginBottom: "10px"
+                                    fontSize: "50px", color: "rgb(55 204 73)", marginBottom: "10px"
                                 }} />
                             </Box>
                             <Box>
@@ -128,7 +128,7 @@ const ImportantRoutes = () => {
                             <Box>
 
                                 <SummarizeIcon sx={{
-                                    fontSize: "65px", color: "rgb(30 141 180)", marginBottom: "10px"
+                                    fontSize: "50px", color: "rgb(30 141 180)", marginBottom: "10px"
                                 }} />
                             </Box>
                             <Box>
@@ -149,7 +149,7 @@ const ImportantRoutes = () => {
                             <Box>
 
                                 <InventoryIcon sx={{
-                                    fontSize: "65px", color: "(0 6 79)", marginBottom: "10px"
+                                    fontSize: "50px", color: "(0 6 79)", marginBottom: "10px"
                                 }} />
                             </Box>
                             <Box>
@@ -170,7 +170,7 @@ const ImportantRoutes = () => {
                             <Box>
 
                                 <TodayIcon sx={{
-                                    fontSize: "65px", color: "rgb(250 200 102)", marginBottom: "10px"
+                                    fontSize: "50px", color: "rgb(250 200 102)", marginBottom: "10px"
                                 }} />
                             </Box>
                             <Box>
