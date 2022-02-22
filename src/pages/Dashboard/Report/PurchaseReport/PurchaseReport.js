@@ -53,7 +53,7 @@ const PurchaseReport = () => {
           </form>
         </Collapse>
       </Box>
-      {/* <Button className={`${styles.filterBtn}`}>Filter</Button> */}
+
       <Box className={`${styles.tableContainer}`} sx={{ mt: 2 }}>
         <Typography sx={{ fontWeight: "bold" }}>Purchase Report</Typography>
         <hr />
