@@ -13,6 +13,7 @@ import {
   Sector,
   Cell,
 } from "recharts";
+import TotalReports from "../UIHome/TotalReports/TotalReports";
 import styles from "./Dashboard.module.css";
 
 const monthlyData = [
@@ -97,74 +98,79 @@ const salesWithPurchase = [
 
 const Dashboard = () => {
   return (
-    <div class="container px-4 mt-5">
-      <div class="row gx-5">
-        <div class="col-12 col-md-8 col-lg-8 col-sm-12">
-          <div class="p-3 border bg-light">
-            <h5>Monthly Sales Amount & Order</h5>
-            <hr />
-            <div>
-              <ResponsiveContainer width="100%" aspect={2}>
-                <BarChart
-                  data={monthlyData}
-                  width={800}
-                  height={300}
-                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" interval={0} width="200" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend verticalAlign="top" height={36} />
-                  <Bar dataKey="salesOrder" fill="#8884D8" barSize={25} />
-                  <Bar dataKey="salesAmount" fill="#82CDFF" barSize={25} />
-                </BarChart>
-              </ResponsiveContainer>
+    <>
+      <div className="container px-4 mt-5">
+        <div class="row gx-5">
+          <div class="col-12 col-md-8 col-lg-8 col-sm-12">
+            <div class="p-3 border bg-light">
+              <h5>Monthly Sales Amount & Order</h5>
+              <hr />
+              <div>
+                <ResponsiveContainer width="100%" aspect={2}>
+                  <BarChart
+                    data={monthlyData}
+                    width={800}
+                    height={300}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="date" interval={0} width="200" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend verticalAlign="top" height={36} />
+                    <Bar dataKey="salesOrder" fill="#8884D8" barSize={25} />
+                    <Bar dataKey="salesAmount" fill="#82CDFF" barSize={25} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-4 col-sm-12">
-          <div class="p-3 border bg-light">
-            <h5>Todays Report</h5>
-            <hr />
-            <div>
-              <table
-                className={`${styles.tableStyle}`}
-                style={{ width: "100%" }}
-              >
-                <tr>
-                  <th className={`${styles.tableStyle}`}>Todays Report</th>
-                  <th className={`${styles.tableStyle}`}>Amount</th>
-                </tr>
-                <tr>
-                  <th className={`${styles.tableStyle}`}>Total Sales</th>
-                  <td className={`${styles.tableStyle}`}>$ 7260300</td>
-                </tr>
-                <tr>
-                  <th className={`${styles.tableStyle}`}>Total Purchase</th>
-                  <td className={`${styles.tableStyle}`}>$ 99004079</td>
-                </tr>
-              </table>
-            </div>
-            <div>
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart width="100%" height={250}>
-                  <Pie
-                    data={salesWithPurchase}
-                    dataKey="value"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={50}
-                    fill="#8884d8"
-                  />
-                </PieChart>
-              </ResponsiveContainer>
+          <div class="col-12 col-md-4 col-lg-4 col-sm-12">
+            <div class="p-3 border bg-light">
+              <h5>Todays Report</h5>
+              <hr />
+              <div>
+                <table
+                  className={`${styles.tableStyle}`}
+                  style={{ width: "100%" }}
+                >
+                  <tr>
+                    <th className={`${styles.tableStyle}`}>Todays Report</th>
+                    <th className={`${styles.tableStyle}`}>Amount</th>
+                  </tr>
+                  <tr>
+                    <th className={`${styles.tableStyle}`}>Total Sales</th>
+                    <td className={`${styles.tableStyle}`}>$ 7260300</td>
+                  </tr>
+                  <tr>
+                    <th className={`${styles.tableStyle}`}>Total Purchase</th>
+                    <td className={`${styles.tableStyle}`}>$ 99004079</td>
+                  </tr>
+                </table>
+              </div>
+              <div>
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart width="100%" height={250}>
+                    <Pie
+                      data={salesWithPurchase}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={50}
+                      fill="#8884d8"
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <div className="container px-4 mt-3">
+        <TotalReports />
+      </div>
+    </>
   );
 };
 
