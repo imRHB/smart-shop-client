@@ -36,7 +36,7 @@ import SupplierStock from "../SupplierStock/SupplierStock";
 //==============import your component here====================//
 // import TestComponent from "../TestComponent/TestComponent";
 import TestComponent from "../TestComponent/TestComponent";
-import TotalReports from "../UIHome/TotalReports/TotalReports";
+import ImportantRoutes from "../UIHome/ImportantRoutes/ImportantRoutes";
 //==============import your component here===================//
 
 const NestedRoutes = () => {
@@ -118,7 +118,7 @@ const NestedRoutes = () => {
 
         {/*===================TEST YOUR COMPONENT HERE=====================*/}
         {/* <Route path="expense-item" element={<TestComponent />}></Route> */}
-        <Route path="test-component" element={<TotalReports />}></Route>
+        <Route path="test-component" element={<ImportantRoutes />}></Route>
         {/*===================TEST YOUR COMPONENT HERE====================*/}
       </Routes>
     </>

@@ -5,18 +5,22 @@ import Grid from '@mui/material/Grid';
 import styles from "./TotalReports.module.css";
 import Typography from '@mui/material/Typography';
 import AnimatedNumber from "animated-number-react";
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import ShopTwoIcon from '@mui/icons-material/ShopTwo';
+import GroupsIcon from '@mui/icons-material/Groups';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 
 const TotalReports = () => {
-    // num = {
-    //     value: 150,
-    // };
+
     const [num, setNum] = useState('')
 
     const handleChange = (e) => {
         setNum(e.target.value);
+
     };
-    // const formatValue = (value) => value.toFixed(2);
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2} columns={12} sx={{ marginTop: 1 }}>
@@ -27,32 +31,97 @@ const TotalReports = () => {
                         </Typography>
                         <Box className={`${styles.reports}`}>
                             <Box>
-                                <h2>{num}</h2>
                                 <AnimatedNumber
-                                    value="120"
+                                    value="580"
                                     onChange={handleChange}
-                                // formatValue={this.formatValue}
+                                    className={`${styles.animatedNum}`}
+                                    duration="6000"
                                 />
+                                <ArrowDropUpIcon sx={{
+                                    fontSize: "30px", color: "#2b6989"
+                                }} />
                             </Box>
                             <Box>
-                                <h2>m</h2>
+                                <PeopleAltIcon sx={{
+                                    fontSize: "65px", color: "#2b6989"
+                                }} />
                             </Box>
                         </Box>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Paper className={`${styles.reportContainer}`}>
-
+                        <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 'bold' }}>
+                            Total Product
+                        </Typography>
+                        <Box className={`${styles.reports}`}>
+                            <Box>
+                                <AnimatedNumber
+                                    value="790"
+                                    onChange={handleChange}
+                                    className={`${styles.animatedNum}`}
+                                    duration="6000"
+                                />
+                                <ArrowDropUpIcon sx={{
+                                    fontSize: "30px", color: "#2b6989"
+                                }} />
+                            </Box>
+                            <Box>
+                                <ShopTwoIcon sx={{
+                                    fontSize: "65px", color: "rgb(255 153 0)"
+                                }} />
+                            </Box>
+                        </Box>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Paper className={`${styles.reportContainer}`}>
-
+                        <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 'bold' }}>
+                            Total Supplier
+                        </Typography>
+                        <Box className={`${styles.reports}`}>
+                            <Box>
+                                <AnimatedNumber
+                                    value="170"
+                                    onChange={handleChange}
+                                    className={`${styles.animatedNum}`}
+                                    duration="6000"
+                                />
+                                <ArrowDropUpIcon sx={{
+                                    fontSize: "30px", color: "#2b6989"
+                                }} />
+                            </Box>
+                            <Box>
+                                <GroupsIcon sx={{
+                                    fontSize: "65px", color: "#6cb344"
+                                }} />
+                            </Box>
+                        </Box>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Paper className={`${styles.reportContainer}`}>
-
+                        <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 'bold' }}>
+                            Total Invoice
+                        </Typography>
+                        <Box className={`${styles.reports}`}>
+                            <Box>
+                                <AnimatedNumber
+                                    value="1790"
+                                    onChange={handleChange}
+                                    className={`${styles.animatedNum}`}
+                                    duration="6000"
+                                />
+                                <ArrowDropUpIcon sx={{
+                                    fontSize: "30px", color: "#2b6989"
+                                }} />
+                            </Box>
+                            <Box>
+                                <StorefrontIcon sx={{
+                                    fontSize: "65px", color: "#3c4652"
+                                }} />
+                            </Box>
+                        </Box>
                     </Paper>
                 </Grid>
             </Grid>
