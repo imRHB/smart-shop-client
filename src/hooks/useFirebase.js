@@ -96,7 +96,7 @@ const useFirebase = () => {
 
   // Observing employee state
   useEffect(() => {
-    dispatch(setLoading({ loading: true }));
+    // dispatch(setLoading({ loading: true }));
     const unsubscribe = onAuthStateChanged(auth, (employee) => {
       if (employee) {
         dispatch(
@@ -106,7 +106,7 @@ const useFirebase = () => {
             photoURL: employee.photoURL,
           })
         );
-        dispatch(setLoading({ loading: false }));
+        // dispatch(setLoading({ loading: false }));
       } else {
       }
     });
