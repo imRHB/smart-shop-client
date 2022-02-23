@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import initializeFirebase from "../Firebase/firebase.init";
 import {
-  saveEmployeeToDB,
   setAuthError,
   setLoading,
   setEmployee,
@@ -39,9 +38,6 @@ const useFirebase = () => {
       .then((userCredential) => {
         // Empty error for successfully register
         dispatch(setAuthError({ error: "" }));
-
-        // Save employee data to Database
-        dispatch(saveEmployeeToDB({ name, email }));
 
         // Update employee's name to firebase
         updateProfile(auth.currentUser, {
