@@ -1,81 +1,146 @@
 import { useEffect, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import {
+  getAuth,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  updateProfile,
+} from "firebase/auth";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import initializeFirebase from "../Firebase/firebase.init";
+import {
+  saveEmployeeToDB,
+  setAuthError,
+  setLoading,
+  setEmployee,
+  checkAdminStatus,
+} from "../store/employee";
 
 initializeFirebase();
 
 const useFirebase = () => {
-    const [user, setUser] = useState({});
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState('');
+  const auth = getAuth();
+  const dispatch = useDispatch();
 
-    const auth = getAuth();
+  const employee = useSelector((state) => state.entities.employee.employeeInfo);
+  const authError = useSelector((state) => state.entities.employee.error);
+  const loading = useSelector((state) => state.entities.employee.loading);
+  const admin = useSelector((state) => state.entities.employee.admin);
 
-    const registerWithEmailAndPassword = (email, password) => {
-        setIsLoading(true);
+  dispatch(checkAdminStatus(employee.email));
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(result => {
+  // Register new employee
+  const registerEmployee = (name, email, password, navigate, location) => {
+    dispatch(setLoading({ loading: true }));
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Empty error for successfully register
+        dispatch(setAuthError({ error: "" }));
 
-            })
-            .catch(error => {
-                setError(error.message);
-            })
-            .finally(() => setIsLoading(false));
-    };
+        // Save employee data to Database
+        dispatch(saveEmployeeToDB({ name, email }));
 
-    const loginWithEmailAndPassword = (email, password) => {
-        setIsLoading(true);
-
-        signInWithEmailAndPassword(auth, email, password)
-            .then(result => {
-
-            })
-            .catch(error => {
-                setError(error.message);
-            })
-            .finally(() => setIsLoading(false));
-    };
-
-    useEffect(() => {
-        setIsLoading(true);
-
-        const unsubscribed = onAuthStateChanged(auth, user => {
-            if (user) {
-                setUser(user);
-            }
-            else {
-                setUser({});
-            }
-
-            setIsLoading(false);
+        // Update employee's name to firebase
+        updateProfile(auth.currentUser, {
+          displayName: name,
         })
+          .then(() => {
+            dispatch(setAuthError({ error: "" }));
+          })
+          .catch((error) => {
+            dispatch(setAuthError({ error: error.message }));
+          });
 
-        return () => unsubscribed;
-    }, [auth]);
+        // Redirect user to the page where they come from
+        redirectInitialPage(navigate, location);
+      })
+      .catch((error) => {
+        // Set error
+        dispatch(setAuthError({ error: error.message }));
+      })
+      .finally(() => {
+        // update loading status
+        dispatch(setLoading({ loading: false }));
+      });
+  };
 
-    const logout = () => {
-        setIsLoading(true);
+  // Login with email and password
+  const loginWithEmailAndPassword = (email, password, navigate, location) => {
+    dispatch(setLoading({ loading: true }));
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        // Empty error for successfully login
+        dispatch(setAuthError({ error: "" }));
+        // Redirect employee to the page where they come from
+        navigate(location?.state?.from || "/dashboard");
+      })
+      .catch((error) => {
+        // Set error to the error
+        dispatch(setAuthError({ error: error.message }));
+      })
+      .finally(() => {
+        // Update loading status
+        dispatch(setLoading({ loading: false }));
+      });
+  };
 
-        signOut(auth)
-            .then(() => {
+  //reset password
+  const handleResetPassword = () => {
+    sendPasswordResetEmail(auth, employee.email).then((result) => {
+      alert("Password Reset Successfully! Check your email!!");
+    });
+  };
 
-            })
-            .catch(error => {
-                setError(error.message);
-            })
-            .finally(() => setIsLoading(false));
-    };
+  // Observing employee state
+  useEffect(() => {
+    // dispatch(setLoading({ loading: true }));
+    const unsubscribe = onAuthStateChanged(auth, (employee) => {
+      if (employee) {
+        dispatch(
+          setEmployee({
+            email: employee.email,
+            displayName: employee.displayName,
+            photoURL: employee.photoURL,
+          })
+        );
+        // dispatch(setLoading({ loading: false }));
+      } else {
+      }
+    });
+    return () => unsubscribe;
+  }, [auth]);
 
+  // Log Out
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        dispatch(setEmployee({}));
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
 
-    return {
-        user,
-        error,
-        isLoading,
-        registerWithEmailAndPassword,
-        loginWithEmailAndPassword,
-        logout
-    }
+  // Redirect Initial Page
+  const redirectInitialPage = (navigate, location) => {
+    const from = location.state?.from?.pathname || "/";
+    navigate(from, { replace: true });
+  };
+
+  //return all functions
+  return {
+    employee,
+    authError,
+    loading,
+    admin,
+    registerEmployee,
+    loginWithEmailAndPassword,
+    handleResetPassword,
+    logOut,
+  };
 };
 
 export default useFirebase;

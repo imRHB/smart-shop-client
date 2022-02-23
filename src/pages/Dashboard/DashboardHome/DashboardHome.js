@@ -12,8 +12,9 @@ import { NavLink } from "react-router-dom";
 import defaultUser from "../../../assets/images/user.png";
 import SidebarNavigation from "../SidebarNavigation/SidebarNavigation";
 import NestedRoutes from "../NestedRoutes/NestedRoutes";
+import logo from "../../../assets/images/logo.png";
 
-const drawerWidth = 230;
+const drawerWidth = 270;
 
 const DashboardHome = (props) => {
   //   const { user } = useAuth();
@@ -48,25 +49,27 @@ const DashboardHome = (props) => {
   //   }
 
   const drawer = (
-    <div>
-      <NavLink to="/" style={{ cursor: "pointer", textDecoration: "none" }}>
+    <div style={{ background: "#E9D41A" }}>
+      <NavLink
+        to="/dashboard"
+        style={{ cursor: "pointer", textDecoration: "none" }}
+      >
         <Typography
           variant="h6"
           component="div"
-          sx={{ flexGrow: 1, mt: 2, ml: 2 }}
+          sx={{ flexGrow: 1, my: 2, textAlign: "center" }}
         >
-          <span
+          <img
             style={{
-              color: "#622A87",
-              fontWeight: "bold",
-              fontSize: "24px",
+              width: "80%",
+              height: "40px",
             }}
-          >
-            Smart<span style={{ color: "red" }}>Shop</span>
-          </span>
+            src={logo}
+            alt=""
+          />
         </Typography>
       </NavLink>
-      <Toolbar />
+      {/* <Toolbar /> */}
       <SidebarNavigation />
     </div>
   );
@@ -75,7 +78,7 @@ const DashboardHome = (props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} style={{ overflowY: "scroll" }}>
       <CssBaseline />
       <AppBar
         elevation={0}
@@ -163,6 +166,7 @@ const DashboardHome = (props) => {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              // overflowY: "unset",
             },
           }}
           open

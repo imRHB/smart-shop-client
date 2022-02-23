@@ -5,9 +5,9 @@ import TextField from "@mui/material/TextField";
 import { Box, Button, Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import MenuIcon from '@mui/icons-material/Menu';
-import ReceiptIcon from '@mui/icons-material/Receipt';
-import Grid from '@mui/material/Grid';
+import MenuIcon from "@mui/icons-material/Menu";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import Grid from "@mui/material/Grid";
 
 const AddSupplier = () => {
   const {
@@ -17,7 +17,6 @@ const AddSupplier = () => {
     formState: { errors },
   } = useForm();
   return (
-
     <Container sx={{ width: "100%", mb: 5 }}>
       <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
         <Typography>
@@ -29,25 +28,41 @@ const AddSupplier = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>Add Supplier</Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>Supplier Ledger</Button>
-        <Button className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>Supplier Payment</Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>Supplier Sales Details</Button>
+        <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
+          Add Supplier
+        </Button>
+        <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
+          Supplier Ledger
+        </Button>
+        <Button className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>
+          Supplier Payment
+        </Button>
+        <Button className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>
+          Supplier Sales Details
+        </Button>
       </Box>
 
       <Box className={`${styles.paymentContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Add Supplier</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>Add Supplier</Typography>
         <hr />
 
-        <form className={`${styles.paymentForm} ${'shadow'}`}>
-          <Grid container spacing={4} columns={16} sx={{ marginTop: 2, marginBottom: 2 }}>
+        <form className={`${styles.paymentForm} ${"shadow"}`}>
+          <Grid
+            container
+            spacing={4}
+            columns={16}
+            sx={{ marginTop: 2, marginBottom: 2 }}
+          >
             <Grid item md={8} sx={16}>
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>Supplier Name <span>*</span></Typography>
+                <Typography className={`${styles.addSupplierFieldLabel}`}>
+                  Supplier Name <span>*</span>
+                </Typography>
 
                 <TextField
                   id="outlined-basic"
-                  sx={{ width: "400px" }}
+                  size="small"
+                  className={`${styles.supplierTextField}`}
                   label="Supplier Name"
                   variant="outlined"
                   {...register("name", { required: true })}
@@ -55,12 +70,14 @@ const AddSupplier = () => {
               </Box>
 
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-
-                <Typography sx={{ textAlign: "start" }}>Supplier Contact No. <span>*</span></Typography>
+                <Typography className={`${styles.addSupplierFieldLabel}`}>
+                  Supplier Contact No. <span>*</span>
+                </Typography>
 
                 <TextField
                   id="outlined-basic"
-                  sx={{ width: "400px" }}
+                  size="small"
+                  className={`${styles.supplierTextField}`}
                   label="Supplier Contact No."
                   variant="outlined"
                   {...register("contact", { required: true })}
@@ -68,11 +85,14 @@ const AddSupplier = () => {
               </Box>
 
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>Supplier Address<span>*</span></Typography>
+                <Typography className={`${styles.addSupplierFieldLabel}`}>
+                  Supplier Address<span>*</span>
+                </Typography>
                 <TextField
                   id="outlined-textarea"
+                  size="small"
                   label="Supplier Address"
-                  sx={{ width: "400px" }}
+                  className={`${styles.supplierTextField}`}
                   multiline
                   {...register("address", { required: true })}
                 />
@@ -80,29 +100,35 @@ const AddSupplier = () => {
             </Grid>
             <Grid item md={8} sx={16}>
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>Supplier Details<span>*</span></Typography>
+                <Typography className={`${styles.addSupplierFieldLabel}`}>
+                  Supplier Details<span>*</span>
+                </Typography>
 
                 <TextField
                   id="outlined-textarea"
+                  size="small"
                   label="Supplier Details"
                   multiline
-                  sx={{ width: "400px" }}
+                  className={`${styles.supplierTextField}`}
                   {...register("details", { required: true })}
                 />
               </Box>
 
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>Previous Balance<span>*</span></Typography>
+                <Typography className={`${styles.addSupplierFieldLabel}`}>
+                  Previous Balance<span>*</span>
+                </Typography>
 
                 <TextField
                   id="outlined-textarea"
                   label="Balance"
+                  size="small"
                   multiline
-                  sx={{ width: "400px" }}
+                  className={`${styles.supplierTextField}`}
                   {...register("balance", { required: true })}
                 />
               </Box>
-              <Box className="d-flex justify-content-between mt-4">
+              <Box className="d-flex justify-content-around mt-5">
                 <Button type="submit" className={`${styles.addSupplierButton}`}>
                   Save Supplier
                 </Button>
@@ -113,9 +139,8 @@ const AddSupplier = () => {
             </Grid>
           </Grid>
         </form>
-
       </Box>
-    </Container >
+    </Container>
   );
 };
 
