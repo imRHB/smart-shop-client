@@ -15,6 +15,8 @@ const StripePayment = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        setIsLoading(true);
+
         fetch(`/${id}`)
             .then(res => res.json())
             .then(data => {

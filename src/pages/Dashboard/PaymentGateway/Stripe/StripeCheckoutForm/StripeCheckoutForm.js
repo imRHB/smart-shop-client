@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { Alert, Button, Container } from "react-bootstrap";
+import { Alert, Button, Container, Spinner } from "react-bootstrap";
 import styles from './StripeCheckoutForm.module.css';
 
-const amount = 300;
+const payAmount = 300;
 
 const StripeCheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
 
+    const [processing, setProcessing] = useState(false);
     const [stripeError, setStripeError] = useState('');
+    const [stripeSuccess, setStripeSuccess] = useState('');
     const [clientSecret, setClientSecret] = useState('');
 
     useEffect(() => {
-        fetch('', {
+        fetch('/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ amount })
+            body: JSON.stringify({ payAmount })
         })
             .then(res => res.json())
-            .then(data => setClientSecret(data));
+            .then(data => setClientSecret(data.clientSecret));
     }, []);
 
     const handleSubmit = async (e) => {
@@ -35,6 +37,8 @@ const StripeCheckoutForm = () => {
         if (card === null) {
             return;
         }
+
+        setProcessing(true);
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
@@ -58,6 +62,17 @@ const StripeCheckoutForm = () => {
                 },
             },
         });
+
+        if (intentError) {
+            setStripeError(intentError.message);
+            setStripeSuccess('');
+        }
+        else {
+            setStripeError('');
+            setStripeSuccess('Your payment is successfully completed');
+            console.log(paymentIntent);
+            setProcessing(false);
+        }
     };
 
     return (
@@ -66,14 +81,14 @@ const StripeCheckoutForm = () => {
                 <div>
                     {
                         stripeError ? <Alert variant="warning">
-                            {stripeError.message}
+                            {stripeError}
                         </Alert>
                             :
                             ''
                     }
 
-                    <div className={`${'bg-light'} ${styles.stripeForm}`}>
-                        <form onSubmit={handleSubmit}>
+                    <div className={`${'bg-light'} ${styles.stripeFormContainer}`}>
+                        <form onSubmit={handleSubmit} className="p-3">
                             <CardElement
                                 options={{
                                     style: {
@@ -90,9 +105,16 @@ const StripeCheckoutForm = () => {
                                     },
                                 }}
                             />
-                            <Button type="submit" variant="secondary" className="mt-4" disabled={!stripe}>
-                                Pay ${amount}
-                            </Button>
+
+                            {
+                                processing ? <div className="m-4">
+                                    <Spinner animation="border" variant="dark" />
+                                </div>
+                                    :
+                                    <Button type="submit" className="mt-4" disabled={!stripe || stripeSuccess}>
+                                        Pay ${payAmount}
+                                    </Button>
+                            }
                         </form>
                     </div>
                 </div>
