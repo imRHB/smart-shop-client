@@ -12,7 +12,7 @@ const CreateProduct = () => {
     }
 
     return (
-        <div className='bg-light'>
+        <div>
 <div style={{ backgroundColor: 'white' }} className='d-flex justify-content-between p-2 my-5'>
    <div  className='text-start d-flex ms-1'>
   <h1>
