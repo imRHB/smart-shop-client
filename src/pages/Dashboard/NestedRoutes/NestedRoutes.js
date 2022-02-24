@@ -17,7 +17,6 @@ import ManageProducts from "../ManageProducts/ManageProducts";
 import ManageSupplier from "../ManageSupplier/ManageSupplier";
 import AddOfficePerson from "../OfficeLoan/AddOfficePerson/AddOfficePerson";
 import ManageOfficeLoan from "../OfficeLoan/ManageOfficeLoan/ManageOfficeLoan";
-import StripePayment from "../PaymentGateway/Stripe/StripePayment/StripePayment";
 import AddLoan from "../PersonalLoan/AddLoan/AddLoan";
 import AddPayment from "../PersonalLoan/AddPayment/AddPayment";
 import AddPerson from "../PersonalLoan/AddPerson/AddPerson";
@@ -118,7 +117,7 @@ const NestedRoutes = () => {
 
         {/*===================TEST YOUR COMPONENT HERE=====================*/}
         {/* <Route path="expense-item" element={<TestComponent />}></Route> */}
-        <Route path="test-component" element={<StripePayment />}></Route>
+        <Route path="test-component" element={<TestComponent />}></Route>
         {/*===================TEST YOUR COMPONENT HERE====================*/}
       </Routes>
     </>
