@@ -26,6 +26,13 @@ const employee = createSlice({
     setLoading: (state, action) => {
       state.loading = action.payload.loading;
     },
+    setEmployee: (state, action) => {
+      const { email, displayName, photoURL } = action.payload;
+      state.employeeInfo.displayName = displayName;
+      state.employeeInfo.email = email;
+      state.employeeInfo.photoURL = photoURL;
+      state.loading = false;
+    },
     setEmployees: (state, action) => {
       state.allEmployees = action.payload;
       state.loading = false;
@@ -54,6 +61,7 @@ const employee = createSlice({
 
 export const {
   setEmployee,
+  setEmployees,
   setLoading,
   setAuthError,
   setAdminStatus,
