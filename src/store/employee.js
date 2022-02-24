@@ -38,9 +38,6 @@ const employee = createSlice({
     setAdminStatus: (state, action) => {
       state.admin = action.payload.admin;
     },
-    addEmployeeToDB: (state, action) => {
-      state.apiResponse = action.payload;
-    },
     // Delete a employee
     deleteEmployee: (state, action) => {
       if (action.payload.deletedCount > 0) {
@@ -91,10 +88,9 @@ export const loadEmployees = () =>
   });
 
 // Delete employee from db
-export const deleteEmployeeToDB = (data) =>
+export const deleteEmployeeToDB = (id) =>
   apiCallBegan({
-    url,
-    data,
+    url: url + "/" + id,
     method: "delete",
     onSuccess: deleteEmployee.type,
   });
