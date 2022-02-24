@@ -50,8 +50,8 @@ const useFirebase = () => {
             dispatch(setAuthError({ error: error.message }));
           });
 
-        // Redirect user to the page where they come from
-        redirectInitialPage(navigate, location);
+        // Redirect employee to the page where they come from
+        navigate(location?.state?.from || "/dashboard/add-employee");
       })
       .catch((error) => {
         // Set error

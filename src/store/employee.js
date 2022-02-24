@@ -3,7 +3,7 @@ import { apiCallBegan } from "./api";
 import Swal from "sweetalert2";
 
 const initialState = {
-  employeeInfo: [],
+  employeeInfo: {},
   employeeAdded: false,
   loading: false,
   error: "",
@@ -25,11 +25,11 @@ const employee = createSlice({
     setLoading: (state, action) => {
       state.loading = action.payload.loading;
     },
-    setAllEmployees: (state, action) => {
-      state.employeeInfo = action.payload;
-      // const { email, displayName } = action.payload;
-      // state.employeeInfo.displayName = displayName;
-      // state.employeeInfo.email = email;
+    setEmployee: (state, action) => {
+      // state.employeeInfo = action.payload;
+      const { email, displayName } = action.payload;
+      state.employeeInfo.displayName = displayName;
+      state.employeeInfo.email = email;
       state.loading = false;
     },
     setAuthError: (state, action) => {
@@ -55,7 +55,7 @@ const employee = createSlice({
 });
 
 export const {
-  setAllEmployees,
+  setEmployee,
   setLoading,
   setAuthError,
   addEmployeeToDB,
@@ -84,7 +84,7 @@ export const saveEmployeeToDB = (data) =>
 export const loadEmployees = () =>
   apiCallBegan({
     url: "/employees",
-    onSuccess: setAllEmployees.type,
+    onSuccess: setEmployee.type,
   });
 
 // Delete employee from db
