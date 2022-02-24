@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import { Button, Collapse, Container, TextField } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import products from "../../../../assets/data/products.json";
 import styles from "./ProductSalesReport.module.css";
 
 function Row(props) {
@@ -22,7 +21,7 @@ function Row(props) {
         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       >
         <TableCell component="th" scope="row">
-          10th Feb 2022{" "}
+          {product.salesDate}
         </TableCell>
         <TableCell align="left">{product.name}</TableCell>
         <TableCell align="left">{product.category}</TableCell>
@@ -36,7 +35,29 @@ function Row(props) {
 
 const ProductSalesReport = () => {
   const [open, setOpen] = React.useState(false);
+  const [allProducts, setAllProducts] = React.useState([]);
+  const [productDisplayed, setProductDisplayed] = React.useState([]);
+  const [startDate, setStartDate] = React.useState("")
+  const [endDate, setEndDate] = React.useState("")
+  useEffect(() => {
+    fetch("https://zahidhasan2806.github.io/productData/products.json")
+      .then(res => res.json())
+      .then(data => {
 
+        setAllProducts(data)
+        setProductDisplayed(data)
+      })
+  }, []);
+  const handleProductSearch = (event) => {
+    event.preventDefault()
+    const matchedProduct = allProducts.filter(product => (product.salesDate >= startDate && product.salesDate <= endDate)
+    );
+    setProductDisplayed(matchedProduct);
+  };
+  let total = 0;
+  productDisplayed.forEach(item => {
+    total = total + item.salePrice
+  })
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
       <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
@@ -60,15 +81,15 @@ const ProductSalesReport = () => {
           unmountOnExit
           className={`${styles.tableContainer}`}
         >
-          <form >
+          <form onSubmit={handleProductSearch}>
 
-            <TextField id="date" label="Start Date" type="date" sx={{ mr: 2 }}
+            <TextField onChange={(e) => setStartDate(e.target.value)} size="small" id="date" label="Start Date" type="date" sx={{ mr: 2 }}
               InputLabelProps={{
                 shrink: true,
               }}
               required
             />
-            <TextField id="date" label="End Date" type="date" sx={{ mr: 2 }}
+            <TextField onChange={(e) => setEndDate(e.target.value)} size="small" id="date" label="End Date" type="date" sx={{ mr: 2 }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -111,14 +132,14 @@ const ProductSalesReport = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.map((employee) => (
+              {productDisplayed.map((employee) => (
                 <Row key={employee._id} employee={employee} />
               ))}
               <TableRow>
                 <TableCell colSpan={5} align="right" sx={{ borderRight: 1 }}>
                   Total Purchase:
                 </TableCell>
-                <TableCell align="right">Dynamic total </TableCell>
+                <TableCell align="right">BDT {total} </TableCell>
               </TableRow>
             </TableBody>
           </Table>
