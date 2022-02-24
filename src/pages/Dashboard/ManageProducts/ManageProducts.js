@@ -19,6 +19,8 @@ import products from "../../../assets/data/products.json";
 import './ManageProducts.css'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 
 function Row(props) {
     const { product } = props;
@@ -41,10 +43,10 @@ function Row(props) {
                 </TableCell>
                 <TableCell align="center">{product.name}</TableCell>
 
-                <TableCell align="center"> 
-               <EditIcon sx={{backgroundColor:'#002447', color:'white', padding:'2px', borderRadius:'5px'}}/> 
-            <DeleteForeverIcon sx={{marginLeft:'15px',backgroundColor:'red', color:'white', padding:'2px', borderRadius:'5px'}}/>
-                    </TableCell>
+                <TableCell align="center">
+                    <EditIcon sx={{ backgroundColor: '#002447', color: 'white', padding: '2px', borderRadius: '5px' }} />
+                    <DeleteForeverIcon sx={{ marginLeft: '15px', backgroundColor: 'red', color: 'white', padding: '2px', borderRadius: '5px' }} />
+                </TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -65,8 +67,8 @@ function Row(props) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    <TableRow  key={product._id}>
-                                        <TableCell  component="th" scope="row">
+                                    <TableRow key={product._id}>
+                                        <TableCell component="th" scope="row">
                                             {product._id}
                                         </TableCell>
                                         <TableCell align="start">{product.description}</TableCell>
@@ -114,81 +116,88 @@ const ManageProducts = () => {
 
     return (
         <Box>
-            <Box sx={{marginBottom:'30px'}}>
-           <div style={{backgroundColor:'white'}} className='d-flex justify-content-between  border'>
-                <div className='text-start ms-2 p-2 '>
-                    <h5>SUITE</h5>
-                    <small className=''>New Products</small>
-                </div>
-                <div>
-                    <p className='text-primary fw-bold border p-1'>PRODUCTS/SUITE</p>
-                </div>
-
-            </div>
-           </Box>
-            <Container sx={{ width: "100%" }}>
-           
-
-            <Box sx={{ boxShadow: '0px 0px 01px 2px whiteSmoke', backgroundColor:'white' }}>
-                <Typography variant="h6" sx={{ borderBottom: '1px solid lightGray', color: 'gray' }}>
-                    Category toevoegen
-                </Typography>
-                <Grid sx={{ padding: '20px' }} container spacing={2}>
-                    <Grid item xs={4}>
-                        <Typography variant="small" sx={{ fontWeight: 'bold', color: 'gray' }}>
-                            Category Name *
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={8} sx={{ marginBottom: '50px' }}>
-                        <TextField sx={{ width: '50%' }} id="outlined-basic" label="Category Name" variant="outlined" />
-                        <Button variant="contained" sx={{ marginLeft: '20px', marginBottom: '10px',backgroundColor:'#002447' }}>Save</Button>
-                    </Grid>
-                </Grid>
-
-
-
-            </Box>
-
-            <Paper sx={{ marginTop: '50px', paddingBottom: '20px', }}>
-                <Box sx={{ borderBottom: '1px solid lightGray' }}>
-                    <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'gray', fontSize: '3vh', margin: '10px', }}>
-                        Manage Category
+            <Box sx={{ marginBottom: '30px' }}>
+                <Box className="justify-content-between m-2 " sx={{ display: "flex",backgroundColor:'white'}}>
+                   <Box  sx={{ display: "flex", }}>
+                   <Typography>
+                        <AssignmentIcon sx={{ fontSize: '65px', backgroundColor: '#002447', color: 'white', margin: '10px' }} />{" "}
                     </Typography>
+                    <Typography sx={{ marginTop: '10px' }}>
+                        <span style={{ fontSize: "26px" }}>PRODUCTS </span> <br />{" "}
+                        <span  style={{ color: "#969494" }}>products management</span>
+                    </Typography>
+                   </Box>
+                    <Box>
+                        <Typography className="border mt-2">
+                            PRODUCTS/SUITE
+                        </Typography>
+                    </Box>
                 </Box>
-                <TableContainer component={Paper} sx={{ width: '97%', margin: '15px', border: '1px solid lightGray' }}>
+               
+            </Box>
+            <Container sx={{ width: "100%" }}>
 
-                    <Table aria-label="simple table">
-                        <TableHead>
-                            <TableRow sx={{backgroundColor:'#002447', color:'white'}}>
-                                <TableCell />
-                                <TableCell sx={{ color:'white', fontWeight:'bold'}}  >SL.</TableCell>
-                                <TableCell  sx={{ color:'white', fontWeight:'bold'}}  align="center">Category Name</TableCell>
-                                <TableCell  sx={{ color:'white', fontWeight:'bold'}}  align="center">Action</TableCell>
 
-                            </TableRow>
-                        </TableHead>
-                        <TableBody >
-                            {products
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((product) => (
-                                    <Row key={product._id} product={product} />
-                                ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Paper>
-            <Typography className="mt-3">
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 15]}
-                    component="div"
-                    count={products.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            </Typography>
-        </Container>
+                <Box sx={{ boxShadow: '0px 0px 01px 2px whiteSmoke', backgroundColor: 'white' }}>
+                    <Typography variant="h6" sx={{ borderBottom: '1px solid lightGray', color: 'gray' }}>
+                        Category toevoegen
+                    </Typography>
+                    <Grid sx={{ padding: '20px' }} container spacing={2}>
+                        <Grid item xs={4}>
+                            <Typography variant="small" sx={{ fontWeight: 'bold', color: 'gray' }}>
+                                Category Name *
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={8} sx={{ marginBottom: '50px' }}>
+                            <TextField sx={{ width: '50%' }} id="outlined-basic" label="Category Name" variant="outlined" />
+                            <Button variant="contained" sx={{ marginLeft: '10px', marginTop: '5px', backgroundColor: '#002447' }}> <FormatAlignJustifyIcon></FormatAlignJustifyIcon>  Save</Button>
+                        </Grid>
+                    </Grid>
+
+
+
+                </Box>
+
+                <Paper sx={{ marginTop: '50px', paddingBottom: 'px', }}>
+                    <Box sx={{ borderBottom: '1px solid lightGray' }}>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'gray', fontSize: '3vh', margin: '10px', }}>
+                            Manage Category
+                        </Typography>
+                    </Box>
+                    <TableContainer component={Paper} sx={{ width: '97%', margin: '15px', border: '1px solid lightGray' }}>
+
+                        <Table aria-label="simple table">
+                            <TableHead>
+                                <TableRow sx={{ backgroundColor: '#002447', color: 'white' }}>
+                                    <TableCell />
+                                    <TableCell sx={{ color: 'white', fontWeight: 'bold' }}  >SL.</TableCell>
+                                    <TableCell sx={{ color: 'white', fontWeight: 'bold' }} align="center">Category Name</TableCell>
+                                    <TableCell sx={{ color: 'white', fontWeight: 'bold' }} align="center">Action</TableCell>
+
+                                </TableRow>
+                            </TableHead>
+                            <TableBody >
+                                {products
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((product) => (
+                                        <Row key={product._id} product={product} />
+                                    ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Paper>
+                <Typography className="mt-3">
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 15]}
+                        component="div"
+                        count={products.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </Typography>
+            </Container>
         </Box>
     );
 };
