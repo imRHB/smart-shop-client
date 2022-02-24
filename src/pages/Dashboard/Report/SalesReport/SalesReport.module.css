@@ -30,3 +30,16 @@
     padding-right: 15px !important;
     margin-right: 5px !important;
   }
+ 
+  .searchBtn {
+    height: 56px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #37a000 !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-right: 5px !important;
+  
+  }
