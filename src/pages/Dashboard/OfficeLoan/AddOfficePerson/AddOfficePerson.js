@@ -1,7 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-
+import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 const AddOfficePerson = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
@@ -14,10 +15,10 @@ const AddOfficePerson = () => {
     return (
         <div >
            <div style={{ backgroundColor:'white' }} className="p-1">
-           <div className='d-flex justify-content-between m-3'>
+           <div className='d-flex justify-content-between m-2'>
                 <div className='text-start  d-flex'>
                     <h1>
-                        <i class="fas fa-address-card text-primary"> </i>
+                        <AssignmentIcon style={{fontSize:'60px', backgroundColor:'#002447', color:'white'}}></AssignmentIcon>
                     </h1>
               <div className='ms-3'>
               <h5 className='fw-bold'>Person</h5>
@@ -26,15 +27,15 @@ const AddOfficePerson = () => {
                 </div>
                 <div>
 
-                    <small className='text-primary fw-bold border p-1'>Person/Add Person</small>
+                    <small style={{color:'#002447'}} className=' fw-bold border p-1'>Person/Add Person</small>
                 </div>
 
             </div>
            </div>
             <div className='text-end m-3'>
-                {/* <Link to="/manageProducts"> */}
-                    <button style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'>Manage Person Loan</button>
-                {/* </Link> */}
+                <Link to="/manageProducts">
+                    <button style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'><FormatAlignJustifyIcon></FormatAlignJustifyIcon> Manage Person Loan</button>
+                </Link>
             </div>
             <div style={{ marginTop: '60px' , backgroundColor:'white' }} className='container '>
 

@@ -19,6 +19,9 @@ import users from "../../../../assets/data/users.json";
 // import "./Manageusers.css";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
+import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import { Link } from "react-router-dom";
 
 function Row(props) {
     const { user } = props;
@@ -41,9 +44,10 @@ function Row(props) {
                         <EditIcon
                             sx={{
                                 marginLeft: "25px",
-                                backgroundColor: "green",
+                                backgroundColor: "#002447",
                                 borderRadius: "5px",
-                                color: "yellow",
+                                color: "white",
+                                padding:'2px'
                             }}
                         />
                     </Button>
@@ -54,6 +58,8 @@ function Row(props) {
                                 backgroundColor: "red",
                                 borderRadius: "5px",
                                 color: "white",
+                                padding:'2px'
+
                             }}
                         />
                     </Button>
@@ -82,7 +88,7 @@ const ManageOfficeLoan = () => {
                 <div className="d-flex justify-content-between border">
                     <div className="text-start d-flex ms-2 p-2 ">
                         <h1>
-                            <i class="fas fa-address-card text-primary"> </i>
+                        <AssignmentIcon style={{fontSize:'60px', backgroundColor:'#002447', color:'white'}}></AssignmentIcon>
                         </h1>
                   <div className="ms-3">
                   <h5>Manage Person</h5>
@@ -90,17 +96,23 @@ const ManageOfficeLoan = () => {
                   </div>
                     </div>
                     <div>
-                        <small className="text-primary fw-bold border p-2 mt-2">
+                        <small className=" fw-bold border p-2 mt-2">
                             Manage / Person
                         </small>
                     </div>
                 </div>
+                
             </Box>
+            <div className='text-end '>
+                <Link to="/addOfficeLoan">
+                    <button style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'><FormatAlignJustifyIcon></FormatAlignJustifyIcon> Add Person Loan</button>
+                </Link>
+            </div>
             <Container sx={{ width: "100%" }}>
 
 
-                <Paper sx={{ marginTop: "50px", paddingBottom: "20px" }}>
-                    <Box sx={{ borderBottom: "1px solid lightGray" }}>
+                <Paper sx={{ marginTop: "50px", paddingBottom: "1px" }}>
+                    <Box sx={{ borderBottom: "1px solid lightGray", display:'flex' }}>
                         <Typography
                             variant="h6"
                             sx={{
@@ -108,17 +120,13 @@ const ManageOfficeLoan = () => {
                                 color: "gray",
                                 fontSize: "3vh",
                                 margin: "10px",
+                                textAlign:'start'
                             }}
                         >
                             Manage Person
                         </Typography>
-                        <Box sx={{ display: "flex", padding: "5px" }}>
-                            <Typography
-                                variant="small"
-                                sx={{ margin: "10px", fontWeight: "bold", color: "gray" }}
-                            >
-                                Search
-                            </Typography>
+                        <Box sx={{ display: "flex", padding: "5px",marginTop:'5px' }}>
+                         
                             <input
                                 className="p-2 mb-3"
                                 type="search"
@@ -133,18 +141,18 @@ const ManageOfficeLoan = () => {
                         sx={{ width: "97%", margin: "15px", border: "1px solid lightGray" }}
                     >
                         <Table aria-label="simple table">
-                            <TableHead>
-                                <TableRow className="colunm">
-                                    <TableCell sx={{ fontWeight: "bold" }} align="center">
+                            <TableHead sx={{backgroundColor:'#002447'}}>
+                                <TableRow className="text-light">
+                                    <TableCell sx={{ fontWeight: "bold", color:'white' }} align="center">
                                         Name
                                     </TableCell>
-                                    <TableCell sx={{ fontWeight: "bold" }} align="center">
+                                    <TableCell sx={{ fontWeight: "bold", color:'white' }} align="center">
                                         Address
                                     </TableCell>
-                                    <TableCell sx={{ fontWeight: "bold" }} align="center">
+                                    <TableCell sx={{ fontWeight: "bold" , color:'white'}} align="center">
                                         Phone.
                                     </TableCell>
-                                    <TableCell sx={{ fontWeight: "bold" }} align="center">
+                                    <TableCell sx={{ fontWeight: "bold", color:'white' }} align="center">
                                         Action.
                                     </TableCell>
                                 </TableRow>
