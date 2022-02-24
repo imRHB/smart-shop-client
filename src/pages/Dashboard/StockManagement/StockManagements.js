@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -15,7 +15,6 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TablePagination from "@mui/material/TablePagination";
 import { Button, Container, TextField } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import products from "../../../assets/data/products.json";
 import styles from "./StockManagements.module.css";
 
 function Row(props) {
@@ -87,9 +86,21 @@ function Row(props) {
 
 const StockManagements = () => {
     const [page, setPage] = React.useState(0);
+    const [inputValue, setInputValue] = React.useState("");
+    const [productDisplayed, setProductDisplayed] = React.useState([]);
+    const [allProducts, setAllProducts] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+    useEffect(() => {
+        fetch("https://zahidhasan2806.github.io/productData/products.json")
+            .then(res => res.json())
+            .then(data => {
+
+                setAllProducts(data)
+                setProductDisplayed(data)
+            })
+    }, [])
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -99,6 +110,12 @@ const StockManagements = () => {
         setPage(0);
     };
 
+    const handleProductSearch = (event) => {
+        event.preventDefault()
+        const matchedProduct = allProducts.filter(product => product.name.toLowerCase().includes(inputValue.toLowerCase()));
+        setProductDisplayed(matchedProduct);
+
+    }
     return (
         <Container sx={{ width: "100%", mb: 5 }}>
             <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 1 }}>
@@ -108,19 +125,19 @@ const StockManagements = () => {
                 <Typography>
                     <span style={{ fontSize: "26px" }}>
                         Stock Report</span> <br />{" "}
-                    <span style={{ color: "#969494" }}>All Stock Report</span>
+                    <span style={{ color: "#969494", marginRight: "-10px" }}>All Stock Report</span>
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "left", mb: 1 }}>
                 <Button className={`${styles.btn}`} onClick={() => setOpen(!open)}>Filter</Button>
                 <Collapse in={open} sx={{ mt: 2, mb: 2 }} timeout="auto" unmountOnExit className={`${styles.tableContainer}`}>
-                    <form >
+                    <form onSubmit={handleProductSearch}>
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                             <Typography sx={{ textAlign: "left", mr: 2 }} style={{ fontSize: "17px" }} >
                                 Search By Product:
                             </Typography>
-                            <TextField size="small" id="outlined-basic" label="Product Name" sx={{ mr: 1 }} variant="outlined" />
-                            <Button className={`${styles.btn}`}>Search</Button>
+                            <TextField onChange={(event) => setInputValue(event.target.value)} size="small" id="outlined-basic" label="Product Name" sx={{ mr: 1 }} variant="outlined" />
+                            <Button type="submit" className={`${styles.btn}`}>Search</Button>
                         </Box>
                     </form>
                 </Collapse>
@@ -165,25 +182,24 @@ const StockManagements = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {products
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            {productDisplayed.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((product) => (
                                     <Row key={product._id} product={product} />
                                 ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Typography className="mt-3">
-                    <TablePagination
-                        rowsPerPageOptions={[5, 10, 15]}
-                        component="div"
-                        count={products.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        onPageChange={handleChangePage}
-                        onRowsPerPageChange={handleChangeRowsPerPage}
-                    />
-                </Typography>
+
+                <TablePagination
+                    sx={{ mt: 3 }}
+                    rowsPerPageOptions={[5, 10, 15]}
+                    component="div"
+                    count={allProducts.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
             </Box>
         </Container>
     );
