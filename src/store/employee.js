@@ -27,12 +27,13 @@ const employee = createSlice({
       state.loading = action.payload.loading;
     },
     setEmployee: (state, action) => {
-      const { email, displayName } = action.payload;
+      const { email, displayName, photoURL } = action.payload;
       state.employeeInfo.displayName = displayName;
       state.employeeInfo.email = email;
+      state.employeeInfo.photoURL = photoURL;
       state.loading = false;
     },
-    setAllEmployees: (state, action) => {
+    setEmployees: (state, action) => {
       state.allEmployees = action.payload;
       state.loading = false;
     },
@@ -45,10 +46,10 @@ const employee = createSlice({
     // Delete a employee
     deleteEmployee: (state, action) => {
       if (action.payload.deletedCount > 0) {
-        const index = state.employeeInfo.findIndex(
+        const index = state.allEmployees.findIndex(
           (employee) => employee._id === action.payload._id
         );
-        state.employeeInfo.splice(index, 1);
+        state.allEmployees.splice(index, 1);
       }
     },
     setUpdateEmployee: (state, action) => {
@@ -60,10 +61,9 @@ const employee = createSlice({
 
 export const {
   setEmployee,
-  setAllEmployees,
+  setEmployees,
   setLoading,
   setAuthError,
-  addEmployeeToDB,
   setAdminStatus,
   employeeAddedSuccess,
   setEmployeeAdded,
@@ -89,7 +89,7 @@ export const saveEmployeeToDB = (data) =>
 export const loadEmployees = () =>
   apiCallBegan({
     url: "/employees",
-    onSuccess: setAllEmployees.type,
+    onSuccess: setEmployee.type,
   });
 
 // Delete employee from db
