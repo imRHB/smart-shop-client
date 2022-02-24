@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 const initialState = {
   employeeInfo: {},
+  allEmployees: [],
   employeeAdded: false,
   loading: false,
   error: "",
@@ -26,10 +27,14 @@ const employee = createSlice({
       state.loading = action.payload.loading;
     },
     setEmployee: (state, action) => {
-      // state.employeeInfo = action.payload;
-      const { email, displayName } = action.payload;
+      const { email, displayName, photoURL } = action.payload;
       state.employeeInfo.displayName = displayName;
       state.employeeInfo.email = email;
+      state.employeeInfo.photoURL = photoURL;
+      state.loading = false;
+    },
+    setEmployees: (state, action) => {
+      state.allEmployees = action.payload;
       state.loading = false;
     },
     setAuthError: (state, action) => {
@@ -41,10 +46,10 @@ const employee = createSlice({
     // Delete a employee
     deleteEmployee: (state, action) => {
       if (action.payload.deletedCount > 0) {
-        const index = state.employeeInfo.findIndex(
+        const index = state.allEmployees.findIndex(
           (employee) => employee._id === action.payload._id
         );
-        state.employeeInfo.splice(index, 1);
+        state.allEmployees.splice(index, 1);
       }
     },
     setUpdateEmployee: (state, action) => {
@@ -56,9 +61,9 @@ const employee = createSlice({
 
 export const {
   setEmployee,
+  setEmployees,
   setLoading,
   setAuthError,
-  addEmployeeToDB,
   setAdminStatus,
   employeeAddedSuccess,
   setEmployeeAdded,
