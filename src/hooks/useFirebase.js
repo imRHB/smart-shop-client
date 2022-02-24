@@ -24,7 +24,7 @@ const useFirebase = () => {
   const auth = getAuth();
   const dispatch = useDispatch();
 
-  const employee = useSelector((state) => state.entities.employee.employeeInfo);
+  const employee = useSelector((state) => state.entities.employee.allEmployees);
   const authError = useSelector((state) => state.entities.employee.error);
   const loading = useSelector((state) => state.entities.employee.loading);
   const admin = useSelector((state) => state.entities.employee.admin);
@@ -97,9 +97,18 @@ const useFirebase = () => {
       if (employee) {
         dispatch(
           setEmployee({
+            name: employee.name,
+            designation: employee.designation,
+            employeeId: employee.employeeId,
+            phone: employee.phone,
             email: employee.email,
-            displayName: employee.displayName,
-            photoURL: employee.photoURL,
+            salary: employee.salary,
+            bloodGroup: employee.bloodGroup,
+            country: employee.country,
+            city: employee.city,
+            zip: employee.zip,
+            address: employee.address,
+            image: employee.image,
           })
         );
         // dispatch(setLoading({ loading: false }));
