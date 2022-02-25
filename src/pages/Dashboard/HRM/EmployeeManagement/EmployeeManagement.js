@@ -22,7 +22,7 @@ import employees from "../../../../assets/data/employees.json";
 import styles from "./EmployeeManagement.module.css";
 
 function Row(props) {
-  const { employee } = props;
+  const { employee, serial } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -41,7 +41,7 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {employee._id}
+          {serial + 1}
         </TableCell>
         <TableCell align="center">{employee.name}</TableCell>
         <TableCell align="center">{employee.position}</TableCell>
@@ -176,8 +176,8 @@ const EmployeeManagement = () => {
             <TableBody>
               {employees
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((employee) => (
-                  <Row key={employee._id} employee={employee} />
+                .map((employee, index) => (
+                  <Row key={employee._id} employee={employee} serial={index} />
                 ))}
             </TableBody>
           </Table>

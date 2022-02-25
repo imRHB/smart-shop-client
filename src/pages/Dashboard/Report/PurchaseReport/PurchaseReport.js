@@ -37,13 +37,13 @@ const PurchaseReport = () => {
         >
           <form >
 
-            <TextField id="date" label="Start Date" type="date" sx={{ mr: 2 }}
+            <TextField size="small" id="date" label="Start Date" type="date" sx={{ mr: 2 }}
               InputLabelProps={{
                 shrink: true,
               }}
               required
             />
-            <TextField id="date" label="End Date" type="date" sx={{ mr: 2 }}
+            <TextField size="small" id="date" label="End Date" type="date" sx={{ mr: 2 }}
               InputLabelProps={{
                 shrink: true,
               }}
