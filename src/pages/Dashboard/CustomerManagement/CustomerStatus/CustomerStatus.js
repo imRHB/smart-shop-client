@@ -76,6 +76,7 @@ function Row(props) {
                     </TableCell>
                     <TableCell align="center">{user.phone}</TableCell>
                     <TableCell align="center">{user.address}</TableCell>
+                    <TableCell align="center">{user.address}</TableCell>
 
                   </TableRow>
                 </TableBody>
