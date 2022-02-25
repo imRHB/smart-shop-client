@@ -20,13 +20,10 @@ const CreateProduct = () => {
   </h1>
    <div className="ms-3">
    <h5 className='fw-bold'>PRODUCTS</h5>
-    <small className=''> New Products</small>
+    <small className=''>Add New Product</small>
    </div>
    </div>
-    <div>
-     
-        <p className=' fw-bold border p-1'>ADD PRODUCTS</p>
-    </div>
+    
     
 </div>
 <div className='text-end m-3'>
