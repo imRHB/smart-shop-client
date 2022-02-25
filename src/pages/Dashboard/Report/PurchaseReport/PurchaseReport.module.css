@@ -1,0 +1,43 @@
+.tableContainer {
+    background-color: #f1f3f6;
+    padding: 17px;
+    border-radius: 5px;
+  }
+  .assignmentIcon {
+    font-size: 56px !important;
+    color: #fff !important;
+    background-color: #001e3c !important;
+    margin-right: 15px !important;
+  }
+ 
+  .topContainer {
+    background-color: #f1f3f6;
+    padding: 17px;
+    border-radius: 5px;
+  }
+  .tableHeader {
+    background-color: #001e3c;
+  }
+  .tableCell {
+    color: #fff !important;
+    font-weight: 700 !important;
+  }
+  .filterBtn {
+    background-color: #003366 !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-right: 5px !important;
+  }
+  .searchBtn {
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #37a000 !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-right: 5px !important;
+  
+  }
