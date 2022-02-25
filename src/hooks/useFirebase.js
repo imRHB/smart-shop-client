@@ -1,146 +1,105 @@
-import { useEffect, useState } from "react";
-import {
-  getAuth,
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  sendPasswordResetEmail,
-  updateProfile,
-} from "firebase/auth";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import initializeFirebase from "../Firebase/firebase.init";
-import {
-  saveEmployeeToDB,
-  setAuthError,
-  setLoading,
-  setEmployee,
-  checkAdminStatus,
-} from "../store/employee";
+import { useEffect, useState } from 'react';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
+
+import initializeFirebase from '../Firebase/firebase.init';
 
 initializeFirebase();
 
+
 const useFirebase = () => {
-  const auth = getAuth();
-  const dispatch = useDispatch();
 
-  const employee = useSelector((state) => state.entities.employee.employeeInfo);
-  const authError = useSelector((state) => state.entities.employee.error);
-  const loading = useSelector((state) => state.entities.employee.loading);
-  const admin = useSelector((state) => state.entities.employee.admin);
+    const auth = getAuth();
 
-  dispatch(checkAdminStatus(employee.email));
+    const [user, setUsers] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState("");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-  // Register new employee
-  const registerEmployee = (name, email, password, navigate, location) => {
-    dispatch(setLoading({ loading: true }));
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Empty error for successfully register
-        dispatch(setAuthError({ error: "" }));
 
-        // Save employee data to Database
-        dispatch(saveEmployeeToDB({ name, email }));
+    //create and sign in user with email and password
 
-        // Update employee's name to firebase
-        updateProfile(auth.currentUser, {
-          displayName: name,
-        })
-          .then(() => {
-            dispatch(setAuthError({ error: "" }));
-          })
-          .catch((error) => {
-            dispatch(setAuthError({ error: error.message }));
-          });
+    const getUserEmail = e => {
+        setEmail(e.target.value);
 
-        // Redirect user to the page where they come from
-        redirectInitialPage(navigate, location);
-      })
-      .catch((error) => {
-        // Set error
-        dispatch(setAuthError({ error: error.message }));
-      })
-      .finally(() => {
-        // update loading status
-        dispatch(setLoading({ loading: false }));
-      });
-  };
+    };
+    const getUserPassword = e => {
+        setPassword(e.target.value);
 
-  // Login with email and password
-  const loginWithEmailAndPassword = (email, password, navigate, location) => {
-    dispatch(setLoading({ loading: true }));
-    signInWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        // Empty error for successfully login
-        dispatch(setAuthError({ error: "" }));
-        // Redirect employee to the page where they come from
-        navigate(location?.state?.from || "/dashboard");
-      })
-      .catch((error) => {
-        // Set error to the error
-        dispatch(setAuthError({ error: error.message }));
-      })
-      .finally(() => {
-        // Update loading status
-        dispatch(setLoading({ loading: false }));
-      });
-  };
+    };
 
-  //reset password
-  const handleResetPassword = () => {
-    sendPasswordResetEmail(auth, employee.email).then((result) => {
-      alert("Password Reset Successfully! Check your email!!");
-    });
-  };
+    //registration
 
-  // Observing employee state
-  useEffect(() => {
-    // dispatch(setLoading({ loading: true }));
-    const unsubscribe = onAuthStateChanged(auth, (employee) => {
-      if (employee) {
-        dispatch(
-          setEmployee({
-            email: employee.email,
-            displayName: employee.displayName,
-            photoURL: employee.photoURL,
-          })
-        );
-        // dispatch(setLoading({ loading: false }));
-      } else {
-      }
-    });
-    return () => unsubscribe;
-  }, [auth]);
 
-  // Log Out
-  const logOut = () => {
-    signOut(auth)
-      .then(() => {
-        dispatch(setEmployee({}));
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  };
 
-  // Redirect Initial Page
-  const redirectInitialPage = (navigate, location) => {
-    const from = location.state?.from?.pathname || "/";
-    navigate(from, { replace: true });
-  };
+    //user sign in with email and password
 
-  //return all functions
-  return {
-    employee,
-    authError,
-    loading,
-    admin,
-    registerEmployee,
-    loginWithEmailAndPassword,
-    handleResetPassword,
-    logOut,
-  };
+    const userLogin = () => {
+
+        setIsLoading(true);
+
+        return signInWithEmailAndPassword(auth, email, password)
+
+    };
+
+
+    //set user name
+
+
+
+    //reset password
+
+    const handleResetPassword = () => {
+        sendPasswordResetEmail(auth, email)
+            .then(result => {
+                alert('Password Reset Successfully! Check your email!!')
+            })
+    }
+
+
+
+    //user state change
+
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, user => {
+            if (user) {
+                setUsers(user)
+            } else {
+                setUsers({})
+            }
+            setIsLoading(false);
+        });
+        return () => unSubscribe;
+    }, [isLoading, auth])
+
+
+
+    //Sign out
+
+    const logOut = () => {
+        setIsLoading(true);
+
+        signOut(auth)
+            .then(() => { })
+            .finally(() => setIsLoading(false))
+
+    };
+
+
+    //return all functions
+    return {
+        user,
+        setUsers,
+        error,
+        getUserEmail,
+        getUserPassword,
+        setError,
+        email,
+        handleResetPassword,
+        userLogin,
+        isLoading,
+        logOut
+    }
 };
 
 export default useFirebase;

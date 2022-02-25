@@ -12,27 +12,30 @@ const UpdateProduct = () => {
     }
 
     return (
-        <div className=''>
-            <div className='d-flex justify-content-between m-3'>
-                <div className='text-start ms-2'>
+        <div>
+            
+            <div style={{backgroundColor:'white'}}  className='d-flex justify-content-between my-5'>
+                <div className='text-start ms-2 d-flex'>
                     <h1>
-                        <i class="fas fa-address-card text-primary"> </i>
+                        <i style={{color:'#002447', fontSize:'70px'}} className="fas fa-address-card"> </i>
                     </h1>
-                    <h5 className='fw-bold'>SUITE</h5>
+                   <div className='ms-3 p-1'>
+                   <h5 className='fw-bold'>SUITE</h5>
                     <small className=''> Update Products</small>
+                   </div>
                 </div>
                 <div>
 
-                    <p className='text-primary fw-bold border p-1'>PRODUCTS/SUITE</p>
+                    <p className=' fw-bold border p-1'>PRODUCTS/SUITE</p>
                 </div>
 
             </div>
             <div className='text-end m-3'>
-                {/* <Link to="/manageProducts"> */}
-                    <button style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'>Update Product</button>
-                {/* </Link> */}
+                <Link to="/manageProducts">
+                    <button style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'>  <i  className="fas fa-address-card"> </i> Update Product</button>
+                </Link>
             </div>
-            <div style={{ marginTop: '60px' }} className='container '>
+            <div style={{ marginTop: '60px', backgroundColor:'white' }} className='container '>
 
                 <div className='row shadow border pb-4 mb-3'>
                     <h5 className='text-start p-3 border'>Please Update  <span style={{ color: 'rgb(45, 55, 72)' }}> Product</span> </h5>
