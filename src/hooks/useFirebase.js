@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import initializeFirebase from "../Firebase/firebase.init";
 import {
-  saveEmployeeToDB,
   setAuthError,
   setLoading,
   setEmployee,
@@ -40,9 +39,6 @@ const useFirebase = () => {
         // Empty error for successfully register
         dispatch(setAuthError({ error: "" }));
 
-        // Save employee data to Database
-        dispatch(saveEmployeeToDB({ name, email }));
-
         // Update employee's name to firebase
         updateProfile(auth.currentUser, {
           displayName: name,
@@ -54,8 +50,8 @@ const useFirebase = () => {
             dispatch(setAuthError({ error: error.message }));
           });
 
-        // Redirect user to the page where they come from
-        redirectInitialPage(navigate, location);
+        // Redirect employee to the page where they come from
+        navigate(location?.state?.from || "/dashboard/add-employee");
       })
       .catch((error) => {
         // Set error
@@ -96,7 +92,7 @@ const useFirebase = () => {
 
   // Observing employee state
   useEffect(() => {
-    dispatch(setLoading({ loading: true }));
+    // dispatch(setLoading({ loading: true }));
     const unsubscribe = onAuthStateChanged(auth, (employee) => {
       if (employee) {
         dispatch(
@@ -106,7 +102,7 @@ const useFirebase = () => {
             photoURL: employee.photoURL,
           })
         );
-        dispatch(setLoading({ loading: false }));
+        // dispatch(setLoading({ loading: false }));
       } else {
       }
     });

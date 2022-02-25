@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-  const { employee, authError, loading, loginWithEmailAndPassword } = useAuth();
+  const { authError, loading, loginWithEmailAndPassword } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();

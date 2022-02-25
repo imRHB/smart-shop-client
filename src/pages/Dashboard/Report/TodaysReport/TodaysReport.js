@@ -20,7 +20,7 @@ const TodaysReport = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>Todays Report</span> <br />{" "}
+          <span style={{ fontSize: "26px", marginLeft: "-77px" }}>Todays Report</span> <br />{" "}
           <span style={{ color: "#969494" }}>
             Todays sales and purchase report
           </span>
