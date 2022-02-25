@@ -77,7 +77,7 @@ const AddEmployee = () => {
     // Send form data to Server
     // dispatch(saveEmployeeToDB(formData));
 
-    fetch("http://localhost:5000/employees", {
+    fetch("https://smart-shop-pos.herokuapp.com/employees", {
       method: "POST",
       body: formData,
     })
