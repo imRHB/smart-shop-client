@@ -12,27 +12,27 @@ const CreateProduct = () => {
     }
 
     return (
-        <div className=''>
-<div className='d-flex justify-content-between m-3'>
-   <div className='text-start ms-2'>
+        <div>
+<div style={{ backgroundColor: 'white' }} className='d-flex justify-content-between p-2 my-5'>
+   <div  className='text-start d-flex ms-1'>
   <h1>
   <i class="fas fa-address-card text-primary"> </i>
   </h1>
-   <h5 className='fw-bold'>SUITE</h5>
-    <small className=''> New Products</small>
+   <div className="ms-3">
+   <h5 className='fw-bold'>PRODUCTS</h5>
+    <small className=''>Add New Product</small>
    </div>
-    <div>
-     
-        <p className='text-primary fw-bold border p-1'>PRODUCTS/SUITE</p>
-    </div>
+   </div>
+    
     
 </div>
 <div className='text-end m-3'>
-{/* <Link to="/manageProducts"> */}
-<button  style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'>Manage Product</button>
-{/* </Link> */}
+<Link to="/manageProducts">
+
+<button  style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'> <i className="fas fa-address-card text-light"> </i> Manage Product</button>
+</Link>
 </div>
-            <div style={{ marginTop: '60px' }} className='container '>
+            <div style={{ marginTop: '60px', backgroundColor:'white' }} className='container '>
 
                 <div className='row shadow border pb-4 mb-3'>
                     <h5 className='text-start p-3 border'>Please Add  <span style={{ color: 'rgb(45, 55, 72)' }}>New Product</span> </h5>

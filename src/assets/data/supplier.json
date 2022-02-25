@@ -1,0 +1,82 @@
+[
+  {
+    "_id": 1,
+    "name": "Md. Najmul",
+    "contact": "+8801723456789",
+    "address": "Dhaka, Bangladesh",
+    "details": "A supplier is an individual or a concern that supplies their own manufactured goods and services to the companies who use them as semi-finished products or raw material to get to.",
+    "balance": "1000"
+  },
+  {
+    "_id": 2,
+    "name": "Md. Rakib",
+    "contact": "+8801723456789",
+    "address": "Dhaka, Bangladesh",
+    "details": "A supplier is an individual or a concern that supplies their own manufactured goods and services to the companies who use them as semi-finished products or raw material to get to.",
+    "balance": "2000"
+  },
+  {
+    "_id": 3,
+    "name": "Md. Zahid",
+    "contact": "+8801723456789",
+    "address": "Dhaka, Bangladesh",
+    "details": "A supplier is an individual or a concern that supplies their own manufactured goods and services to the companies who use them as semi-finished products or raw material to get to.",
+    "balance": "2500"
+  },
+  {
+    "_id": 4,
+    "name": "Maria Munni",
+    "contact": "+8801723456789",
+    "address": "Pabna, Bangladesh",
+    "details": "A supplier is an individual or a concern that supplies their own manufactured goods and services to the companies who use them as semi-finished products or raw material to get to.",
+    "balance": "3500"
+  },
+  {
+    "_id": 5,
+    "name": "Munni Khatun",
+    "contact": "+8801723456789",
+    "address": "Pabna, Bangladesh",
+    "details": "A supplier is an individual or a concern that supplies their own manufactured goods and services to the companies who use them as semi-finished products or raw material to get to.",
+    "balance": "3500"
+  },
+  {
+    "_id": 6,
+    "name": "Maria Munni",
+    "contact": "+8801723456789",
+    "address": "Pabna, Bangladesh",
+    "details": "A supplier is an individual or a concern that supplies their own manufactured goods and services to the companies who use them as semi-finished products or raw material to get to.",
+    "balance": "4500"
+  },
+  {
+    "_id": 7,
+    "name": "Maria Munni",
+    "contact": "+8801723456789",
+    "address": "Pabna, Bangladesh",
+    "details": "A supplier is an individual or a concern that supplies their own manufactured goods and services to the companies who use them as semi-finished products or raw material to get to.",
+    "balance": "1200"
+  },
+  {
+    "_id": 8,
+    "name": "Maria Munni",
+    "contact": "+8801723456789",
+    "address": "Pabna, Bangladesh",
+    "details": "A supplier is an individual or a concern that supplies their own manufactured goods and services to the companies who use them as semi-finished products or raw material to get to.",
+    "balance": "900"
+  },
+  {
+    "_id": 9,
+    "name": "Afsana Meem",
+    "contact": "+8801723456789",
+    "address": "Madaripur, Bangladesh",
+    "details": "A supplier is an individual or a concern that supplies their own manufactured goods and services to the companies who use them as semi-finished products or raw material to get to.",
+    "balance": "2000"
+  },
+  {
+    "_id": 10,
+    "name": "Afsana Meem",
+    "contact": "+8801723456789",
+    "address": "Barisal, Bangladesh",
+    "details": "A supplier is an individual or a concern that supplies their own manufactured goods and services to the companies who use them as semi-finished products or raw material to get to.",
+    "balance": "1500"
+  }
+]

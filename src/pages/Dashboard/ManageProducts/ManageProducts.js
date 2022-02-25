@@ -88,17 +88,17 @@ function Row(props) {
 }
 
 Row.propTypes = {
-    product: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        img: PropTypes.string.isRequired,
-        position: PropTypes.string.isRequired,
-        role: PropTypes.string.isRequired,
-        productId: PropTypes.string.isRequired,
-        phone: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-        address: PropTypes.string.isRequired,
-        salary: PropTypes.string.isRequired,
-    }).isRequired,
+  product: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    position: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    productId: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    salary: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 const ManageProducts = () => {

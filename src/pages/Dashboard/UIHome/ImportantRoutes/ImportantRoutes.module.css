@@ -1,0 +1,19 @@
+.reportContainer{
+    border-radius: 5px;
+    border: 1px solid rgb(201, 201, 201);
+    padding: 15px;
+}
+
+.reports{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+.routeTitle{
+    text-decoration:none;
+    margin-top:0;
+    color:black;
+    font-weight:700;
+}
