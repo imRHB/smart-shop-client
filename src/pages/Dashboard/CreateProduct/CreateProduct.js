@@ -19,13 +19,13 @@ const CreateProduct = () => {
   <i class="fas fa-address-card text-primary"> </i>
   </h1>
    <div className="ms-3">
-   <h5 className='fw-bold'>SUITE</h5>
+   <h5 className='fw-bold'>PRODUCTS</h5>
     <small className=''> New Products</small>
    </div>
    </div>
     <div>
      
-        <p className='text-primary fw-bold border p-1'>PRODUCTS/SUITE</p>
+        <p className=' fw-bold border p-1'>ADD PRODUCTS</p>
     </div>
     
 </div>
