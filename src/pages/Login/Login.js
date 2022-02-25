@@ -1,54 +1,102 @@
-import React from 'react';
+import React from "react";
 import styles from "./Login.module.css";
-import { Button, Form } from 'react-bootstrap';
-import logo from "../../assets/images/logo.png"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLock, faUserAlt } from '@fortawesome/free-solid-svg-icons'
+import { Button, Form } from "react-bootstrap";
+import logo from "../../assets/images/logo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { useLocation, useNavigate } from 'react-router-dom';
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-    return (
-        <div className={`${styles.loginPage}`}>
+  const { user, setUsers, userLogin, setError, getUserEmail, getUserPassword } = useAuth();
 
-            {/* login form */}
-            <Form className={`${styles.userLoginSection} ${'shadow'}`}>
+  const navigate = useNavigate();
+  const location = useLocation();
+  const redirect = location?.state?.from || '/dashboard';
 
-                {/* logo and title */}
-                <img src={logo} alt="logo" className={`${styles.siteLogo} ${'mb-3'}`} />
+  //handle user login with email and password
 
-                <h4>Welcome Back!</h4>
-                <p >Enter your credentials to continue</p>
+  const userLoginWithEmailPass = (e) => {
+    e.preventDefault();
 
-                {/* input fields */}
-                <Form.Group className={`${styles.inputFieldGroup} ${'mb-3 mx-auto'}`} controlId="formBasicEmail">
+    userLogin()
+      .then((result) => {
+        setUsers(result.user)
+        navigate(redirect);
+      })
+      .catch((err) => {
+        setError(err.message)
+      })
+  }
 
-                    <Form.Label className={`${styles.inputLabels}`}>Email address</Form.Label>
-                    <FontAwesomeIcon icon={faUserAlt} className={`${styles.formIcon}`} />
-                    <Form.Control type="email" placeholder="Your Username" className={`${styles.inputFields}`} />
-                </Form.Group>
+  return (
+    <div className={`${styles.loginPage}`}>
 
-                <Form.Group className={`${styles.inputFieldGroup} ${'mb-3 mx-auto'}`} controlId="formBasicPassword">
-                    <Form.Label className={`${styles.inputLabels}`}>Password</Form.Label>
-                    <FontAwesomeIcon icon={faLock} className={`${styles.formIcon}`} />
-                    <Form.Control type="password" placeholder="Your Password" className={`${styles.inputFields}`} />
-                </Form.Group>
+      {/* login form */}
+      <Form onSubmit={userLoginWithEmailPass} className={`${styles.userLoginSection} ${"shadow"}`}>
+        {/* logo and title */}
+        <img src={logo} alt="logo" className={`${styles.siteLogo} ${"mb-3"}`} />
 
-                {/* save password checkbox and forgot password button */}
-                <div className={`${'d-flex flex-xxl-column justify-content-between mb-5'}`}>
-                    <Form.Group controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label=" Remember me" />
-                    </Form.Group>
-                    <Button variant='none' className={`${'m-0 p-0'}`}>Forgot Password?</Button>
-                </div>
+        <h4>Welcome Back!</h4>
+        <p>Enter your credentials to continue</p>
 
-                {/* submit button */}
+        {/* input fields */}
+        <Form.Group
+          className={`${styles.inputFieldGroup} ${"mb-3 mx-auto"}`}
+          controlId="formBasicEmail"
+        >
+          <Form.Label className={`${styles.inputLabels}`}>
+            Email address
+          </Form.Label>
+          <FontAwesomeIcon icon={faUserAlt} className={`${styles.formIcon}`} />
+          <Form.Control
+            type="email"
+            placeholder="Your Email"
+            className={`${styles.inputFields}`}
+            name='email'
+            onBlur={getUserEmail}
+          />
+        </Form.Group>
 
-                <Button variant="primary" className={`${styles.submitButton} ${'w-100'}`} type="submit">
-                    Login
-                </Button>
-            </Form>
+        <Form.Group
+          className={`${styles.inputFieldGroup} ${"mb-3 mx-auto"}`}
+          controlId="formBasicPassword"
+        >
+          <Form.Label className={`${styles.inputLabels}`}>Password</Form.Label>
+          <FontAwesomeIcon icon={faLock} className={`${styles.formIcon}`} />
+          <Form.Control
+            type="password"
+            placeholder="Your Password"
+            className={`${styles.inputFields}`}
+            name='password'
+            onBlur={getUserPassword}
+          />
+        </Form.Group>
 
+        {/* save password checkbox and forgot password button */}
+        <div
+          className={`${"d-flex flex-xxl-column justify-content-between mb-5"}`}
+        >
+          <Form.Group controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label=" Remember me" />
+          </Form.Group>
+          <Button variant="none" className={`${"m-0 p-0"}`}>
+            Forgot Password?
+          </Button>
         </div>
-    );
+
+        {/* submit button */}
+
+        <Button
+          variant="primary"
+          className={`${styles.submitButton} ${"w-100"}`}
+          type="submit"
+        >
+          Login
+        </Button>
+      </Form>
+    </div>
+  );
 };
 
 export default Login;

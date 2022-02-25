@@ -18,11 +18,11 @@ import { Button, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import employees from "../../../assets/data/employees.json";
+import employees from "../../../../assets/data/employees.json";
 import styles from "./EmployeeManagement.module.css";
 
 function Row(props) {
-  const { employee } = props;
+  const { employee, serial } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -41,7 +41,7 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {employee._id}
+          {serial + 1}
         </TableCell>
         <TableCell align="center">{employee.name}</TableCell>
         <TableCell align="center">{employee.position}</TableCell>
@@ -131,8 +131,8 @@ const EmployeeManagement = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>HRM</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Manage Employee</span>
+          <span style={{ fontSize: "26px", marginLeft: "-77px" }}>HRM</span>{" "}
+          <br /> <span style={{ color: "#969494" }}>Manage Employee</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
@@ -140,7 +140,9 @@ const EmployeeManagement = () => {
         <Button className={`${styles.addEmployeeBtn}`}>Add Employee</Button>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Manage Employee</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+          Manage Employee
+        </Typography>
         <hr />
         <TableContainer
           component={Paper}
@@ -174,8 +176,8 @@ const EmployeeManagement = () => {
             <TableBody>
               {employees
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((employee) => (
-                  <Row key={employee._id} employee={employee} />
+                .map((employee, index) => (
+                  <Row key={employee._id} employee={employee} serial={index} />
                 ))}
             </TableBody>
           </Table>

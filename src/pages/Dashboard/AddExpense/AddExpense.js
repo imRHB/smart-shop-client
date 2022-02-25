@@ -66,7 +66,7 @@ import DehazeIcon from '@mui/icons-material/Dehaze';const AddExpense = () => {
                                         <div className='  mt-2'>
                                             <div className=''>
                                                 <span className='fw-bold'>Date *</span>
-                                                <input style={{ width: '60%',marginLeft: '6%' }} className='field mb-3  ' type="date" {...register("date", { required: true })} placeholder='Date' /> <br />
+                                                <input style={{ width: '60%',marginLeft: '6%' }} className='field mb-3 ' type="date" {...register("date", { required: true })} placeholder='Date' /> <br />
                                                
                                             </div>
                                          
