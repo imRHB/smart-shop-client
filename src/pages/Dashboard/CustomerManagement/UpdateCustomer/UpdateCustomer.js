@@ -56,6 +56,20 @@ const UpdateCustomer = () => {
     formData.append("city", city);
     formData.append("zip", zip);
     formData.append("address", address);
+    fetch("https://smart-shop-pos.herokuapp.com/customers", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire("Good job!", "Customer Created Successfully!", "success");
+          reset();
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
