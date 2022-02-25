@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import { Button, Collapse, Container } from "@mui/material";
+import { Button, Collapse, Container, TextField } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import suppliers from "../../../../assets/data/supplier.json";
 import styles from "./ProfitReportInvoice.module.css";
@@ -61,29 +61,22 @@ const ProfitReportInvoice = () => {
           unmountOnExit
           className={`${styles.tableContainer}`}
         >
-          <input
-            type="date"
-            style={{
-              width: "400px",
-              padding: "8px",
-              backgroundColor: "#e4e4e4",
-              border: "1px solid #aeaeae",
-              marginRight: "5px",
-              borderRadius: "3px",
-            }}
-          />
-          <input
-            type="date"
-            style={{
-              width: "400px",
-              padding: "8px",
-              backgroundColor: "#e4e4e4",
-              border: "1px solid #aeaeae",
-              marginRight: "5px",
-              borderRadius: "3px",
-            }}
-          />
-          <Button className={`${styles.searchBtn}`}>Search</Button>
+          <form >
+
+            <TextField id="date" label="Start Date" type="date" sx={{ mr: 2 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              required
+            />
+            <TextField id="date" label="End Date" type="date" sx={{ mr: 2 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              required
+            />
+            <Button className={`${styles.searchBtn}`} type='submit'>Search</Button>
+          </form>
         </Collapse>
       </Box>
       <Box className={`${styles.tableContainer}`}>

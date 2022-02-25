@@ -8,8 +8,16 @@ import Swal from "sweetalert2";
 import designations from "../../../../assets/data/designations.json";
 import cloudImage from "../../../../assets/images/cloud-upload.png";
 import styles from "./AddEmployee.module.css";
+import useAuth from "../../../../hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveEmployeeToDB } from "../../../../store/employee";
 
 const AddEmployee = () => {
+  const { registerEmployee, loading, authError } = useAuth();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
@@ -43,10 +51,18 @@ const AddEmployee = () => {
       image,
     } = data;
     const name = `${firstName} ${lastName}`;
+    const password = "123456";
+    const address = `${address1} ${address2}`;
+    const current = new Date().getTime();
+    const employeeId = current.toString().slice(9, 12) + phone;
+
+    // Register new user based on data
+    registerEmployee(name, email, password, navigate, location);
 
     const formData = new FormData();
     formData.append("name", name);
     formData.append("designation", designation);
+    formData.append("employeeId", employeeId);
     formData.append("phone", phone);
     formData.append("email", email);
     formData.append("salary", salary);
@@ -54,24 +70,16 @@ const AddEmployee = () => {
     formData.append("country", country);
     formData.append("city", city);
     formData.append("zip", zip);
-    formData.append("address1", address1);
-    formData.append("address2", address2);
+    formData.append("address", address);
     formData.append("image", image[0]);
 
-    // fetch("", {
-    //   method: "POST",
-    //   body: formData,
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.insertedId) {
-    //       Swal.fire("Good job!", "Employee Created Successfully!", "success");
-    //       reset();
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+    // Send form data to Server
+    dispatch(saveEmployeeToDB(formData));
+
+    //Alert message
+    Swal.fire("Good job!", "Employee Added Successfully!", "success");
+
+    reset();
   };
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
