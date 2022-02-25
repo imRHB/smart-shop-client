@@ -10,12 +10,13 @@ import cloudImage from "../../../../assets/images/cloud-upload.png";
 import styles from "./AddEmployee.module.css";
 import useAuth from "../../../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { saveEmployeeToDB } from "../../../../store/employee";
+// import { useDispatch } from "react-redux";
+// import { saveEmployeeToDB } from "../../../../store/employee";
 
 const AddEmployee = () => {
-  const { registerEmployee, loading, authError } = useAuth();
-  const dispatch = useDispatch();
+  // const { registerEmployee, loading, authError } = useAuth();
+  // const dispatch = useDispatch();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [countries, setCountries] = useState([]);
@@ -57,7 +58,7 @@ const AddEmployee = () => {
     const employeeId = current.toString().slice(9, 12) + phone;
 
     // Register new user based on data
-    registerEmployee(name, email, password, navigate, location);
+    // registerEmployee(name, email, password, navigate, location);
 
     const formData = new FormData();
     formData.append("name", name);
@@ -74,12 +75,22 @@ const AddEmployee = () => {
     formData.append("image", image[0]);
 
     // Send form data to Server
-    dispatch(saveEmployeeToDB(formData));
+    // dispatch(saveEmployeeToDB(formData));
 
-    //Alert message
-    Swal.fire("Good job!", "Employee Added Successfully!", "success");
-
-    reset();
+    fetch("http://localhost:5000/employees", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire("Good job!", "Employee Added Successfully!", "success");
+          reset();
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
