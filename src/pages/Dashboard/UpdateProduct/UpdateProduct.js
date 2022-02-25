@@ -13,10 +13,11 @@ const UpdateProduct = () => {
 
     return (
         <div>
+            
             <div style={{backgroundColor:'white'}}  className='d-flex justify-content-between my-5'>
                 <div className='text-start ms-2 d-flex'>
                     <h1>
-                        <i class="fas fa-address-card"> </i>
+                        <i style={{color:'#002447', fontSize:'70px'}} className="fas fa-address-card"> </i>
                     </h1>
                    <div className='ms-3 p-1'>
                    <h5 className='fw-bold'>SUITE</h5>
@@ -31,7 +32,7 @@ const UpdateProduct = () => {
             </div>
             <div className='text-end m-3'>
                 <Link to="/manageProducts">
-                    <button style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'>Update Product</button>
+                    <button style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'>  <i  className="fas fa-address-card"> </i> Update Product</button>
                 </Link>
             </div>
             <div style={{ marginTop: '60px', backgroundColor:'white' }} className='container '>

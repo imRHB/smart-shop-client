@@ -15,7 +15,7 @@ const api =
 
     try {
       const response = await axios.request({
-        baseURL: "https://smart-shop-pos.herokuapp.com/",
+        baseURL: "https://localhost:5000/",
         url,
         method,
         data,
