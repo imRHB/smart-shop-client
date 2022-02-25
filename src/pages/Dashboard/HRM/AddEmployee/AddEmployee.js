@@ -56,9 +56,6 @@ const AddEmployee = () => {
     const current = new Date().getTime();
     const employeeId = current.toString().slice(9, 12) + phone;
 
-    // Register new user based on data
-    registerEmployee(name, email, password, navigate, location);
-
     const formData = new FormData();
     formData.append("name", name);
     formData.append("designation", designation);
@@ -75,6 +72,9 @@ const AddEmployee = () => {
 
     // Send form data to Server
     dispatch(saveEmployeeToDB(formData));
+
+    // Register new user based on data
+    // registerEmployee(name, email, password, navigate, location);
 
     //Alert message
     Swal.fire("Good job!", "Employee Added Successfully!", "success");
