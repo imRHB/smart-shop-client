@@ -5,10 +5,19 @@ import { Button, Container, Grid, Input } from "@mui/material";
 import { useForm } from "react-hook-form";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
+import designations from "../../../../assets/data/designations.json";
 import cloudImage from "../../../../assets/images/cloud-upload.png";
 import styles from "./AddEmployee.module.css";
+import useAuth from "../../../../hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveEmployeeToDB } from "../../../../store/employee";
 
 const AddEmployee = () => {
+  const { registerEmployee, loading, authError } = useAuth();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
@@ -18,32 +27,7 @@ const AddEmployee = () => {
         setCountries(result.data);
       });
   });
-  const designations = [
-    {
-      _id: 1,
-      name: "Manager",
-    },
-    {
-      _id: 2,
-      name: "Store",
-    },
-    {
-      _id: 3,
-      name: "Sales Executive",
-    },
-    {
-      _id: 4,
-      name: "HR",
-    },
-    {
-      _id: 5,
-      name: "Programer",
-    },
-    {
-      _id: 6,
-      name: "Designer",
-    },
-  ];
+
   const {
     register,
     handleSubmit,
@@ -67,10 +51,18 @@ const AddEmployee = () => {
       image,
     } = data;
     const name = `${firstName} ${lastName}`;
+    const password = "123456";
+    const address = `${address1} ${address2}`;
+    const current = new Date().getTime();
+    const employeeId = current.toString().slice(9, 12) + phone;
+
+    // Register new user based on data
+    registerEmployee(name, email, password, navigate, location);
 
     const formData = new FormData();
     formData.append("name", name);
     formData.append("designation", designation);
+    formData.append("employeeId", employeeId);
     formData.append("phone", phone);
     formData.append("email", email);
     formData.append("salary", salary);
@@ -78,24 +70,16 @@ const AddEmployee = () => {
     formData.append("country", country);
     formData.append("city", city);
     formData.append("zip", zip);
-    formData.append("address1", address1);
-    formData.append("address2", address2);
+    formData.append("address", address);
     formData.append("image", image[0]);
 
-    // fetch("", {
-    //   method: "POST",
-    //   body: formData,
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.insertedId) {
-    //       Swal.fire("Good job!", "Employee Created Successfully!", "success");
-    //       reset();
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+    // Send form data to Server
+    dispatch(saveEmployeeToDB(formData));
+
+    //Alert message
+    Swal.fire("Good job!", "Employee Added Successfully!", "success");
+
+    reset();
   };
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
@@ -104,8 +88,8 @@ const AddEmployee = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>HRM</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Add Employee</span>
+          <span style={{ fontSize: "26px", marginLeft: "-46px" }}>HRM</span>{" "}
+          <br /> <span style={{ color: "#969494" }}>Add Employee</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
@@ -115,7 +99,9 @@ const AddEmployee = () => {
         </Button>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Add Employee</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+          Add Employee
+        </Typography>
         <hr />
         <div className="mt-2">
           <div className="form-container">

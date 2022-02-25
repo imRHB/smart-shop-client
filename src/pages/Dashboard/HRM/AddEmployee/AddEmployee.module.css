@@ -4,6 +4,12 @@
   border-radius: 5px;
 }
 
+.topContainer {
+  background-color: #f1f3f6;
+  padding: 17px;
+  border-radius: 5px;
+}
+
 .assignmentIcon {
   font-size: 56px !important;
   color: #fff !important;
@@ -18,6 +24,7 @@
   padding-left: 15px !important;
   padding-right: 15px !important;
   margin-right: 5px !important;
+  font-weight: 700;
 }
 
 .designationBtn:hover {
@@ -31,17 +38,12 @@
   text-transform: capitalize !important;
   padding-left: 15px !important;
   padding-right: 15px !important;
+  font-weight: 700;
 }
 
 .manageEmployeeBtn:hover {
   background-color: #45c203 !important;
   color: #fff !important;
-}
-
-.topContainer {
-  background-color: #f1f3f6;
-  padding: 17px;
-  border-radius: 5px;
 }
 
 .resetBtn {

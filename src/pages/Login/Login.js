@@ -4,12 +4,36 @@ import { Button, Form } from "react-bootstrap";
 import logo from "../../assets/images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { useLocation, useNavigate } from 'react-router-dom';
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+  const { user, setUsers, userLogin, setError, getUserEmail, getUserPassword } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const redirect = location?.state?.from || '/dashboard';
+
+  //handle user login with email and password
+
+  const userLoginWithEmailPass = (e) => {
+    e.preventDefault();
+
+    userLogin()
+      .then((result) => {
+        setUsers(result.user)
+        navigate(redirect);
+      })
+      .catch((err) => {
+        setError(err.message)
+      })
+  }
+
   return (
     <div className={`${styles.loginPage}`}>
+
       {/* login form */}
-      <Form className={`${styles.userLoginSection} ${"shadow"}`}>
+      <Form onSubmit={userLoginWithEmailPass} className={`${styles.userLoginSection} ${"shadow"}`}>
         {/* logo and title */}
         <img src={logo} alt="logo" className={`${styles.siteLogo} ${"mb-3"}`} />
 
@@ -27,8 +51,10 @@ const Login = () => {
           <FontAwesomeIcon icon={faUserAlt} className={`${styles.formIcon}`} />
           <Form.Control
             type="email"
-            placeholder="Your Username"
+            placeholder="Your Email"
             className={`${styles.inputFields}`}
+            name='email'
+            onBlur={getUserEmail}
           />
         </Form.Group>
 
@@ -42,6 +68,8 @@ const Login = () => {
             type="password"
             placeholder="Your Password"
             className={`${styles.inputFields}`}
+            name='password'
+            onBlur={getUserPassword}
           />
         </Form.Group>
 

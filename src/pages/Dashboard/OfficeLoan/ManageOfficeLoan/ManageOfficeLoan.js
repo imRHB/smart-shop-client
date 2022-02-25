@@ -24,20 +24,20 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import { Link } from "react-router-dom";
 
 function Row(props) {
-    const { user } = props;
-    const [open, setOpen] = React.useState(false);
+  const { user } = props;
+  const [open, setOpen] = React.useState(false);
 
-    return (
-        <React.Fragment>
-            <TableRow
-                className="colunm"
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-                <TableCell width="15%" align="center" component="th" scope="row">
-                    {user.name}
-                </TableCell>
-                <TableCell align="center">{user.address}</TableCell>
-                <TableCell align="center">{user.phone}</TableCell>
+  return (
+    <React.Fragment>
+      <TableRow
+        className="colunm"
+        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+      >
+        <TableCell width="15%" align="center" component="th" scope="row">
+          {user.name}
+        </TableCell>
+        <TableCell align="center">{user.address}</TableCell>
+        <TableCell align="center">{user.phone}</TableCell>
 
                 <TableCell align="center">
                     <Button>
@@ -70,17 +70,17 @@ function Row(props) {
 }
 
 const ManageOfficeLoan = () => {
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
     return (
         <Box>

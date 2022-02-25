@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-
-const AddExpense = () => {
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import DehazeIcon from '@mui/icons-material/Dehaze';const AddExpense = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
 
@@ -12,27 +12,30 @@ const AddExpense = () => {
     }
 
     return (
-        <div className=''>
-            <div className='d-flex justify-content-between m-3'>
-                <div className='text-start ms-2'>
-                    <h1>
-                        <i class="fas fa-address-card text-primary"> </i>
+        <div>
+            <div style={{backgroundColor:'white'}} className='d-flex justify-content-between m-3'>
+                <div className=' d-flex text-start ms-2'>
+                <h1>
+                    <AssignmentIcon style={{fontSize:'55px', backgroundColor:'#002447', color:'white'}}></AssignmentIcon>
                     </h1>
-                    <h5 className='fw-bold'>EXPENSE</h5>
+                  <div className='ms-2'>
+                  <h5 className='fw-bold'>EXPENSE</h5>
                     <small className=''> Add Expense</small>
+                  </div>
+                 
                 </div>
                 <div>
 
-                    <small className='text-primary fw-bold border p-1'>Expense/Add Expense</small>
+                    <small className=' fw-bold border p-1'>Expense/Add Expense</small>
                 </div>
 
             </div>
             <div className='text-end m-3'>
-                {/* <Link to="/manageProducts"> */}
-                    <button style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'>Add Expense</button>
-                {/* </Link> */}
+                <Link to="/expenseItem">
+                    <button style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-1'><DehazeIcon></DehazeIcon> Add Expense</button>
+                </Link>
             </div>
-            <div style={{ marginTop: '60px' }} className='container '>
+            <div style={{ marginTop: '60px' , backgroundColor:'white'}} className='container '>
 
                 <div className='row shadow border pb-4 mb-3'>
                     <h5 className='text-start p-3 border'>Please Add  <span style={{ color: 'rgb(45, 55, 72)' }}> Expense</span> </h5>
@@ -63,7 +66,7 @@ const AddExpense = () => {
                                         <div className='  mt-2'>
                                             <div className=''>
                                                 <span className='fw-bold'>Date *</span>
-                                                <input style={{ width: '60%',marginLeft: '6%' }} className='field mb-3  ' type="date" {...register("date", { required: true })} placeholder='Date' /> <br />
+                                                <input style={{ width: '60%',marginLeft: '6%' }} className='field mb-3 ' type="date" {...register("date", { required: true })} placeholder='Date' /> <br />
                                                
                                             </div>
                                          

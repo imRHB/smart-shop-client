@@ -46,4 +46,23 @@
     padding: 17px;
     border-radius: 5px;
   }
+  .filterBtn {
+    background-color: #003366 !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-right: 5px !important;
+  }
+  .searchBtn {
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #37a000 !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-right: 5px !important;
+  
+  }
   
