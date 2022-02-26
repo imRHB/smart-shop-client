@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -18,12 +18,37 @@ import { Button, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import employees from "../../../../assets/data/employees.json";
+import Swal from "sweetalert2";
+// import employees from "../../../../assets/data/employees.json";
 import styles from "./EmployeeManagement.module.css";
 
 function Row(props) {
-  const { employee, serial } = props;
+  const { employee, serial, reload, setReload } = props;
   const [open, setOpen] = React.useState(false);
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/employees/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire("Deleted!", "Employee has been deleted.", "success");
+              setReload(!reload);
+            }
+          });
+      }
+    });
+  };
 
   return (
     <React.Fragment>
@@ -44,20 +69,23 @@ function Row(props) {
           {serial + 1}
         </TableCell>
         <TableCell align="center">{employee.name}</TableCell>
-        <TableCell align="center">{employee.position}</TableCell>
+        <TableCell align="center">{employee.designation}</TableCell>
         <TableCell align="center">{employee.phone}</TableCell>
         <TableCell align="center">{employee.email}</TableCell>
         <TableCell align="center">
           <img
             style={{ width: "70px", height: "70px" }}
-            src={employee.img}
+            src={`data:image/jpeg;base64,${employee.image}`}
             alt="Product"
             // loading="lazy"
           />
         </TableCell>
         <TableCell align="center">
           <EditIcon className={`${styles.editIcon}`} />
-          <Delete className={`${styles.deleteIcon}`} />
+          <Delete
+            onClick={() => handleDelete(employee?._id)}
+            className={`${styles.deleteIcon}`}
+          />
         </TableCell>
       </TableRow>
       <TableRow>
@@ -112,6 +140,20 @@ Row.propTypes = {
 };
 
 const EmployeeManagement = () => {
+  const [employees, setEmployees] = useState([]);
+  const [reload, setReload] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`http://localhost:5000/employees`)
+      .then((res) => res.json())
+      .then((data) => {
+        setEmployees(data);
+        setLoading(false);
+      });
+  }, [reload]);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -177,7 +219,14 @@ const EmployeeManagement = () => {
               {employees
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((employee, index) => (
-                  <Row key={employee._id} employee={employee} serial={index} />
+                  <Row
+                    key={employee._id}
+                    employee={employee}
+                    serial={index}
+                    loading={loading}
+                    reload={reload}
+                    setReload={setReload}
+                  />
                 ))}
             </TableBody>
           </Table>
