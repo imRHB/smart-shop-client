@@ -77,6 +77,14 @@ const AddEmployee = () => {
     // Send form data to Server
     // dispatch(saveEmployeeToDB(formData));
 
+    // Register new user based on data
+    // registerEmployee(name, email, password, navigate, location);
+
+    //Alert message
+    Swal.fire("Good job!", "Employee Added Successfully!", "success");
+
+    reset();
+
     fetch("https://smart-shop-pos.herokuapp.com/employees", {
       method: "POST",
       body: formData,
