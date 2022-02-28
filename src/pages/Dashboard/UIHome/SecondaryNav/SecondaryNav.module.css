@@ -12,3 +12,30 @@
     color: rgb(164, 164, 164);
     font-weight: 300;
 }
+.startChat {
+  background-color: #2c95ff !important;
+  color: #fff !important;
+  text-transform: capitalize !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+}
+
+.startChat:hover {
+  background-color: #004a94 !important;
+  color: #fff !important;
+}
+
+.viewProfile {
+  background-color: #389f00 !important;
+  color: rgb(255, 255, 255) !important;
+  text-transform: capitalize !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.viewProfile:hover {
+  background-color: #276f00 !important;
+  color: rgb(255, 255, 255) !important;
+}
