@@ -1,0 +1,20 @@
+.usersProfileDropdown{
+    margin-left: 15px;
+}
+
+.usersDPDropdown:hover{
+background-color: #003366;
+cursor: default;
+}
+.alldropdownItems{
+    background-color: #003366;
+    color: white;
+}
+.usersDropdown{
+ color: white;
+}
+
+.usersDropdown:hover{
+background-color: #003366;
+color: white;
+}
