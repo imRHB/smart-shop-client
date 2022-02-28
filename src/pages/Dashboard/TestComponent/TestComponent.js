@@ -1,5 +1,4 @@
 import React from "react";
-import DashboardNavbar from "../UIHome/DashboardNavbar/DashboardNavbar";
 import SecondaryNav from "../UIHome/SecondaryNav/SecondaryNav";
 
 const TestComponent = () => {
@@ -10,7 +9,6 @@ const TestComponent = () => {
       <p className="text-danger fw-bold">
         Don't forget remove your component from test route
       </p> */}
-      <DashboardNavbar />
       <SecondaryNav />
     </div>
   );
