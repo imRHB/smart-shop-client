@@ -4,17 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { Provider } from "react-redux";
-import configureStore from "./store/configureStore";
-
-const store = configureStore();
+import AuthProvider from "./contexts/AuthProvider";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
+  <AuthProvider>
+    <BrowserRouter>
       <App />
-    </Provider>
-  </BrowserRouter>,
+    </BrowserRouter>
+  </AuthProvider>,
   document.getElementById("root")
 );
 

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Modal } from 'react-bootstrap';
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,14 +14,35 @@ import { Button, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import suppliers from "../../../assets/data/supplier.json";
 import styles from "./ManageSupplier.module.css";
 import MenuIcon from '@mui/icons-material/Menu';
 import ReceiptIcon from '@mui/icons-material/Receipt';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CloseIcon from '@mui/icons-material/Close';
 
 
 function Row(props) {
-    const { supplier } = props;
+    const { supplier, setSuppliers, suppliers } = props;
+
+    //delete supplier
+    const handleDeleteSupplier = id => {
+        const url = `https://smart-shop-pos.herokuapp.com/suppliers/${id}`
+
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    const remainSuppliers = suppliers.filter(item => item._id !== id);
+                    setSuppliers(remainSuppliers);
+                }
+            })
+    };
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleNoBtn = () => setShow(false);
 
     return (
         <React.Fragment>
@@ -29,20 +51,43 @@ function Row(props) {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
 
-                <TableCell component="th" scope="row">
+                {/* <TableCell component="th" scope="row">
                     {supplier._id}
-                </TableCell>
+                </TableCell> */}
                 <TableCell align="center">{supplier.name}</TableCell>
                 <TableCell align="center">{supplier.address}</TableCell>
                 <TableCell align="center">{supplier.contact}</TableCell>
                 <TableCell align="center">BDT {supplier.balance}</TableCell>
                 <TableCell align="center">
                     <EditIcon className={`${styles.editIcon}`} />
-                    <Delete className={`${styles.deleteIcon}`} />
+                    <Delete onClick={() => { setShow(true); }} className={`${styles.deleteIcon}`} />
                 </TableCell>
             </TableRow>
+            {/* Confirmation alert */}
+            <Modal show={show} onHide={handleClose}
+                size="md"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
 
-        </React.Fragment>
+                <div className={`${"modal-header"}`}>
+                    <h5 className={`${"modal-title text-danger fw-bold"}`} id="exampleModalLabel">Edit Supplier</h5>
+                </div>
+
+                <Modal.Body>Are you sure you want to delete supplier?</Modal.Body>
+                <Modal.Footer>
+                    {/* confirmation button */}
+                    <Button variant="outlined" className={`${styles.paymentBtn}`} onClick={() => { handleDeleteSupplier(supplier._id) }} startIcon={<DeleteIcon />}>
+                        Update
+                    </Button>
+                    <Button className={`${styles.receiptBtn}`} startIcon={<CloseIcon />} onClick={handleNoBtn}>
+                        Cancel
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+
+        </React.Fragment >
     );
 }
 
@@ -59,6 +104,15 @@ const ManageSupplier = () => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+
+    const [suppliers, setSuppliers] = useState([]);
+    useEffect(() => {
+        fetch('https://smart-shop-pos.herokuapp.com/suppliers')
+            .then(res => res.json())
+            .then(data => setSuppliers(data))
+    }, []);
+
+
     return (
         <Container sx={{ width: "100%", mb: 5 }}>
             <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
@@ -87,7 +141,7 @@ const ManageSupplier = () => {
                         <TableHead className={`${styles.tableHeader}`}>
                             <TableRow>
 
-                                <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
+                                {/* <TableCell className={`${styles.tableCell}`}>SL.</TableCell> */}
                                 <TableCell align="center" className={`${styles.tableCell}`}>
                                     Supplier Name
                                 </TableCell>
@@ -110,7 +164,7 @@ const ManageSupplier = () => {
                             {suppliers
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((supplier) => (
-                                    <Row key={supplier._id} supplier={supplier} />
+                                    <Row key={supplier._id} suppliers={suppliers} setSuppliers={setSuppliers} supplier={supplier} />
                                 ))}
                         </TableBody>
                     </Table>
@@ -125,6 +179,7 @@ const ManageSupplier = () => {
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
+
             </Box>
         </Container>
 
