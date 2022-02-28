@@ -36,7 +36,7 @@ function Row(props) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/employees/${id}`, {
+        fetch(`https://smart-shop-pos.herokuapp.com/employees/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -77,7 +77,7 @@ function Row(props) {
             style={{ width: "70px", height: "70px" }}
             src={`data:image/jpeg;base64,${employee.image}`}
             alt="Product"
-            // loading="lazy"
+          // loading="lazy"
           />
         </TableCell>
         <TableCell align="center">
