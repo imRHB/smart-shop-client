@@ -48,6 +48,7 @@ const SecondaryNav = () => {
                 <Grid item xs={12} sm={6} md={6}>
                     <Box sx={{ textAlign: "start" }}>
                         <h4>Welcome Back! Admin</h4>
+                        <p>You have 4 new notifications! Check it out!</p>
                     </Box>
 
                 </Grid>

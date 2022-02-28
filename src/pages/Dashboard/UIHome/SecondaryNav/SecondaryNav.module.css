@@ -6,3 +6,9 @@
 .navContainer h4{
     font-weight: 700;
 }
+
+.navContainer p{
+    text-align: start;
+    color: rgb(164, 164, 164);
+    font-weight: 300;
+}

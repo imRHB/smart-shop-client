@@ -15,8 +15,6 @@ import { NavLink } from 'react-router-dom';
 const DashboardNavbar = () => {
     return (
         <div className='ms-auto'>
-
-
             <Typography
                 sx={{ color: "#0C0C0C", fontWeight: "600", display: "flex", alignItems: "center", justifyContent: "center" }}
                 component="div"
