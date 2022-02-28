@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, getIdToken } from "firebase/auth";
 
 import initializeFirebase from '../Firebase/firebase.init';
+import firebaseConfig from "../Firebase/firebase.config";
 
 initializeFirebase();
 
@@ -63,6 +64,9 @@ const useFirebase = () => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, user => {
             if (user) {
+                getIdToken(user)
+                    .then(idToken => localStorage.setItem('idToken', idToken));
+                // include 'authorization': `Bearer ${localstorage.getItem('idToken)}` in headers, where JWT Token needed
                 setUsers(user)
             } else {
                 setUsers({})
