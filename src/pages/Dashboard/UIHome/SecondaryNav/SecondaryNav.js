@@ -3,8 +3,8 @@ import styles from "./SecondaryNav.module.css";
 
 const SecondaryNav = () => {
     return (
-        <div >
-            <h2>hello</h2>
+        <div className={`${styles.navContainer}`}>
+
         </div>
     );
 };

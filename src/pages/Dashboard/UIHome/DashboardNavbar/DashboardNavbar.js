@@ -9,6 +9,8 @@ import styles from "./DashboardNavbar.module.css";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import AddIcon from '@mui/icons-material/Add';
+import { NavLink } from 'react-router-dom';
 
 const DashboardNavbar = () => {
     return (
@@ -19,8 +21,10 @@ const DashboardNavbar = () => {
                 sx={{ color: "#0C0C0C", fontWeight: "600", display: "flex", alignItems: "center", justifyContent: "center" }}
                 component="div"
             >
+
+                <NavLink to="/dashboard/pos"> <AddIcon sx={{ color: "#0d6efd" }}> </AddIcon></NavLink>
                 <Badge color="error" badgeContent={11} max={10} >
-                    <NotificationsNoneIcon sx={{ color: "#0d6efd" }} />
+                    <NotificationsNoneIcon sx={{ color: "#0d6efd" }} className={`${styles.usersProfileDropdown}`} />
                 </Badge>
 
                 <div >
