@@ -157,8 +157,9 @@ const DashboardNavbar = () => {
 
                             <h6 className={`${styles.employeeTitle}`} >Joined Date<span className={`${styles.employeeInfo}`}><br /> 01/01/2022</span><hr /></h6>
 
-                            <h6 className={`${styles.employeeTitle}`} >Employee ID<span className={`${styles.employeeInfo}`}><br />#26578</span></h6>
+                            <h6 className={`${styles.employeeTitle}`} >Email<span className={`${styles.employeeInfo}`}><br />admin@admin.com</span><hr /></h6>
 
+                            <h6 className={`${styles.employeeTitle}`} >Phone<span className={`${styles.employeeInfo}`}><br />01723456789</span></h6>
                         </Col>
                     </Row>
                 </Modal.Body>
