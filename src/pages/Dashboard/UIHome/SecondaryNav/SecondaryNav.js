@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal, Row, Col } from 'react-bootstrap';
 import styles from "./SecondaryNav.module.css";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -61,24 +61,52 @@ const SecondaryNav = () => {
                 <Grid item xs={12} sm={3} md={4} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <Button onClick={handleShow} className={`${styles.viewProfile}`} startIcon={<PreviewIcon />}>View Profile</Button>
                     <Button className={`${styles.startChat}`} startIcon={<ChatIcon />}>Start Chat</Button>
-
                 </Grid>
             </Grid>
             {/* order now form */}
-            <Modal show={show} centered onHide={handleClose}
-
-            >
-                <div className='shadow rounded' style={{ 'backgroundColor': '#004a94' }}>
-
-
-                    <Modal.Header closeButton>
-                        <Modal.Title>Admin</Modal.Title>
+            <Modal show={show} centered onHide={handleClose}>
+                <div className='shadow rounded' >
+                    <Modal.Header closeButton style={{ 'backgroundColor': 'white' }}>
+                        <Modal.Title style={{ "fontWeight": "700", "color": "#004a94" }}>AFSANA MEEM</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body style={{ 'backgroundColor': '#004a94' }}>
+                        <Row>
+                            <Col md={4}>
+                                {true && (
+                                    <div className="mx-3 text-center">
+                                        {false ? (
+                                            <img
+                                                style={{
+                                                    width: "150px",
+                                                    height: "150px"
+                                                }}
+                                                src={""}
+                                                alt=""
+                                            />
+                                        ) : (
+                                            <img
+                                                style={{
+                                                    width: "150px",
+                                                    height: "150px"
+                                                }}
+                                                src={defaultUser}
+                                                alt=""
+                                            />
+                                        )}
 
-                        <Button className="d-block mx-auto mx-3 my-2 btn  w-75" variant="secondary" onClick={handleClose}>
-                            Not Now
-                        </Button>
+
+                                    </div>
+                                )}
+                            </Col>
+                            <Col>
+                                <div style={{ "color": "white", marginLeft: "30px" }}>
+                                    <h6>Designation: Admin</h6>
+                                    <h5>Designation: Admin</h5>
+                                    <h5>Designation: Admin</h5>
+                                    <h5>Designation: Admin</h5>
+                                </div>
+                            </Col>
+                        </Row>
 
                     </Modal.Body>
                 </div>
