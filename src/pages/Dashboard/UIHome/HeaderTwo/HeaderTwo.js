@@ -63,7 +63,7 @@ const HeaderTwo = () => {
                     <Button className={`${styles.startChat}`} startIcon={<ChatIcon />}>Start Chat</Button>
                 </Grid>
             </Grid>
-            {/* order now form */}
+            {/* profile show */}
             <Modal show={show} centered onHide={handleClose} >
                 <Modal.Body style={{ backgroundColor: "rgb(237, 235, 255)" }}>
                     <Row style={{ margin: 0 }}>

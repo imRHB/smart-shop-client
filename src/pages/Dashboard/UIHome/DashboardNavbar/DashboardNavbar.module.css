@@ -18,3 +18,14 @@ cursor: default;
 background-color: #003366;
 color: white;
 }
+
+.employeeTitle{
+    font-weight: 700;
+    font-size: 20px;
+}
+.employeeInfo{
+   
+    font-weight: 400;
+    font-size: 15px;
+    
+}
