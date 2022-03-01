@@ -65,51 +65,48 @@ const SecondaryNav = () => {
             </Grid>
             {/* order now form */}
             <Modal show={show} centered onHide={handleClose}>
-                <div className='shadow rounded' >
-                    <Modal.Header closeButton style={{ 'backgroundColor': 'white' }}>
-                        <Modal.Title style={{ "fontWeight": "700", "color": "#004a94" }}>AFSANA MEEM</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body style={{ 'backgroundColor': '#004a94' }}>
-                        <Row>
-                            <Col md={4}>
-                                {true && (
-                                    <div className="mx-3 text-center">
-                                        {false ? (
-                                            <img
-                                                style={{
-                                                    width: "150px",
-                                                    height: "150px"
-                                                }}
-                                                src={""}
-                                                alt=""
-                                            />
-                                        ) : (
-                                            <img
-                                                style={{
-                                                    width: "150px",
-                                                    height: "150px"
-                                                }}
-                                                src={defaultUser}
-                                                alt=""
-                                            />
-                                        )}
-
-
-                                    </div>
+                <Row style={{ margin: 0 }}>
+                    <Col md={6} sm={12} style={{ padding: "40px" }}>
+                        {true && (
+                            <div className="mx-3 text-center" >
+                                {false ? (
+                                    <img
+                                        style={{
+                                            width: "150px",
+                                            height: "150px"
+                                        }}
+                                        className="img-fluid"
+                                        src={""}
+                                        alt=""
+                                    />
+                                ) : (
+                                    <img
+                                        className="img-fluid"
+                                        style={{
+                                            width: "150px",
+                                            height: "150px"
+                                        }}
+                                        src={defaultUser}
+                                        alt=""
+                                    />
                                 )}
-                            </Col>
-                            <Col>
-                                <div style={{ "color": "white", marginLeft: "30px" }}>
-                                    <h6>Designation: Admin</h6>
-                                    <h5>Designation: Admin</h5>
-                                    <h5>Designation: Admin</h5>
-                                    <h5>Designation: Admin</h5>
-                                </div>
-                            </Col>
-                        </Row>
+                            </div>
+                        )}
+                    </Col>
+                    <Col md={6} sm={12} style={{ backgroundColor: "#003366", padding: "40px", color: "white", textAlign: "center" }} >
 
-                    </Modal.Body>
-                </div>
+                        <h6 className={`${styles.employeeTitle}`} >Designation:<span className={`${styles.employeeInfo}`}>Admin</span></h6>
+
+                        <h6>Joined Date: 01/01/2022</h6>
+
+                        <h6>Employee ID: #2568</h6>
+                        <hr />
+                        <h6>Todays Login Time:09:15am</h6>
+
+                        <h6>Last Logout Time: 04:45pm</h6>
+                    </Col>
+                </Row>
+
             </Modal>
         </div>
     );
