@@ -59,12 +59,6 @@ const AddEmployee = () => {
     const employeeId = current.toString().slice(9, 12) + phone;
     const role = "General";
 
-<<<<<<< HEAD
-    // Register new user based on data
-    // registerEmployee(name, email, password, navigate, location);
-
-=======
->>>>>>> 15732c2301b3dd49a3ef03957203022227aca03f
     const formData = new FormData();
     formData.append("name", name);
     formData.append("designation", designation);
@@ -84,22 +78,6 @@ const AddEmployee = () => {
     //Send form data to Server
     dispatch(saveEmployeeToDB(formData));
 
-<<<<<<< HEAD
-    fetch("http://localhost:5000/employees", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          Swal.fire("Good job!", "Employee Added Successfully!", "success");
-          reset();
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-=======
     // Register new user based on data
     registerEmployee(name, email, password, navigate, location);
 
@@ -107,7 +85,6 @@ const AddEmployee = () => {
     Swal.fire("Good job!", "Employee Added Successfully!", "success");
 
     reset();
->>>>>>> 15732c2301b3dd49a3ef03957203022227aca03f
   };
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
