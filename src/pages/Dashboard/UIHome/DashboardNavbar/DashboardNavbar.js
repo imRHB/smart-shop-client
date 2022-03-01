@@ -13,6 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { NavLink } from 'react-router-dom';
 import { Modal, Row, Col } from 'react-bootstrap';
 
+
 const DashboardNavbar = () => {
 
     const [show, setShow] = React.useState(false);
@@ -33,6 +34,7 @@ const DashboardNavbar = () => {
     const day = today.toLocaleDateString(locale, { weekday: 'long' });
     const date = `${day}, ${today.getDate()} ${today.toLocaleDateString(locale, { month: 'long' })}\n\n`;
     const time = today.toLocaleTimeString(locale, { hour: 'numeric', hour12: true, minute: 'numeric' });
+
 
     return (
         <div style={{ display: "flex" }}>
@@ -129,10 +131,7 @@ const DashboardNavbar = () => {
                                 <div className="mx-3 text-center border border-1 p-3" >
                                     {false ? (
                                         <img
-                                            style={{
-                                                width: "150px",
-                                                height: "150px"
-                                            }}
+
                                             className="img-fluid"
                                             src={""}
                                             alt=""
