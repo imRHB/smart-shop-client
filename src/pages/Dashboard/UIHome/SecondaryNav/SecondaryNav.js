@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Modal } from 'react-bootstrap';
 import styles from "./SecondaryNav.module.css";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import defaultUser from "../../../../assets/images/user.png";
 import { Button } from "@mui/material";
 import PreviewIcon from '@mui/icons-material/Preview';
-
+import ChatIcon from '@mui/icons-material/Chat';
 
 const SecondaryNav = () => {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return (
         <div className={`${styles.navContainer}`}>
             <Grid container spacing={3}>
@@ -55,11 +59,30 @@ const SecondaryNav = () => {
 
                 </Grid>
                 <Grid item xs={12} sm={3} md={4} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Button className={`${styles.viewProfile}`} startIcon={<PreviewIcon />}>View Profile</Button>
-                    <Button className={`${styles.startChat}`} startIcon={<PreviewIcon />}>Start Chat</Button>
+                    <Button onClick={handleShow} className={`${styles.viewProfile}`} startIcon={<PreviewIcon />}>View Profile</Button>
+                    <Button className={`${styles.startChat}`} startIcon={<ChatIcon />}>Start Chat</Button>
 
                 </Grid>
             </Grid>
+            {/* order now form */}
+            <Modal show={show} centered onHide={handleClose}
+
+            >
+                <div className='shadow rounded' style={{ 'backgroundColor': '#004a94' }}>
+
+
+                    <Modal.Header closeButton>
+                        <Modal.Title>Admin</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
+                        <Button className="d-block mx-auto mx-3 my-2 btn  w-75" variant="secondary" onClick={handleClose}>
+                            Not Now
+                        </Button>
+
+                    </Modal.Body>
+                </div>
+            </Modal>
         </div>
     );
 };
