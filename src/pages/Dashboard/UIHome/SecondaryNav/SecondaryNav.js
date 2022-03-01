@@ -64,51 +64,51 @@ const SecondaryNav = () => {
                 </Grid>
             </Grid>
             {/* order now form */}
-            <Modal show={show} centered onHide={handleClose}>
-                <Row style={{ margin: 0 }}>
-                    <Col md={6} sm={12} style={{ padding: "40px" }}>
-                        {true && (
-                            <div className="mx-3 text-center" >
-                                {false ? (
-                                    <img
-                                        style={{
-                                            width: "150px",
-                                            height: "150px"
-                                        }}
-                                        className="img-fluid"
-                                        src={""}
-                                        alt=""
-                                    />
-                                ) : (
-                                    <img
-                                        className="img-fluid"
-                                        style={{
-                                            width: "150px",
-                                            height: "150px"
-                                        }}
-                                        src={defaultUser}
-                                        alt=""
-                                    />
-                                )}
-                            </div>
-                        )}
-                    </Col>
-                    <Col md={6} sm={12} style={{ backgroundColor: "#003366", padding: "40px", color: "white", textAlign: "center" }} >
+            <Modal show={show} centered onHide={handleClose} >
+                <Modal.Body style={{ backgroundColor: "rgb(237, 235, 255)" }}>
+                    <Row style={{ margin: 0 }}>
+                        <Col md={6} sm={12} style={{ padding: "20px" }}>
+                            <h4 style={{ textAlign: "center", color: "#003366", fontWeight: "700", marginBottom: "30px" }}>AFSANA MEEM</h4>
+                            {true && (
+                                <div className="mx-3 text-center border border-1 p-3" >
+                                    {false ? (
+                                        <img
+                                            style={{
+                                                width: "150px",
+                                                height: "150px"
+                                            }}
+                                            className="img-fluid"
+                                            src={""}
+                                            alt=""
+                                        />
+                                    ) : (
+                                        <img
+                                            className="img-fluid"
 
-                        <h6 className={`${styles.employeeTitle}`} >Designation:<span className={`${styles.employeeInfo}`}>Admin</span></h6>
+                                            src={defaultUser}
+                                            alt=""
+                                        />
+                                    )}
+                                </div>
+                            )}
+                            <hr />
+                            <h6 style={{ marginTop: "30px", textAlign: "center", fontSize: "12px" }}>Todays Login Time:09:15am</h6>
 
-                        <h6>Joined Date: 01/01/2022</h6>
+                            <h6 style={{ textAlign: "center", fontSize: "12px" }}>Last Logout Time: 04:45pm</h6>
+                        </Col>
+                        <Col md={6} sm={12} style={{ backgroundColor: "#003366", padding: "20px", color: "white", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }} >
 
-                        <h6>Employee ID: #2568</h6>
-                        <hr />
-                        <h6>Todays Login Time:09:15am</h6>
+                            <h6 className={`${styles.employeeTitle}`} >Designation<span className={`${styles.employeeInfo}`}><br />Admin</span><hr /></h6>
 
-                        <h6>Last Logout Time: 04:45pm</h6>
-                    </Col>
-                </Row>
+                            <h6 className={`${styles.employeeTitle}`} >Joined Date<span className={`${styles.employeeInfo}`}><br /> 01/01/2022</span><hr /></h6>
 
+                            <h6 className={`${styles.employeeTitle}`} >Employee ID<span className={`${styles.employeeInfo}`}><br />#26578</span></h6>
+
+                        </Col>
+                    </Row>
+                </Modal.Body>
             </Modal>
-        </div>
+        </div >
     );
 };
 
