@@ -4,7 +4,7 @@ const useCategory = () => {
     const [category, setCategory] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/category')
+        fetch('https://smart-shop-pos.herokuapp.com/category')
             .then(res => res.json())
             .then(data => setCategory(data));
     }, []);

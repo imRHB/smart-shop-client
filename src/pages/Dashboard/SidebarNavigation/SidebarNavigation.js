@@ -80,7 +80,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -137,7 +136,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-new-invoice`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -154,7 +152,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-invoice`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -171,7 +168,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/pos`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -227,7 +223,6 @@ const SidebarNavigation = () => {
               {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/product-category`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -244,7 +239,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-product`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -261,7 +255,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-product`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -318,7 +311,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-customer`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -335,7 +327,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-customer`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -352,7 +343,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/credit-customer`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -369,7 +359,7 @@ const SidebarNavigation = () => {
               {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/paid-customer`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -426,7 +416,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-supplier`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -443,7 +432,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-supplier`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -460,7 +448,7 @@ const SidebarNavigation = () => {
               {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/supplier-ledger`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -477,7 +465,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/supplier-payment`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -494,7 +482,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/supplier-sales-details`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -551,7 +539,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-purchase`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -568,7 +556,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-purchase`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -625,7 +613,7 @@ const SidebarNavigation = () => {
               {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/create-account`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -642,7 +630,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-account`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -659,7 +647,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/payment`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -676,7 +663,7 @@ const SidebarNavigation = () => {
               {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/receipt`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -692,7 +679,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-transition`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -709,7 +695,7 @@ const SidebarNavigation = () => {
               {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/account-closing`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -725,7 +711,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/account-report`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -782,7 +768,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/stock-report`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -799,7 +784,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/supplier-stock-report`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -816,7 +800,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/product-stock-report`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -873,7 +856,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/purchase-report`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -890,7 +872,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/sales-report-product`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -907,7 +888,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/profit-report-invoice`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -924,7 +904,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/today-report`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -941,7 +920,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/sales-report`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -998,7 +976,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-new-bank`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1015,7 +993,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/bank-transaction`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1032,7 +1010,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-bank`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1089,7 +1067,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/designation`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1106,7 +1083,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-employee`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1123,7 +1099,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-employee`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1180,7 +1155,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/expense-item`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1197,7 +1171,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-expense`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1214,7 +1187,7 @@ const SidebarNavigation = () => {
               {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-expense`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1231,7 +1204,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/expense-statement`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1288,7 +1261,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-office-person`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1305,7 +1277,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-office-loan`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1362,7 +1333,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-person`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1379,7 +1349,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-person`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1396,7 +1365,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-personal-loan`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1413,7 +1381,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-personal-loan`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1430,7 +1397,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-payment`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1487,7 +1453,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-menu`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1504,7 +1470,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-role`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1521,7 +1487,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/role-list`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1538,7 +1504,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/user-assign-role`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1555,7 +1521,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/assigned-role`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1612,7 +1578,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/sms-configuration`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1629,7 +1595,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/mail-configuration`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1646,7 +1612,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-company`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1664,7 +1630,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-user`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1681,7 +1647,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-user`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1698,7 +1664,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/language`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1716,7 +1682,7 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/setting`}
-                activeClassName="active"
+                
               >
                 <Button
                   sx={{
@@ -1746,7 +1712,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/test-component`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1777,7 +1742,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to="/"
-                activeClassName="active"
               >
                 <Button
                   onClick={logOut}
@@ -1837,7 +1801,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-new-invoice`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1854,7 +1817,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-invoice`}
-                activeClassName="active"
               >
                 <Button
                   sx={{
@@ -1871,7 +1833,6 @@ const SidebarNavigation = () => {
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/pos`}
-                activeClassName="active"
               >
                 <Button
                   sx={{

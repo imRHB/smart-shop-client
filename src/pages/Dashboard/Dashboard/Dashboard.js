@@ -100,9 +100,9 @@ const Dashboard = () => {
   return (
     <>
       <div className="container px-4 mt-5">
-        <div class="row gx-5">
-          <div class="col-12 col-md-8 col-lg-8 col-sm-12">
-            <div class="p-3 border bg-light">
+        <div className="row gx-5">
+          <div className="col-12 col-md-8 col-lg-8 col-sm-12">
+            <div className="p-3 border bg-light">
               <h5>Monthly Sales Amount & Order</h5>
               <hr />
               <div>
@@ -125,8 +125,8 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-4 col-lg-4 col-sm-12">
-            <div class="p-3 border bg-light">
+          <div className="col-12 col-md-4 col-lg-4 col-sm-12">
+            <div className="p-3 border bg-light">
               <h5>Todays Report</h5>
               <hr />
               <div>
@@ -134,18 +134,20 @@ const Dashboard = () => {
                   className={`${styles.tableStyle}`}
                   style={{ width: "100%" }}
                 >
-                  <tr>
-                    <th className={`${styles.tableStyle}`}>Todays Report</th>
-                    <th className={`${styles.tableStyle}`}>Amount</th>
-                  </tr>
-                  <tr>
-                    <th className={`${styles.tableStyle}`}>Total Sales</th>
-                    <td className={`${styles.tableStyle}`}>$ 7260300</td>
-                  </tr>
-                  <tr>
-                    <th className={`${styles.tableStyle}`}>Total Purchase</th>
-                    <td className={`${styles.tableStyle}`}>$ 99004079</td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <th className={`${styles.tableStyle}`}>Todays Report</th>
+                      <th className={`${styles.tableStyle}`}>Amount</th>
+                    </tr>
+                    <tr>
+                      <th className={`${styles.tableStyle}`}>Total Sales</th>
+                      <td className={`${styles.tableStyle}`}>$ 7260300</td>
+                    </tr>
+                    <tr>
+                      <th className={`${styles.tableStyle}`}>Total Purchase</th>
+                      <td className={`${styles.tableStyle}`}>$ 99004079</td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
               <div>
