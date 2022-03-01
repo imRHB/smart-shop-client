@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Login.module.css";
 import { Button, Form } from "react-bootstrap";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from "../../hooks/useAuth";
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Login = () => {
   const { user, setUsers, userLogin, setError, getUserEmail, getUserPassword } = useAuth();
@@ -13,6 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const redirect = location?.state?.from || '/dashboard';
+  const [passwordShown, setPasswordShown] = useState(false);
 
   //handle user login with email and password
 
@@ -28,6 +31,10 @@ const Login = () => {
         setError(err.message)
       })
   }
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   return (
     <div className={`${styles.loginPage}`}>
@@ -54,6 +61,7 @@ const Login = () => {
             placeholder="Your Email"
             className={`${styles.inputFields}`}
             name='email'
+            defaultValue="admin@ssp.com"
             onBlur={getUserEmail}
           />
         </Form.Group>
@@ -64,13 +72,21 @@ const Login = () => {
         >
           <Form.Label className={`${styles.inputLabels}`}>Password</Form.Label>
           <FontAwesomeIcon icon={faLock} className={`${styles.formIcon}`} />
+
           <Form.Control
-            type="password"
+            type={passwordShown ? "text" : "password"}
             placeholder="Your Password"
             className={`${styles.inputFields}`}
             name='password'
+            defaultValue="123456"
             onBlur={getUserPassword}
           />
+
+          {passwordShown ?
+            <VisibilityOffIcon onClick={togglePassword} icon={faLock} className={`${styles.eyeIconOne}`} />
+            :
+            <RemoveRedEyeIcon onClick={togglePassword} icon={faLock} className={`${styles.eyeIconTwo}`} />
+          }
         </Form.Group>
 
         {/* save password checkbox and forgot password button */}
