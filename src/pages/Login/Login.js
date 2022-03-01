@@ -76,8 +76,8 @@ const Login = () => {
             type="email"
             placeholder="Your Email"
             className={`${styles.inputFields}`}
-            name='email'
             defaultValue="admin@ssp.com"
+            name="email"
             {...register("email", { required: true })}
           />
           {errors.email && (
@@ -98,10 +98,8 @@ const Login = () => {
             className={`${styles.inputFields}`}
             name='password'
             defaultValue="123456"
-
             {...register("password", { required: true })}
           />
-
           {passwordShown ?
             <VisibilityOffIcon onClick={togglePassword} icon={faLock} className={`${styles.eyeIconOne}`} />
             :
