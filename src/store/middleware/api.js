@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiCallBegan, apiCallFailed, apiCallSuccessed } from "../api";
+import { apiCallBegan, apiCallFailed, apiCallSucceeded } from "../api";
 
 const api =
   ({ dispatch }) =>
@@ -22,7 +22,7 @@ const api =
       });
 
       // General
-      dispatch(apiCallSuccessed(response.data));
+      dispatch(apiCallSucceeded(response.data));
       // Specific
       if (onSuccess) dispatch({ type: onSuccess, payload: response.data });
     } catch (error) {

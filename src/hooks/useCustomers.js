@@ -4,7 +4,7 @@ const useCustomers = () => {
     const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/customers')
+        fetch('https://smart-shop-pos.herokuapp.com/customers')
             .then(res => res.json())
             .then(data => setCustomers(data));
     }, []);
