@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiCallBegan, apiCallFailed, apiCallSuccessed } from "../api";
+import { apiCallBegan, apiCallFailed, apiCallSucceeded } from "../api";
 
 const api =
   ({ dispatch }) =>
@@ -15,14 +15,14 @@ const api =
 
     try {
       const response = await axios.request({
-        baseURL: "https://localhost:5000/",
+        baseURL: "http://localhost:5000",
         url,
         method,
         data,
       });
 
       // General
-      dispatch(apiCallSuccessed(response.data));
+      dispatch(apiCallSucceeded(response.data));
       // Specific
       if (onSuccess) dispatch({ type: onSuccess, payload: response.data });
     } catch (error) {

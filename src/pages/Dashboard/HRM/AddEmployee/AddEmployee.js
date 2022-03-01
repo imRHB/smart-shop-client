@@ -10,15 +10,16 @@ import cloudImage from "../../../../assets/images/cloud-upload.png";
 import styles from "./AddEmployee.module.css";
 import useAuth from "../../../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-// import { saveEmployeeToDB } from "../../../../store/employee";
+import { useDispatch } from "react-redux";
+import { saveEmployeeToDB } from "../../../../store/employee";
 
 const AddEmployee = () => {
-  // const { registerEmployee, loading, authError } = useAuth();
-  // const dispatch = useDispatch();
+  const { registerEmployee, loading, authError } = useAuth();
+  const dispatch = useDispatch();
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  let sl = 0;
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
@@ -56,16 +57,16 @@ const AddEmployee = () => {
     const address = `${address1} ${address2}`;
     const current = new Date().getTime();
     const employeeId = current.toString().slice(9, 12) + phone;
-
-    // Register new user based on data
-    // registerEmployee(name, email, password, navigate, location);
+    const role = "General";
 
     const formData = new FormData();
     formData.append("name", name);
     formData.append("designation", designation);
+    formData.append("role", role);
     formData.append("employeeId", employeeId);
     formData.append("phone", phone);
     formData.append("email", email);
+    formData.append("password", password);
     formData.append("salary", salary);
     formData.append("bloodGroup", bloodGroup);
     formData.append("country", country);
@@ -74,23 +75,16 @@ const AddEmployee = () => {
     formData.append("address", address);
     formData.append("image", image[0]);
 
-    // Send form data to Server
-    // dispatch(saveEmployeeToDB(formData));
+    //Send form data to Server
+    dispatch(saveEmployeeToDB(formData));
 
-    fetch("https://smart-shop-pos.herokuapp.com/employees", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          Swal.fire("Good job!", "Employee Added Successfully!", "success");
-          reset();
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    // Register new user based on data
+    registerEmployee(name, email, password, navigate, location);
+
+    //Alert message
+    Swal.fire("Good job!", "Employee Added Successfully!", "success");
+
+    reset();
   };
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
@@ -328,10 +322,7 @@ const AddEmployee = () => {
                         >
                           <option>-- select country --</option>
                           {countries?.map((countryDetail) => (
-                            <option
-                              key={countryDetail?.iso2}
-                              value={countryDetail?.country}
-                            >
+                            <option key={sl++} value={countryDetail?.country}>
                               {countryDetail?.country}
                             </option>
                           ))}
@@ -434,6 +425,14 @@ const AddEmployee = () => {
                           Picture
                         </span>
                         <div className="input-group mb-4">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            className="form-control"
+                            style={{ background: "#E5E5E5" }}
+                            id="inputGroupFile02"
+                            {...register("image")}
+                          />
                           <label
                             className="input-group-text"
                             htmlFor="inputGroupFile02"
@@ -449,14 +448,6 @@ const AddEmployee = () => {
                               Upload image
                             </span>
                           </label>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            className="form-control"
-                            style={{ background: "#E5E5E5" }}
-                            id="inputGroupFile02"
-                            {...register("image", { required: false })}
-                          />
                         </div>
                       </div>
                     </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -19,10 +20,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
-// import employees from "../../../../assets/data/employees.json";
 import styles from "./EmployeeManagement.module.css";
+import { deleteEmployeeToDB, loadEmployees } from "../../../../store/employee";
 
 function Row(props) {
+  const dispatch = useDispatch();
   const { employee, serial, reload, setReload } = props;
   const [open, setOpen] = React.useState(false);
   const handleDelete = (id) => {
@@ -36,16 +38,9 @@ function Row(props) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://smart-shop-pos.herokuapp.com/employees/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount) {
-              Swal.fire("Deleted!", "Employee has been deleted.", "success");
-              setReload(!reload);
-            }
-          });
+        dispatch(deleteEmployeeToDB(id));
+        Swal.fire("Deleted!", "Employee has been deleted.", "success");
+        setReload(!reload);
       }
     });
   };
@@ -77,7 +72,7 @@ function Row(props) {
             style={{ width: "70px", height: "70px" }}
             src={`data:image/jpeg;base64,${employee.image}`}
             alt="Product"
-          // loading="lazy"
+            // loading="lazy"
           />
         </TableCell>
         <TableCell align="center">
@@ -140,18 +135,17 @@ Row.propTypes = {
 };
 
 const EmployeeManagement = () => {
-  const [employees, setEmployees] = useState([]);
+  const dispatch = useDispatch();
+  // Getting employees from store
+  const employees = useSelector(
+    (state) => state.entities.employee.allEmployees
+  );
   const [reload, setReload] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Load Employees from Database
   useEffect(() => {
-    setLoading(true);
-    fetch(`http://localhost:5000/employees`)
-      .then((res) => res.json())
-      .then((data) => {
-        setEmployees(data);
-        setLoading(false);
-      });
+    dispatch(loadEmployees());
   }, [reload]);
 
   const [page, setPage] = React.useState(0);
