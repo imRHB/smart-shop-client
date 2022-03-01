@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./Login.module.css";
 import { Button, Form } from "react-bootstrap";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Login = () => {
   const { authError, loading, loginWithEmailAndPassword } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
+  const [passwordShown, setPasswordShown] = useState(false);
 
   // React hook form
   const {
@@ -43,6 +46,10 @@ const Login = () => {
   //     });
   // };
 
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
   return (
     <div className={`${styles.loginPage}`}>
       {/* login form */}
@@ -69,6 +76,7 @@ const Login = () => {
             type="email"
             placeholder="Your Email"
             className={`${styles.inputFields}`}
+            defaultValue="admin@ssp.com"
             name="email"
             {...register("email", { required: true })}
           />
@@ -83,13 +91,20 @@ const Login = () => {
         >
           <Form.Label className={`${styles.inputLabels}`}>Password</Form.Label>
           <FontAwesomeIcon icon={faLock} className={`${styles.formIcon}`} />
+
           <Form.Control
-            type="password"
+            type={passwordShown ? "text" : "password"}
             placeholder="Your Password"
             className={`${styles.inputFields}`}
-            name="password"
+            name='password'
+            defaultValue="123456"
             {...register("password", { required: true })}
           />
+          {passwordShown ?
+            <VisibilityOffIcon onClick={togglePassword} icon={faLock} className={`${styles.eyeIconOne}`} />
+            :
+            <RemoveRedEyeIcon onClick={togglePassword} icon={faLock} className={`${styles.eyeIconTwo}`} />
+          }
           {errors.password && (
             <span className="text-warning">This field is required</span>
           )}
