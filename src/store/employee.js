@@ -91,13 +91,16 @@ export const {
 export default employee.reducer;
 
 // Add new employee to db
-export const saveEmployeeToDB = (data) =>
+export const saveEmployeeToDB = (data) => {
+  console.log(data);
+  console.log("employee saved");
   apiCallBegan({
     url: "/employees",
     data,
     method: "post",
     onSuccess: addEmployeeToDB.type,
   });
+};
 
 // Load Employees form Database
 export const loadEmployees = () =>
