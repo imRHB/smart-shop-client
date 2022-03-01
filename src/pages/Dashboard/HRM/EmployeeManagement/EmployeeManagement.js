@@ -211,7 +211,7 @@ const EmployeeManagement = () => {
             </TableHead>
             <TableBody>
               {employees
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((employee, index) => (
                   <Row
                     key={employee._id}
