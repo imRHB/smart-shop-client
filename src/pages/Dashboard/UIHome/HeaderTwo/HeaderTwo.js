@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Row, Col } from 'react-bootstrap';
-import styles from "./HeaderTwo.css";
+import styles from "./HeaderTwo.module.css";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import defaultUser from "../../../../assets/images/user.png";
