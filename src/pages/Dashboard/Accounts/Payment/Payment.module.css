@@ -64,7 +64,7 @@
                 -2px -2px 10px rgb(213, 213, 213) inset;
 }
 .inputFields{
-  width: 350px;
+  width: 100%;
    background-color: #f1f3f6;
 }
 .inputTitle{
