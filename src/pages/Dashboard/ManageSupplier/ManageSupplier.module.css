@@ -57,6 +57,21 @@
   color: #fff !important;
 }
 
+.updateBtn{
+  background-color: #87c3ff !important;
+  color: rgb(3, 0, 0) !important;
+  text-transform: capitalize !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+}
+
+.updateBtn:hover {
+  background-color: #006ddb !important;
+  color: #fff !important;
+}
+
 .receiptBtn {
   background-color: #45c203 !important;
   color: #fff !important;
@@ -81,14 +96,10 @@
   background-color: #ffffff !important;
 }
 .addSupplierField{
-    line-height: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     padding: 10px;
-   
     background-color: rgb(243, 243, 243);
     border: 1px solid rgb(205, 205, 205);
-    /* box-shadow: 2px 2px 10px rgb(255, 255, 255) inset,
-                -2px -2px 10px rgb(213, 213, 213) inset; */
 }
 
 

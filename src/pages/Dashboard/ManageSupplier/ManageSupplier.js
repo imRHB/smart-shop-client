@@ -104,8 +104,9 @@ function Row(props) {
             </Modal>
 
             {/* manage supplier */}
-            {/* order now form */}
-            <Modal show={show} centered onHide={handleClose}>
+
+            <Modal show={show} aria-labelledby="contained-modal-title-vcenter"
+                centered onHide={handleClose}>
                 <div className='shadow rounded' style={{ 'background': 'linear-gradient(to right, #1e3c72, #2a5298)' }}>
                     <Modal.Header closeButton>
                         <Modal.Title style={{ color: "white" }}>Update Supplier</Modal.Title>
@@ -115,7 +116,6 @@ function Row(props) {
                         <form className="pt-3 pb-3" onSubmit={handleSubmit(onSubmit)}>
                             <Box sx={{ display: "flex", flexDirection: "column" }}>
                                 <Box className={`${styles.addSupplierField}`}>
-
                                     <TextField
                                         id="outlined-basic"
                                         size="small"
@@ -125,11 +125,9 @@ function Row(props) {
                                         variant="outlined"
                                         {...register("name", { required: true })}
                                     />
-
                                 </Box>
 
                                 <Box className={`${styles.addSupplierField}`}>
-
                                     <TextField
                                         id="outlined-textarea"
                                         size="small"
@@ -167,15 +165,10 @@ function Row(props) {
 
                                 </Box>
                             </Box>
-                            {/* 
-                            {details.name &&
-                                <input className="my-2 w-75 mx-auto d-block px-4 py-1 border-0 rounded" value={details.name} {...register("service", { required: true })} />
-                            }
- */}
 
                             <Modal.Footer className="mt-4">
                                 {/* confirmation button */}
-                                <Button variant="outlined" className={`${styles.paymentBtn}`} onClick={() => { handleDeleteSupplier(supplier._id) }} endIcon={<UpgradeIcon />}>
+                                <Button variant="outlined" className={`${styles.updateBtn}`} onClick={() => { handleDeleteSupplier(supplier._id) }} endIcon={<UpgradeIcon />}>
                                     Update
                                 </Button>
                                 <Button className={`${styles.receiptBtn}`} endIcon={<CloseIcon />} onClick={handleNoBtn}>
