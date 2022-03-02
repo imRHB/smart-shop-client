@@ -37,6 +37,7 @@ import SupplierStock from "../SupplierStock/SupplierStock";
 //==============import your component here====================//
 // import TestComponent from "../TestComponent/TestComponent";
 import TestComponent from "../TestComponent/TestComponent";
+import AddCategory from "../AddCategory/AddCategory";
 //==============import your component here===================//
 
 const NestedRoutes = () => {
