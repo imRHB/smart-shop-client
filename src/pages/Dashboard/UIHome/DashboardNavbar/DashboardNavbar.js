@@ -12,6 +12,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import AddIcon from '@mui/icons-material/Add';
 import { NavLink } from 'react-router-dom';
 import { Modal, Row, Col } from 'react-bootstrap';
+import { Box } from '@mui/material';
 
 
 const DashboardNavbar = () => {
@@ -37,72 +38,72 @@ const DashboardNavbar = () => {
 
 
     return (
-        <div style={{ display: "flex" }}>
-            <Typography sx={{ color: "#0d6efd", fontWeight: "bold" }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Typography sx={{ color: "#0d6efd", fontWeight: "bold", fontSize: "15px" }}>
                 {date}
                 {time}
             </Typography>
-            <div className='ms-auto'>
-                <Typography
-                    sx={{ color: "#0C0C0C", fontWeight: "600", display: "flex", alignItems: "center", justifyContent: "center" }}
-                    component="div"
-                >
-                    <NavLink to="/dashboard/pos"> <AddIcon sx={{ color: "#0d6efd" }}> </AddIcon></NavLink>
-                    <Badge color="error" badgeContent={11} max={10} >
-                        <NotificationsNoneIcon sx={{ color: "#0d6efd" }} className={`${styles.usersProfileDropdown}`} />
-                    </Badge>
 
-                    <div >
-                        <NavDropdown title={<AccountCircleIcon />} className={`${styles.usersProfileDropdown}`}>
-                            <div className={`${styles.alldropdownItems}`}>
-                                <NavDropdown.Item className={`${styles.usersDPDropdown}`}>
-                                    {true && (
-                                        <div className="mx-3 text-center">
-                                            {false ? (
-                                                <img
-                                                    style={{
-                                                        width: "50px",
-                                                        height: "50px",
-                                                        borderRadius: "50%",
-                                                        border: "1px solid gray"
+            <Typography
+                sx={{ color: "#0C0C0C", fontWeight: "600", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "auto" }}
+                component="div"
+            >
+                <NavLink to="/dashboard/pos"> <AddIcon sx={{ color: "#0d6efd" }}> </AddIcon></NavLink>
+                <Badge color="error" badgeContent={11} max={10} >
+                    <NotificationsNoneIcon sx={{ color: "#0d6efd" }} className={`${styles.usersProfileDropdown}`} />
+                </Badge>
 
-                                                    }}
-                                                    src={""}
-                                                    alt=""
-                                                />
-                                            ) : (
-                                                <img
-                                                    style={{
-                                                        width: "60px",
-                                                        height: "60px",
-                                                        borderRadius: "50%",
-                                                        border: "1px solid gray",
-                                                        marginTop: "10px"
-                                                    }}
-                                                    src={defaultUser}
-                                                    alt=""
-                                                />
-                                            )}
-                                        </div>
-                                    )}
-                                </NavDropdown.Item>
-                                <hr />
-                                <NavDropdown.Item className={`${styles.usersDropdown}`}>
-                                    <PersonOutlineIcon sx={{ marginRight: "10px" }} />
-                                    <span className="">
-                                        {" "}
-                                        {"Najmul Ovi"} | {true ? "Admin" : "Subscriber"}
-                                    </span>
-                                </NavDropdown.Item>
+                <div >
+                    <NavDropdown title={<AccountCircleIcon />} className={`${styles.usersProfileDropdown}`}>
+                        <div className={`${styles.alldropdownItems}`}>
+                            <NavDropdown.Item className={`${styles.usersDPDropdown}`}>
+                                {true && (
+                                    <div className="mx-3 text-center">
+                                        {false ? (
+                                            <img
+                                                style={{
+                                                    width: "50px",
+                                                    height: "50px",
+                                                    borderRadius: "50%",
+                                                    border: "1px solid gray"
 
-                                <NavDropdown.Item onClick={handleShow} className={`${styles.usersDropdown}`}>
-                                    <ManageAccountsIcon sx={{ marginRight: "10px" }} />
-                                    My Profile
+                                                }}
+                                                src={""}
+                                                alt=""
+                                            />
+                                        ) : (
+                                            <img
+                                                style={{
+                                                    width: "60px",
+                                                    height: "60px",
+                                                    borderRadius: "50%",
+                                                    border: "1px solid gray",
+                                                    marginTop: "10px"
+                                                }}
+                                                src={defaultUser}
+                                                alt=""
+                                            />
+                                        )}
+                                    </div>
+                                )}
+                            </NavDropdown.Item>
+                            <hr />
+                            <NavDropdown.Item className={`${styles.usersDropdown}`}>
+                                <PersonOutlineIcon sx={{ marginRight: "10px" }} />
+                                <span className="">
+                                    {" "}
+                                    {"Najmul Ovi"} | {true ? "Admin" : "Subscriber"}
+                                </span>
+                            </NavDropdown.Item>
 
-                                </NavDropdown.Item>
-                                <hr />
-                                <NavDropdown.Item className={`${styles.usersDropdown}`}>
-                                    {/* {user.email ? (
+                            <NavDropdown.Item onClick={handleShow} className={`${styles.usersDropdown}`}>
+                                <ManageAccountsIcon sx={{ marginRight: "10px" }} />
+                                My Profile
+
+                            </NavDropdown.Item>
+                            <hr />
+                            <NavDropdown.Item className={`${styles.usersDropdown}`}>
+                                {/* {user.email ? (
                                 <Button onClick={logOut} className="btn_regular">
                                     Log Out
                                 </Button>
@@ -113,14 +114,14 @@ const DashboardNavbar = () => {
                                     </Button>
                                 </Link>
                             )} */}
-                                    <LogoutIcon sx={{ marginRight: "10px" }} />
-                                    Logout
-                                </NavDropdown.Item>
-                            </div>
-                        </NavDropdown>
-                    </div>
-                </Typography>
-            </div>
+                                <LogoutIcon sx={{ marginRight: "10px" }} />
+                                Logout
+                            </NavDropdown.Item>
+                        </div>
+                    </NavDropdown>
+                </div>
+            </Typography>
+
             {/* profile show */}
             <Modal show={show} centered onHide={handleClose} >
                 <Modal.Body style={{ backgroundColor: "rgb(237, 235, 255)" }}>
@@ -164,7 +165,7 @@ const DashboardNavbar = () => {
                     </Row>
                 </Modal.Body>
             </Modal>
-        </div>
+        </Box>
     );
 };
 
