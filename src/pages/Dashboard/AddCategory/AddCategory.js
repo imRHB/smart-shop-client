@@ -108,21 +108,19 @@ const AddCategory = () => {
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                                         <div className="p-3 border bg-light">
                                             <div className="mb-3">
-                                                <div className="mb-3">
-                                                    <label
-                                                        className="form-label"
-                                                        style={{ fontWeight: "bold" }}
-                                                    >
-                                                        Details{" "}
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        placeholder="Category Details"
-                                                        style={{ background: "#E5E5E5" }}
-                                                        {...register("details", { required: false })}
-                                                    />
-                                                </div>
+                                                <label
+                                                    className="form-label"
+                                                    style={{ fontWeight: "bold" }}
+                                                >
+                                                    Details
+                                                </label>
+                                                <textarea
+                                                    className="form-control"
+                                                    rows="3"
+                                                    placeholder="Product Details"
+                                                    style={{ background: "#E5E5E5" }}
+                                                    {...register("description", { required: false })}
+                                                ></textarea>
                                             </div>
                                         </div>
                                     </div>
