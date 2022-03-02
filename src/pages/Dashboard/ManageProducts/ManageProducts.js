@@ -129,7 +129,7 @@ const ManageProducts = () => {
                     <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
                 </Typography>
                 <Typography>
-                    <span style={{ fontSize: "26px", marginLeft: "-38px" }}>Product</span>{" "}
+                    <span style={{ fontSize: "26px", marginLeft: "-30px" }}>Product</span>{" "}
                     <br /> <span style={{ color: "#969494" }}>Manage Product</span>
                 </Typography>
             </Box>

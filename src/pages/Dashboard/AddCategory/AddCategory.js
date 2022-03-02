@@ -65,8 +65,8 @@ const AddCategory = () => {
                     <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
                 </Typography>
                 <Typography>
-                    <span style={{ fontSize: "26px" }}>Category</span>{" "}
-                    <br /> <span style={{ color: "#969494" }}>Add Category</span>
+                    <span style={{ fontSize: "26px", marginLeft: '-36px' }}>Product</span>{" "}
+                    <br /> <span style={{ color: "#969494" }}>Product Category</span>
                 </Typography>
             </Box>
 

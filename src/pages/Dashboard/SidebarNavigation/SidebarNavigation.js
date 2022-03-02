@@ -220,7 +220,7 @@ const SidebarNavigation = () => {
               </Button>
             </AccordionSummary>
             <AccordionDetails sx={{ background: "#012C56 !important" }}>
-              {/* <NavLink
+              <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/product-category`}
               >
@@ -235,7 +235,7 @@ const SidebarNavigation = () => {
                   <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
                   Category
                 </Button>
-              </NavLink> */}
+              </NavLink>
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-product`}
