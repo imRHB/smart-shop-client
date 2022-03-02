@@ -112,52 +112,68 @@ function Row(props) {
                     </Modal.Header>
                     <Modal.Body>
                         {/* form */}
-                        <form className="pt-3 pb-5" onSubmit={handleSubmit(onSubmit)}>
+                        <form className="pt-3 pb-3" onSubmit={handleSubmit(onSubmit)}>
                             <Box sx={{ display: "flex", flexDirection: "column" }}>
-                                <TextField
-                                    id="outlined-basic"
-                                    size="small"
-                                    className={`${styles.supplierTextField}`}
-                                    label="Supplier Name"
-                                    variant="outlined"
-                                    {...register("name", { required: true })}
-                                />
-                                <TextField
-                                    id="outlined-textarea"
-                                    size="small"
-                                    label="Supplier Address"
-                                    className={`${styles.supplierTextField}`}
-                                    multiline
-                                    {...register("address", { required: true })}
-                                />
-                                <TextField
-                                    id="outlined-basic"
-                                    size="small"
-                                    className={`${styles.supplierTextField}`}
-                                    label="Supplier Contact No."
-                                    variant="outlined"
-                                    {...register("contact", { required: true })}
-                                />
-                                <TextField
-                                    id="outlined-textarea"
-                                    label="Balance"
-                                    size="small"
-                                    multiline
-                                    className={`${styles.supplierTextField}`}
-                                    {...register("balance", { required: true })}
-                                />
-                            </Box>
-                            {/* <input className="my-2 w-75 mx-auto d-block px-4 py-1 border-0 rounded" defaultValue={user.displayName} {...register("name")} />
+                                <Box className={`${styles.addSupplierField}`}>
 
+                                    <TextField
+                                        id="outlined-basic"
+                                        size="small"
+                                        className={`${styles.supplierTextField}`}
+                                        defaultValue={supplier.name}
+                                        label="Supplier Name"
+                                        variant="outlined"
+                                        {...register("name", { required: true })}
+                                    />
+
+                                </Box>
+
+                                <Box className={`${styles.addSupplierField}`}>
+
+                                    <TextField
+                                        id="outlined-textarea"
+                                        size="small"
+                                        label="Supplier Address"
+                                        className={`${styles.supplierTextField}`}
+                                        defaultValue={supplier.address}
+                                        multiline
+                                        {...register("address", { required: true })}
+                                    />
+
+                                </Box>
+                                <Box className={`${styles.addSupplierField}`}>
+
+                                    <TextField
+                                        id="outlined-basic"
+                                        size="small"
+                                        className={`${styles.supplierTextField}`}
+                                        label="Supplier Contact No."
+                                        variant="outlined"
+                                        defaultValue={supplier.address}
+                                        {...register("contact", { required: true })}
+                                    />
+
+                                </Box>
+                                <Box className={`${styles.addSupplierField}`}>
+
+                                    <TextField
+                                        id="outlined-textarea"
+                                        label="Balance"
+                                        size="small"
+                                        defaultValue={supplier.balance}
+                                        className={`${styles.supplierTextField}`}
+                                        {...register("balance", { required: true })}
+                                    />
+
+                                </Box>
+                            </Box>
+                            {/* 
                             {details.name &&
                                 <input className="my-2 w-75 mx-auto d-block px-4 py-1 border-0 rounded" value={details.name} {...register("service", { required: true })} />
                             }
+ */}
 
-                            {details.price &&
-                                <input className="my-2 w-75 mx-auto d-block px-4 py-1 border-0 rounded" value={details.price} {...register("price", { required: true })} />
-                            } */}
-
-                            <Modal.Footer>
+                            <Modal.Footer className="mt-4">
                                 {/* confirmation button */}
                                 <Button variant="outlined" className={`${styles.paymentBtn}`} onClick={() => { handleDeleteSupplier(supplier._id) }} endIcon={<UpgradeIcon />}>
                                     Update
