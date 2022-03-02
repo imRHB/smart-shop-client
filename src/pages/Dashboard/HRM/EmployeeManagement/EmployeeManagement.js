@@ -106,7 +106,7 @@ function Row(props) {
                       {employee.name}
                     </TableCell>
                     <TableCell align="center">{employee.phone}</TableCell>
-                    <TableCell align="center">{employee.position}</TableCell>
+                    <TableCell align="center">{employee.designation}</TableCell>
                     <TableCell align="center">{employee.address}</TableCell>
                     <TableCell align="center">BDT {employee.salary}</TableCell>
                   </TableRow>
