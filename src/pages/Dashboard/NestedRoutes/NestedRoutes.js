@@ -37,6 +37,7 @@ import SupplierStock from "../SupplierStock/SupplierStock";
 //==============import your component here====================//
 // import TestComponent from "../TestComponent/TestComponent";
 import TestComponent from "../TestComponent/TestComponent";
+import AddCategory from "../AddCategory/AddCategory";
 //==============import your component here===================//
 
 const NestedRoutes = () => {
@@ -52,6 +53,7 @@ const NestedRoutes = () => {
         {/*============ Sell Department All Routes End ==============*/}
 
         {/*============ Product Department All Routes Start ==============*/}
+        <Route path="product-category" element={<AddCategory />}></Route>
         <Route path="add-product" element={<AddProduct />}></Route>
         <Route path="manage-product" element={<ManageProducts />}></Route>
         {/*============ Product Department All Routes End ==============*/}

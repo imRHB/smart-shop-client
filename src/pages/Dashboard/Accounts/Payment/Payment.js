@@ -16,6 +16,7 @@ import TabContext from "@mui/lab/TabContext";
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import StripePayment from "../../PaymentGateway/Stripe/StripePayment/StripePayment";
 
 const Payment = () => {
   const {
@@ -100,7 +101,7 @@ const Payment = () => {
                 columns={16}
                 sx={{ marginTop: 2, marginBottom: 2 }}
               >
-                <Grid item md={8} sx={16}>
+                <Grid item md={8} sm={16} sx={16}>
                   <Box className={`${styles.inputContainer}`}>
                     <Typography className={`${styles.inputTitle}`} variant="f6">
                       Date<span style={{ color: "#f44336" }}>*</span>
@@ -166,10 +167,16 @@ const Payment = () => {
                       >
                         <MenuItem value="cash">Cash</MenuItem>
                         <MenuItem value="cheque">Cheque</MenuItem>
+                        <MenuItem value="card">Card</MenuItem>
                         <MenuItem value="payOrder">Pay Order</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>
+                  {
+                    mode === "card" &&
+                    <StripePayment />
+                  }
+
 
                   {
                     (mode === "cheque" || mode === "payOrder") &&
@@ -221,7 +228,7 @@ const Payment = () => {
                   }
 
                 </Grid>
-                <Grid item md={8} sx={16}>
+                <Grid item md={8} sm={16} sx={16}>
                   <Box className={`${styles.inputContainer}`}>
                     <Typography className={`${styles.inputTitle}`} variant="f6">
                       Description<span style={{ color: "#f44336" }}>*</span>
