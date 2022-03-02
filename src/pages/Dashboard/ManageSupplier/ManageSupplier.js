@@ -20,7 +20,6 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import TextField from "@mui/material/TextField";
 import UpgradeIcon from '@mui/icons-material/Upgrade';
 
@@ -28,6 +27,9 @@ import UpgradeIcon from '@mui/icons-material/Upgrade';
 function Row(props) {
     const { supplier, setSuppliers, suppliers } = props;
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleNoBtn = () => setShow(false);
 
     //delete supplier
     const handleDeleteSupplier = id => {
@@ -45,21 +47,9 @@ function Row(props) {
             })
     };
 
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleNoBtn = () => setShow(false);
+    // update supplier
 
-    const onSubmit = data => {
 
-        axios.post('https://stormy-woodland-90777.herokuapp.com/colorCastleOrders', data)
-            .then(res => {
-                if (res.data.insertedId) {
-                    alert("Service Booked Successfully!!");
-                    reset();
-                    setShow(false)
-                }
-            })
-    };
 
     return (
         <React.Fragment>
@@ -113,7 +103,7 @@ function Row(props) {
                     </Modal.Header>
                     <Modal.Body>
                         {/* form */}
-                        <form className="pt-3 pb-3" onSubmit={handleSubmit(onSubmit)}>
+                        <form className="pt-3 pb-3" onSubmit={handleSubmit()}>
                             <Box sx={{ display: "flex", flexDirection: "column" }}>
                                 <Box className={`${styles.addSupplierField}`}>
                                     <TextField
@@ -168,7 +158,7 @@ function Row(props) {
 
                             <Modal.Footer className="mt-4">
                                 {/* confirmation button */}
-                                <Button variant="outlined" className={`${styles.updateBtn}`} onClick={() => { handleDeleteSupplier(supplier._id) }} endIcon={<UpgradeIcon />}>
+                                <Button variant="outlined" className={`${styles.updateBtn}`} endIcon={<UpgradeIcon />}>
                                     Update
                                 </Button>
                                 <Button className={`${styles.receiptBtn}`} endIcon={<CloseIcon />} onClick={handleNoBtn}>
