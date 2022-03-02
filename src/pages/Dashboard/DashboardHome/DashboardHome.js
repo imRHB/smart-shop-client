@@ -13,6 +13,7 @@ import defaultUser from "../../../assets/images/user.png";
 import SidebarNavigation from "../SidebarNavigation/SidebarNavigation";
 import NestedRoutes from "../NestedRoutes/NestedRoutes";
 import logo from "../../../assets/images/logo.png";
+import DashboardNavbar from "../UIHome/DashboardNavbar/DashboardNavbar";
 
 const drawerWidth = 270;
 
@@ -99,7 +100,7 @@ const DashboardHome = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
+          {/* <Typography
             sx={{ color: "#0C0C0C", fontWeight: "600" }}
             component="div"
           >
@@ -133,7 +134,10 @@ const DashboardHome = (props) => {
                 </span>
               </div>
             )}
-          </Typography>
+          </Typography> */}
+          <Box sx={{ width: "100%" }}>
+            <DashboardNavbar />
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
@@ -178,8 +182,6 @@ const DashboardHome = (props) => {
         component="main"
         sx={{
           flexGrow: 1,
-          pl: 3,
-          pr: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           background: "#E5E5E5",
           height: "230vh",
