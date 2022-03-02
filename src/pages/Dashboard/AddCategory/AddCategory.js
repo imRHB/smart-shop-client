@@ -5,12 +5,12 @@ import Table from "@mui/material/Table";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
-import products from "../../../assets/data/products.json";
+import category from '../../../assets/data/category.json';
 import styles from './AddCategory.module.css';
 import { useForm } from "react-hook-form";
 
 function Row(props) {
-    const { product, serial } = props;
+    const { ctgry, serial } = props;
 
     const handleDelete = () => {
 
@@ -25,11 +25,11 @@ function Row(props) {
                 <TableCell component="th" scope="row">
                     {serial + 1}
                 </TableCell>
-                <TableCell align="center">{product.name}</TableCell>
+                <TableCell align="center">{ctgry.name}</TableCell>
                 <TableCell align="center">
                     <EditIcon className={`${styles.editIcon}`} />
                     <Delete
-                        onClick={() => handleDelete(product?._id)}
+                        onClick={() => handleDelete(ctgry?._id)}
                         className={`${styles.deleteIcon}`}
                     />
                 </TableCell>
@@ -182,12 +182,12 @@ const AddCategory = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {products
+                            {category
                                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((product, index) => (
+                                .map((ctgry, index) => (
                                     <Row
-                                        key={product._id}
-                                        product={product}
+                                        key={ctgry._id}
+                                        ctgry={ctgry}
                                         serial={index}
                                     // loading={loading}
                                     // reload={reload}
@@ -201,7 +201,7 @@ const AddCategory = () => {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 15]}
                         component="div"
-                        count={products.length}
+                        count={category.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
