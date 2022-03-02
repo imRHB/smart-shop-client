@@ -48,16 +48,16 @@ const AddSupplier = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
+        <Button sx={{ mb: 1 }} className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
           Add Supplier
         </Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
+        <Button sx={{ mb: 1 }} className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
           Supplier Ledger
         </Button>
-        <Button className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>
+        <Button sx={{ mb: 1 }} className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>
           Supplier Payment
         </Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>
+        <Button sx={{ mb: 1 }} className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>
           Supplier Sales Details
         </Button>
       </Box>
@@ -67,13 +67,10 @@ const AddSupplier = () => {
         <hr />
 
         <form onSubmit={handleSubmit(onSubmit)} className={`${styles.paymentForm} ${"shadow"}`}>
-          <Grid
-            container
-            spacing={4}
-            columns={16}
+          <Grid container spacing={4} columns={16}
             sx={{ marginTop: 2, marginBottom: 2 }}
           >
-            <Grid item md={8} sx={16}>
+            <Grid item md={8} sm={16} sx={16}>
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
                 <Typography className={`${styles.addSupplierFieldLabel}`}>
                   Supplier Name <span>*</span>
@@ -104,7 +101,7 @@ const AddSupplier = () => {
                 />
               </Box>
 
-              <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+              <Box className={`${styles.addSupplierField}`}>
                 <Typography className={`${styles.addSupplierFieldLabel}`}>
                   Supplier Address<span>*</span>
                 </Typography>
@@ -118,7 +115,7 @@ const AddSupplier = () => {
                 />
               </Box>
             </Grid>
-            <Grid item md={8} sx={16}>
+            <Grid item md={8} sm={16} sx={16}>
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
                 <Typography className={`${styles.addSupplierFieldLabel}`}>
                   Supplier Details<span>*</span>
@@ -149,10 +146,10 @@ const AddSupplier = () => {
                 />
               </Box>
               <Box className="d-flex justify-content-around mt-5">
-                <Button type="submit" className={`${styles.addSupplierButton}`}>
+                <Button type="submit" className={`${styles.addSupplierButton} ${"mb-1"}`}>
                   Save Supplier
                 </Button>
-                <Button type="submit" className={`${styles.addAnotherButton}`}>
+                <Button type="submit" className={`${styles.addAnotherButton} ${"mb-1"}`}>
                   Save and Add Another
                 </Button>
               </Box>
