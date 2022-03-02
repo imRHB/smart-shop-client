@@ -13,6 +13,7 @@ import {
   Sector,
   Cell,
 } from "recharts";
+import HeaderTwo from "../UIHome/HeaderTwo/HeaderTwo";
 import TotalReports from "../UIHome/TotalReports/TotalReports";
 import styles from "./Dashboard.module.css";
 
@@ -99,6 +100,7 @@ const salesWithPurchase = [
 const Dashboard = () => {
   return (
     <>
+      <HeaderTwo />
       <div className="container px-4 mt-5">
         <div className="row gx-5">
           <div className="col-12 col-md-8 col-lg-8 col-sm-12">
