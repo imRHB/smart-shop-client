@@ -13,7 +13,7 @@ const HeaderTwo = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (
-        <div className={`${styles.navContainer}`}>
+        <div className={`${styles.navContainer} ${"shadow"}`}>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={3} md={2}>
                     <Box>
