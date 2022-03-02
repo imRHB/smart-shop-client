@@ -113,7 +113,7 @@ function Row(props) {
                     <Modal.Body>
                         {/* form */}
                         <form className="pt-3 pb-5" onSubmit={handleSubmit(onSubmit)}>
-                            <Box>
+                            <Box sx={{ display: "flex", flexDirection: "column" }}>
                                 <TextField
                                     id="outlined-basic"
                                     size="small"
