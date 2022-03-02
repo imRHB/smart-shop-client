@@ -248,7 +248,7 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
+                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
                   Product
                 </Button>
               </NavLink>
@@ -264,7 +264,7 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
+                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
                   Product
                 </Button>
               </NavLink>
