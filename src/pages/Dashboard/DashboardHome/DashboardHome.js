@@ -79,8 +79,7 @@ const DashboardHome = (props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }} style={{ overflowY: "scroll" }}>
-      <CssBaseline />
+    <Box sx={{ display: "flex" }}>
       <AppBar
         elevation={0}
         position="fixed"
@@ -100,41 +99,7 @@ const DashboardHome = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography
-            sx={{ color: "#0C0C0C", fontWeight: "600" }}
-            component="div"
-          >
-            {true && (
-              <div className="mx-3 text-center">
-                {false ? (
-                  <img
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%",
-                    }}
-                    src={""}
-                    alt=""
-                  />
-                ) : (
-                  <img
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%",
-                    }}
-                    src={defaultUser}
-                    alt=""
-                  />
-                )}
 
-                <span className="">
-                  {" "}
-                  {"Najmul Ovi"} | {true ? "Admin" : "Subscriber"}
-                </span>
-              </div>
-            )}
-          </Typography> */}
           <Box sx={{ width: "100%" }}>
             <DashboardNavbar />
           </Box>
@@ -181,7 +146,6 @@ const DashboardHome = (props) => {
       <Box
         component="main"
         sx={{
-          flexGrow: 1,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           background: "#E5E5E5",
           height: "230vh",

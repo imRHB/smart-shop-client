@@ -30,6 +30,7 @@ import PurchaseReport from "../Report/PurchaseReport/PurchaseReport";
 import SalesReport from "../Report/SalesReport/SalesReport";
 import TodaysReport from "../Report/TodaysReport/TodaysReport";
 import AddInvoice from "../Sell/AddInvoice/AddInvoice";
+import AddCategory from "../AddCategory/AddCategory";
 import ManageInvoice from "../Sell/ManageInvoice/ManageInvoice";
 import PosInvoice from "../Sell/PosInvoice/PosInvoice";
 import StockManagements from "../StockManagement/StockManagements";
@@ -37,7 +38,6 @@ import SupplierStock from "../SupplierStock/SupplierStock";
 //==============import your component here====================//
 // import TestComponent from "../TestComponent/TestComponent";
 import TestComponent from "../TestComponent/TestComponent";
-import AddCategory from "../AddCategory/AddCategory";
 //==============import your component here===================//
 
 const NestedRoutes = () => {
