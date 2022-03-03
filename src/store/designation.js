@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 let initialState = {
   allDesignation: [],
   designationLoading: false,
+  reload: false,
   designationAdded: false,
   designationDeleted: false,
   editDesignation: {},
@@ -55,6 +56,9 @@ const designation = createSlice({
       if (action.payload.modifiedCount)
         Swal.fire("Good job!", "Designation Updated Successfully!", "success");
     },
+    setReload: (state, action) => {
+      state.reload = action.payload.reload;
+    },
   },
 });
 
@@ -68,6 +72,7 @@ export const {
   setDeleteDesignation,
   setEditDesignation,
   setUpdateDesignation,
+  setReload,
 } = designation.actions;
 
 export default designation.reducer;

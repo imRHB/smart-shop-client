@@ -5,13 +5,15 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import styles from "./AddDesignation.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { saveDesignationToDB } from "../../../../../store/designation";
+import {
+  saveDesignationToDB,
+  setReload,
+} from "../../../../../store/designation";
 
 const AddDesignation = () => {
   const dispatch = useDispatch();
-  const designationAdded = useSelector(
-    (state) => state.entities.designation.designationAdded
-  );
+  //get reload value from store
+  let reload = useSelector((state) => state.entities.designation.reload);
   const {
     register,
     handleSubmit,
@@ -21,10 +23,11 @@ const AddDesignation = () => {
   const onSubmit = (data) => {
     //Send form data to Server
     dispatch(saveDesignationToDB(data));
-    if (designationAdded) {
-      Swal.fire("Good job!", "Designation Added Successfully.", "success");
-      reset();
-    }
+
+    // Set reload
+    dispatch(setReload({ reload: !reload }));
+    Swal.fire("Good job!", "Designation Added Successfully.", "success");
+    reset();
   };
   return (
     <Box className={`${styles.tableContainer}`}>

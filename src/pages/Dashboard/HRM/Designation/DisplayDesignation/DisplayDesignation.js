@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import Table from "@mui/material/Table";
@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteDesignationToDB,
   loadDesignations,
+  setReload,
 } from "../../../../../store/designation";
 
 const override = css`
@@ -30,7 +31,7 @@ const override = css`
 
 function Row(props) {
   const dispatch = useDispatch();
-  const { designation, serial, reload, setReload } = props;
+  const { designation, serial } = props;
   const designationDeleted = useSelector(
     (state) => state.entities.designation.designationDeleted
   );
@@ -49,7 +50,9 @@ function Row(props) {
         dispatch(deleteDesignationToDB(id));
         if (designationDeleted) {
           Swal.fire("Deleted!", "Designation has been deleted.", "success");
-          setReload(!reload);
+          // Set reload
+          dispatch(setReload());
+          // setReload(!reload);
         }
       }
     });
@@ -94,12 +97,13 @@ const DisplayDesignation = () => {
   const designationLoader = useSelector(
     (state) => state.entities.designation.designationLoading
   );
-  const [reload, setReload] = useState(false);
+  //get reload value from store
+  const reload = useSelector((state) => state.entities.designation.reload);
 
   // Load all designations from Database
   useEffect(() => {
     dispatch(loadDesignations());
-  }, [reload]);
+  }, [reload, dispatch]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -162,7 +166,6 @@ const DisplayDesignation = () => {
                     designation={designation}
                     serial={index}
                     reload={reload}
-                    setReload={setReload}
                   />
                 ))}
           </TableBody>
