@@ -15,7 +15,6 @@ import Delete from "@mui/icons-material/Delete";
 import { css } from "@emotion/react";
 import FadeLoader from "react-spinners/FadeLoader";
 import Swal from "sweetalert2";
-import designations from "../../../../../assets/data/designations.json";
 import styles from "./DisplayDesignation.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -173,7 +172,7 @@ const DisplayDesignation = () => {
         <TablePagination
           rowsPerPageOptions={[5, 10, 15]}
           component="div"
-          count={designations.length}
+          count={allDesignations.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
