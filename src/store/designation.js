@@ -6,6 +6,7 @@ let initialState = {
   allDesignation: [],
   designationLoading: false,
   designationAdded: false,
+  designationDeleted: false,
   editDesignation: {},
   error: "",
   apiResponse: {},
@@ -42,6 +43,7 @@ const designation = createSlice({
           (designation) => designation._id === action.payload._id
         );
         state.allDesignation.splice(index, 1);
+        state.designationDeletedSuccess = true;
       }
     },
     setEditDesignation: (state, action) => {
