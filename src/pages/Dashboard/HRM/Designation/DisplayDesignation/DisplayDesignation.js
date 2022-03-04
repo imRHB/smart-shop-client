@@ -33,7 +33,7 @@ function Row(props) {
   const dispatch = useDispatch();
   const { designation, serial } = props;
   const designationDeleted = useSelector(
-    (state) => state.entities.designation.designationDeleted
+    (state) => state.entities.designation.designationDeletedSuccess
   );
 
   const handleDelete = (id) => {
