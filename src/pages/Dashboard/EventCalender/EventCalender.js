@@ -47,22 +47,22 @@ const EventCalender = () => {
     const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
     const [allEvents, setAllEvents] = useState([]);
 
-// get event
-useEffect(() => {
-    fetch('http://localhost:5000/events')
-        .then(res => res.json())
-        .then(data =>{ 
-            setAllEvents(data);
-            
-        })
+    // get event
+    useEffect(() => {
+        fetch('https://smart-shop-pos.herokuapp.com/events')
+            .then(res => res.json())
+            .then(data => {
+                setAllEvents(data);
 
-}, [allEvents])
+            })
+
+    }, [allEvents])
 
 
     const handleAddEvent = (e) => {
         e.preventDefault();
         // setAllEvents([...allEvents, newEvent]);
-        fetch('http://localhost:5000/events', {
+        fetch('https://smart-shop-pos.herokuapp.com/events', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(newEvent)
@@ -94,7 +94,7 @@ useEffect(() => {
                     <div className="row">
                         <div className="col-12 col-lg-3 col-md-3">
 
-                            <input  type="text" placeholder="Add Event" style={{ width: "97%", }} className="p-1 mt-1 ms-3" value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })} />
+                            <input type="text" placeholder="Add Event" style={{ width: "97%", }} className="p-1 mt-1 ms-3" value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })} />
 
 
                         </div>
@@ -103,12 +103,12 @@ useEffect(() => {
                         </div>
 
                         <div className="col-12 col-lg-3 col-md-3 ">
-                            <DatePicker  className="p-1 mt-1 w-100" placeholderText="End Date" selected={newEvent.end} onChange={(end) => setNewEvent({ ...newEvent, end })} />
+                            <DatePicker className="p-1 mt-1 w-100" placeholderText="End Date" selected={newEvent.end} onChange={(end) => setNewEvent({ ...newEvent, end })} />
 
                         </div>
 
                         <div className="col-12 col-lg-3 col-md-3 ">
-                            <button style={{backgroundColor:'#003366'}} type="submit" className="btn text-light fw-bold mt-1 me-5 w-75" onClick={handleAddEvent}>
+                            <button style={{ backgroundColor: '#003366' }} type="submit" className="btn text-light fw-bold mt-1 me-5 w-75" onClick={handleAddEvent}>
                                 <AddCommentIcon></AddCommentIcon>   Add Event
                             </button>
                         </div>
@@ -124,12 +124,12 @@ useEffect(() => {
                     <div className="m-1" style={{ backgroundColor: 'white', height: '' }}>
                         <h5 style={{ borderBottom: '2px solid gray' }} className="pt-4">ALl Event List:</h5>
                         <div className="pb-3">
-                        {
-                            allEvents?.map(event=>
-                                <h6 style={{color:'white', backgroundColor:"#4682B4"}}  className="mt-2 me-3 ms-2  p-1 border rounded"><FiberSmartRecordIcon style={{color:'#FFA500'}} ></FiberSmartRecordIcon>  {event?.title}</h6>
+                            {
+                                allEvents?.map(event =>
+                                    <h6 style={{ color: 'white', backgroundColor: "#4682B4" }} className="mt-2 me-3 ms-2  p-1 border rounded"><FiberSmartRecordIcon style={{ color: '#FFA500' }} ></FiberSmartRecordIcon>  {event?.title}</h6>
 
                                 )
-                        }
+                            }
                         </div>
                     </div>
                 </div>
