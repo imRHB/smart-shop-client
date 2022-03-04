@@ -17,7 +17,6 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import styles from "./ManageSupplier.module.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import ReceiptIcon from "@mui/icons-material/Receipt";
-import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
 import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";

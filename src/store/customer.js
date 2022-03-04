@@ -96,7 +96,7 @@ export const loadCustomers = () =>
   });
 
 // Delete customer from db
-export const deleteSupplierToDB = (id) =>
+export const deleteCustomerToDB = (id) =>
   apiCallBegan({
     url: `/customers/${id}`,
     method: "delete",
