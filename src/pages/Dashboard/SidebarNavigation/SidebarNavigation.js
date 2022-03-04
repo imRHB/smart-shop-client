@@ -352,8 +352,8 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Credit
-                  Customer
+                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
+                  Customer Status
                 </Button>
               </NavLink>
               {/* <NavLink
@@ -1723,37 +1723,6 @@ const SidebarNavigation = () => {
                 >
                   <QuizIcon sx={{ mr: 2, fontSize: "24px" }} />
                   Test Component
-                </Button>
-              </NavLink>
-            </AccordionSummary>
-          </Accordion>
-          {/*======= Test Component Nav Menu End ======*/}
-
-          {/*======= Logout Nav Menu Start ======*/}
-          <Accordion
-            TransitionProps={{ unmountOnExit: true }}
-            sx={{
-              background: "#003366 !important",
-              boxShadow: "none !important",
-              marginTop: "0 !important",
-            }}
-          >
-            <AccordionSummary>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to="/"
-              >
-                <Button
-                  onClick={logOut}
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "300",
-                    fontSize: "16px",
-                  }}
-                >
-                  <LogoutIcon sx={{ mr: 2, fontSize: "24px" }} />
-                  LogOut
                 </Button>
               </NavLink>
             </AccordionSummary>
