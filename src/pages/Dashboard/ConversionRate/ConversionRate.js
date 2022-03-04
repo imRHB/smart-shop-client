@@ -5,13 +5,13 @@ import ReactApexChart from 'react-apexcharts';
 const ConversionRate = () => {
     const [year, setYear] = useState({
         series: [{
-            name: 'Series 1',
+            name: 'Sales 1',
             data: [80, 50, 30, 40, 100, 20],
         }, {
-            name: 'Series 2',
+            name: 'Sales 2',
             data: [20, 30, 40, 80, 20, 80],
         }, {
-            name: 'Series 3',
+            name: 'Sales 3',
             data: [44, 76, 78, 13, 43, 10],
         }],
         options: {
@@ -26,7 +26,7 @@ const ConversionRate = () => {
                 }
             },
             title: {
-                text: 'Current Year',
+                text: 'Sales Year',
                 
             },
             stroke: {
@@ -71,8 +71,8 @@ const ConversionRate = () => {
 
             },
             xaxis: {
-                categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
-                    'United States', 'China', 'Germany'
+                categories: [ 'Oil','Fish', 'Biscuit', 'Fruits', 'Meat',
+                'Drink', 'Rice',  'Vegetables', 'Lemon Round', 'Beverages',
                 ],
 
             }
@@ -85,7 +85,7 @@ const ConversionRate = () => {
             <div className='row'>
                 <div  className='col-12 col-lg-7 col-md-7'>
                     <div style={{ backgroundColor: 'white', height:'380px' }} className="p-1 ">
-                        <h6 className='text-start m-2 fw-bold '>Current Country</h6>
+                        <h6 className='text-start m-2 fw-bold '>Top Sales Products</h6>
                         <div className='mt-2' id="chart">
                             <ReactApexChart options={rate.options} series={rate.series} type="bar" height={250} />
                         </div>
