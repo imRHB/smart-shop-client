@@ -45,11 +45,11 @@ const DashboardNavbar = () => {
 
   const [notification, setNotification] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/events")
+    fetch("https://smart-shop-pos.herokuapp.com/events")
       .then(res => res.json())
       .then(data => setNotification(data))
 
-  }, []);
+  }, [notification]);
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
