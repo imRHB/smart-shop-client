@@ -7,6 +7,7 @@ import defaultUser from "../../../../assets/images/user.png";
 import { Button } from "@mui/material";
 import PreviewIcon from "@mui/icons-material/Preview";
 import ChatIcon from "@mui/icons-material/Chat";
+import { NavLink } from "react-router-dom";
 
 const HeaderTwo = () => {
   const [show, setShow] = useState(false);
@@ -80,9 +81,14 @@ const HeaderTwo = () => {
           >
             View Profile
           </Button>
-          <Button className={`${styles.startChat}`} startIcon={<ChatIcon />}>
-            Start Chat
-          </Button>
+          <NavLink
+            style={{ textDecoration: "none", marginTop: "0 !important" }}
+            to={`/dashboard/events`}
+          >
+            <Button className={`${styles.startChat}`} startIcon={<ChatIcon />}>
+              Add Event
+            </Button>
+          </NavLink>
         </Grid>
       </Grid>
       {/* profile show */}
