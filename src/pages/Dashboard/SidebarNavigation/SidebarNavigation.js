@@ -352,8 +352,8 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Credit
-                  Customer
+                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
+                  Customer Status
                 </Button>
               </NavLink>
               {/* <NavLink

@@ -74,7 +74,9 @@ const UpdateCustomer = () => {
         </Typography>
         <Typography>
           <span style={{ fontSize: "26px" }}>Manage Customer</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Edit Customer Information</span>
+          <span style={{ color: "#969494" }}>
+            <i class="fas fa-address-book    "></i> Customer Information
+          </span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
@@ -83,7 +85,7 @@ const UpdateCustomer = () => {
         </Button>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Edit Customer</Typography>
+        <Typography sx={{ fontWeight: "bold" }}>Add Customer</Typography>
         <hr />
         <div className="mt-2">
           <div className="form-container">
