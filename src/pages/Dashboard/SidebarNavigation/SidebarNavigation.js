@@ -97,181 +97,6 @@ const SidebarNavigation = () => {
           </Accordion>
           {/*======= Dashboard Nav Menu End ======*/}
 
-          {/*======= Sell Nav Menu Start ======*/}
-          <Accordion
-            TransitionProps={{ unmountOnExit: true }}
-            sx={{
-              background: "#003366 !important",
-              boxShadow: "none !important",
-            }}
-          >
-            <AccordionSummary
-              expandIcon={
-                <ArrowBackIosNewIcon
-                  sx={{ color: "#fff !important", fontSize: "12px" }}
-                />
-              }
-              aria-controls="panel2a-content"
-              id="panel2a-header"
-              sx={{
-                "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-                  transform: "rotate(-90deg)",
-                  marginBottom: 0,
-                },
-              }}
-            >
-              <Button
-                sx={{
-                  color: "#fff !important",
-                  textTransform: "capitalize",
-                  fontWeight: "300",
-                  fontSize: "16px",
-                }}
-              >
-                <PointOfSaleIcon sx={{ mr: 2, fontSize: "24px" }} />
-                Sell
-              </Button>
-            </AccordionSummary>
-            <AccordionDetails sx={{ background: "#012C56 !important" }}>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/add-new-invoice`}
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add New
-                  Invoice
-                </Button>
-              </NavLink>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/manage-invoice`}
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
-                  Invoice
-                </Button>
-              </NavLink>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/pos`}
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "uppercase",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> POS
-                </Button>
-              </NavLink>
-            </AccordionDetails>
-          </Accordion>
-          {/*======= Sell Nav Menu End ======*/}
-
-          {/*======= Product Nav Menu Start ======*/}
-          <Accordion
-            TransitionProps={{ unmountOnExit: true }}
-            sx={{
-              background: "#003366 !important",
-              boxShadow: "none !important",
-            }}
-          >
-            <AccordionSummary
-              expandIcon={
-                <ArrowBackIosNewIcon
-                  sx={{ color: "#fff !important", fontSize: "12px" }}
-                />
-              }
-              aria-controls="panel2a-content"
-              id="panel2a-header"
-              sx={{
-                "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-                  transform: "rotate(-90deg)",
-                  marginBottom: 0,
-                },
-              }}
-            >
-              <Button
-                sx={{
-                  color: "#fff !important",
-                  textTransform: "capitalize",
-                  fontWeight: "300",
-                  fontSize: "16px",
-                }}
-              >
-                <ShoppingCartIcon sx={{ mr: 2, fontSize: "24px" }} />
-                Product
-              </Button>
-            </AccordionSummary>
-            <AccordionDetails sx={{ background: "#012C56 !important" }}>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/product-category`}
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
-                  Category
-                </Button>
-              </NavLink>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/add-product`}
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
-                  Product
-                </Button>
-              </NavLink>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/manage-product`}
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
-                  Product
-                </Button>
-              </NavLink>
-            </AccordionDetails>
-          </Accordion>
-          {/*======= Product Nav Menu End ======*/}
-
           {/*======= Customer Nav Menu Start ======*/}
           <Accordion
             TransitionProps={{ unmountOnExit: true }}
@@ -499,80 +324,6 @@ const SidebarNavigation = () => {
             </AccordionDetails>
           </Accordion>
           {/*======= Supplier Nav Menu End ======*/}
-
-          {/*======= Purchase Nav Menu Start ======*/}
-          {/* <Accordion
-            TransitionProps={{ unmountOnExit: true }}
-            sx={{
-              background: "#003366 !important",
-              boxShadow: "none !important",
-            }}
-          >
-            <AccordionSummary
-              expandIcon={
-                <ArrowBackIosNewIcon
-                  sx={{ color: "#fff !important", fontSize: "12px" }}
-                />
-              }
-              aria-controls="panel2a-content"
-              id="panel2a-header"
-              sx={{
-                "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-                  transform: "rotate(-90deg)",
-                  marginBottom: 0,
-                },
-              }}
-            >
-              <Button
-                sx={{
-                  color: "#fff !important",
-                  textTransform: "capitalize",
-                  fontWeight: "300",
-                  fontSize: "16px",
-                }}
-              >
-                <ShopIcon sx={{ mr: 2, fontSize: "24px" }} />
-                Purchase
-              </Button>
-            </AccordionSummary>
-            <AccordionDetails sx={{ background: "#012C56 !important" }}>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/add-purchase`}
-                
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
-                  Purchase
-                </Button>
-              </NavLink>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/manage-purchase`}
-                
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
-                  Purchase
-                </Button>
-              </NavLink>
-            </AccordionDetails>
-          </Accordion> */}
-          {/*======= Purchase Nav Menu End ======*/}
 
           {/*======= Accounts Nav Menu Start ======*/}
           <Accordion
@@ -937,6 +688,343 @@ const SidebarNavigation = () => {
           </Accordion>
           {/*======= Report Nav Menu End ======*/}
 
+          {/*======= HRM Nav Menu Start ======*/}
+          <Accordion
+            TransitionProps={{ unmountOnExit: true }}
+            sx={{
+              background: "#003366 !important",
+              boxShadow: "none !important",
+            }}
+          >
+            <AccordionSummary
+              expandIcon={
+                <ArrowBackIosNewIcon
+                  sx={{ color: "#fff !important", fontSize: "12px" }}
+                />
+              }
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+              sx={{
+                "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+                  transform: "rotate(-90deg)",
+                  marginBottom: 0,
+                },
+              }}
+            >
+              <Button
+                sx={{
+                  color: "#fff !important",
+                  textTransform: "capitalize",
+                  fontWeight: "300",
+                  fontSize: "16px",
+                }}
+              >
+                <AccountCircleIcon sx={{ mr: 2, fontSize: "24px" }} />
+                HRM
+              </Button>
+            </AccordionSummary>
+            <AccordionDetails sx={{ background: "#012C56 !important" }}>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/designation`}
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
+                  Designation
+                </Button>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/add-employee`}
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
+                  Employee
+                </Button>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/manage-employee`}
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
+                  Employee
+                </Button>
+              </NavLink>
+            </AccordionDetails>
+          </Accordion>
+          {/*======= HRM Nav Menu End ======*/}
+
+          {/*======= Sell Nav Menu Start ======*/}
+          <Accordion
+            TransitionProps={{ unmountOnExit: true }}
+            sx={{
+              background: "#003366 !important",
+              boxShadow: "none !important",
+            }}
+          >
+            <AccordionSummary
+              expandIcon={
+                <ArrowBackIosNewIcon
+                  sx={{ color: "#fff !important", fontSize: "12px" }}
+                />
+              }
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+              sx={{
+                "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+                  transform: "rotate(-90deg)",
+                  marginBottom: 0,
+                },
+              }}
+            >
+              <Button
+                sx={{
+                  color: "#fff !important",
+                  textTransform: "capitalize",
+                  fontWeight: "300",
+                  fontSize: "16px",
+                }}
+              >
+                <PointOfSaleIcon sx={{ mr: 2, fontSize: "24px" }} />
+                Sell
+              </Button>
+            </AccordionSummary>
+            <AccordionDetails sx={{ background: "#012C56 !important" }}>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/add-new-invoice`}
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add New
+                  Invoice
+                </Button>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/manage-invoice`}
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
+                  Invoice
+                </Button>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/pos`}
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "uppercase",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> POS
+                </Button>
+              </NavLink>
+            </AccordionDetails>
+          </Accordion>
+          {/*======= Sell Nav Menu End ======*/}
+
+          {/*======= Product Nav Menu Start ======*/}
+          <Accordion
+            TransitionProps={{ unmountOnExit: true }}
+            sx={{
+              background: "#003366 !important",
+              boxShadow: "none !important",
+            }}
+          >
+            <AccordionSummary
+              expandIcon={
+                <ArrowBackIosNewIcon
+                  sx={{ color: "#fff !important", fontSize: "12px" }}
+                />
+              }
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+              sx={{
+                "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+                  transform: "rotate(-90deg)",
+                  marginBottom: 0,
+                },
+              }}
+            >
+              <Button
+                sx={{
+                  color: "#fff !important",
+                  textTransform: "capitalize",
+                  fontWeight: "300",
+                  fontSize: "16px",
+                }}
+              >
+                <ShoppingCartIcon sx={{ mr: 2, fontSize: "24px" }} />
+                Product
+              </Button>
+            </AccordionSummary>
+            <AccordionDetails sx={{ background: "#012C56 !important" }}>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/product-category`}
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
+                  Category
+                </Button>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/add-product`}
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
+                  Product
+                </Button>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/manage-product`}
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
+                  Product
+                </Button>
+              </NavLink>
+            </AccordionDetails>
+          </Accordion>
+          {/*======= Product Nav Menu End ======*/}
+
+          {/*======= Purchase Nav Menu Start ======*/}
+          {/* <Accordion
+            TransitionProps={{ unmountOnExit: true }}
+            sx={{
+              background: "#003366 !important",
+              boxShadow: "none !important",
+            }}
+          >
+            <AccordionSummary
+              expandIcon={
+                <ArrowBackIosNewIcon
+                  sx={{ color: "#fff !important", fontSize: "12px" }}
+                />
+              }
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+              sx={{
+                "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+                  transform: "rotate(-90deg)",
+                  marginBottom: 0,
+                },
+              }}
+            >
+              <Button
+                sx={{
+                  color: "#fff !important",
+                  textTransform: "capitalize",
+                  fontWeight: "300",
+                  fontSize: "16px",
+                }}
+              >
+                <ShopIcon sx={{ mr: 2, fontSize: "24px" }} />
+                Purchase
+              </Button>
+            </AccordionSummary>
+            <AccordionDetails sx={{ background: "#012C56 !important" }}>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/add-purchase`}
+                
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
+                  Purchase
+                </Button>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/manage-purchase`}
+                
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
+                  Purchase
+                </Button>
+              </NavLink>
+            </AccordionDetails>
+          </Accordion> */}
+          {/*======= Purchase Nav Menu End ======*/}
+
           {/*======= Bank Nav Menu Start ======*/}
           {/* <Accordion
             TransitionProps={{ unmountOnExit: true }}
@@ -1027,94 +1115,6 @@ const SidebarNavigation = () => {
             </AccordionDetails>
           </Accordion> */}
           {/*======= Bank Nav Menu End ======*/}
-
-          {/*======= HRM Nav Menu Start ======*/}
-          <Accordion
-            TransitionProps={{ unmountOnExit: true }}
-            sx={{
-              background: "#003366 !important",
-              boxShadow: "none !important",
-            }}
-          >
-            <AccordionSummary
-              expandIcon={
-                <ArrowBackIosNewIcon
-                  sx={{ color: "#fff !important", fontSize: "12px" }}
-                />
-              }
-              aria-controls="panel2a-content"
-              id="panel2a-header"
-              sx={{
-                "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-                  transform: "rotate(-90deg)",
-                  marginBottom: 0,
-                },
-              }}
-            >
-              <Button
-                sx={{
-                  color: "#fff !important",
-                  textTransform: "capitalize",
-                  fontWeight: "300",
-                  fontSize: "16px",
-                }}
-              >
-                <AccountCircleIcon sx={{ mr: 2, fontSize: "24px" }} />
-                HRM
-              </Button>
-            </AccordionSummary>
-            <AccordionDetails sx={{ background: "#012C56 !important" }}>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/designation`}
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
-                  Designation
-                </Button>
-              </NavLink>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/add-employee`}
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
-                  Employee
-                </Button>
-              </NavLink>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/manage-employee`}
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
-                  Employee
-                </Button>
-              </NavLink>
-            </AccordionDetails>
-          </Accordion>
-          {/*======= HRM Nav Menu End ======*/}
 
           {/*======= Expense Nav Menu Start ======*/}
           <Accordion
