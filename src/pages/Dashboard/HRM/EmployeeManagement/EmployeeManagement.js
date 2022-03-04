@@ -152,7 +152,6 @@ const EmployeeManagement = () => {
     (state) => state.entities.employee.employeesLoading
   );
   const [reload, setReload] = useState(false);
-  // const [loading, setLoading] = useState(false);
 
   // Load Employees from Database
   useEffect(() => {

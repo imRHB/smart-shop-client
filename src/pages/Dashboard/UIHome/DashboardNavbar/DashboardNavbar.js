@@ -12,9 +12,11 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AddIcon from "@mui/icons-material/Add";
 import { NavLink } from "react-router-dom";
 import { Modal, Row, Col } from "react-bootstrap";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import useAuth from "../../../../hooks/useAuth";
 
 const DashboardNavbar = () => {
+  const { logOut } = useAuth();
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -145,8 +147,23 @@ const DashboardNavbar = () => {
                                     </Button>
                                 </Link>
                             )} */}
-                <LogoutIcon sx={{ marginRight: "10px" }} />
-                Logout
+                <NavLink
+                  style={{ textDecoration: "none", marginTop: "0 !important" }}
+                  to="/"
+                >
+                  <Button
+                    onClick={logOut}
+                    sx={{
+                      color: "#fff !important",
+                      textTransform: "capitalize",
+                      fontWeight: "300",
+                      fontSize: "16px",
+                    }}
+                  >
+                    <LogoutIcon sx={{ mr: 2, fontSize: "24px" }} />
+                    Logout
+                  </Button>
+                </NavLink>
               </NavDropdown.Item>
             </div>
           </NavDropdown>

@@ -7,7 +7,7 @@ let initialState = {
   supplierLoading: false,
   reload: false,
   supplierAdded: false,
-  supplierDeleted: false,
+  supplierDeletedSuccess: false,
   editSupplier: {},
   error: "",
   apiResponse: {},
@@ -44,6 +44,7 @@ const supplier = createSlice({
           (supplier) => supplier._id === action.payload._id
         );
         state.allSupplier.splice(index, 1);
+        state.supplierDeletedSuccess = true;
       }
     },
     setEditSupplier: (state, action) => {

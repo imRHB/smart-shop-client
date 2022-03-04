@@ -32,9 +32,9 @@ const override = css`
 function Row(props) {
   const dispatch = useDispatch();
   const { designation, serial } = props;
-  const designationDeleted = useSelector(
-    (state) => state.entities.designation.designationDeleted
-  );
+  // const designationDeleted = useSelector(
+  //   (state) => state.entities.designation.designationDeletedSuccess
+  // );
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -48,12 +48,10 @@ function Row(props) {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deleteDesignationToDB(id));
-        if (designationDeleted) {
-          Swal.fire("Deleted!", "Designation has been deleted.", "success");
-          // Set reload
-          dispatch(setReload());
-          // setReload(!reload);
-        }
+        Swal.fire("Deleted!", "Designation has been deleted.", "success");
+        // Set reload
+        dispatch(setReload());
+        // setReload(!reload);
       }
     });
   };
