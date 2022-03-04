@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Button, Container, Grid, Input } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { useForm } from "react-hook-form";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
-import cloudImage from "../../../../assets/images/cloud-upload.png";
 import styles from "./UpdateCustomer.module.css";
+import { useDispatch } from "react-redux";
+import { saveCustomerToDB } from "../../../../store/customer";
 
 const UpdateCustomer = () => {
+  const dispatch = useDispatch();
   const categories = [
     {
       _id: 1,
@@ -47,29 +49,22 @@ const UpdateCustomer = () => {
     } = data;
     const name = `${firstName} ${lastName}`;
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("category", category);
-    formData.append("phone", phone);
-    formData.append("email", email);
-    formData.append("fax", fax);
-    formData.append("city", city);
-    formData.append("zip", zip);
-    formData.append("address", address);
-    fetch("https://smart-shop-pos.herokuapp.com/customers", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          Swal.fire("Good job!", "Customer Created Successfully!", "success");
-          reset();
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    const customerData = {
+      name,
+      category,
+      phone,
+      email,
+      fax,
+      city,
+      zip,
+      address,
+    };
+
+    //Send form data to Server
+    dispatch(saveCustomerToDB(customerData));
+
+    Swal.fire("Good job!", "Customer Created Successfully!", "success");
+    reset();
   };
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
@@ -309,7 +304,7 @@ const UpdateCustomer = () => {
                           rows="3"
                           placeholder="Address"
                           style={{ background: "#E5E5E5" }}
-                          {...register("address1", { required: false })}
+                          {...register("address", { required: false })}
                         ></textarea>
                       </div>
                     </div>
