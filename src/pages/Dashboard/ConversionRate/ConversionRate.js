@@ -85,7 +85,7 @@ const ConversionRate = () => {
             <div className='row'>
                 <div  className='col-12 col-lg-7 col-md-7'>
                     <div style={{ backgroundColor: 'white', height:'380px' }} className="p-1 ">
-                        <h6 className='text-start m-2 fw-bold '>Top Sales Products</h6>
+                        <h6 className='text-start m-2 fw-bold '>Top Sales Products </h6>
                         <div className='mt-2' id="chart">
                             <ReactApexChart options={rate.options} series={rate.series} type="bar" height={250} />
                         </div>
@@ -93,7 +93,7 @@ const ConversionRate = () => {
 
                 </div>
                 <div className='col-12 col-lg-5 col-md-5'>
-                    <div style={{ backgroundColor: 'white' }} className="p-2 ">
+                    <div style={{ backgroundColor: 'white' }} className="p-2">
                         <div id="chart">
                             <div id="chart">
                                 <ReactApexChart options={year.options} series={year.series} type="radar" height={350} />

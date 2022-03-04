@@ -1,5 +1,4 @@
 import React from "react";
-import ConversionRate from "../ConversionRate/ConversionRate";
 
 const TestComponent = () => {
   return (
@@ -9,7 +8,6 @@ const TestComponent = () => {
       <p className="text-danger fw-bold">
         Don't forget remove your component from test route
       </p>
-      <ConversionRate></ConversionRate>
     </div>
   );
 };
