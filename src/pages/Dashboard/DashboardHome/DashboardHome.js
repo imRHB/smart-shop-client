@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 import defaultUser from "../../../assets/images/user.png";
 import SidebarNavigation from "../SidebarNavigation/SidebarNavigation";
 import NestedRoutes from "../NestedRoutes/NestedRoutes";
-import logo from "../../../assets/images/logo.png";
+import logo from "../../../assets/images/logo2.png";
 import DashboardNavbar from "../UIHome/DashboardNavbar/DashboardNavbar";
 
 const drawerWidth = 270;
@@ -50,7 +50,7 @@ const DashboardHome = (props) => {
   //   }
 
   const drawer = (
-    <div style={{ background: "#E9D41A" }}>
+    <div style={{ background: "#fff" }}>
       <NavLink
         to="/dashboard"
         style={{ cursor: "pointer", textDecoration: "none" }}
