@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import defaultUser from "../../../../assets/images/user.png";
 import { NavDropdown } from "react-bootstrap";
@@ -40,6 +40,15 @@ const DashboardNavbar = () => {
     minute: "numeric",
   });
 
+
+  const [notification, setNotification] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/events")
+      .then(res => res.json())
+      .then(data => setNotification(data))
+
+  }, []);
+
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <Typography
@@ -64,7 +73,7 @@ const DashboardNavbar = () => {
           {" "}
           <AddIcon sx={{ color: "#0d6efd" }}> </AddIcon>
         </NavLink>
-        <Badge color="error" badgeContent={11} max={10}>
+        <Badge color="error" badgeContent={notification.length} max={10}>
           <NotificationsNoneIcon
             sx={{ color: "#0d6efd" }}
             className={`${styles.usersProfileDropdown}`}
