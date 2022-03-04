@@ -37,9 +37,9 @@ const override = css`
 function Row(props) {
   const dispatch = useDispatch();
   const { supplier, serial, reload, setReload } = props;
-  const supplierDeleted = useSelector(
-    (state) => state.entities.supplier.supplierDeletedSuccess
-  );
+  //   const supplierDeleted = useSelector(
+  //     (state) => state.entities.supplier.supplierDeletedSuccess
+  //   );
 
   //delete supplier
   const handleDeleteSupplier = (id) => {
@@ -54,11 +54,9 @@ function Row(props) {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deleteSupplierToDB(id));
-        if (supplierDeleted) {
-          Swal.fire("Deleted!", "Supplier has been deleted.", "success");
-          // Set reload
-          setReload(!reload);
-        }
+        Swal.fire("Deleted!", "Supplier has been deleted.", "success");
+        // Set reload
+        setReload(!reload);
       }
     });
   };
@@ -258,7 +256,7 @@ const ManageSupplier = () => {
           <Table aria-label="simple table">
             <TableHead className={`${styles.tableHeader}`}>
               <TableRow>
-                {/* <TableCell className={`${styles.tableCell}`}>SL.</TableCell> */}
+                <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
                   Supplier Name
                 </TableCell>
