@@ -175,20 +175,7 @@ const AddInvoice = () => {
                     >
                       Available Quantity
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
-                      className={`${styles.tableCell}`}
-                    >
-                      Carton
-                    </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
-                      className={`${styles.tableCell}`}
-                    >
-                      Item
-                    </TableCell>
+
                     <TableCell
                       align="center"
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
@@ -201,7 +188,7 @@ const AddInvoice = () => {
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                       className={`${styles.tableCell}`}
                     >
-                      Rate<span>*</span>
+                      Price<span>*</span>
                     </TableCell>
                     <TableCell
                       align="center"
@@ -254,36 +241,18 @@ const AddInvoice = () => {
                         >
                           <input
                             type="text"
-                            placeholder="Available Ctn."
+                            placeholder="Available Qn."
                             {...register("ctn", { required: true })}
                             style={{
-                              width: "70px",
+                              width: "100px",
                               padding: "8px",
                               backgroundColor: "#f1f3f6",
                               border: "1px solid #aeaeae",
+                              p: 1
                             }}
                           />
                         </TableCell>
 
-                        <TableCell
-                          align="center"
-                          sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
-                            p: 1,
-                          }}
-                        >
-                          <input
-                            type="number"
-                            placeholder="0"
-                            {...register("carton", { required: true })}
-                            style={{
-                              width: "70px",
-                              padding: "8px",
-                              backgroundColor: "#f1f3f6",
-                              border: "1px solid #aeaeae",
-                            }}
-                          />
-                        </TableCell>
                         <TableCell
                           align="center"
                           sx={{
@@ -313,28 +282,8 @@ const AddInvoice = () => {
                         >
                           <input
                             type="text"
-                            placeholder="0"
-                            {...register("item", { required: true })}
-                            style={{
-                              width: "70px",
-                              padding: "8px",
-                              backgroundColor: "#f1f3f6",
-                              border: "1px solid #aeaeae",
-                            }}
-                          />
-                        </TableCell>
-
-                        <TableCell
-                          align="center"
-                          sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
-                            p: 1,
-                          }}
-                        >
-                          <input
-                            type="text"
-                            placeholder="Rating"
-                            {...register("rate", { required: true })}
+                            placeholder="Price"
+                            {...register("price", { required: true })}
                             style={{
                               width: "70px",
                               padding: "8px",
@@ -407,8 +356,6 @@ const AddInvoice = () => {
                     <TableCell />
                     <TableCell />
                     <TableCell />
-                    <TableCell />
-                    <TableCell />
                     <TableCell
                       align="center"
                       sx={{
@@ -440,8 +387,6 @@ const AddInvoice = () => {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell />
-                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell />
@@ -495,8 +440,6 @@ const AddInvoice = () => {
                     <TableCell />
                     <TableCell />
                     <TableCell />
-                    <TableCell />
-                    <TableCell />
                     <TableCell
                       align="center"
                       sx={{
@@ -546,11 +489,9 @@ const AddInvoice = () => {
                         variant="contained"
                         color="success"
                       >
-                        Full Paid
+                        Print Invoice
                       </Button>
                     </TableCell>
-                    <TableCell />
-                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell />
@@ -563,7 +504,7 @@ const AddInvoice = () => {
                         p: 1,
                       }}
                     >
-                      Due:
+                      Change Amount:
                     </TableCell>
                     <TableCell
                       align="center"
@@ -572,7 +513,7 @@ const AddInvoice = () => {
                       <input
                         type="text"
                         placeholder="0"
-                        {...register("due", { required: true })}
+                        {...register("changeAmount", { required: true })}
                         style={{
                           width: "70px",
                           padding: "8px",
