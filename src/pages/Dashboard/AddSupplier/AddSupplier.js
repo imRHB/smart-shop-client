@@ -8,14 +8,33 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import Grid from "@mui/material/Grid";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { saveSupplierToDB } from "../../../store/supplier";
 
 const AddSupplier = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+
+  const onSubmit = (data) => {
+    //Send form data to Server
+    dispatch(saveSupplierToDB(data));
+
+    Swal.fire({
+      position: "top",
+      icon: "success",
+      title: "New Supplier Added",
+      showConfirmButton: true,
+    });
+    reset();
+  };
+
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
       <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
@@ -43,10 +62,15 @@ const AddSupplier = () => {
       </Box>
 
       <Box className={`${styles.paymentContainer}`}>
-        <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>Add Supplier</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>
+          Add Supplier
+        </Typography>
         <hr />
 
-        <form className={`${styles.paymentForm} ${"shadow"}`}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={`${styles.paymentForm} ${"shadow"}`}
+        >
           <Grid
             container
             spacing={4}

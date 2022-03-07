@@ -12,7 +12,8 @@ import { NavLink } from "react-router-dom";
 import defaultUser from "../../../assets/images/user.png";
 import SidebarNavigation from "../SidebarNavigation/SidebarNavigation";
 import NestedRoutes from "../NestedRoutes/NestedRoutes";
-import logo from "../../../assets/images/logo.png";
+import logo from "../../../assets/images/logo2.png";
+import DashboardNavbar from "../UIHome/DashboardNavbar/DashboardNavbar";
 
 const drawerWidth = 270;
 
@@ -49,7 +50,7 @@ const DashboardHome = (props) => {
   //   }
 
   const drawer = (
-    <div style={{ background: "#E9D41A" }}>
+    <div style={{ background: "#fff" }}>
       <NavLink
         to="/dashboard"
         style={{ cursor: "pointer", textDecoration: "none" }}
@@ -78,8 +79,7 @@ const DashboardHome = (props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }} style={{ overflowY: "scroll" }}>
-      <CssBaseline />
+    <Box sx={{ display: "flex" }}>
       <AppBar
         elevation={0}
         position="fixed"
@@ -99,41 +99,10 @@ const DashboardHome = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            sx={{ color: "#0C0C0C", fontWeight: "600" }}
-            component="div"
-          >
-            {true && (
-              <div className="mx-3 text-center">
-                {false ? (
-                  <img
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%",
-                    }}
-                    src={""}
-                    alt=""
-                  />
-                ) : (
-                  <img
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%",
-                    }}
-                    src={defaultUser}
-                    alt=""
-                  />
-                )}
 
-                <span className="">
-                  {" "}
-                  {"Najmul Ovi"} | {true ? "Admin" : "Subscriber"}
-                </span>
-              </div>
-            )}
-          </Typography>
+          <Box sx={{ width: "100%" }}>
+            <DashboardNavbar />
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
@@ -177,9 +146,6 @@ const DashboardHome = (props) => {
       <Box
         component="main"
         sx={{
-          flexGrow: 1,
-          pl: 3,
-          pr: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           background: "#E5E5E5",
           height: "230vh",

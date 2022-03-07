@@ -4,8 +4,16 @@ import Typography from "@mui/material/Typography";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import styles from "./AddDesignation.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  saveDesignationToDB,
+  setReload,
+} from "../../../../../store/designation";
 
 const AddDesignation = () => {
+  const dispatch = useDispatch();
+  //get reload value from store
+  let reload = useSelector((state) => state.entities.designation.reload);
   const {
     register,
     handleSubmit,
@@ -13,26 +21,13 @@ const AddDesignation = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    let { name, detail } = data;
+    //Send form data to Server
+    dispatch(saveDesignationToDB(data));
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("detail", detail);
-
-    // fetch("", {
-    //   method: "POST",
-    //   body: formData,
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.insertedId) {
-    //       Swal.fire("Good job!", "Employee Created Successfully!", "success");
-    //       reset();
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+    // Set reload
+    dispatch(setReload({ reload: !reload }));
+    Swal.fire("Good job!", "Designation Added Successfully.", "success");
+    reset();
   };
   return (
     <Box className={`${styles.tableContainer}`}>
