@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -18,12 +19,39 @@ import { Button, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import employees from "../../../../assets/data/employees.json";
+import Swal from "sweetalert2";
+import { css } from "@emotion/react";
+import FadeLoader from "react-spinners/FadeLoader";
 import styles from "./EmployeeManagement.module.css";
+import { deleteEmployeeToDB, loadEmployees } from "../../../../store/employee";
+
+const override = css`
+  display: block;
+  border-color: red;
+  margin: 0 auto;
+`;
 
 function Row(props) {
-  const { employee, serial } = props;
+  const dispatch = useDispatch();
+  const { employee, serial, reload, setReload } = props;
   const [open, setOpen] = React.useState(false);
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteEmployeeToDB(id));
+        Swal.fire("Deleted!", "Employee has been deleted.", "success");
+        setReload(!reload);
+      }
+    });
+  };
 
   return (
     <React.Fragment>
@@ -44,20 +72,23 @@ function Row(props) {
           {serial + 1}
         </TableCell>
         <TableCell align="center">{employee.name}</TableCell>
-        <TableCell align="center">{employee.position}</TableCell>
+        <TableCell align="center">{employee.designation}</TableCell>
         <TableCell align="center">{employee.phone}</TableCell>
         <TableCell align="center">{employee.email}</TableCell>
         <TableCell align="center">
           <img
             style={{ width: "70px", height: "70px" }}
-            src={employee.img}
+            src={`data:image/jpeg;base64,${employee.image}`}
             alt="Product"
             // loading="lazy"
           />
         </TableCell>
         <TableCell align="center">
           <EditIcon className={`${styles.editIcon}`} />
-          <Delete className={`${styles.deleteIcon}`} />
+          <Delete
+            onClick={() => handleDelete(employee?._id)}
+            className={`${styles.deleteIcon}`}
+          />
         </TableCell>
       </TableRow>
       <TableRow>
@@ -83,7 +114,7 @@ function Row(props) {
                       {employee.name}
                     </TableCell>
                     <TableCell align="center">{employee.phone}</TableCell>
-                    <TableCell align="center">{employee.position}</TableCell>
+                    <TableCell align="center">{employee.designation}</TableCell>
                     <TableCell align="center">{employee.address}</TableCell>
                     <TableCell align="center">BDT {employee.salary}</TableCell>
                   </TableRow>
@@ -112,6 +143,21 @@ Row.propTypes = {
 };
 
 const EmployeeManagement = () => {
+  const dispatch = useDispatch();
+  // Getting employees from store
+  const employees = useSelector(
+    (state) => state.entities.employee.allEmployees
+  );
+  const employeesLoader = useSelector(
+    (state) => state.entities.employee.employeesLoading
+  );
+  const [reload, setReload] = useState(false);
+
+  // Load Employees from Database
+  useEffect(() => {
+    dispatch(loadEmployees());
+  }, [reload]);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -174,11 +220,33 @@ const EmployeeManagement = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {employees
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((employee, index) => (
-                  <Row key={employee._id} employee={employee} serial={index} />
-                ))}
+              {employeesLoader && (
+                <TableRow>
+                  <TableCell align="center" colSpan={8}>
+                    <FadeLoader
+                      color={"#123abc"}
+                      loading={employeesLoader}
+                      css={override}
+                      height={10}
+                      width={5}
+                      radius={2}
+                      margin={2}
+                    />
+                  </TableCell>
+                </TableRow>
+              )}
+              {employees.length > 0 &&
+                employees
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((employee, index) => (
+                    <Row
+                      key={employee._id}
+                      employee={employee}
+                      serial={index}
+                      reload={reload}
+                      setReload={setReload}
+                    />
+                  ))}
             </TableBody>
           </Table>
         </TableContainer>

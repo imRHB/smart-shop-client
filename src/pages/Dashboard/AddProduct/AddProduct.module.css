@@ -1,0 +1,52 @@
+.tableContainer {
+    background-color: #f1f3f6;
+    padding: 17px;
+    border-radius: 5px;
+  }
+  
+  .topContainer {
+    background-color: #f1f3f6;
+    padding: 17px;
+    border-radius: 5px;
+  }
+  
+  .assignmentIcon {
+    font-size: 56px !important;
+    color: #fff !important;
+    background-color: #001e3c !important;
+    margin-right: 15px !important;
+  }
+  
+  .manageProductBtn {
+    background-color: #003366 !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-right: 5px !important;
+    font-weight: 700;
+  }
+  
+  .manageProductBtn:hover {
+    background-color: #003366 !important;
+    color: #fff !important;
+  }
+  
+  .resetBtn {
+    background-color: #e7575e !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    margin-right: 5px !important;
+  }
+  
+  .saveBtn {
+    background-color: #003366 !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    margin-right: 5px !important;
+  }
+  

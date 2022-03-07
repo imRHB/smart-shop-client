@@ -1,0 +1,32 @@
+.usersProfileDropdown{
+    margin-left: 15px;
+}
+
+.usersDPDropdown:hover{
+background-color: #003366;
+cursor: default;
+}
+.alldropdownItems{
+    background-color: #003366;
+    color: white;
+    border: 1px solid #2c95ff;
+}
+.usersDropdown{
+ color: white;
+}
+
+.usersDropdown:hover{
+background-color: #003366;
+color: white;
+}
+
+.employeeTitle{
+    font-weight: 700;
+    font-size: 20px;
+}
+.employeeInfo{
+   
+    font-weight: 400;
+    font-size: 15px;
+    
+}

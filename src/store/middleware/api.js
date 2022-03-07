@@ -1,10 +1,11 @@
 import axios from "axios";
-import { apiCallBegan, apiCallFailed, apiCallSuccessed } from "../api";
+import { apiCallBegan, apiCallFailed, apiCallSucceeded } from "../api";
 
 const api =
   ({ dispatch }) =>
   (next) =>
   async (action) => {
+    console.log(action);
     if (action.type !== apiCallBegan.type) return next(action);
 
     const { url, method, data, onSuccess, onError, onStart, onFailed } =
@@ -15,14 +16,14 @@ const api =
 
     try {
       const response = await axios.request({
-        baseURL: "https://localhost:5000/",
+        baseURL: "https://smart-shop-pos.herokuapp.com",
         url,
         method,
         data,
       });
 
       // General
-      dispatch(apiCallSuccessed(response.data));
+      dispatch(apiCallSucceeded(response.data));
       // Specific
       if (onSuccess) dispatch({ type: onSuccess, payload: response.data });
     } catch (error) {

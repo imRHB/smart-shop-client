@@ -1,82 +1,151 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { Button, Container, Grid, Input } from "@mui/material";
+import { useForm } from "react-hook-form";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import Swal from "sweetalert2";
+import styles from "./AddOfficePerson.module.css";
+
 const AddOfficePerson = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    let { firstName, phone, address } = data;
+    const name = `${firstName}`;
 
-
-
-    const onSubmit = (data) => {
-
-    }
-
-    return (
-        <div >
-           <div style={{ backgroundColor:'white' }} className="p-1">
-           <div className='d-flex justify-content-between m-2'>
-                <div className='text-start  d-flex'>
-                    <h1>
-                        <AssignmentIcon style={{fontSize:'60px', backgroundColor:'#002447', color:'white'}}></AssignmentIcon>
-                    </h1>
-              <div className='ms-3'>
-              <h5 className='fw-bold'>Person</h5>
-                    <small className=''> Add Person</small>
-              </div>
-                </div>
-                <div>
-
-                    <small style={{color:'#002447'}} className=' fw-bold border p-1'>Person/Add Person</small>
-                </div>
-
-            </div>
-           </div>
-            <div className='text-end m-3'>
-                <Link to="/manageProducts">
-                    <button style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'><FormatAlignJustifyIcon></FormatAlignJustifyIcon> Manage Person Loan</button>
-                </Link>
-            </div>
-            <div style={{ marginTop: '60px' , backgroundColor:'white' }} className='container '>
-
-                <div className='row shadow border pb-4 mb-3'>
-                    <h5 className='text-start p-3 border'>Please Add  <span style={{ color: 'rgb(45, 55, 72)' }}> Person</span> </h5>
-
-                    <div className='col-12 col-lg-12 col-md-12 mt-5'>
-                        <div className='text-center'>
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                             
-                                        <span className='fw-bold'>Expense Item *</span>
-
-                                        <input style={{ width: '60%' }} className='field mb-3 ms-2 ' {...register("name", { required: true })} placeholder='Person Name ' /> <br />
-
-                                       
-                                        <div className='  mt-2'>
-                                            <div className=''>
-                                                <span className='fw-bold'>Phone *</span>
-                                                <input style={{ width: '60%',marginLeft: '6%' }} className='field mb-3  ' type="number" {...register("phone", { required: true })} placeholder='Phone Number' /> <br />
-                                               
-                                            </div>
-                                         
-                                            <div className='mt-2'>
-                                                <span className='fw-bold'>Address *</span>
-                                                <input style={{ width: '60%', marginLeft: '4%' }} className='field mb-3   ' type="text" {...register("address", { required: true })} placeholder='Adsrss ' /> <br />
-                                    </div>
-                                 
-                                </div>
-
-                                <input style={{ backgroundColor: '#002447' }} className=' text-light btn fw-bold  px-5 py-2' type="submit" />
-
-                            </form>
-                        </div>
-
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("phone", phone);
+    formData.append("address", address);
+  };
+  return (
+    <Container sx={{ width: "100%", mb: 5 }}>
+      <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
+        <Typography>
+          <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
+        </Typography>
+        <Typography>
+          <span style={{ fontSize: "26px" }}>Office Loan</span> <br />{" "}
+          <span style={{ color: "#969494" }}>Add Person</span>
+        </Typography>
+      </Box>
+      <Box sx={{ textAlign: "right", my: 2 }}>
+   
+        <Button className={`${styles.manageEmployeeBtn}`}>Manage Loan</Button>
+      </Box>
+      <Box className={`${styles.tableContainer}`}>
+        <Typography sx={{ fontWeight: "bold", textAlign:'start', marginLeft:'5px' }}>Add Person</Typography>
+        <hr />
+        <div className="mt-2">
+          <div className="form-container">
+            <div>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="row gx-3 mb-3">
+                  <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div className="p-3 border bg-light">
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          style={{ fontWeight: "bold" }}
+                        >
+                          Name <sup className="text-danger fw-bold fs-6">*</sup>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Name"
+                          style={{ background: "#E5E5E5" }}
+                          {...register("firstName", { required: true })}
+                        />
+                        {errors.firstName && (
+                          <span className="text-danger">
+                            Please enter your name.
+                          </span>
+                        )}
+                      </div>
                     </div>
-
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div className="p-3 border bg-light">
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          style={{ fontWeight: "bold" }}
+                        >
+                          Phone{" "}
+                          <sup className="text-danger fw-bold fs-6">*</sup>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Phone"
+                          style={{ background: "#E5E5E5" }}
+                          {...register("phone", { required: true })}
+                        />
+                        {errors.phone && (
+                          <span className="text-danger">
+                            Please enter phone number.
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-    );
 
+                <div className="row gx-3 mb-3">
+                  <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div className="p-3 border bg-light">
+                      <div className="mb-3">
+                        <label
+                          className="form-label"
+                          style={{ fontWeight: "bold" }}
+                        >
+                          Address
+                        </label>
+                        <textarea
+                          className="form-control"
+                          rows="3"
+                          placeholder="Address"
+                          style={{ background: "#E5E5E5" }}
+                          {...register("address", { required: false })}
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+                    <div className="p-3 border bg-light">
+                      <div className="mb-3">
+                        <Box sx={{ textAlign: "center", my: 2 }}>
+                          <input
+                            type="reset"
+                            className={`${"btn"} ${styles.resetBtn}`}
+                            style={{ background: "#251D58", color: "#fff" }}
+                            value="Reset"
+                          />
+                          <input
+                            type="submit"
+                            className={`${"btn"} ${styles.saveBtn}`}
+                            style={{ background: "#251D58", color: "#fff" }}
+                            value="Save"
+                          />
+                        </Box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row gx-3 mb-3"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </Box>
+    </Container>
+  );
 };
 
 export default AddOfficePerson;

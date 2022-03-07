@@ -1,35 +1,30 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
+import React from 'react';
+import { Container } from "react-bootstrap";
+import { Box, Button, Collapse, IconButton, Paper, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Typography } from "@mui/material";
 import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import TablePagination from "@mui/material/TablePagination";
-import { Button, Container, Grid, TextField } from "@mui/material";
-import products from "../../../assets/data/products.json";
-import './ManageProducts.css'
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import EditIcon from '@mui/icons-material/Edit';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
+import EditIcon from "@mui/icons-material/Edit";
+import Delete from "@mui/icons-material/Delete";
+import products from '../../../assets/data/products.json';
+import styles from './ManageProducts.module.css';
 
 function Row(props) {
-    const { product } = props;
+    const { product, serial } = props;
     const [open, setOpen] = React.useState(false);
+
+    const handleDelete = () => {
+
+    };
 
     return (
         <React.Fragment>
-            <TableRow className="colunm" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                <TableCell width="8%">
+            <TableRow
+                className={`${styles.tableHover}`}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+                <TableCell>
                     <IconButton
                         aria-label="expand row"
                         size="small"
@@ -38,14 +33,33 @@ function Row(props) {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                <TableCell width="15%" align="start" component="th" scope="row">
-                    {product._id}
+                <TableCell component="th" scope="row">
+                    {serial + 1}
                 </TableCell>
                 <TableCell align="center">{product.name}</TableCell>
-
+                <TableCell align="center">{product.category}</TableCell>
+                <TableCell align="center">{product.price}</TableCell>
+                <TableCell align="center">{product.salePrice}</TableCell>
                 <TableCell align="center">
-                    <EditIcon sx={{ backgroundColor: '#002447', color: 'white', padding: '2px', borderRadius: '5px' }} />
-                    <DeleteForeverIcon sx={{ marginLeft: '15px', backgroundColor: 'red', color: 'white', padding: '2px', borderRadius: '5px' }} />
+                    <img
+                        style={{ width: "70px", height: "70px" }}
+                        src={product.img}
+                        alt="Product"
+                    // loading="lazy"
+                    />
+                    {/* <img
+                        style={{ width: "70px", height: "70px" }}
+                        src={`data:image/jpeg;base64,${product.img}`}
+                        alt="Product"
+                    // loading="lazy"
+                    /> */}
+                </TableCell>
+                <TableCell align="center">
+                    <EditIcon className={`${styles.editIcon}`} />
+                    <Delete
+                        onClick={() => handleDelete(product?._id)}
+                        className={`${styles.deleteIcon}`}
+                    />
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -53,29 +67,29 @@ function Row(props) {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
                             <Typography variant="h6" gutterBottom component="div">
-                                Products Details
+                                Product Details
                             </Typography>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
-                                    <TableRow >
-                                        <TableCell align="start">SL.</TableCell>
-                                        <TableCell width="50%" align="center">Description</TableCell>
+                                    <TableRow>
+                                        <TableCell align="center">Product ID</TableCell>
+                                        <TableCell align="center">Name</TableCell>
+                                        <TableCell align="center">Category</TableCell>
                                         <TableCell align="center">Unit</TableCell>
                                         <TableCell align="center">Price</TableCell>
-                                        <TableCell align="center">SellPrice</TableCell>
-
+                                        <TableCell align="center">Sale Price</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     <TableRow key={product._id}>
                                         <TableCell component="th" scope="row">
-                                            {product._id}
+                                            {product.productId}
                                         </TableCell>
-                                        <TableCell align="start">{product.description}</TableCell>
+                                        <TableCell align="center">{product.name}</TableCell>
+                                        <TableCell align="center">{product.category}</TableCell>
                                         <TableCell align="center">{product.unit}</TableCell>
-                                        <TableCell align="center">{product.price}</TableCell>
-                                        <TableCell align="center">{product.salePrice}</TableCell>
-
+                                        <TableCell align="center">BDT {product.price}</TableCell>
+                                        <TableCell align="center">BDT {product.salePrice}</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -87,21 +101,10 @@ function Row(props) {
     );
 }
 
-Row.propTypes = {
-  product: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    position: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
-    productId: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    salary: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 const ManageProducts = () => {
+    const [open, setOpen] = React.useState(false);
+    const [inputValue, setInputValue] = React.useState("");
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -114,78 +117,105 @@ const ManageProducts = () => {
         setPage(0);
     };
 
+    const handleProductSearch = (event) => {
+        event.preventDefault();
+    };
+
+
     return (
-        <Box>
-            <Box sx={{ marginBottom: '30px' }}>
-                <Box className="justify-content-between m-2 " sx={{ display: "flex",backgroundColor:'white'}}>
-                   <Box  sx={{ display: "flex", }}>
-                   <Typography>
-                        <AssignmentIcon sx={{ fontSize: '65px', backgroundColor: '#002447', color: 'white', margin: '10px' }} />{" "}
-                    </Typography>
-                    <Typography sx={{ marginTop: '10px' }}>
-                        <span style={{ fontSize: "26px" }}>PRODUCTS </span> <br />{" "}
-                        <span  style={{ color: "#969494" }}>products management</span>
-                    </Typography>
-                   </Box>
-                    <Box>
-                        <Typography className="border mt-2">
-                            PRODUCTS/SUITE
-                        </Typography>
-                    </Box>
-                </Box>
-               
+        <Container sx={{ width: "100%", mb: 5 }}>
+            <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
+                <Typography>
+                    <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
+                </Typography>
+                <Typography>
+                    <span style={{ fontSize: "26px", marginLeft: "-30px" }}>Product</span>{" "}
+                    <br /> <span style={{ color: "#969494" }}>Manage Product</span>
+                </Typography>
             </Box>
-            <Container sx={{ width: "100%" }}>
 
-
-                <Box sx={{ boxShadow: '0px 0px 01px 2px whiteSmoke', backgroundColor: 'white' }}>
-                    <Typography variant="h6" sx={{ borderBottom: '1px solid lightGray', color: 'gray' }}>
-                        Category toevoegen
-                    </Typography>
-                    <Grid sx={{ padding: '20px' }} container spacing={2}>
-                        <Grid item xs={4}>
-                            <Typography variant="small" sx={{ fontWeight: 'bold', color: 'gray' }}>
-                                Category Name *
+            {/* <Box sx={{ textAlign: "left", mb: 1 }}>
+                <Button className={`${styles.filterBtn}`} onClick={() => setOpen(!open)}>Filter</Button>
+                <Collapse in={open} sx={{ mt: 2, mb: 2 }} timeout="auto" unmountOnExit className={`${styles.tableContainer}`}>
+                    <form onSubmit={handleProductSearch}>
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <Typography sx={{ textAlign: "left", mr: 2 }} style={{ fontSize: "17px" }} >
+                                Search By Product:
                             </Typography>
-                        </Grid>
-                        <Grid item xs={8} sx={{ marginBottom: '50px' }}>
-                            <TextField sx={{ width: '50%' }} id="outlined-basic" label="Category Name" variant="outlined" />
-                            <Button variant="contained" sx={{ marginLeft: '10px', marginTop: '5px', backgroundColor: '#002447' }}> <FormatAlignJustifyIcon></FormatAlignJustifyIcon>  Save</Button>
-                        </Grid>
-                    </Grid>
+                            <TextField onChange={(event) => setInputValue(event.target.value)} size="small" id="outlined-basic" label="Product Name" sx={{ mr: 1 }} variant="outlined" />
+                            <Button type="submit" className={`${styles.searchBtn}`}>Search</Button>
+                        </Box>
+                    </form>
+                </Collapse>
+            </Box> */}
 
-
-
+            <Box sx={{ textAlign: "left", mb: 1 }}>
+                <Box className={`${styles.tableContainer}`}>
+                    <form onSubmit={handleProductSearch}>
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <Typography sx={{ textAlign: "left", mr: 2 }} style={{ fontSize: "17px" }} >
+                                Search By Product:
+                            </Typography>
+                            <TextField onChange={(event) => setInputValue(event.target.value)} size="small" id="outlined-basic" label="Product Name" sx={{ mr: 1 }} variant="outlined" />
+                            <Button type="submit" className={`${styles.searchBtn}`}>Search</Button>
+                        </Box>
+                    </form>
                 </Box>
+            </Box>
 
-                <Paper sx={{ marginTop: '50px', paddingBottom: 'px', }}>
-                    <Box sx={{ borderBottom: '1px solid lightGray' }}>
-                        <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'gray', fontSize: '3vh', margin: '10px', }}>
-                            Manage Category
-                        </Typography>
-                    </Box>
-                    <TableContainer component={Paper} sx={{ width: '97%', margin: '15px', border: '1px solid lightGray' }}>
-
-                        <Table aria-label="simple table">
-                            <TableHead>
-                                <TableRow sx={{ backgroundColor: '#002447', color: 'white' }}>
-                                    <TableCell />
-                                    <TableCell sx={{ color: 'white', fontWeight: 'bold' }}  >SL.</TableCell>
-                                    <TableCell sx={{ color: 'white', fontWeight: 'bold' }} align="center">Category Name</TableCell>
-                                    <TableCell sx={{ color: 'white', fontWeight: 'bold' }} align="center">Action</TableCell>
-
-                                </TableRow>
-                            </TableHead>
-                            <TableBody >
-                                {products
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((product) => (
-                                        <Row key={product._id} product={product} />
-                                    ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Paper>
+            <Box sx={{ textAlign: "right", my: 2 }}>
+                <Button className={`${styles.addProductBtn}`}>Add Product</Button>
+            </Box>
+            <Box className={`${styles.tableContainer}`}>
+                <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+                    Manage Product
+                </Typography>
+                <hr />
+                <TableContainer
+                    component={Paper}
+                    sx={{ border: 1, borderColor: "grey.300" }}
+                >
+                    <Table aria-label="simple table">
+                        <TableHead className={`${styles.tableHeader}`}>
+                            <TableRow>
+                                <TableCell />
+                                <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Name
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Category
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Price
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Sale Price
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Image
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Action
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {products
+                                ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((product, index) => (
+                                    <Row
+                                        key={product._id}
+                                        product={product}
+                                        serial={index}
+                                    // loading={loading}
+                                    // reload={reload}
+                                    // setReload={setReload}
+                                    />
+                                ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
                 <Typography className="mt-3">
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 15]}
@@ -197,8 +227,8 @@ const ManageProducts = () => {
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Typography>
-            </Container>
-        </Box>
+            </Box>
+        </Container>
     );
 };
 

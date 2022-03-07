@@ -4,7 +4,7 @@ const useSuppliers = () => {
     const [suppliers, setSuppliers] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/suppliers')
+        fetch('https://smart-shop-pos.herokuapp.com/suppliers')
             .then(res => res.json())
             .then(data => setSuppliers(data));
     }, []);
