@@ -1,5 +1,7 @@
 import React from "react";
 import Charts from "../Charts/Charts";
+import ConversionRate from "../ConversionRate/ConversionRate";
+import OrderTimeline from "../OrderTimeline/OrderTimeline";
 import HeaderTwo from "../UIHome/HeaderTwo/HeaderTwo";
 import TotalReports from "../UIHome/TotalReports/TotalReports";
 import WelcomeReport from "../WelcomeReport/WelcomeReport";
@@ -17,6 +19,12 @@ const Dashboard = () => {
       </div>
       <div className="container px-4 mt-3">
         <TotalReports />
+      </div>
+      <div className="container px-4 mt-3">
+        <OrderTimeline />
+      </div>
+      <div className="container px-4 mt-3">
+        <ConversionRate />
       </div>
     </>
   );
