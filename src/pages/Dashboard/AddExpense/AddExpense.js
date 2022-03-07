@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import styles from "./AddExpense.module.css";
 import { Link } from "react-router-dom";
 
-const AddPerson = () => {
+const AddExpense = () => {
   const {
     register,
     handleSubmit,
@@ -167,4 +167,4 @@ const AddPerson = () => {
   );
 };
 
-export default AddPerson;
+export default AddExpense;
