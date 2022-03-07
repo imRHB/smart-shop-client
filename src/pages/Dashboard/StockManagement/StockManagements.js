@@ -71,7 +71,7 @@ function Row(props) {
                                             style={{ width: "70px", height: "70px" }}
                                             src={product.img}
                                             alt="Product" /></TableCell>
-                                        <TableCell align="start">{product.description}</TableCell>
+                                        <TableCell align="left">{product.description}</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -125,7 +125,7 @@ const StockManagements = () => {
                 <Typography>
                     <span style={{ fontSize: "26px" }}>
                         Stock Report</span> <br />{" "}
-                    <span style={{ color: "#969494", marginRight: "-10px" }}>All Stock Report</span>
+                    <span style={{ color: "#969494", marginRight: "31px" }}>All Stock Report</span>
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "left", mb: 1 }}>
