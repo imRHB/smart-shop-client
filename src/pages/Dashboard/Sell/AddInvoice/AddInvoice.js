@@ -68,7 +68,7 @@ const AddInvoice = () => {
               <TextField
                 id="outlined-basic"
                 size="small"
-                sx={{ width: "400px" }}
+                sx={{ width: "45%", backgroundColor: "white" }}
                 label="Customer Contact"
                 variant="outlined"
                 {...register("contact", { required: true })}
@@ -86,29 +86,46 @@ const AddInvoice = () => {
             </Box>
 
             <Collapse in={open} timeout="auto">
-              <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>
-                  Customer Name <span>*</span>
-                </Typography>
+              <Box sx={{ width: "45%", display: "flex" }}>
+                <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+                  <Typography sx={{ textAlign: "start" }}>
+                    Customer Name <span>*</span>
+                  </Typography>
 
-                <TextField
-                  size="small"
-                  id="outlined-basic"
-                  sx={{ width: "400px" }}
-                  label="Customer Name"
-                  variant="outlined"
-                  {...register("name", { required: true })}
-                />
+                  <TextField
+                    size="small"
+                    id="outlined-basic"
+                    sx={{ width: "45%", backgroundColor: "white" }}
+                    label="Customer Name"
+                    variant="outlined"
+                    {...register("name", { required: true })}
+                  />
+                </Box>
+                <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+                  <Typography sx={{ textAlign: "start" }}>
+                    Customer Email
+                  </Typography>
+
+                  <TextField
+                    size="small"
+                    id="outlined-basic"
+                    sx={{ width: "45%", backgroundColor: "white" }}
+                    label="Customer Email"
+                    variant="outlined"
+                    {...register("email", { required: true })}
+                  />
+                </Box>
               </Box>
+
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
                 <Typography sx={{ textAlign: "start" }}>
-                  Address <span>*</span>
+                  Address
                 </Typography>
 
                 <TextField
                   size="small"
                   id="outlined-basic"
-                  sx={{ width: "400px" }}
+                  sx={{ width: "45%", backgroundColor: "white" }}
                   label="Customer Address"
                   variant="outlined"
                   {...register("address", { required: true })}
@@ -125,9 +142,9 @@ const AddInvoice = () => {
                 type="date"
                 {...register("date", { required: true })}
                 style={{
-                  width: "400px",
+                  width: "45%",
                   padding: "8px",
-                  backgroundColor: "#e4e4e4",
+                  backgroundColor: "white",
                   border: "1px solid #aeaeae",
                   borderRadius: "3px",
                 }}
