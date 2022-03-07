@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import styles from "./ImportantRoutes.module.css";
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import SellIcon from '@mui/icons-material/Sell';
 import { NavLink } from 'react-router-dom';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -12,31 +11,35 @@ import StrollerIcon from '@mui/icons-material/Stroller';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import TodayIcon from '@mui/icons-material/Today';
+import Typography from "@mui/material/Typography";
 
 
 const ImportantRoutes = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2} columns={12} sx={{ marginTop: 1 }}>
-                <Grid item xs={12} sm={6} md={3}>
-                    <Paper className={`${styles.reportContainer}`}>
-                        <Box className={`${styles.reports}`}>
-                            <Box>
-                                <SellIcon sx={{
-                                    fontSize: "50px", color: "#3eb7e0", marginBottom: "10px"
-                                }} />
+                <NavLink
+                    className={`${styles.routeTitle}`}
+                    to={`/dashboard/pos`}
+                >
+                    <Grid item xs={12} sm={6} md={3}>
+                        <Paper className={`${styles.reportContainer}`}>
+                            <Box className={`${styles.reports}`}>
+                                <Box>
+                                    <SellIcon sx={{
+                                        fontSize: "50px", color: "#3eb7e0", marginBottom: "10px"
+                                    }} />
+                                </Box>
+                                <Box>
+                                    <Typography>
+                                        Create POS Invoice
+                                    </Typography>
+                                </Box>
                             </Box>
-                            <Box>
-                                <NavLink
-                                    className={`${styles.routeTitle}`}
-                                    to={`/dashboard/pos`}
-                                >
-                                    Create POS Invoice
-                                </NavLink>
-                            </Box>
-                        </Box>
-                    </Paper>
-                </Grid>
+                        </Paper>
+                    </Grid>
+                </NavLink>
+
                 <Grid item xs={12} sm={6} md={3}>
                     <Paper className={`${styles.reportContainer}`}>
 
