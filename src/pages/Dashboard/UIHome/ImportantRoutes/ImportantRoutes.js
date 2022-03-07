@@ -18,12 +18,12 @@ const ImportantRoutes = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2} columns={12} sx={{ marginTop: 1 }}>
-                <NavLink
-                    className={`${styles.routeTitle}`}
-                    to={`/dashboard/pos`}
-                >
-                    <Grid item xs={12} sm={6} md={3}>
-                        <Paper className={`${styles.reportContainer}`}>
+                <Grid item xs={12} sm={6} md={3}>
+                    <Paper className={`${styles.reportContainer}`}>
+                        <NavLink
+                            style={{ textDecoration: "none" }}
+                            to={`/dashboard/pos`}
+                        >
                             <Box className={`${styles.reports}`}>
                                 <Box>
                                     <SellIcon sx={{
@@ -31,97 +31,103 @@ const ImportantRoutes = () => {
                                     }} />
                                 </Box>
                                 <Box>
-                                    <Typography>
+                                    <Typography className={`${styles.routeTitle}`}>
                                         Create POS Invoice
                                     </Typography>
                                 </Box>
                             </Box>
-                        </Paper>
-                    </Grid>
-                </NavLink>
+                        </NavLink>
+                    </Paper>
+                </Grid>
+
 
                 <Grid item xs={12} sm={6} md={3}>
                     <Paper className={`${styles.reportContainer}`}>
-
-                        <Box className={`${styles.reports}`}>
-                            <Box>
-
-                                <ReceiptIcon sx={{
-                                    fontSize: "50px", color: "rgb(120 185 83)", marginBottom: "10px"
-                                }} />
+                        <NavLink
+                            style={{ textDecoration: "none" }}
+                            to={`/dashboard/add-new-invoice`}
+                        >
+                            <Box className={`${styles.reports}`}>
+                                <Box>
+                                    <ReceiptIcon sx={{
+                                        fontSize: "50px", color: "rgb(120 185 83)", marginBottom: "10px"
+                                    }} />
+                                </Box>
+                                <Box>
+                                    <Typography className={`${styles.routeTitle}`}>
+                                        Create New Invoice
+                                    </Typography>
+                                </Box>
                             </Box>
-                            <Box>
-                                <NavLink
-                                    className={`${styles.routeTitle}`}
-                                    to={`/dashboard/add-new-invoice`}
-                                >
-                                    Create New Invoice
-                                </NavLink>
-                            </Box>
-                        </Box>
+                        </NavLink>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Paper className={`${styles.reportContainer}`}>
-
-                        <Box className={`${styles.reports}`}>
-                            <Box>
-
-                                <ShoppingBasketIcon sx={{
-                                    fontSize: "50px", color: "rgb(255 59 114)", marginBottom: "10px"
-                                }} />
+                        <NavLink
+                            style={{ textDecoration: "none" }}
+                            to={`/dashboard/add-product`}
+                        >
+                            <Box className={`${styles.reports}`}>
+                                <Box>
+                                    <ShoppingBasketIcon sx={{
+                                        fontSize: "50px", color: "rgb(255 59 114)", marginBottom: "10px"
+                                    }} />
+                                </Box>
+                                <Box>
+                                    <Typography className={`${styles.routeTitle}`}>
+                                        Add Product
+                                    </Typography>
+                                </Box>
                             </Box>
-                            <Box>
-                                <NavLink
-                                    className={`${styles.routeTitle}`}
-                                    to={`/dashboard/add-product`}
-                                >
-                                    Add Product
-                                </NavLink>
-                            </Box>
-                        </Box>
+                        </NavLink>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Paper className={`${styles.reportContainer}`}>
+                        <NavLink
+                            style={{ textDecoration: "none" }}
+                            to={`/dashboard/add-customer`}
+                        >
+                            <Box className={`${styles.reports}`}>
+                                <Box>
 
-                        <Box className={`${styles.reports}`}>
-                            <Box>
-
-                                <StrollerIcon sx={{
-                                    fontSize: "50px", color: "rgb(34 0 234)", marginBottom: "10px"
-                                }} />
+                                    <StrollerIcon sx={{
+                                        fontSize: "50px", color: "rgb(34 0 234)", marginBottom: "10px"
+                                    }} />
+                                </Box>
+                                <Box>
+                                    <Typography className={`${styles.routeTitle}`}>
+                                        Add Customer
+                                    </Typography>
+                                </Box>
                             </Box>
-                            <Box>
-                                <NavLink
-                                    className={`${styles.routeTitle}`}
-                                    to={`/dashboard/add-customer`}
-                                >
-                                    Add Customer
-                                </NavLink>
-                            </Box>
-                        </Box>
+                        </NavLink>
                     </Paper>
                 </Grid>
             </Grid>
             <Grid container spacing={2} columns={12} sx={{ marginTop: 1 }}>
                 <Grid item xs={12} sm={6} md={3}>
                     <Paper className={`${styles.reportContainer}`}>
-                        <Box className={`${styles.reports}`}>
-                            <Box>
-                                <SellIcon sx={{
-                                    fontSize: "50px", color: "rgb(55 204 73)", marginBottom: "10px"
-                                }} />
+                        <NavLink
+                            style={{ textDecoration: "none" }}
+                            to={`/dashboard/sales-report`}
+                        >
+                            <Box className={`${styles.reports}`}>
+                                <Box>
+                                    <SellIcon sx={{
+                                        fontSize: "50px", color: "rgb(55 204 73)", marginBottom: "10px"
+                                    }} />
+                                </Box>
+                                <Box>
+                                    <Typography className={`${styles.routeTitle}`}>
+                                        to={`/dashboard/sales-report`}
+
+                                        Sales Report
+                                    </Typography>
+                                </Box>
                             </Box>
-                            <Box>
-                                <NavLink
-                                    className={`${styles.routeTitle}`}
-                                    to={`/dashboard/sales-report`}
-                                >
-                                    Sales Report
-                                </NavLink>
-                            </Box>
-                        </Box>
+                        </NavLink>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
