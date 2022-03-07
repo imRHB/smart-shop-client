@@ -2,6 +2,8 @@
     border-radius: 5px;
     border: 1px solid rgb(201, 201, 201);
     padding: 15px;
+    margin: 0 20px;
+    background-color: rgb(251, 255, 255);
 }
 
 .reports{
@@ -15,4 +17,14 @@
     margin-top:0;
     color:black;
     font-weight:700;
+}
+
+.routeIcons{
+    position: relative;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+
+.reportContainer:hover .routeIcons {
+  transform: rotateY(360deg);
 }

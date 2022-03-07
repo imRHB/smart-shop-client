@@ -25,7 +25,7 @@ const ImportantRoutes = () => {
                             to={`/dashboard/pos`}
                         >
                             <Box className={`${styles.reports}`}>
-                                <Box>
+                                <Box className={`${styles.routeIcons}`}>
                                     <SellIcon sx={{
                                         fontSize: "50px", color: "#3eb7e0", marginBottom: "10px"
                                     }} />
@@ -48,7 +48,7 @@ const ImportantRoutes = () => {
                             to={`/dashboard/add-new-invoice`}
                         >
                             <Box className={`${styles.reports}`}>
-                                <Box>
+                                <Box className={`${styles.routeIcons}`}>
                                     <ReceiptIcon sx={{
                                         fontSize: "50px", color: "rgb(120 185 83)", marginBottom: "10px"
                                     }} />
@@ -69,7 +69,7 @@ const ImportantRoutes = () => {
                             to={`/dashboard/add-product`}
                         >
                             <Box className={`${styles.reports}`}>
-                                <Box>
+                                <Box className={`${styles.routeIcons}`}>
                                     <ShoppingBasketIcon sx={{
                                         fontSize: "50px", color: "rgb(255 59 114)", marginBottom: "10px"
                                     }} />
@@ -90,8 +90,7 @@ const ImportantRoutes = () => {
                             to={`/dashboard/add-customer`}
                         >
                             <Box className={`${styles.reports}`}>
-                                <Box>
-
+                                <Box className={`${styles.routeIcons}`}>
                                     <StrollerIcon sx={{
                                         fontSize: "50px", color: "rgb(34 0 234)", marginBottom: "10px"
                                     }} />
@@ -114,7 +113,7 @@ const ImportantRoutes = () => {
                             to={`/dashboard/sales-report`}
                         >
                             <Box className={`${styles.reports}`}>
-                                <Box>
+                                <Box className={`${styles.routeIcons}`}>
                                     <SellIcon sx={{
                                         fontSize: "50px", color: "rgb(55 204 73)", marginBottom: "10px"
                                     }} />
@@ -135,7 +134,7 @@ const ImportantRoutes = () => {
                             to={`/dashboard/purchase-report`}
                         >
                             <Box className={`${styles.reports}`}>
-                                <Box>
+                                <Box className={`${styles.routeIcons}`}>
                                     <SummarizeIcon sx={{
                                         fontSize: "50px", color: "rgb(30 141 180)", marginBottom: "10px"
                                     }} />
@@ -156,7 +155,7 @@ const ImportantRoutes = () => {
                             to={`/dashboard/stock-report`}
                         >
                             <Box className={`${styles.reports}`}>
-                                <Box>
+                                <Box className={`${styles.routeIcons}`}>
                                     <InventoryIcon sx={{
                                         fontSize: "50px", color: "(0 6 79)", marginBottom: "10px"
                                     }} />
@@ -172,23 +171,23 @@ const ImportantRoutes = () => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Paper className={`${styles.reportContainer}`}>
-
-                        <Box className={`${styles.reports}`}>
-                            <Box>
-
-                                <TodayIcon sx={{
-                                    fontSize: "50px", color: "rgb(250 200 102)", marginBottom: "10px"
-                                }} />
+                        <NavLink
+                            style={{ textDecoration: "none" }}
+                            to={`/dashboard/today-report`}
+                        >
+                            <Box className={`${styles.reports}`}>
+                                <Box className={`${styles.routeIcons}`}>
+                                    <TodayIcon sx={{
+                                        fontSize: "50px", color: "rgb(250 200 102)", marginBottom: "10px"
+                                    }} />
+                                </Box>
+                                <Box>
+                                    <Typography className={`${styles.routeTitle}`}>
+                                        Todays Report
+                                    </Typography>
+                                </Box>
                             </Box>
-                            <Box>
-                                <NavLink
-                                    className={`${styles.routeTitle}`}
-                                    to={`/dashboard/today-report`}
-                                >
-                                    Todays Report
-                                </NavLink>
-                            </Box>
-                        </Box>
+                        </NavLink>
                     </Paper>
                 </Grid>
             </Grid>
