@@ -62,16 +62,16 @@ const AddInvoice = () => {
           <Box className={`${styles.tableContainer}`}>
             <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
               <Typography sx={{ textAlign: "start" }}>
-                Customer Name<span>*</span>
+                Customer Contact No.<span>*</span>
               </Typography>
 
               <TextField
                 id="outlined-basic"
                 size="small"
                 sx={{ width: "400px" }}
-                label="Customer Name"
+                label="Customer Contact"
                 variant="outlined"
-                {...register("name", { required: true })}
+                {...register("contact", { required: true })}
               />
               <Button
                 sx={{ borderRadius: 0, marginTop: "2px" }}
@@ -86,6 +86,20 @@ const AddInvoice = () => {
             </Box>
 
             <Collapse in={open} timeout="auto">
+              <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+                <Typography sx={{ textAlign: "start" }}>
+                  Customer Name <span>*</span>
+                </Typography>
+
+                <TextField
+                  size="small"
+                  id="outlined-basic"
+                  sx={{ width: "400px" }}
+                  label="Customer Name"
+                  variant="outlined"
+                  {...register("name", { required: true })}
+                />
+              </Box>
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
                 <Typography sx={{ textAlign: "start" }}>
                   Address <span>*</span>
@@ -137,7 +151,7 @@ const AddInvoice = () => {
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                       className={`${styles.tableCell}`}
                     >
-                      Available Ctn.
+                      Available Quantity
                     </TableCell>
                     <TableCell
                       align="center"
