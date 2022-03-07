@@ -41,12 +41,9 @@ function Row(props) {
                 </TableCell>
                 <TableCell align="center">{product.name}</TableCell>
                 <TableCell align="center">{product.category}</TableCell>
-                <TableCell align="center">{10}</TableCell>
                 <TableCell align="center">{50}</TableCell>
-                <TableCell align="center">{35}</TableCell>
-                <TableCell align="center">{15}</TableCell>
-                <TableCell align="center">{product.price}</TableCell>
                 <TableCell align="center">{product.salePrice}</TableCell>
+                <TableCell align="center">{product.price}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -60,8 +57,8 @@ function Row(props) {
                                     <TableRow>
                                         <TableCell align="center">Product Name</TableCell>
                                         <TableCell align="center">Category</TableCell>
-                                        <TableCell align="center">Supplier Price</TableCell>
-                                        <TableCell align="center">Sale Price</TableCell>
+                                        <TableCell align="center">Product Image</TableCell>
+                                        <TableCell align="center">Product Details</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -70,8 +67,11 @@ function Row(props) {
                                             {product.name}
                                         </TableCell>
                                         <TableCell align="center">{product.category}</TableCell>
-                                        <TableCell align="center">{product.price}</TableCell>
-                                        <TableCell align="center">{product.salePrice}</TableCell>
+                                        <TableCell align="center"><img
+                                            style={{ width: "70px", height: "70px" }}
+                                            src={product.img}
+                                            alt="Product" /></TableCell>
+                                        <TableCell align="start">{product.description}</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -162,17 +162,9 @@ const StockManagements = () => {
                                     Category
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Quantity per carton
+                                    Available Quantity
                                 </TableCell>
-                                <TableCell align="center" className={`${styles.tableCell}`}>
-                                    In Ctn.
-                                </TableCell>
-                                <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Out Ctn.
-                                </TableCell>
-                                <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Stock
-                                </TableCell>
+
                                 <TableCell align="center" className={`${styles.tableCell}`}>
                                     Supplier Price
                                 </TableCell>
