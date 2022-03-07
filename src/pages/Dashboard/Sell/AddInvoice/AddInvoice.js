@@ -40,7 +40,7 @@ const AddInvoice = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>ADD NEW INVOICE</span> <br />{" "}
+          <span style={{ fontSize: "26px" }}>ADD NEW INVOICE</span> <br />
           <span style={{ color: "#969494" }}>Add New Invoice</span>
         </Typography>
       </Box>
@@ -148,7 +148,7 @@ const AddInvoice = () => {
                 {...register("date", { required: true })}
                 style={{
                   width: "45%",
-                  padding: "8px",
+                  padding: "10px",
                   backgroundColor: "white",
                   border: "1px solid #aeaeae",
                   borderRadius: "3px",
