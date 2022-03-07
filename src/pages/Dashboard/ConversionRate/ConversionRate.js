@@ -5,15 +5,18 @@ import ReactApexChart from 'react-apexcharts';
 const ConversionRate = () => {
     const [year, setYear] = useState({
         series: [{
-            name: 'Sales 1',
+            name: 'Gold ',
             data: [80, 50, 30, 40, 100, 20],
         }, {
-            name: 'Sales 2',
+            name: 'Silver',
             data: [20, 30, 40, 80, 20, 80],
         }, {
-            name: 'Sales 3',
+            name: 'Platinum',
             data: [44, 76, 78, 13, 43, 10],
-        }],
+        },{
+          name: 'Reguler',
+          data: [14, 90, 55, 60, 50, 70],
+      }],
         options: {
             chart: {
                 height: 350,
@@ -26,7 +29,7 @@ const ConversionRate = () => {
                 }
             },
             title: {
-                text: 'Sales Year',
+                text: 'Customer Type',
                 
             },
             stroke: {
@@ -39,7 +42,7 @@ const ConversionRate = () => {
                 size: 0
             },
             xaxis: {
-                categories: [  '2016', '2017', '2018', '2019', '2020', '2021']
+                categories: [ '2016', '2017', '2018', '2019', '2020', '2021']
             }
         },
 
@@ -48,7 +51,7 @@ const ConversionRate = () => {
     })
     const [rate, setRate] = useState({
         series: [{
-            data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+            data: [1380, 1200, 1100,690,580, 540,470, 448, 430,400]
         }],
         options: {
             chart: {
@@ -71,8 +74,8 @@ const ConversionRate = () => {
 
             },
             xaxis: {
-                categories: [ 'Oil','Fish', 'Biscuit', 'Fruits', 'Meat',
-                'Drink', 'Rice',  'Vegetables', 'Lemon Round', 'Beverages',
+                categories: [ 'Md Abdul','Md Rahman', 'AS Towfiq ', 'Kanta Islam', 'Riyad Ali',
+                'Nirjon Mahmud', 'Fahad Islam',  'Jony Roy', 'Rumana Runa', 'Soukot Ali',
                 ],
 
             }
@@ -85,7 +88,7 @@ const ConversionRate = () => {
             <div className='row'>
                 <div  className='col-12 col-lg-7 col-md-7'>
                     <div style={{ backgroundColor: 'white', height:'380px' }} className="p-1 ">
-                        <h6 className='text-start m-2 fw-bold '>Top Sales Products </h6>
+                        <h6 className='text-start m-2 fw-bold '>Top Costumer's </h6>
                         <div className='mt-2' id="chart">
                             <ReactApexChart options={rate.options} series={rate.series} type="bar" height={250} />
                         </div>
