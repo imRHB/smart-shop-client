@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts'
+import styles from "./Charts.module.css";
 
 const Charts = () => {
     const [pieChart, setPieChart] = useState({
 
 
-        series: [44, 55, 13, 43, 22],
+        series: [760300, 944079, 604079],
         options: {
             chart: {
                 width: 380,
                 type: 'pie',
             },
         
-            labels: ['America', 'Asia', 'Aurope', 'Africa', 'Team E'],
+            labels: ['Sales', 'Purchase', 'Profit'],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -108,26 +109,52 @@ const Charts = () => {
 
     return (
        <div className=''>
-            <div className=' container mb-5'>
+            <div className='  mb-5'>
             <br />
             <br />
             <div className='row '>
                 <div className='col-12 col-lg-7 mt-5'>
 
                     <div style={{ backgroundColor: 'white' }} className='mt-4 p-2'>
-                        <h6 className='pt-4 px-2'>Monthly Sales, Buy, Profit</h6>
+                        <h5 className='pt-3 px-2'>Monthly Sales, Buy, Profit</h5>
                         <small className='text-secondary ms-2 '>(+43%) than last year</small>
                         <ReactApexChart options={charts.options} series={charts.series} type="line" height={350} />
                     </div>
                 </div>
 
                 <div  className='col-12 col-lg-5 mt-5 '>
-                    <div  style={{ width:'100%',backgroundColor: 'white', height:'455px'}} className='m-1  mt-4'>
-                    <h6 style={{paddingTop:'50px'}} className=''>Current Visit</h6>
+                    <div  style={{ width:'100%',backgroundColor: 'white', height:'455px'}} className='m-1 mt-4 '>
+                    <h5 className='pt-3 ps-3'>Todays Report</h5>
                     <div className='mt-4 ' style={{ backgroundColor: 'white' ,  }} id="chart">
                         <ReactApexChart options={pieChart.options}  series={pieChart.series} type="pie" width={350} />
                     </div>
+                 
+     
+            <div className='px-4 mt-3'>
+              <table
+                className={`${styles.tableStyle}`}
+                style={{ width: "100%" }}
+              >
+                <tr>
+                  <th className={`${styles.tableStyle}`}>Todays Report</th>
+                  <th className={`${styles.tableStyle}`}>Amount</th>
+                </tr>
+                <tr>
+                  <th className={`${styles.tableStyle}`}>Total Sales</th>
+                  <td className={`${styles.tableStyle} ` }>$ 7260300</td>
+                </tr>
+                <tr>
+                  <th className={`${styles.tableStyle}`}>Total Purchase</th>
+                  <td className={`${styles.tableStyle}`}>$ 99004079</td>
+                </tr>
+                <tr>
+                  <th className={`${styles.tableStyle}`}>Total Profit</th>
+                  <td className={`${styles.tableStyle}`}>$ 904079</td>
+                </tr>
+              </table>
+            </div>
                     </div>
+                  
                 </div>
             </div>
 
