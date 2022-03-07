@@ -15,6 +15,7 @@ import Paper from "@mui/material/Paper";
 import TableRow from "@mui/material/TableRow";
 import Delete from "@mui/icons-material/Delete";
 import Collapse from "@mui/material/Collapse";
+import { NavLink } from "react-router-dom";
 
 const AddInvoice = () => {
   const [open, setOpen] = React.useState(false);
@@ -44,21 +45,25 @@ const AddInvoice = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
-          Manage Invoice
-        </Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
-          POS
-        </Button>
+        <NavLink to="/dashboard/manage-invoice" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
+            Manage Invoice
+          </Button>
+        </NavLink>
+        <NavLink to="/dashboard/pos" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
+            POS
+          </Button>
+        </NavLink>
       </Box>
 
-      <Box className={`${styles.paymentContainer}`}>
+      <Box className={`${styles.invoiceContainer}`}>
         <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>
           Add New Invoice
         </Typography>
         <hr />
 
-        <form className={`${"shadow"}`}>
+        <form>
           <Box className={`${styles.tableContainer}`}>
             <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
               <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
@@ -86,8 +91,8 @@ const AddInvoice = () => {
             </Box>
 
             <Collapse in={open} timeout="auto">
-              <Box sx={{ width: "45%", display: "flex" }}>
-                <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+              <Box sx={{ width: "45%", display: "flex", flexContent: "between" }}>
+                <Box className={`${styles.addSupplierField} ${"pb-4, me-2"}`}>
                   <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
                     Customer Name <span>*</span>
                   </Typography>
@@ -112,7 +117,7 @@ const AddInvoice = () => {
                     sx={{ backgroundColor: "white" }}
                     label="Customer Email"
                     variant="outlined"
-                    {...register("email", { required: true })}
+                    {...register("email")}
                   />
                 </Box>
               </Box>
@@ -128,7 +133,7 @@ const AddInvoice = () => {
                   sx={{ width: "45%", backgroundColor: "white" }}
                   label="Customer Address"
                   variant="outlined"
-                  {...register("address", { required: true })}
+                  {...register("address")}
                 />
               </Box>
             </Collapse>
