@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Row, Col } from "react-bootstrap";
 import styles from "./HeaderTwo.module.css";
 import Grid from "@mui/material/Grid";
@@ -13,6 +13,15 @@ const HeaderTwo = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [notification, setNotification] = useState([]);
+  useEffect(() => {
+    fetch("https://smart-shop-pos.herokuapp.com/events")
+      .then(res => res.json())
+      .then(data => setNotification(data))
+
+  }, [notification]);
+
   return (
     <div className={`${styles.navContainer} ${"shadow"}`}>
       <Grid container spacing={3}>
@@ -60,7 +69,7 @@ const HeaderTwo = () => {
         >
           <Box sx={{ textAlign: "start" }}>
             <h4>Welcome Back! Admin</h4>
-            <p>You have 4 new notifications! Check it out!</p>
+            <p>You have <span className="text-white">{notification.length}</span> new notifications! Check it out!</p>
           </Box>
         </Grid>
         <Grid

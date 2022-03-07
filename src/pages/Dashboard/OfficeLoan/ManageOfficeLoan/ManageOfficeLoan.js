@@ -83,9 +83,9 @@ const ManageOfficeLoan = () => {
   };
 
     return (
-        <Box>
-            <Box style={{ backgroundColor: 'white' }} sx={{ marginBottom: "30px" }}>
-                <div className="d-flex justify-content-between border">
+        <Box sx={{marginTop:'10px'}}>
+            <Box sx={{ marginBottom: "30px", backgroundColor:'#f1f3f6' }}>
+                <div className="d-flex justify-content-between border ">
                     <div className="text-start d-flex ms-2 p-2 ">
                         <h1>
                         <AssignmentIcon style={{fontSize:'60px', backgroundColor:'#002447', color:'white'}}></AssignmentIcon>
@@ -102,18 +102,45 @@ const ManageOfficeLoan = () => {
                     </div>
                 </div>
                 
+               
             </Box>
-            <div className='text-end '>
+            <Box sx={{ borderBottom: "1px solid lightGray", display:'flex', backgroundColor:'#f1f3f6' , marginTop:'px',  marginLeft:'15px' ,marginRight:'15px' }}>
+                        <Typography
+                            variant="h6"
+                            sx={{
+                                fontWeight: "bold",
+                                color: "gray",
+                                fontSize: "3vh",
+                                margin: "10px",
+                                textAlign:'start'
+                            }}
+                        >
+                          Seacrh By Person
+                        </Typography>
+                        <Box sx={{ display: "flex", padding: "5px",marginTop:'5px' }}>
+                         
+                            <input
+                                className="p-2 mb-3"
+                                type="search"
+                                placeholder="Seacrh Here"
+                                name=""
+                                id=""
+                            />
+                              <button style={{ backgroundColor: '#002447', height:'40px' }} className='  text-light btn fw-bold ms-3'>Search</button>
+                        </Box>
+                    </Box>
+            <div className='text-end mt-3 me-3'>
                 <Link to="/addOfficeLoan">
-                    <button style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'><FormatAlignJustifyIcon></FormatAlignJustifyIcon> Add Person Loan</button>
+                    <button style={{ backgroundColor: '#45c203' }} className='  text-light btn fw-bold py-2'>Add Person Loan</button>
                 </Link>
             </div>
+            
             <Container sx={{ width: "100%" }}>
 
 
-                <Paper sx={{ marginTop: "50px", paddingBottom: "1px" }}>
+                <Paper sx={{ marginTop: "50px", paddingBottom: "1px", backgroundColor:'#f1f3f6' }}>
                     <Box sx={{ borderBottom: "1px solid lightGray", display:'flex' }}>
-                        <Typography
+                         <Typography
                             variant="h6"
                             sx={{
                                 fontWeight: "bold",
@@ -125,7 +152,7 @@ const ManageOfficeLoan = () => {
                         >
                             Manage Person
                         </Typography>
-                        <Box sx={{ display: "flex", padding: "5px",marginTop:'5px' }}>
+                        {/* <Box sx={{ display: "flex", padding: "5px",marginTop:'5px' }}>
                          
                             <input
                                 className="p-2 mb-3"
@@ -134,7 +161,7 @@ const ManageOfficeLoan = () => {
                                 name=""
                                 id=""
                             />
-                        </Box>
+                        </Box>  */}
                     </Box>
                     <TableContainer
                         component={Paper}

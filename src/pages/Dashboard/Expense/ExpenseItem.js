@@ -31,9 +31,7 @@ function Row(props) {
 
                 <TableCell align="center">
 
-                    <Button>
-                        <EditIcon sx={{ marginLeft: '25px', backgroundColor: '#002447', borderRadius: '5px', color: 'white', padding: '2px' }} />
-                    </Button>
+              
 
                     <Button>
                         <DeleteForeverIcon sx={{ backgroundColor: 'red', borderRadius: '5px', color: 'white', padding: '2px' }} />
@@ -59,8 +57,8 @@ const ExpenseItem = () => {
     };
 
     return (
-        <Box className="bg-light">
-            <Box sx={{ marginBottom: '30px', backgroundColor: 'white' }}>
+        <Box className="mt-3">
+            <Box sx={{ marginBottom: '30px', backgroundColor: '#f1f3f6' }}>
                 <div className='d-flex justify-content-between  border'>
                     <div className='d-flex text-start ms-2 p-2 '>
                         <AssignmentIcon style={{ fontSize: '60px', backgroundColor: '#002447', color: 'white' }}></AssignmentIcon>
@@ -79,43 +77,62 @@ const ExpenseItem = () => {
             <div className='text-end '>
 
                 <Link to="/addExpense">
-                <button style={{ backgroundColor: '#002447' }} className='  text-light btn fw-bold py-2'><FormatAlignJustifyIcon></FormatAlignJustifyIcon> Add ExpenseItem</button>
+                <button style={{ backgroundColor: '#45c203 ' }} className='  text-light btn fw-bold py-2 me-3'><FormatAlignJustifyIcon></FormatAlignJustifyIcon> Add ExpenseItem</button>
                 </Link>
             </div>
-            <Container sx={{ width: "100%" }}>
+            <Container sx={{ width: "100%", marginTop:'20px' }}>
 
 
-                <Box sx={{ boxShadow: '0px 0px 01px 2px whiteSmoke', backgroundColor: 'white' }}>
+                <Box sx={{ boxShadow: '0px 0px 01px 2px whiteSmoke', backgroundColor: '#f1f3f6' }}>
                     <Typography variant="h6" sx={{ borderBottom: '1px solid lightGray', color: 'gray' }}>
                         Add Expense Item
 
                     </Typography>
                     <Grid sx={{ padding: '20px' }} container spacing={2}>
-                        <Grid item xs={4}>
+                        <Grid item xs={2}>
                             <Typography variant="small" sx={{ fontWeight: 'bold', color: 'gray' }}>
                                 Expence Name *
                             </Typography>
                         </Grid>
-                        <Grid item xs={8} sx={{ marginBottom: '50px' }}>
+                        <Grid item xs={10} sx={{ marginBottom: '50px' }}>
                             <TextField sx={{ width: '50%' }} id="outlined-basic" label="Category Name" variant="outlined" />
                             <Button variant="contained" sx={{ marginLeft: '20px', marginTop: '5px', backgroundColor: '#002447' }}>Save</Button>
                         </Grid>
                     </Grid>
 
-
-
                 </Box>
+                <Box sx={{ borderBottom: "1px solid lightGray", display:'flex', backgroundColor:'#f1f3f6' , marginTop:'35px',  marginLeft:'5px' ,marginRight:'5px' }}>
+                        <Typography
+                            variant="h6"
+                            sx={{
+                                fontWeight: "bold",
+                                color: "gray",
+                                fontSize: "3vh",
+                                margin: "10px",
+                                textAlign:'start'
+                            }}
+                        >
+                          Seacrh By Expese Name
+                        </Typography>
+                        <Box sx={{ display: "flex", padding: "5px",marginTop:'5px' }}>
 
+                            <input
+                                className="p-2 mb-3"
+                                type="search"
+                                placeholder="Seacrh Here"
+                                name=""
+                                id=""
+                            />
+                              <button style={{ backgroundColor: '#45c203 ', height:'40px' }} className='  text-light btn fw-bold ms-3'>Search</button>
+                        </Box>
+                    </Box>
 
-                <Paper sx={{ marginTop: '50px', paddingBottom: '5px', }}>
+                <Paper sx={{ marginTop: '50px', paddingBottom: '5px', backgroundColor:'#f1f3f6'}}>
                     <Box sx={{ borderBottom: '1px solid lightGray', display: 'flex' }}>
                         <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'gray', fontSize: '3vh', margin: '10px', }}>
                             Expense Item
                         </Typography>
-                        <Box sx={{ display: 'flex', padding: '5px' }}>
-                            <input className="p-2 mb-3" type="search" placeholder="Seacrh Here" name="" id="" />
-
-                        </Box>
+                        
                     </Box>
                     <TableContainer component={Paper} sx={{ width: '97%', margin: '15px', border: '1px solid lightGray' }}>
 
