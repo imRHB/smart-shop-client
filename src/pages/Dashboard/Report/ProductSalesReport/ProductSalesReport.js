@@ -25,7 +25,7 @@ function Row(props) {
         </TableCell>
         <TableCell align="left">{product.name}</TableCell>
         <TableCell align="left">{product.category}</TableCell>
-        <TableCell align="left">{product.category}</TableCell>
+        <TableCell align="left">{100}</TableCell>
         <TableCell align="right">{product.salePrice}</TableCell>
         <TableCell align="right">{100}</TableCell>
       </TableRow>
@@ -121,7 +121,7 @@ const ProductSalesReport = () => {
                   Category
                 </TableCell>
                 <TableCell align="left" className={`${styles.tableCell}`}>
-                  Customer Name
+                  Unit
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
                   Rate
