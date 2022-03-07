@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import TablePagination from "@mui/material/TablePagination";
-import { Button, Collapse, Container, FormControl, Link, MenuItem, Select, Typography } from "@mui/material";
+import { Button, Collapse, Container, FormControl, InputLabel, Link, MenuItem, Select, Typography } from "@mui/material";
 import products from "../../../assets/data/products.json";
 import styles from './Supplier.module.css'
 import { Box } from '@mui/system';
@@ -67,18 +67,19 @@ const SupplierStock = () => {
             <Box sx={{ textAlign: "left", mb: 1 }}>
                 <Button className={`${styles.btn}`} onClick={() => setOpen(!open)}>Filter</Button>
                 <Collapse in={open} sx={{ mt: 2, mb: 2 }} timeout="auto" unmountOnExit className={`${styles.tableContainer}`}>
-                    <FormControl fullWidth>
-                        <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <Typography sx={{ textAlign: "left", mr: 2 }} style={{ fontSize: "17px" }} >
-                                Select Supplier:
-                            </Typography>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <Typography sx={{ textAlign: "left", mr: 2 }} style={{ fontSize: "17px" }} >
+                            Select Supplier:
+                        </Typography>
 
-
-                            <Select sx={{ minWidth: 150, mr: 1 }}
-                                labelId="demo-simple-select-autowidth-label"
-                                id="demo-simple-select-autowidth"
+                        <FormControl sx={{ minWidth: 150, mr: 1, padding: "4px" }}>
+                            <InputLabel id="demo-simple-select-label">Select Supplier</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                label="Select Supplier"
+                                size="small"
                                 value={supplier}
-                                label="Select One"
                                 onChange={handleChange}
                             >
                                 <MenuItem value="Afsana">Afsana</MenuItem>
@@ -88,9 +89,9 @@ const SupplierStock = () => {
                                 <MenuItem value="Mahfuz">Mahfuz</MenuItem>
                                 <MenuItem value="Maria">Maria</MenuItem>
                             </Select>
-                            <Button type='submit' className={`${styles.btn}`}>Search</Button>
-                        </Box>
-                    </FormControl>
+                        </FormControl>
+                        <Button type='submit' className={`${styles.btn}`}>Search</Button>
+                    </Box>
                 </Collapse>
             </Box>
 
