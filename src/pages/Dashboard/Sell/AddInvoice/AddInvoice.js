@@ -61,7 +61,7 @@ const AddInvoice = () => {
         <form className={`${"shadow"}`}>
           <Box className={`${styles.tableContainer}`}>
             <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-              <Typography sx={{ textAlign: "start" }}>
+              <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
                 Customer Contact No.<span>*</span>
               </Typography>
 
@@ -88,28 +88,28 @@ const AddInvoice = () => {
             <Collapse in={open} timeout="auto">
               <Box sx={{ width: "45%", display: "flex" }}>
                 <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                  <Typography sx={{ textAlign: "start" }}>
+                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
                     Customer Name <span>*</span>
                   </Typography>
 
                   <TextField
                     size="small"
                     id="outlined-basic"
-                    sx={{ width: "45%", backgroundColor: "white" }}
+                    sx={{ backgroundColor: "white" }}
                     label="Customer Name"
                     variant="outlined"
                     {...register("name", { required: true })}
                   />
                 </Box>
                 <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                  <Typography sx={{ textAlign: "start" }}>
+                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
                     Customer Email
                   </Typography>
 
                   <TextField
                     size="small"
                     id="outlined-basic"
-                    sx={{ width: "45%", backgroundColor: "white" }}
+                    sx={{ backgroundColor: "white" }}
                     label="Customer Email"
                     variant="outlined"
                     {...register("email", { required: true })}
@@ -118,7 +118,7 @@ const AddInvoice = () => {
               </Box>
 
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>
+                <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
                   Address
                 </Typography>
 
@@ -134,7 +134,7 @@ const AddInvoice = () => {
             </Collapse>
 
             <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-              <Typography sx={{ textAlign: "start" }}>
+              <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
                 Date<span>*</span>
               </Typography>
 
