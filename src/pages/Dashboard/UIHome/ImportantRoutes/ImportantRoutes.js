@@ -121,8 +121,6 @@ const ImportantRoutes = () => {
                                 </Box>
                                 <Box>
                                     <Typography className={`${styles.routeTitle}`}>
-                                        to={`/dashboard/sales-report`}
-
                                         Sales Report
                                     </Typography>
                                 </Box>
@@ -132,44 +130,44 @@ const ImportantRoutes = () => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Paper className={`${styles.reportContainer}`}>
-
-                        <Box className={`${styles.reports}`}>
-                            <Box>
-
-                                <SummarizeIcon sx={{
-                                    fontSize: "50px", color: "rgb(30 141 180)", marginBottom: "10px"
-                                }} />
+                        <NavLink
+                            style={{ textDecoration: "none" }}
+                            to={`/dashboard/purchase-report`}
+                        >
+                            <Box className={`${styles.reports}`}>
+                                <Box>
+                                    <SummarizeIcon sx={{
+                                        fontSize: "50px", color: "rgb(30 141 180)", marginBottom: "10px"
+                                    }} />
+                                </Box>
+                                <Box>
+                                    <Typography className={`${styles.routeTitle}`}>
+                                        Purchase Report
+                                    </Typography>
+                                </Box>
                             </Box>
-                            <Box>
-                                <NavLink
-                                    className={`${styles.routeTitle}`}
-                                    to={`/dashboard/purchase-report`}
-                                >
-                                    Purchase Report
-                                </NavLink>
-                            </Box>
-                        </Box>
+                        </NavLink>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <Paper className={`${styles.reportContainer}`}>
-
-                        <Box className={`${styles.reports}`}>
-                            <Box>
-
-                                <InventoryIcon sx={{
-                                    fontSize: "50px", color: "(0 6 79)", marginBottom: "10px"
-                                }} />
+                        <NavLink
+                            style={{ textDecoration: "none" }}
+                            to={`/dashboard/stock-report`}
+                        >
+                            <Box className={`${styles.reports}`}>
+                                <Box>
+                                    <InventoryIcon sx={{
+                                        fontSize: "50px", color: "(0 6 79)", marginBottom: "10px"
+                                    }} />
+                                </Box>
+                                <Box>
+                                    <Typography className={`${styles.routeTitle}`}>
+                                        Stock Report
+                                    </Typography>
+                                </Box>
                             </Box>
-                            <Box>
-                                <NavLink
-                                    className={`${styles.routeTitle}`}
-                                    to={`/dashboard/stock-report`}
-                                >
-                                    Stock Report
-                                </NavLink>
-                            </Box>
-                        </Box>
+                        </NavLink>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
