@@ -17,7 +17,7 @@ function Row(props) {
                 <TableCell align="center">{product.name}</TableCell>
                 <TableCell align="center">BDT {product.salePrice}</TableCell>
                 <TableCell align="center">5</TableCell>
-                <TableCell align="center">{product.salePrice * 10}</TableCell>
+                <TableCell align="right">BDT {product.salePrice * 5}</TableCell>
 
 
             </TableRow>
@@ -35,6 +35,10 @@ const CustomerInvoice = () => {
                 setProducts(data.slice(0, 4))
             })
     }, []);
+    let total = 0;
+    products.forEach(item => {
+        total = total + item.salePrice * 5
+    })
     return (
         <Container >
             <Box sx={{ mt: 5, bgcolor: "white" }} className={`${styles.containerBorder}`}>
@@ -54,10 +58,10 @@ const CustomerInvoice = () => {
                             <Typography sx={{ textAlign: "left" }} variant="body1">Address: 59 GM Bari Wasa Masjid road</Typography>
                         </Box>
                     </Grid>
-                    <Grid item xs={6}>
-                        <Box >
-                            <Typography sx={{ textAlign: "left" }}>Invoice ID:#22222FSS </Typography>
-                            <Typography sx={{ textAlign: "left" }}>Invoice Date: 12-03-2022</Typography>
+                    <Grid item xs={6} >
+                        <Box sx={{ ml: "auto" }}>
+                            <Typography sx={{ textAlign: "right " }}>Invoice ID:#22222FSS </Typography>
+                            <Typography sx={{ textAlign: "right" }}>Invoice Date: 12-03-2022</Typography>
                         </Box>
                     </Grid>
                 </Grid>
@@ -80,7 +84,7 @@ const CustomerInvoice = () => {
 
                                         <TableCell className={`${styles.tableCell}`} align="center">Quantity </TableCell>
 
-                                        <TableCell className={`${styles.tableCell}`} align="center">Amount</TableCell>
+                                        <TableCell className={`${styles.tableCell}`} align="right">Amount</TableCell>
 
                                     </TableRow>
                                 </TableHead>
@@ -88,15 +92,21 @@ const CustomerInvoice = () => {
                                     {products.map((product) => (
                                         <Row key={product._id} product={product} />
                                     ))}
+                                    <TableCell colSpan={4} align="right" sx={{ borderRight: 1 }}>
+                                        Total Amount:
+                                    </TableCell>
+                                    <TableCell align="right">BDT {total}</TableCell>
+
                                 </TableBody>
                             </Table>
 
                         </TableContainer>
 
+                        <Typography sx={{ textAlign: "left", my: 5 }}>Employee Name: Hasan Zahid</Typography>
                     </Box>
                 </Container>
-            </Box>
-        </Container>
+            </Box >
+        </Container >
     );
 };
 
