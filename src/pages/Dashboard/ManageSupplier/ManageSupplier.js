@@ -25,7 +25,12 @@ import Swal from "sweetalert2";
 import { css } from "@emotion/react";
 import FadeLoader from "react-spinners/FadeLoader";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteSupplierToDB, loadSuppliers } from "../../../store/supplier";
+import {
+  deleteSupplierToDB,
+  loadSuppliers,
+  setEditSupplier,
+  updateSupplierToDB,
+} from "../../../store/supplier";
 
 const override = css`
   display: block;
@@ -71,6 +76,31 @@ function Row(props) {
   const handleNoBtn = () => setShow(false);
 
   // update supplier
+  const editSupplier = useSelector(
+    (state) => state.entities.supplier.editSupplier
+  );
+
+  const onSubmit = (data) => {
+    const { name, contact, address, details, balance } = data;
+
+    const newData = {
+      id: editSupplier._id,
+      name,
+      contact,
+      address,
+      details,
+      balance,
+    };
+
+    // Send updated data to the server
+    dispatch(updateSupplierToDB(newData));
+    reset();
+  };
+
+  const handleEditSupplier = (id) => {
+    dispatch(setEditSupplier({ _id: id }));
+    return setShow(true);
+  };
 
   return (
     <React.Fragment>
@@ -88,7 +118,7 @@ function Row(props) {
         <TableCell align="center">
           <EditIcon
             onClick={() => {
-              setShow(true);
+              return handleEditSupplier(supplier._id);
             }}
             className={`${styles.editIcon}`}
           />
@@ -106,6 +136,8 @@ function Row(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         onHide={handleClose}
+        style={{ marginTop: "50px" }}
+        scrollable="true"
       >
         <div
           className="shadow rounded"
@@ -118,29 +150,17 @@ function Row(props) {
           </Modal.Header>
           <Modal.Body>
             {/* form */}
-            <form className="pt-3 pb-3" onSubmit={handleSubmit()}>
+            <form className="pt-3 pb-3" onSubmit={handleSubmit(onSubmit)}>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <Box className={`${styles.addSupplierField}`}>
                   <TextField
                     id="outlined-basic"
                     size="small"
                     className={`${styles.supplierTextField}`}
-                    defaultValue={supplier.name}
+                    defaultValue={editSupplier?.name}
                     label="Supplier Name"
                     variant="outlined"
                     {...register("name", { required: true })}
-                  />
-                </Box>
-
-                <Box className={`${styles.addSupplierField}`}>
-                  <TextField
-                    id="outlined-textarea"
-                    size="small"
-                    label="Supplier Address"
-                    className={`${styles.supplierTextField}`}
-                    defaultValue={supplier.address}
-                    multiline
-                    {...register("address", { required: true })}
                   />
                 </Box>
                 <Box className={`${styles.addSupplierField}`}>
@@ -150,8 +170,30 @@ function Row(props) {
                     className={`${styles.supplierTextField}`}
                     label="Supplier Contact No."
                     variant="outlined"
-                    defaultValue={supplier.address}
+                    defaultValue={editSupplier?.contact}
                     {...register("contact", { required: true })}
+                  />
+                </Box>
+                <Box className={`${styles.addSupplierField}`}>
+                  <TextField
+                    id="outlined-textarea"
+                    size="small"
+                    label="Supplier Address"
+                    className={`${styles.supplierTextField}`}
+                    defaultValue={editSupplier?.address}
+                    multiline
+                    {...register("address", { required: true })}
+                  />
+                </Box>
+                <Box className={`${styles.addSupplierField}`}>
+                  <TextField
+                    id="outlined-basic"
+                    size="small"
+                    className={`${styles.supplierTextField}`}
+                    label="Details"
+                    variant="outlined"
+                    defaultValue={editSupplier?.details}
+                    {...register("details", { required: true })}
                   />
                 </Box>
                 <Box className={`${styles.addSupplierField}`}>
@@ -159,7 +201,7 @@ function Row(props) {
                     id="outlined-textarea"
                     label="Balance"
                     size="small"
-                    defaultValue={supplier.balance}
+                    defaultValue={editSupplier?.balance}
                     className={`${styles.supplierTextField}`}
                     {...register("balance", { required: true })}
                   />
@@ -169,6 +211,7 @@ function Row(props) {
               <Modal.Footer className="mt-4">
                 {/* confirmation button */}
                 <Button
+                  type="submit"
                   variant="outlined"
                   className={`${styles.updateBtn}`}
                   endIcon={<UpgradeIcon />}
