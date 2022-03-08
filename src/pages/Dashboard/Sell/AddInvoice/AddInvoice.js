@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./AddInvoice.module.css";
 import TextField from "@mui/material/TextField";
@@ -15,6 +15,14 @@ import Paper from "@mui/material/Paper";
 import TableRow from "@mui/material/TableRow";
 import Delete from "@mui/icons-material/Delete";
 import Collapse from "@mui/material/Collapse";
+import { NavLink } from "react-router-dom";
+import Stack from '@mui/material/Stack';
+import Autocomplete from '@mui/material/Autocomplete';
+import Swal from "sweetalert2";
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from '@mui/material/InputLabel';
 
 const AddInvoice = () => {
   const [open, setOpen] = React.useState(false);
@@ -32,6 +40,21 @@ const AddInvoice = () => {
     setToggle(!toggle);
   };
 
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("https://smart-shop-pos.herokuapp.com/products")
+      .then((res) => res.json())
+      .then((data) => setFilteredProducts(data))
+  }, [filteredProducts]);
+
+
+  const [unit, setUnit] = React.useState('');
+
+  const handleUnitChange = (event) => {
+    setUnit(event.target.value);
+  };
+
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
       <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
@@ -39,39 +62,43 @@ const AddInvoice = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>ADD NEW INVOICE</span> <br />{" "}
+          <span style={{ fontSize: "26px" }}>ADD NEW INVOICE</span> <br />
           <span style={{ color: "#969494" }}>Add New Invoice</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
-          Manage Invoice
-        </Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
-          POS
-        </Button>
+        <NavLink to="/dashboard/manage-invoice" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
+            Manage Invoice
+          </Button>
+        </NavLink>
+        <NavLink to="/dashboard/pos" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
+            POS
+          </Button>
+        </NavLink>
       </Box>
 
-      <Box className={`${styles.paymentContainer}`}>
+      <Box className={`${styles.invoiceContainer}`}>
         <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>
           Add New Invoice
         </Typography>
         <hr />
 
-        <form className={`${"shadow"}`}>
+        <form>
           <Box className={`${styles.tableContainer}`}>
             <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-              <Typography sx={{ textAlign: "start" }}>
-                Customer Name<span>*</span>
+              <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
+                Customer Contact No.<span>*</span>
               </Typography>
 
               <TextField
                 id="outlined-basic"
                 size="small"
-                sx={{ width: "400px" }}
-                label="Customer Name"
+                sx={{ width: "45%", backgroundColor: "white" }}
+                label="Customer Contact"
                 variant="outlined"
-                {...register("name", { required: true })}
+                {...register("contact", { required: true })}
               />
               <Button
                 sx={{ borderRadius: 0, marginTop: "2px" }}
@@ -86,24 +113,55 @@ const AddInvoice = () => {
             </Box>
 
             <Collapse in={open} timeout="auto">
+              <Box sx={{ width: "45%", display: "flex", flexContent: "between" }}>
+                <Box className={`${styles.addSupplierField} ${"pb-4, me-2"}`}>
+                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
+                    Customer Name <span>*</span>
+                  </Typography>
+
+                  <TextField
+                    size="small"
+                    id="outlined-basic"
+                    sx={{ backgroundColor: "white" }}
+                    label="Customer Name"
+                    variant="outlined"
+                    {...register("name", { required: true })}
+                  />
+                </Box>
+                <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
+                    Customer Email
+                  </Typography>
+
+                  <TextField
+                    size="small"
+                    id="outlined-basic"
+                    sx={{ backgroundColor: "white" }}
+                    label="Customer Email"
+                    variant="outlined"
+                    {...register("email")}
+                  />
+                </Box>
+              </Box>
+
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>
-                  Address <span>*</span>
+                <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
+                  Address
                 </Typography>
 
                 <TextField
                   size="small"
                   id="outlined-basic"
-                  sx={{ width: "400px" }}
+                  sx={{ width: "45%", backgroundColor: "white" }}
                   label="Customer Address"
                   variant="outlined"
-                  {...register("address", { required: true })}
+                  {...register("address")}
                 />
               </Box>
             </Collapse>
 
             <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-              <Typography sx={{ textAlign: "start" }}>
+              <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
                 Date<span>*</span>
               </Typography>
 
@@ -111,9 +169,9 @@ const AddInvoice = () => {
                 type="date"
                 {...register("date", { required: true })}
                 style={{
-                  width: "400px",
-                  padding: "8px",
-                  backgroundColor: "#e4e4e4",
+                  width: "45%",
+                  padding: "10px",
+                  backgroundColor: "white",
                   border: "1px solid #aeaeae",
                   borderRadius: "3px",
                 }}
@@ -128,55 +186,43 @@ const AddInvoice = () => {
                   <TableRow>
                     <TableCell
                       className={`${styles.tableCell}`}
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                     >
-                      Item Information<span>*</span>
+                      Product Information<span>*</span>
                     </TableCell>
                     <TableCell
                       align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                       className={`${styles.tableCell}`}
                     >
-                      Available Ctn.
+                      Available Quantity
                     </TableCell>
+
                     <TableCell
                       align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
-                      className={`${styles.tableCell}`}
-                    >
-                      Carton
-                    </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
-                      className={`${styles.tableCell}`}
-                    >
-                      Item
-                    </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                       className={`${styles.tableCell}`}
                     >
                       Quantity
                     </TableCell>
                     <TableCell
                       align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                       className={`${styles.tableCell}`}
                     >
-                      Rate<span>*</span>
+                      Unit
                     </TableCell>
                     <TableCell
                       align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                       className={`${styles.tableCell}`}
                     >
-                      Discount/Pcs.
+                      Price<span>*</span>
                     </TableCell>
+
                     <TableCell
                       align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                       className={`${styles.tableCell}`}
                     >
                       Total
@@ -197,16 +243,19 @@ const AddInvoice = () => {
                             borderRight: "1px solid rgba(224, 224, 224, 1)",
                           }}
                         >
-                          <input
-                            type="text"
-                            placeholder="Product Name"
-                            {...register("product", { required: true })}
-                            style={{
-                              padding: "8px",
-                              backgroundColor: "#f1f3f6",
-                              border: "1px solid #aeaeae",
-                            }}
-                          />
+                          <Stack spacing={2} sx={{ width: 300 }}>
+                            <Autocomplete
+                              {...register("product", { required: true })}
+                              style={{
+                                backgroundColor: "#f1f3f6",
+                              }}
+                              freeSolo
+                              id="free-solo-demo"
+                              size="small"
+                              options={filteredProducts.map((product) => product.name)}
+                              renderInput={(params) => <TextField {...params} label=" Choose product" />}
+                            />
+                          </Stack>
                         </TableCell>
 
                         <TableCell
@@ -218,36 +267,19 @@ const AddInvoice = () => {
                         >
                           <input
                             type="text"
-                            placeholder="Available Ctn."
+                            placeholder="Available Qn."
                             {...register("ctn", { required: true })}
                             style={{
-                              width: "70px",
+                              width: "100px",
                               padding: "8px",
                               backgroundColor: "#f1f3f6",
                               border: "1px solid #aeaeae",
+                              p: 1,
+                              borderRadius: "3px"
                             }}
                           />
                         </TableCell>
 
-                        <TableCell
-                          align="center"
-                          sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
-                            p: 1,
-                          }}
-                        >
-                          <input
-                            type="number"
-                            placeholder="0"
-                            {...register("carton", { required: true })}
-                            style={{
-                              width: "70px",
-                              padding: "8px",
-                              backgroundColor: "#f1f3f6",
-                              border: "1px solid #aeaeae",
-                            }}
-                          />
-                        </TableCell>
                         <TableCell
                           align="center"
                           sx={{
@@ -264,8 +296,37 @@ const AddInvoice = () => {
                               padding: "8px",
                               backgroundColor: "#f1f3f6",
                               border: "1px solid #aeaeae",
+                              borderRadius: "3px"
                             }}
                           />
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          sx={{
+                            borderRight: "1px solid rgba(224, 224, 224, 1)",
+                            p: 1, width: "160px"
+                          }}>
+                          <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Select Unit</InputLabel>
+                            <Select
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              size="small"
+                              className={`${styles.inputFields}`}
+                              label="Select Unit"
+                              sx={{ padding: "4px" }}
+                              style={{
+                                backgroundColor: "#f1f3f6",
+                              }}
+                              {...register("unit", { required: true })}
+                              value={unit}
+                              onChange={handleUnitChange}
+                            >
+                              <MenuItem value="cash">K.G.</MenuItem>
+                              <MenuItem value="cheque">Gram</MenuItem>
+                              <MenuItem value="card">Pcs.</MenuItem>
+                            </Select>
+                          </FormControl>
                         </TableCell>
 
                         <TableCell
@@ -277,56 +338,18 @@ const AddInvoice = () => {
                         >
                           <input
                             type="text"
-                            placeholder="0"
-                            {...register("item", { required: true })}
+                            placeholder="Price"
+                            {...register("price", { required: true })}
                             style={{
                               width: "70px",
                               padding: "8px",
                               backgroundColor: "#f1f3f6",
                               border: "1px solid #aeaeae",
+                              borderRadius: "3px"
                             }}
                           />
                         </TableCell>
 
-                        <TableCell
-                          align="center"
-                          sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
-                            p: 1,
-                          }}
-                        >
-                          <input
-                            type="text"
-                            placeholder="Rating"
-                            {...register("rate", { required: true })}
-                            style={{
-                              width: "70px",
-                              padding: "8px",
-                              backgroundColor: "#f1f3f6",
-                              border: "1px solid #aeaeae",
-                            }}
-                          />
-                        </TableCell>
-
-                        <TableCell
-                          align="center"
-                          sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
-                            p: 1,
-                          }}
-                        >
-                          <input
-                            type="text"
-                            placeholder="0.00"
-                            {...register("discount", { required: true })}
-                            style={{
-                              width: "70px",
-                              padding: "8px",
-                              backgroundColor: "#f1f3f6",
-                              border: "1px solid #aeaeae",
-                            }}
-                          />
-                        </TableCell>
 
                         <TableCell
                           align="center"
@@ -344,13 +367,18 @@ const AddInvoice = () => {
                               padding: "8px",
                               backgroundColor: "#f1f3f6",
                               border: "1px solid #aeaeae",
+                              borderRadius: "3px"
                             }}
                           />
                         </TableCell>
                         <TableCell
                           onClick={() => {
                             if (tableRow <= 1) {
-                              alert("There only one row you can't delete.");
+                              Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'There are only one row, you can not delete it!'
+                              })
                             } else {
                               setTableRow(tableRow - 1);
                             }
@@ -367,8 +395,6 @@ const AddInvoice = () => {
                     );
                   })}
                   <TableRow>
-                    <TableCell />
-                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell />
@@ -399,13 +425,12 @@ const AddInvoice = () => {
                           padding: "8px",
                           backgroundColor: "#f1f3f6",
                           border: "1px solid #aeaeae",
+                          borderRadius: "3px"
                         }}
                       />
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell />
-                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell />
@@ -436,6 +461,7 @@ const AddInvoice = () => {
                           padding: "8px",
                           backgroundColor: "#f1f3f6",
                           border: "1px solid #aeaeae",
+                          borderRadius: "3px"
                         }}
                       />
                     </TableCell>
@@ -456,8 +482,6 @@ const AddInvoice = () => {
                         Add New Item
                       </Button>
                     </TableCell>
-                    <TableCell />
-                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell />
@@ -484,6 +508,7 @@ const AddInvoice = () => {
                           padding: "8px",
                           backgroundColor: "#f1f3f6",
                           border: "1px solid #aeaeae",
+                          borderRadius: "3px"
                         }}
                       />
                     </TableCell>
@@ -510,11 +535,9 @@ const AddInvoice = () => {
                         variant="contained"
                         color="success"
                       >
-                        Full Paid
+                        Print Invoice
                       </Button>
                     </TableCell>
-                    <TableCell />
-                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell />
@@ -527,7 +550,7 @@ const AddInvoice = () => {
                         p: 1,
                       }}
                     >
-                      Due:
+                      Change Amount:
                     </TableCell>
                     <TableCell
                       align="center"
@@ -536,12 +559,13 @@ const AddInvoice = () => {
                       <input
                         type="text"
                         placeholder="0"
-                        {...register("due", { required: true })}
+                        {...register("changeAmount", { required: true })}
                         style={{
                           width: "70px",
                           padding: "8px",
                           backgroundColor: "#f1f3f6",
                           border: "1px solid #aeaeae",
+                          borderRadius: "3px"
                         }}
                       />
                     </TableCell>
@@ -551,8 +575,8 @@ const AddInvoice = () => {
             </TableContainer>
           </Box>
         </form>
-      </Box>
-    </Container>
+      </Box >
+    </Container >
   );
 };
 
