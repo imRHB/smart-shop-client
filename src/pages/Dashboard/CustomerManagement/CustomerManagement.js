@@ -79,9 +79,10 @@ function Row(props) {
           {serial + 1}
         </TableCell>
         <TableCell align="center">{customer?.name}</TableCell>
+        <TableCell align="center">{customer?.name}</TableCell>
         <TableCell align="center">{customer?.address}</TableCell>
         <TableCell align="center">{customer?.phone}</TableCell>
-        <TableCell align="center">{customer?.email}</TableCell>
+        {/* <TableCell align="center">{customer?.email}</TableCell> */}
         <TableCell align="center">
           <EditIcon className={`${styles.editIcon}`} />
           <Delete
@@ -102,9 +103,8 @@ function Row(props) {
                   <TableRow>
                     <TableCell align="center">Name</TableCell>
                     <TableCell align="center">Phone</TableCell>
-                    <TableCell align="center">Position</TableCell>
                     <TableCell align="center">Address</TableCell>
-                    <TableCell align="center">Salary</TableCell>
+                    <TableCell align="center">Status</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -113,7 +113,7 @@ function Row(props) {
                       {customer?.name}
                     </TableCell>
                     <TableCell align="center">{customer?.phone}</TableCell>
-                    <TableCell align="center">{customer?.position}</TableCell>
+                    <TableCell align="center">{customer?.phone}</TableCell>
                     <TableCell align="center">{customer?.address}</TableCell>
                   </TableRow>
                 </TableBody>
@@ -194,14 +194,18 @@ const CustomerManagement = () => {
                   Name
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
+                  Status
+                </TableCell>
+
+                <TableCell align="center" className={`${styles.tableCell}`}>
                   Address
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
                   Phone
                 </TableCell>
-                <TableCell align="center" className={`${styles.tableCell}`}>
+                {/* <TableCell align="center" className={`${styles.tableCell}`}>
                   Email
-                </TableCell>
+                </TableCell> */}
 
                 <TableCell align="center" className={`${styles.tableCell}`}>
                   Action
