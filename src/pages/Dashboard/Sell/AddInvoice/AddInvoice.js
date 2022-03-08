@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./AddInvoice.module.css";
 import TextField from "@mui/material/TextField";
@@ -16,6 +16,8 @@ import TableRow from "@mui/material/TableRow";
 import Delete from "@mui/icons-material/Delete";
 import Collapse from "@mui/material/Collapse";
 import { NavLink } from "react-router-dom";
+import Stack from '@mui/material/Stack';
+import Autocomplete from '@mui/material/Autocomplete';
 
 const AddInvoice = () => {
   const [open, setOpen] = React.useState(false);
@@ -32,6 +34,14 @@ const AddInvoice = () => {
   const buttonToggle = () => {
     setToggle(!toggle);
   };
+
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("https://mighty-waters-53050.herokuapp.com/blogs")
+      .then((res) => res.json())
+      .then((data) => setFilteredProducts(data.blog))
+  }, [filteredProducts]);
 
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
@@ -164,9 +174,9 @@ const AddInvoice = () => {
                   <TableRow>
                     <TableCell
                       className={`${styles.tableCell}`}
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                     >
-                      Item Information<span>*</span>
+                      Product Information<span>*</span>
                     </TableCell>
                     <TableCell
                       align="center"
@@ -190,13 +200,7 @@ const AddInvoice = () => {
                     >
                       Price<span>*</span>
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
-                      className={`${styles.tableCell}`}
-                    >
-                      Discount/Pcs.
-                    </TableCell>
+
                     <TableCell
                       align="center"
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
@@ -220,16 +224,17 @@ const AddInvoice = () => {
                             borderRight: "1px solid rgba(224, 224, 224, 1)",
                           }}
                         >
-                          <input
-                            type="text"
-                            placeholder="Product Name"
-                            {...register("product", { required: true })}
-                            style={{
-                              padding: "8px",
-                              backgroundColor: "#f1f3f6",
-                              border: "1px solid #aeaeae",
-                            }}
-                          />
+                          <Stack spacing={2} sx={{ width: 300 }}>
+                            <Autocomplete
+                              {...register("product", { required: true })}
+                              style={{
+                                backgroundColor: "#f1f3f6",
+                              }}
+                              size="small"
+                              options={filteredProducts.map((product) => product.name)}
+                              renderInput={(params) => <TextField {...params} label=" Choose product" />}
+                            />
+                          </Stack>
                         </TableCell>
 
                         <TableCell
@@ -248,7 +253,8 @@ const AddInvoice = () => {
                               padding: "8px",
                               backgroundColor: "#f1f3f6",
                               border: "1px solid #aeaeae",
-                              p: 1
+                              p: 1,
+                              borderRadius: "3px"
                             }}
                           />
                         </TableCell>
@@ -269,6 +275,7 @@ const AddInvoice = () => {
                               padding: "8px",
                               backgroundColor: "#f1f3f6",
                               border: "1px solid #aeaeae",
+                              borderRadius: "3px"
                             }}
                           />
                         </TableCell>
@@ -289,29 +296,11 @@ const AddInvoice = () => {
                               padding: "8px",
                               backgroundColor: "#f1f3f6",
                               border: "1px solid #aeaeae",
+                              borderRadius: "3px"
                             }}
                           />
                         </TableCell>
 
-                        <TableCell
-                          align="center"
-                          sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
-                            p: 1,
-                          }}
-                        >
-                          <input
-                            type="text"
-                            placeholder="0.00"
-                            {...register("discount", { required: true })}
-                            style={{
-                              width: "70px",
-                              padding: "8px",
-                              backgroundColor: "#f1f3f6",
-                              border: "1px solid #aeaeae",
-                            }}
-                          />
-                        </TableCell>
 
                         <TableCell
                           align="center"
@@ -329,6 +318,7 @@ const AddInvoice = () => {
                               padding: "8px",
                               backgroundColor: "#f1f3f6",
                               border: "1px solid #aeaeae",
+                              borderRadius: "3px"
                             }}
                           />
                         </TableCell>
@@ -352,7 +342,6 @@ const AddInvoice = () => {
                     );
                   })}
                   <TableRow>
-                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell />
@@ -382,12 +371,12 @@ const AddInvoice = () => {
                           padding: "8px",
                           backgroundColor: "#f1f3f6",
                           border: "1px solid #aeaeae",
+                          borderRadius: "3px"
                         }}
                       />
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell />
@@ -417,6 +406,7 @@ const AddInvoice = () => {
                           padding: "8px",
                           backgroundColor: "#f1f3f6",
                           border: "1px solid #aeaeae",
+                          borderRadius: "3px"
                         }}
                       />
                     </TableCell>
@@ -437,7 +427,6 @@ const AddInvoice = () => {
                         Add New Item
                       </Button>
                     </TableCell>
-                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell
@@ -463,6 +452,7 @@ const AddInvoice = () => {
                           padding: "8px",
                           backgroundColor: "#f1f3f6",
                           border: "1px solid #aeaeae",
+                          borderRadius: "3px"
                         }}
                       />
                     </TableCell>
@@ -494,7 +484,6 @@ const AddInvoice = () => {
                     </TableCell>
                     <TableCell />
                     <TableCell />
-                    <TableCell />
                     <TableCell
                       align="center"
                       sx={{
@@ -519,6 +508,7 @@ const AddInvoice = () => {
                           padding: "8px",
                           backgroundColor: "#f1f3f6",
                           border: "1px solid #aeaeae",
+                          borderRadius: "3px"
                         }}
                       />
                     </TableCell>
@@ -528,8 +518,8 @@ const AddInvoice = () => {
             </TableContainer>
           </Box>
         </form>
-      </Box>
-    </Container>
+      </Box >
+    </Container >
   );
 };
 
