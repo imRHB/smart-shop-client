@@ -16,6 +16,7 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import invoices from "../../../../assets/data/invoice.json";
 import styles from "./ManageInvoice.module.css";
 import MenuIcon from "@mui/icons-material/Menu";
+import { NavLink } from "react-router-dom";
 
 function Row(props) {
   const { invoice } = props;
@@ -29,8 +30,8 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {invoice._id}
         </TableCell>
-        <TableCell align="center">{invoice.item}</TableCell>
         <TableCell align="center">{invoice.name}</TableCell>
+        <TableCell align="center">{invoice.item}</TableCell>
         <TableCell align="center">{invoice.date}</TableCell>
         <TableCell align="center">BDT {invoice.total}</TableCell>
         <TableCell align="center">
@@ -67,12 +68,17 @@ const ManageInvoice = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
-          Add New Invoice
-        </Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
-          POS
-        </Button>
+        <NavLink to="/dashboard/add-new-invoice" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
+            Add New Invoice
+          </Button>
+        </NavLink>
+        <NavLink to="/dashboard/pos" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
+            POS
+          </Button>
+        </NavLink>
+
       </Box>
       <Box className={`${styles.tableContainer}`}>
         <Typography sx={{ fontWeight: "bold" }}>Manage Invoice</Typography>
@@ -84,18 +90,21 @@ const ManageInvoice = () => {
           <Table aria-label="simple table">
             <TableHead className={`${styles.tableHeader}`}>
               <TableRow>
-                <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
+
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Sell No.
+                  Order ID
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
                   Customer Name
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Date
+                  Customer Phone
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Total Amount
+                  Purchase Date
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Purchase Amount
                 </TableCell>
 
                 <TableCell align="center" className={`${styles.tableCell}`}>

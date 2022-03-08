@@ -18,6 +18,11 @@ import Collapse from "@mui/material/Collapse";
 import { NavLink } from "react-router-dom";
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
+import Swal from "sweetalert2";
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from '@mui/material/InputLabel';
 
 const AddInvoice = () => {
   const [open, setOpen] = React.useState(false);
@@ -38,10 +43,17 @@ const AddInvoice = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    fetch("https://mighty-waters-53050.herokuapp.com/blogs")
+    fetch("https://smart-shop-pos.herokuapp.com/products")
       .then((res) => res.json())
-      .then((data) => setFilteredProducts(data.blog))
+      .then((data) => setFilteredProducts(data))
   }, [filteredProducts]);
+
+
+  const [unit, setUnit] = React.useState('');
+
+  const handleUnitChange = (event) => {
+    setUnit(event.target.value);
+  };
 
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
@@ -180,7 +192,7 @@ const AddInvoice = () => {
                     </TableCell>
                     <TableCell
                       align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                       className={`${styles.tableCell}`}
                     >
                       Available Quantity
@@ -188,14 +200,21 @@ const AddInvoice = () => {
 
                     <TableCell
                       align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                       className={`${styles.tableCell}`}
                     >
                       Quantity
                     </TableCell>
                     <TableCell
                       align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
+                      className={`${styles.tableCell}`}
+                    >
+                      Unit
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                       className={`${styles.tableCell}`}
                     >
                       Price<span>*</span>
@@ -203,7 +222,7 @@ const AddInvoice = () => {
 
                     <TableCell
                       align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                       className={`${styles.tableCell}`}
                     >
                       Total
@@ -230,6 +249,8 @@ const AddInvoice = () => {
                               style={{
                                 backgroundColor: "#f1f3f6",
                               }}
+                              freeSolo
+                              id="free-solo-demo"
                               size="small"
                               options={filteredProducts.map((product) => product.name)}
                               renderInput={(params) => <TextField {...params} label=" Choose product" />}
@@ -279,6 +300,34 @@ const AddInvoice = () => {
                             }}
                           />
                         </TableCell>
+                        <TableCell
+                          align="center"
+                          sx={{
+                            borderRight: "1px solid rgba(224, 224, 224, 1)",
+                            p: 1, width: "160px"
+                          }}>
+                          <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Select Unit</InputLabel>
+                            <Select
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              size="small"
+                              className={`${styles.inputFields}`}
+                              label="Select Unit"
+                              sx={{ padding: "4px" }}
+                              style={{
+                                backgroundColor: "#f1f3f6",
+                              }}
+                              {...register("unit", { required: true })}
+                              value={unit}
+                              onChange={handleUnitChange}
+                            >
+                              <MenuItem value="cash">K.G.</MenuItem>
+                              <MenuItem value="cheque">Gram</MenuItem>
+                              <MenuItem value="card">Pcs.</MenuItem>
+                            </Select>
+                          </FormControl>
+                        </TableCell>
 
                         <TableCell
                           align="center"
@@ -325,7 +374,11 @@ const AddInvoice = () => {
                         <TableCell
                           onClick={() => {
                             if (tableRow <= 1) {
-                              alert("There only one row you can't delete.");
+                              Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'There are only one row, you can not delete it!'
+                              })
                             } else {
                               setTableRow(tableRow - 1);
                             }
@@ -342,6 +395,7 @@ const AddInvoice = () => {
                     );
                   })}
                   <TableRow>
+                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell />
@@ -377,6 +431,7 @@ const AddInvoice = () => {
                     </TableCell>
                   </TableRow>
                   <TableRow>
+                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell />
@@ -427,6 +482,7 @@ const AddInvoice = () => {
                         Add New Item
                       </Button>
                     </TableCell>
+                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell
@@ -482,6 +538,7 @@ const AddInvoice = () => {
                         Print Invoice
                       </Button>
                     </TableCell>
+                    <TableCell />
                     <TableCell />
                     <TableCell />
                     <TableCell
