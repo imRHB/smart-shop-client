@@ -148,7 +148,7 @@ const DashboardHome = (props) => {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           background: "#E5E5E5",
-          height: "230vh",
+          height: "100%",
         }}
       >
         <Toolbar />
