@@ -46,6 +46,22 @@ const PurchaseProduct = () => {
           <br /> <span style={{ color: "#969494" }}>Add Purchase Invoice</span>
         </Typography>
       </Box>
+      <Box sx={{ textAlign: "right", my: 2 }}>
+        <NavLink
+          to="/dashboard/manage-product"
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
+            Manage Products
+          </Button>
+        </NavLink>
+
+        <NavLink to="/dashboard/add-product" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
+            Add New Product
+          </Button>
+        </NavLink>
+      </Box>
     </Container>
   );
 };

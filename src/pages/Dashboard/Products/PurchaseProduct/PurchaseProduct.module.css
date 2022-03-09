@@ -10,3 +10,31 @@
   background-color: #001e3c !important;
   margin-right: 15px !important;
 }
+
+.paymentBtn {
+  background-color: #003366 !important;
+  color: #fff !important;
+  text-transform: capitalize !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+}
+
+.paymentBtn:hover {
+  background-color: #004a94 !important;
+  color: #fff !important;
+}
+
+.receiptBtn {
+  background-color: #45c203 !important;
+  color: #fff !important;
+  text-transform: capitalize !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.receiptBtn:hover {
+  background-color: #2b7b00 !important;
+  color: #fff !important;
+}
