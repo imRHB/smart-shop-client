@@ -7,12 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import styles from "./Payment.module.css";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
-import ReceiptIcon from "@mui/icons-material/Receipt";
 import SendIcon from "@mui/icons-material/Send";
-import Tab from "@mui/material/Tab";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import TabContext from "@mui/lab/TabContext";
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -26,12 +21,6 @@ const Payment = () => {
     reset,
     formState: { errors },
   } = useForm();
-
-  // const [value, setValue] = React.useState("1");
-
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
 
   const [category, setCategory] = React.useState('');
 
@@ -77,16 +66,6 @@ const Payment = () => {
         <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>Add Payment</Typography>
         <hr />
         <Box>
-          {/* <TabContext value={value}>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <TabList onChange={handleChange} aria-label="lab API tabs example" >
-                <Typography sx={{ fontWeight: "bold", marginTop: 2, marginRight: 3 }} >
-                  Choose Transaction
-                </Typography>
-                <Tab label="Payment" value="1" />
-                <Tab label="Receipt" value="2" />
-              </TabList>
-            </Box> */}
 
           <form className={`${styles.paymentForm} ${"shadow"}`}>
             <Grid

@@ -89,18 +89,19 @@ const ManageTransaction = () => {
                         <TableHead className={`${styles.tableHeader}`}>
                             <TableRow>
 
-                                <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
+                                <TableCell className={`${styles.tableCell}`}>Transaction ID</TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Name
+                                    Transaction Category
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Account Name
+                                    Transaction Date
+
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Receipt Amount
+                                    Paid Amount
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Paid
+                                    Due Amount
                                 </TableCell>
 
                                 <TableCell align="center" className={`${styles.tableCell}`}>
