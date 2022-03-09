@@ -17,6 +17,7 @@ import transactions from "../../../../assets/data/transaction.json";
 import styles from "./ManageTransaction.module.css";
 import MenuIcon from '@mui/icons-material/Menu';
 import ReceiptIcon from '@mui/icons-material/Receipt';
+import { NavLink } from 'react-router-dom';
 
 
 function Row(props) {
@@ -71,10 +72,11 @@ const ManageTransaction = () => {
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "right", my: 2 }}>
-                <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>Create Account</Button>
-                <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>Manage Account</Button>
-                <Button className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>Payment</Button>
-                <Button className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>Receipt</Button>
+                <NavLink to="/dashboard/payment" style={{ textDecoration: "none" }}>
+                    <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
+                        Make Payment
+                    </Button>
+                </NavLink>
             </Box>
             <Box className={`${styles.tableContainer}`}>
                 <Typography sx={{ fontWeight: "bold" }}>Manage Transaction</Typography>

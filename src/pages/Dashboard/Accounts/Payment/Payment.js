@@ -17,6 +17,7 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import StripePayment from "../../PaymentGateway/Stripe/StripePayment/StripePayment";
+import { NavLink } from "react-router-dom";
 
 const Payment = () => {
   const {
@@ -26,11 +27,11 @@ const Payment = () => {
     formState: { errors },
   } = useForm();
 
-  const [value, setValue] = React.useState("1");
+  // const [value, setValue] = React.useState("1");
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  // const handleChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
 
   const [category, setCategory] = React.useState('');
 
@@ -65,25 +66,18 @@ const Payment = () => {
       </Box>
 
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
-          Create Account
-        </Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
-          Manage Account
-        </Button>
-        <Button className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>
-          Payment
-        </Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>
-          Receipt
-        </Button>
+        <NavLink to="/dashboard/manage-transition" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
+            Manage Transaction
+          </Button>
+        </NavLink>
       </Box>
 
       <Box className={`${styles.paymentContainer}`}>
         <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>Add Payment</Typography>
         <hr />
         <Box>
-          <TabContext value={value}>
+          {/* <TabContext value={value}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <TabList onChange={handleChange} aria-label="lab API tabs example" >
                 <Typography sx={{ fontWeight: "bold", marginTop: 2, marginRight: 3 }} >
@@ -92,178 +86,96 @@ const Payment = () => {
                 <Tab label="Payment" value="1" />
                 <Tab label="Receipt" value="2" />
               </TabList>
-            </Box>
+            </Box> */}
 
-            <form className={`${styles.paymentForm} ${"shadow"}`}>
-              <Grid
-                container
-                spacing={4}
-                columns={16}
-                sx={{ marginTop: 2, marginBottom: 2 }}
-              >
-                <Grid item md={8} sm={16} sx={16}>
-                  <Box className={`${styles.inputContainer}`}>
-                    <Typography className={`${styles.inputTitle}`} variant="f6">
-                      Date<span style={{ color: "#f44336" }}>*</span>
-                    </Typography>
+          <form className={`${styles.paymentForm} ${"shadow"}`}>
+            <Grid
+              container
+              spacing={4}
+              columns={16}
+              sx={{ marginTop: 2, marginBottom: 2 }}
+            >
+              <Grid item md={8} sm={16} sx={16}>
+                <Box className={`${styles.inputContainer}`}>
+                  <Typography className={`${styles.inputTitle}`} variant="f6">
+                    Date<span style={{ color: "#f44336" }}>*</span>
+                  </Typography>
 
-                    <input
-                      type="date"
-                      {...register("date", { required: true })}
-                      className={`${styles.inputFields}`}
-                      style={{
-                        padding: "8px",
-                        border: "1px solid #aeaeae",
-                        borderRadius: "3px",
-                      }}
-                    />
-                  </Box>
+                  <input
+                    type="date"
+                    {...register("date", { required: true })}
+                    className={`${styles.inputFields}`}
+                    style={{
+                      padding: "8px",
+                      border: "1px solid #aeaeae",
+                      borderRadius: "3px",
+                    }}
+                  />
+                </Box>
 
-                  <Box className={`${styles.inputContainer}`}>
-                    <Typography className={`${styles.inputTitle}`} variant="f6">
-                      Transaction Category
-                      <span style={{ color: "#f44336" }}>*</span>
-                    </Typography>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Select Category</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        size="small"
-                        className={`${styles.inputFields}`}
-                        label="Select Category"
-                        sx={{ padding: "4px" }}
-                        {...register("category", { required: true })}
-                        value={category}
-                        onChange={handleCategoryChange}
-                      >
-                        <MenuItem value="supplier">Supplier</MenuItem>
-                        <MenuItem value="customer">Customer</MenuItem>
-                        <MenuItem value="office">Office</MenuItem>
-                        <MenuItem value="loan">Loan</MenuItem>
-                        <MenuItem value="employee">Employee</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Box>
-
-
-                  <Box className={`${styles.inputContainer}`}>
-                    <Typography className={`${styles.inputTitle}`} variant="f6">
-                      Transaction Mode
-                      <span style={{ color: "#f44336" }}>*</span>
-                    </Typography>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Select Mode</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        size="small"
-                        className={`${styles.inputFields}`}
-                        label="Select Mode"
-                        sx={{ padding: "4px" }}
-                        {...register("mode", { required: true })}
-                        value={mode}
-                        onChange={handleModeChange}
-                      >
-                        <MenuItem value="cash">Cash</MenuItem>
-                        <MenuItem value="cheque">Cheque</MenuItem>
-                        <MenuItem value="card">Card</MenuItem>
-                        <MenuItem value="payOrder">Pay Order</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Box>
-                  {
-                    mode === "card" &&
-                    <StripePayment />
-                  }
-
-
-                  {
-                    (mode === "cheque" || mode === "payOrder") &&
-
-                    <Box>
-                      <Box className={`${styles.inputContainer}`}>
-                        <Typography className={`${styles.inputTitle}`} variant="f6">
-                          Cheque/Pay Order No
-                          <span style={{ color: "#f44336" }}>*</span>
-                        </Typography>
-
-                        <TextField
-                          id="outlined-basic"
-                          size="small"
-                          className={`${styles.inputFields}`}
-                          label="Pay Mode"
-                          variant="outlined"
-                          {...register("payMode", { required: true })}
-                        />
-                      </Box>
-
-                      <Box className={`${styles.inputContainer}`}>
-                        <Typography className={`${styles.inputTitle}`} variant="f6">
-                          Bank Name<span style={{ color: "#f44336" }}>*</span>
-                        </Typography>
-                        <FormControl fullWidth>
-                          <InputLabel id="demo-simple-select-label">Select Bank</InputLabel>
-                          <Select
-                            labelId="demo-simple-select-label"
-                            id="outlined-basic"
-                            size="small"
-                            className={`${styles.inputFields}`}
-                            label="Bank Name"
-                            variant="outlined"
-                            {...register("bank", { required: true })}
-                            value={bank}
-                            sx={{ padding: "4px" }}
-                            onChange={handleBankChange}
-                          >
-                            <MenuItem value={1}>Sonali Bank</MenuItem>
-                            <MenuItem value={2}>AB Bank</MenuItem>
-                            <MenuItem value={2}>IBBL</MenuItem>
-                            <MenuItem value={2}>NBL</MenuItem>
-                            <MenuItem value={2}>NCBL</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Box>
-                    </Box>
-                  }
-
-                </Grid>
-                <Grid item md={8} sm={16} sx={16}>
-                  <Box className={`${styles.inputContainer}`}>
-                    <Typography className={`${styles.inputTitle}`} variant="f6">
-                      Description<span style={{ color: "#f44336" }}>*</span>
-                    </Typography>
-
-                    <TextField
-                      id="outlined-basic"
+                <Box className={`${styles.inputContainer}`}>
+                  <Typography className={`${styles.inputTitle}`} variant="f6">
+                    Transaction Category
+                    <span style={{ color: "#f44336" }}>*</span>
+                  </Typography>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Select Category</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
                       size="small"
                       className={`${styles.inputFields}`}
-                      label="Description"
-                      variant="outlined"
-                      {...register("desc", { required: true })}
-                    />
-                  </Box>
+                      label="Select Category"
+                      sx={{ padding: "4px" }}
+                      {...register("category", { required: true })}
+                      value={category}
+                      onChange={handleCategoryChange}
+                    >
+                      <MenuItem value="customer">Customer</MenuItem>
+                      <MenuItem value="employee">Employee</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
 
-                  <Box className={`${styles.inputContainer}`}>
-                    <Typography className={`${styles.inputTitle}`} variant="f6">
-                      Select Option Name
-                      <span style={{ color: "#f44336" }}>*</span>
-                    </Typography>
 
-                    <TextField
-                      id="outlined-basic"
+                <Box className={`${styles.inputContainer}`}>
+                  <Typography className={`${styles.inputTitle}`} variant="f6">
+                    Transaction Mode
+                    <span style={{ color: "#f44336" }}>*</span>
+                  </Typography>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Select Mode</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
                       size="small"
                       className={`${styles.inputFields}`}
-                      label="Supplier Contact No."
-                      variant="outlined"
-                      {...register("contact", { required: true })}
-                    />
-                  </Box>
+                      label="Select Mode"
+                      sx={{ padding: "4px" }}
+                      {...register("mode", { required: true })}
+                      value={mode}
+                      onChange={handleModeChange}
+                    >
+                      <MenuItem value="cash">Cash</MenuItem>
+                      <MenuItem value="cheque">Cheque</MenuItem>
+                      <MenuItem value="card">Card</MenuItem>
+                      <MenuItem value="payOrder">Pay Order</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+                {
+                  mode === "card" &&
+                  <StripePayment />
+                }
 
-                  <TabPanel value="1" sx={{ m: 0, p: 0 }}>
+
+                {
+                  (mode === "cheque" || mode === "payOrder") &&
+
+                  <Box>
                     <Box className={`${styles.inputContainer}`}>
                       <Typography className={`${styles.inputTitle}`} variant="f6">
-                        Payment Amount
+                        Cheque/Pay Order No
                         <span style={{ color: "#f44336" }}>*</span>
                       </Typography>
 
@@ -271,12 +183,91 @@ const Payment = () => {
                         id="outlined-basic"
                         size="small"
                         className={`${styles.inputFields}`}
-                        label="Payment Amount"
+                        label="Pay Mode"
                         variant="outlined"
-                        {...register("amount", { required: true })}
+                        {...register("payMode", { required: true })}
                       />
                     </Box>
-                  </TabPanel>
+
+                    <Box className={`${styles.inputContainer}`}>
+                      <Typography className={`${styles.inputTitle}`} variant="f6">
+                        Bank Name<span style={{ color: "#f44336" }}>*</span>
+                      </Typography>
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Select Bank</InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          id="outlined-basic"
+                          size="small"
+                          className={`${styles.inputFields}`}
+                          label="Bank Name"
+                          variant="outlined"
+                          {...register("bank", { required: true })}
+                          value={bank}
+                          sx={{ padding: "4px" }}
+                          onChange={handleBankChange}
+                        >
+                          <MenuItem value={1}>Sonali Bank</MenuItem>
+                          <MenuItem value={2}>AB Bank</MenuItem>
+                          <MenuItem value={2}>IBBL</MenuItem>
+                          <MenuItem value={2}>NBL</MenuItem>
+                          <MenuItem value={2}>NCBL</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Box>
+                  </Box>
+                }
+
+              </Grid>
+              <Grid item md={8} sm={16} sx={16}>
+                <Box className={`${styles.inputContainer}`}>
+                  <Typography className={`${styles.inputTitle}`} variant="f6">
+                    Details
+                  </Typography>
+
+                  <TextField
+                    id="outlined-basic"
+                    size="small"
+                    className={`${styles.inputFields}`}
+                    label="Details"
+                    variant="outlined"
+                    {...register("detail")}
+                  />
+                </Box>
+
+                <Box className={`${styles.inputContainer}`}>
+                  <Typography className={`${styles.inputTitle}`} variant="f6">
+                    Select Option Name
+                    <span style={{ color: "#f44336" }}>*</span>
+                  </Typography>
+
+                  <TextField
+                    id="outlined-basic"
+                    size="small"
+                    className={`${styles.inputFields}`}
+                    label="Supplier Contact No."
+                    variant="outlined"
+                    {...register("contact", { required: true })}
+                  />
+                </Box>
+
+
+                <Box className={`${styles.inputContainer}`}>
+                  <Typography className={`${styles.inputTitle}`} variant="f6">
+                    Payment Amount
+                    <span style={{ color: "#f44336" }}>*</span>
+                  </Typography>
+
+                  <TextField
+                    id="outlined-basic"
+                    size="small"
+                    className={`${styles.inputFields}`}
+                    label="Payment Amount"
+                    variant="outlined"
+                    {...register("amount", { required: true })}
+                  />
+                </Box>
+                {/*                 
 
                   <TabPanel value="2" sx={{ m: 0, p: 0 }}>
                     <Box className={`${styles.inputContainer}`}>
@@ -293,21 +284,21 @@ const Payment = () => {
                         {...register("amount", { required: true })}
                       />
                     </Box>
-                  </TabPanel>
+                  </TabPanel> */}
 
-                  <Box sx={{ textAlign: "right" }}>
-                    <Button
-                      className={`${styles.paymentBtn}`}
-                      sx={{ my: 2, width: "100%", fontWeight: "bold" }}
-                      endIcon={<SendIcon />}
-                    >
-                      Submit
-                    </Button>
-                  </Box>
-                </Grid>
+                <Box sx={{ textAlign: "right" }}>
+                  <Button
+                    className={`${styles.paymentBtn}`}
+                    sx={{ my: 2, width: "100%", fontWeight: "bold" }}
+                    endIcon={<SendIcon />}
+                  >
+                    Submit
+                  </Button>
+                </Box>
               </Grid>
-            </form>
-          </TabContext>
+            </Grid>
+          </form>
+          {/* </TabContext> */}
         </Box>
       </Box>
     </Container >
