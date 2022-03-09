@@ -45,7 +45,7 @@ const CustomerInvoice = () => {
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ p: 5 }}>
                     <Grid item xs={12} sx={{ textAlign: "left" }}>
                         <Box >
-                            <Typography sx={{ textAlign: "left" }} variant="h3">Invoice</Typography>
+                            <Typography sx={{ textAlign: "left", fontWeight: "bold", mb: 3 }} variant="h3">Invoice</Typography>
 
                         </Box>
                     </Grid>
@@ -65,7 +65,7 @@ const CustomerInvoice = () => {
                         </Box>
                     </Grid>
                 </Grid>
-                <Box sx={{ width: 200, mx: "auto" }}>
+                <Box sx={{ width: 200, mx: "auto", mb: 5 }}>
                     <img
                         src={logo}
                         alt=""
@@ -102,7 +102,7 @@ const CustomerInvoice = () => {
 
                         </TableContainer>
 
-                        <Typography sx={{ textAlign: "left", my: 5 }}>Employee Name: Hasan Zahid</Typography>
+                        <Typography sx={{ textAlign: "left", my: 5 }}>Invoiced By: Hasan Zahid</Typography>
                     </Box>
                 </Container>
             </Box >
