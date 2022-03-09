@@ -30,6 +30,7 @@ import PurchaseReport from "../Report/PurchaseReport/PurchaseReport";
 import SalesReport from "../Report/SalesReport/SalesReport";
 import TodaysReport from "../Report/TodaysReport/TodaysReport";
 import AddInvoice from "../Sell/AddInvoice/AddInvoice";
+import AddCategory from "../AddCategory/AddCategory";
 import ManageInvoice from "../Sell/ManageInvoice/ManageInvoice";
 import PosInvoice from "../Sell/PosInvoice/PosInvoice";
 import StockManagements from "../StockManagement/StockManagements";
@@ -37,7 +38,7 @@ import SupplierStock from "../SupplierStock/SupplierStock";
 //==============import your component here====================//
 // import TestComponent from "../TestComponent/TestComponent";
 import TestComponent from "../TestComponent/TestComponent";
-import AddCategory from "../AddCategory/AddCategory";
+import EventCalender from "../EventCalender/EventCalender";
 //==============import your component here===================//
 
 const NestedRoutes = () => {
@@ -117,7 +118,7 @@ const NestedRoutes = () => {
         <Route path="manage-personal-loan" element={<ManageLoan />}></Route>
         <Route path="add-payment" element={<AddPayment />}></Route>
         {/*============ Personal Loan Department All Routes End ==============*/}
-
+        <Route path="events" element={<EventCalender />}></Route>
         {/*===================TEST YOUR COMPONENT HERE=====================*/}
         {/* <Route path="expense-item" element={<TestComponent />}></Route> */}
         <Route path="test-component" element={<TestComponent />}></Route>
