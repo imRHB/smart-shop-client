@@ -29,20 +29,18 @@ function Row(props) {
                 className={`${styles.tableHover}`}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-
                 <TableCell component="th" scope="row">
                     {transaction._id}
                 </TableCell>
-                <TableCell align="center">{transaction.name}</TableCell>
-                <TableCell align="center">{transaction.account}</TableCell>
-                <TableCell align="center">BDT {transaction.receipt}</TableCell>
-                <TableCell align="center">BDT {transaction.pay}</TableCell>
+                <TableCell align="center">{transaction.category}</TableCell>
+                <TableCell align="center">{transaction.date}</TableCell>
+                <TableCell align="center">BDT {transaction.amount}</TableCell>
+                <TableCell align="center">BDT 0.00</TableCell>
                 <TableCell align="center">
                     <EditIcon className={`${styles.editIcon}`} />
                     <Delete className={`${styles.deleteIcon}`} />
                 </TableCell>
             </TableRow>
-
         </React.Fragment>
     );
 }

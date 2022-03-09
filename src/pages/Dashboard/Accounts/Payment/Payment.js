@@ -147,7 +147,6 @@ const Payment = () => {
                   <StripePayment />
                 }
 
-
                 {
                   (mode === "cheque" || mode === "payOrder") &&
 
@@ -246,25 +245,6 @@ const Payment = () => {
                     {...register("amount", { required: true })}
                   />
                 </Box>
-                {/*                 
-
-                  <TabPanel value="2" sx={{ m: 0, p: 0 }}>
-                    <Box className={`${styles.inputContainer}`}>
-                      <Typography className={`${styles.inputTitle}`} variant="f6">
-                        Receipt Amount
-                        <span style={{ color: "#f44336" }}>*</span>
-                      </Typography>
-                      <TextField
-                        id="outlined-basic"
-                        size="small"
-                        className={`${styles.inputFields}`}
-                        label="Receipt Amount"
-                        variant="outlined"
-                        {...register("amount", { required: true })}
-                      />
-                    </Box>
-                  </TabPanel> */}
-
                 <Box sx={{ textAlign: "right" }}>
                   <Button
                     className={`${styles.paymentBtn}`}
@@ -277,7 +257,6 @@ const Payment = () => {
               </Grid>
             </Grid>
           </form>
-          {/* </TabContext> */}
         </Box>
       </Box>
     </Container >
