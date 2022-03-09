@@ -41,7 +41,7 @@ const CustomerInvoice = () => {
     })
     return (
         <Container >
-            <Box sx={{ mt: 5, bgcolor: "white" }} className={`${styles.containerBorder}`}>
+            <Box sx={{ mt: 5, bgcolor: "white", position: "relative" }} className={`${styles.containerBorder}`}>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ p: 5 }}>
                     <Grid item xs={12} sx={{ textAlign: "left" }}>
                         <Box >
@@ -105,6 +105,7 @@ const CustomerInvoice = () => {
                         <Typography sx={{ textAlign: "left", my: 5 }}>Invoiced By: Hasan Zahid</Typography>
                     </Box>
                 </Container>
+                <Typography sx={{ color: "#e0e0e0", position: "absolute", right: "10px", bottom: "-35px" }}>An exciting place for the whole family to shop</Typography>
             </Box >
         </Container >
     );
