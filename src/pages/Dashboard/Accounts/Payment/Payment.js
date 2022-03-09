@@ -144,7 +144,10 @@ const Payment = () => {
                 </Box>
                 {
                   mode === "card" &&
-                  <StripePayment />
+                  <Box className={`${styles.cardPay}`} >
+                    <StripePayment />
+                  </Box>
+
                 }
 
                 {
@@ -245,10 +248,10 @@ const Payment = () => {
                     {...register("amount", { required: true })}
                   />
                 </Box>
-                <Box sx={{ textAlign: "right" }}>
+                <Box sx={{ textAlign: "center" }}>
                   <Button
                     className={`${styles.paymentBtn}`}
-                    sx={{ my: 2, width: "100%", fontWeight: "bold" }}
+                    sx={{ my: 2, width: "50%", fontWeight: "bold" }}
                     endIcon={<SendIcon />}
                   >
                     Submit

@@ -10,13 +10,12 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import { Button, Container } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import transactions from "../../../../assets/data/transaction.json";
 import styles from "./ManageTransaction.module.css";
 import MenuIcon from '@mui/icons-material/Menu';
-import ReceiptIcon from '@mui/icons-material/Receipt';
+import PreviewIcon from '@mui/icons-material/Preview';
 import { NavLink } from 'react-router-dom';
 
 
@@ -37,7 +36,7 @@ function Row(props) {
                 <TableCell align="center">BDT {transaction.amount}</TableCell>
                 <TableCell align="center">BDT 0.00</TableCell>
                 <TableCell align="center">
-                    <EditIcon className={`${styles.editIcon}`} />
+                    <PreviewIcon className={`${styles.editIcon}`} />
                     <Delete className={`${styles.deleteIcon}`} />
                 </TableCell>
             </TableRow>
