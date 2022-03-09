@@ -10,13 +10,13 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import { Button, Container } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import transactions from "../../../../assets/data/transaction.json";
 import styles from "./ManageTransaction.module.css";
 import MenuIcon from '@mui/icons-material/Menu';
-import ReceiptIcon from '@mui/icons-material/Receipt';
+import PreviewIcon from '@mui/icons-material/Preview';
+import { NavLink } from 'react-router-dom';
 
 
 function Row(props) {
@@ -28,20 +28,18 @@ function Row(props) {
                 className={`${styles.tableHover}`}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-
                 <TableCell component="th" scope="row">
                     {transaction._id}
                 </TableCell>
-                <TableCell align="center">{transaction.name}</TableCell>
-                <TableCell align="center">{transaction.account}</TableCell>
-                <TableCell align="center">BDT {transaction.receipt}</TableCell>
-                <TableCell align="center">BDT {transaction.pay}</TableCell>
+                <TableCell align="center">{transaction.category}</TableCell>
+                <TableCell align="center">{transaction.date}</TableCell>
+                <TableCell align="center">BDT {transaction.amount}</TableCell>
+                <TableCell align="center">BDT 0.00</TableCell>
                 <TableCell align="center">
-                    <EditIcon className={`${styles.editIcon}`} />
+                    <PreviewIcon className={`${styles.editIcon}`} />
                     <Delete className={`${styles.deleteIcon}`} />
                 </TableCell>
             </TableRow>
-
         </React.Fragment>
     );
 }
@@ -71,10 +69,11 @@ const ManageTransaction = () => {
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "right", my: 2 }}>
-                <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>Create Account</Button>
-                <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>Manage Account</Button>
-                <Button className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>Payment</Button>
-                <Button className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>Receipt</Button>
+                <NavLink to="/dashboard/payment" style={{ textDecoration: "none" }}>
+                    <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
+                        Make Payment
+                    </Button>
+                </NavLink>
             </Box>
             <Box className={`${styles.tableContainer}`}>
                 <Typography sx={{ fontWeight: "bold" }}>Manage Transaction</Typography>
@@ -87,18 +86,19 @@ const ManageTransaction = () => {
                         <TableHead className={`${styles.tableHeader}`}>
                             <TableRow>
 
-                                <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
+                                <TableCell className={`${styles.tableCell}`}>Transaction ID</TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Name
+                                    Transaction Category
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Account Name
+                                    Transaction Date
+
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Receipt Amount
+                                    Paid Amount
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Paid
+                                    Due Amount
                                 </TableCell>
 
                                 <TableCell align="center" className={`${styles.tableCell}`}>
