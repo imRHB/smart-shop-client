@@ -34,9 +34,19 @@ const PurchaseProduct = () => {
     setToggle(!toggle);
   };
   return (
-    <div>
-      <h2>Purchase Product Invoice</h2>
-    </div>
+    <Container sx={{ width: "100%", mb: 5 }}>
+      <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
+        <Typography>
+          <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
+        </Typography>
+        <Typography>
+          <span style={{ fontSize: "26px", marginLeft: "-56px" }}>
+            Products
+          </span>{" "}
+          <br /> <span style={{ color: "#969494" }}>Add Purchase Invoice</span>
+        </Typography>
+      </Box>
+    </Container>
   );
 };
 
