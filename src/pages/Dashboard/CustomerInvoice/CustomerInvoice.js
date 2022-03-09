@@ -45,7 +45,7 @@ const CustomerInvoice = () => {
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ p: 5 }}>
                     <Grid item xs={12} sx={{ textAlign: "left" }}>
                         <Box >
-                            <Typography sx={{ textAlign: "left", fontWeight: "bold", mb: 3 }} variant="h3">Invoice</Typography>
+                            <Typography sx={{ textAlign: "left", fontWeight: "bold", mb: 3, fontStyle: 'italic' }} variant="h3">Invoice</Typography>
 
                         </Box>
                     </Grid>
@@ -92,20 +92,24 @@ const CustomerInvoice = () => {
                                     {products.map((product) => (
                                         <Row key={product._id} product={product} />
                                     ))}
-                                    <TableCell colSpan={4} align="right" sx={{ borderRight: 1 }}>
+                                    <TableCell colSpan={4} align="right" sx={{ borderRight: 1 }} style={{ fontWeight: "bold" }}>
                                         Total Amount:
                                     </TableCell>
-                                    <TableCell align="right">BDT {total}</TableCell>
+                                    <TableCell align="right" style={{ fontWeight: "bold" }}>BDT {total}</TableCell>
 
                                 </TableBody>
                             </Table>
 
                         </TableContainer>
 
-                        <Typography sx={{ textAlign: "left", my: 5 }}>Invoiced By: Hasan Zahid</Typography>
+                        <Typography sx={{ textAlign: "left", mt: 8, mb: 3, fontWeight: "bold" }}>Prepared By: Hasan Zahid</Typography>
+
+                        <Typography sx={{ textAlign: "left" }}>Smart Shop | Dhaka,Bangladesh  <br /> https://smart-shop-pos.web.app </Typography>
+
                     </Box>
                 </Container>
                 <Typography sx={{ color: "#e0e0e0", position: "absolute", right: "10px", bottom: "-35px" }}>An exciting place for the whole family to shop</Typography>
+
             </Box >
         </Container >
     );
