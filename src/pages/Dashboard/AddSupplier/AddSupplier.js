@@ -130,11 +130,11 @@ const AddSupplier = () => {
                     sx={{ padding: "4px" }}
                     onChange={handleCompanyChange}
                   >
-                    <MenuItem value={1}>Cheviot International Ltd.</MenuItem>
-                    <MenuItem value={2}>Hoang Mo Thien Company Limited</MenuItem>
-                    <MenuItem value={2}>Ozege tekstil konfeksioyon sanayi ve ticaret</MenuItem>
-                    <MenuItem value={3}>Cannabis Suppliers</MenuItem>
-                    <MenuItem value={4}>Best International Ltd.</MenuItem>
+                    <MenuItem value="Cheviot International Ltd.">Cheviot International Ltd.</MenuItem>
+                    <MenuItem value="Hoang Mo Thien Company Limited">Hoang Mo Thien Company Limited</MenuItem>
+                    <MenuItem value="Ozege tekstil konfeksioyon sanayi ve ticaret">Ozege tekstil konfeksioyon sanayi ve ticaret</MenuItem>
+                    <MenuItem value="Cannabis Suppliers">Cannabis Suppliers</MenuItem>
+                    <MenuItem value="Best International Ltd.">Best International Ltd.</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
