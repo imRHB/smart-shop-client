@@ -15,6 +15,7 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from "@mui/material/MenuItem";
+import { NavLink } from "react-router-dom";
 
 const AddSupplier = () => {
   const dispatch = useDispatch();
@@ -55,19 +56,13 @@ const AddSupplier = () => {
           <span style={{ color: "#969494" }}>Add New Supplier</span>
         </Typography>
       </Box>
+
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button sx={{ mb: 1 }} className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
-          Add Supplier
-        </Button>
-        <Button sx={{ mb: 1 }} className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
-          Supplier Ledger
-        </Button>
-        <Button sx={{ mb: 1 }} className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>
-          Supplier Payment
-        </Button>
-        <Button sx={{ mb: 1 }} className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>
-          Supplier Sales Details
-        </Button>
+        <NavLink to="/dashboard/manage-supplier" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
+            Manage Supplier
+          </Button>
+        </NavLink>
       </Box>
 
       <Box className={`${styles.paymentContainer}`}>

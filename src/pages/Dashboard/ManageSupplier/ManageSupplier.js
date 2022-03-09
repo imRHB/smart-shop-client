@@ -31,6 +31,7 @@ import {
   setEditSupplier,
   updateSupplierToDB,
 } from "../../../store/supplier";
+import { NavLink } from "react-router-dom";
 
 const override = css`
   display: block;
@@ -112,9 +113,9 @@ function Row(props) {
           {serial + 1}
         </TableCell>
         <TableCell align="center">{supplier.name}</TableCell>
-        <TableCell align="center">{supplier.address}</TableCell>
         <TableCell align="center">{supplier.contact}</TableCell>
-        <TableCell align="center">BDT {supplier.balance}</TableCell>
+        <TableCell align="center">{supplier.company}</TableCell>
+        <TableCell align="center">{supplier.companyAddress}</TableCell>
         <TableCell align="center">
           <EditIcon
             onClick={() => {
@@ -178,11 +179,11 @@ function Row(props) {
                   <TextField
                     id="outlined-textarea"
                     size="small"
-                    label="Supplier Address"
+                    label="Company Name"
                     className={`${styles.supplierTextField}`}
-                    defaultValue={editSupplier?.address}
+                    defaultValue={editSupplier?.company}
                     multiline
-                    {...register("address", { required: true })}
+                    {...register("company", { required: true })}
                   />
                 </Box>
                 <Box className={`${styles.addSupplierField}`}>
@@ -190,20 +191,10 @@ function Row(props) {
                     id="outlined-basic"
                     size="small"
                     className={`${styles.supplierTextField}`}
-                    label="Details"
+                    label="Company Address"
                     variant="outlined"
-                    defaultValue={editSupplier?.details}
-                    {...register("details", { required: true })}
-                  />
-                </Box>
-                <Box className={`${styles.addSupplierField}`}>
-                  <TextField
-                    id="outlined-textarea"
-                    label="Balance"
-                    size="small"
-                    defaultValue={editSupplier?.balance}
-                    className={`${styles.supplierTextField}`}
-                    {...register("balance", { required: true })}
+                    defaultValue={editSupplier?.companyAddress}
+                    {...register("companyAddress", { required: true })}
                   />
                 </Box>
               </Box>
@@ -274,20 +265,15 @@ const ManageSupplier = () => {
           <span style={{ color: "#969494" }}>Manage your Supplier</span>
         </Typography>
       </Box>
+
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
-          Add Supplier
-        </Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
-          Supplier Ledger
-        </Button>
-        <Button className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>
-          Supplier Payment
-        </Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>
-          Supplier Sales Details
-        </Button>
+        <NavLink to="/dashboard/add-supplier" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
+            Add Supplier
+          </Button>
+        </NavLink>
       </Box>
+
       <Box className={`${styles.tableContainer}`}>
         <Typography sx={{ fontWeight: "bold" }}>Manage Supplier</Typography>
         <hr />
@@ -303,13 +289,13 @@ const ManageSupplier = () => {
                   Supplier Name
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Address
+                  Supplier Contact No.
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Mobile
+                  Company Name
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Balance
+                  Company Address
                 </TableCell>
 
                 <TableCell align="center" className={`${styles.tableCell}`}>
