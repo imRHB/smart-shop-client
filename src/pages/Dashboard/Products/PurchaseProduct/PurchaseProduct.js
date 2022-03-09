@@ -19,6 +19,20 @@ import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
 
 const PurchaseProduct = () => {
+  const [open, setOpen] = React.useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [tableRow, setTableRow] = useState(1);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const buttonToggle = () => {
+    setToggle(!toggle);
+  };
   return (
     <div>
       <h2>Purchase Product Invoice</h2>
