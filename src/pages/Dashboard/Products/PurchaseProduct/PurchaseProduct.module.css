@@ -38,3 +38,9 @@
   background-color: #2b7b00 !important;
   color: #fff !important;
 }
+
+.paymentContainer {
+  background-color: #f1f3f6;
+  padding: 17px;
+  border-radius: 5px;
+}

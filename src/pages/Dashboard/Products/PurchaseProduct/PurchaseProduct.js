@@ -62,6 +62,13 @@ const PurchaseProduct = () => {
           </Button>
         </NavLink>
       </Box>
+
+      <Box className={`${styles.paymentContainer}`}>
+        <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>
+          New Purchase Invoice (For Supplier)
+        </Typography>
+        <hr />
+      </Box>
     </Container>
   );
 };
