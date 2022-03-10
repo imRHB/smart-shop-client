@@ -15,6 +15,8 @@ import Paper from "@mui/material/Paper";
 import TableRow from "@mui/material/TableRow";
 import Delete from "@mui/icons-material/Delete";
 import Collapse from "@mui/material/Collapse";
+import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
 
 const PosInvoice = () => {
   const [open, setOpen] = React.useState(false);
@@ -39,36 +41,41 @@ const PosInvoice = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>ADD NEW INVOICE</span> <br />{" "}
+          <span style={{ fontSize: "26px" }}>ADD POS INVOICE</span> <br />{" "}
           <span style={{ color: "#969494" }}>Add new pos invoice</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
-          Manage Invoice
-        </Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
-          Add New Invoice
-        </Button>
+        <NavLink to="/dashboard/manage-invoice" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
+            Manage Invoice
+          </Button>
+        </NavLink>
+
+        <NavLink to="/dashboard/add-new-invoice" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
+            Add New Invoice
+          </Button>
+        </NavLink>
       </Box>
 
       <Box className={`${styles.paymentContainer}`}>
         <Typography sx={{ fontWeight: "bold", textAlign: "start" }}>
-          New POS invoice
+          New POS Invoice
         </Typography>
         <hr />
 
         <form className={`${"shadow"}`}>
           <Box className={`${styles.tableContainer}`}>
             <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-              <Typography sx={{ textAlign: "start" }}>
+              <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
                 Barcode<span>*</span>
               </Typography>
 
               <TextField
                 size="small"
                 id="outlined-basic"
-                sx={{ width: "400px" }}
+                sx={{ width: "45%", backgroundColor: "white" }}
                 placeholder="Barcode or QR code scan here"
                 label="Barcode/QR Code"
                 variant="outlined"
@@ -77,17 +84,17 @@ const PosInvoice = () => {
             </Box>
 
             <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-              <Typography sx={{ textAlign: "start" }}>
-                Customer Name<span>*</span>
+              <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
+                Supplier Contact no.<span>*</span>
               </Typography>
 
               <TextField
                 id="outlined-basic"
                 size="small"
-                sx={{ width: "400px" }}
-                label="Customer Name"
+                sx={{ width: "45%", backgroundColor: "white" }}
+                label="Contact no."
                 variant="outlined"
-                {...register("name", { required: true })}
+                {...register("contactNo", { required: true })}
               />
               <Button
                 sx={{ borderRadius: 0, marginTop: "2px" }}
@@ -97,29 +104,60 @@ const PosInvoice = () => {
                 }}
                 className={`${styles.paymentBtn}`}
               >
-                {toggle ? "Old Customer" : "New Customer"}
+                {toggle ? "Old Supplier" : "New Supplier"}
               </Button>
             </Box>
 
             <Collapse in={open} timeout="auto">
+              <Box sx={{ width: "45%", display: "flex", flexContent: "between" }}>
+                <Box className={`${styles.addSupplierField} ${"pb-4, me-2"}`}>
+                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
+                    Supplier Name <span>*</span>
+                  </Typography>
+
+                  <TextField
+                    size="small"
+                    id="outlined-basic"
+                    sx={{ backgroundColor: "white" }}
+                    label="Supplier Name"
+                    variant="outlined"
+                    {...register("supplierName", { required: true })}
+                  />
+                </Box>
+                <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
+                    Supplier Email
+                  </Typography>
+
+                  <TextField
+                    size="small"
+                    id="outlined-basic"
+                    sx={{ backgroundColor: "white" }}
+                    label="Supplier Email"
+                    variant="outlined"
+                    {...register("supplierEmail")}
+                  />
+                </Box>
+              </Box>
+
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start" }}>
-                  Address <span>*</span>
+                <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
+                  Address
                 </Typography>
 
                 <TextField
                   size="small"
                   id="outlined-basic"
-                  sx={{ width: "400px" }}
-                  label="Customer Address"
+                  sx={{ width: "45%", backgroundColor: "white" }}
+                  label="Supplier Address"
                   variant="outlined"
-                  {...register("address", { required: true })}
+                  {...register("supplierAddress")}
                 />
               </Box>
             </Collapse>
 
             <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-              <Typography sx={{ textAlign: "start" }}>
+              <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
                 Date<span>*</span>
               </Typography>
 
@@ -127,9 +165,9 @@ const PosInvoice = () => {
                 type="date"
                 {...register("date", { required: true })}
                 style={{
-                  width: "400px",
+                  width: "45%",
                   padding: "8px",
-                  backgroundColor: "#e4e4e4",
+                  backgroundColor: "white",
                   border: "1px solid #aeaeae",
                   borderRadius: "3px",
                 }}
@@ -144,7 +182,7 @@ const PosInvoice = () => {
                   <TableRow>
                     <TableCell
                       className={`${styles.tableCell}`}
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                     >
                       Item Information<span>*</span>
                     </TableCell>
@@ -366,7 +404,11 @@ const PosInvoice = () => {
                         <TableCell
                           onClick={() => {
                             if (tableRow <= 1) {
-                              alert("There only one row you can't delete.");
+                              Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'There are only one row, you can not delete it!'
+                              })
                             } else {
                               setTableRow(tableRow - 1);
                             }
@@ -514,7 +556,7 @@ const PosInvoice = () => {
                       }}
                     >
                       <Button
-                        sx={{ borderRadius: "0" }}
+                        sx={{ borderRadius: "0", mb: 1 }}
                         className={`${styles.paymentBtn}`}
                         variant="contained"
                         color="success"
@@ -526,7 +568,7 @@ const PosInvoice = () => {
                         variant="contained"
                         color="success"
                       >
-                        Full Paid
+                        Print Invoice
                       </Button>
                     </TableCell>
                     <TableCell />
