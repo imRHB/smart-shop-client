@@ -133,38 +133,6 @@ const SidebarNavigation = () => {
               </Button>
             </AccordionSummary>
             <AccordionDetails sx={{ background: "#012C56 !important" }}>
-              {/* <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/add-new-invoice`}
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add New
-                  Invoice
-                </Button>
-              </NavLink> */}
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/manage-invoice`}
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "capitalize",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
-                  Invoice
-                </Button>
-              </NavLink>
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/pos`}
@@ -177,7 +145,23 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> POS
+                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> POS
+                </Button>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/manage-invoice`}
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
+                  Invoice
                 </Button>
               </NavLink>
             </AccordionDetails>
