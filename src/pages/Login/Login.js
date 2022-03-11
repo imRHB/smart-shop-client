@@ -7,8 +7,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { css } from "@emotion/react";
+import FadeLoader from "react-spinners/FadeLoader";
+
+const override = css`
+  display: block;
+  border-color: red;
+  margin: 0 auto;
+`;
 
 const Login = () => {
   const { authError, loading, loginWithEmailAndPassword } = useAuth();
@@ -96,15 +104,23 @@ const Login = () => {
             type={passwordShown ? "text" : "password"}
             placeholder="Your Password"
             className={`${styles.inputFields}`}
-            name='password'
+            name="password"
             defaultValue="123456"
             {...register("password", { required: true })}
           />
-          {passwordShown ?
-            <VisibilityOffIcon onClick={togglePassword} icon={faLock} className={`${styles.eyeIconOne}`} />
-            :
-            <RemoveRedEyeIcon onClick={togglePassword} icon={faLock} className={`${styles.eyeIconTwo}`} />
-          }
+          {passwordShown ? (
+            <VisibilityOffIcon
+              onClick={togglePassword}
+              icon={faLock}
+              className={`${styles.eyeIconOne}`}
+            />
+          ) : (
+            <RemoveRedEyeIcon
+              onClick={togglePassword}
+              icon={faLock}
+              className={`${styles.eyeIconTwo}`}
+            />
+          )}
           {errors.password && (
             <span className="text-warning">This field is required</span>
           )}
@@ -132,8 +148,16 @@ const Login = () => {
           Login
         </Button>
         {loading && (
-          <div className="text-center mt-2">
-            <div className="spinner-border text-primary"></div>
+          <div className="text-center mt-3">
+            <FadeLoader
+              color={"#123abc"}
+              loading={loading}
+              css={override}
+              height={8}
+              width={4}
+              radius={2}
+              margin={2}
+            />
           </div>
         )}
 

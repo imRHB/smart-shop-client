@@ -14,6 +14,7 @@ const api =
         if (onStart) dispatch({ type: onStart });
         next(action);
 
+<<<<<<< HEAD
         try {
           const response = await axios.request({
             baseURL: "http://localhost:5000",
@@ -21,6 +22,16 @@ const api =
             method,
             data,
           });
+=======
+    try {
+      const response = await axios.request({
+        // baseURL: "https://smart-shop-pos.herokuapp.com",
+        baseURL: "http://localhost:5000",
+        url,
+        method,
+        data,
+      });
+>>>>>>> 2aa871280340f1e51ed305cabb51097e8bd3f930
 
           // General
           dispatch(apiCallSucceeded(response.data));

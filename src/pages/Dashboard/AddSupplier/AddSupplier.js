@@ -6,12 +6,15 @@ import { Box, Button, Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
-import ReceiptIcon from "@mui/icons-material/Receipt";
 import Grid from "@mui/material/Grid";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { saveSupplierToDB } from "../../../store/supplier";
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from "@mui/material/MenuItem";
+import { NavLink } from "react-router-dom";
 
 const AddSupplier = () => {
   const dispatch = useDispatch();
@@ -35,6 +38,12 @@ const AddSupplier = () => {
     reset();
   };
 
+  const [company, setCompany] = React.useState('');
+
+  const handleCompanyChange = (event) => {
+    setCompany(event.target.value);
+  };
+
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
       <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
@@ -46,19 +55,13 @@ const AddSupplier = () => {
           <span style={{ color: "#969494" }}>Add New Supplier</span>
         </Typography>
       </Box>
+
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
-          Add Supplier
-        </Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
-          Supplier Ledger
-        </Button>
-        <Button className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>
-          Supplier Payment
-        </Button>
-        <Button className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>
-          Supplier Sales Details
-        </Button>
+        <NavLink to="/dashboard/manage-supplier" style={{ textDecoration: "none" }}>
+          <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
+            Manage Supplier
+          </Button>
+        </NavLink>
       </Box>
 
       <Box className={`${styles.paymentContainer}`}>
@@ -77,9 +80,9 @@ const AddSupplier = () => {
             columns={16}
             sx={{ marginTop: 2, marginBottom: 2 }}
           >
-            <Grid item md={8} sx={16}>
-              <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography className={`${styles.addSupplierFieldLabel}`}>
+            <Grid item md={8} sm={16} sx={16}>
+              <Box className={`${styles.addSupplierField} ${"pb-4"}`} >
+                <Typography className={`${styles.addSupplierFieldLabel} ${'mb-2'}`}>
                   Supplier Name <span>*</span>
                 </Typography>
 
@@ -93,11 +96,10 @@ const AddSupplier = () => {
                 />
               </Box>
 
-              <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+              <Box className={`${styles.addSupplierField} ${"pb-4"}`} sx={{ mt: 2 }}>
                 <Typography className={`${styles.addSupplierFieldLabel}`}>
                   Supplier Contact No. <span>*</span>
                 </Typography>
-
                 <TextField
                   id="outlined-basic"
                   size="small"
@@ -107,60 +109,57 @@ const AddSupplier = () => {
                   {...register("contact", { required: true })}
                 />
               </Box>
+            </Grid>
+            <Grid item md={8} sm={16} sx={16}>
+              <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+                <Typography className={`${styles.addSupplierFieldLabel}`}>
+                  Company Name<span>*</span>
+                </Typography>
+
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Select Company</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="outlined-basic"
+                    size="small"
+                    className={`${styles.supplierTextField}`}
+                    label="Company Name"
+                    variant="outlined"
+                    {...register("company", { required: true })}
+                    value={company}
+                    sx={{ padding: "4px" }}
+                    onChange={handleCompanyChange}
+                  >
+                    <MenuItem value="Cheviot International Ltd.">Cheviot International Ltd.</MenuItem>
+                    <MenuItem value="Hoang Mo Thien Company Limited">Hoang Mo Thien Company Limited</MenuItem>
+                    <MenuItem value="Ozege tekstil konfeksioyon sanayi ve ticaret">Ozege tekstil konfeksioyon sanayi ve ticaret</MenuItem>
+                    <MenuItem value="Cannabis Suppliers">Cannabis Suppliers</MenuItem>
+                    <MenuItem value="Best International Ltd.">Best International Ltd.</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
 
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
                 <Typography className={`${styles.addSupplierFieldLabel}`}>
-                  Supplier Address<span>*</span>
+                  Company Address<span>*</span>
                 </Typography>
+
                 <TextField
                   id="outlined-textarea"
+                  label="Company Address"
                   size="small"
-                  label="Supplier Address"
-                  className={`${styles.supplierTextField}`}
                   multiline
-                  {...register("address", { required: true })}
+                  className={`${styles.supplierTextField}`}
+                  {...register("companyAddress", { required: true })}
                 />
               </Box>
             </Grid>
-            <Grid item md={8} sx={16}>
-              <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography className={`${styles.addSupplierFieldLabel}`}>
-                  Supplier Details<span>*</span>
-                </Typography>
+            <Box className="d-block m-auto mt-2">
+              <Button type="submit" className={`${styles.addSupplierButton} ${"mb-1"}`}>
+                Save Supplier
+              </Button>
 
-                <TextField
-                  id="outlined-textarea"
-                  size="small"
-                  label="Supplier Details"
-                  multiline
-                  className={`${styles.supplierTextField}`}
-                  {...register("details", { required: true })}
-                />
-              </Box>
-
-              <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography className={`${styles.addSupplierFieldLabel}`}>
-                  Previous Balance<span>*</span>
-                </Typography>
-
-                <TextField
-                  id="outlined-textarea"
-                  label="Balance"
-                  size="small"
-                  multiline
-                  className={`${styles.supplierTextField}`}
-                  {...register("balance", { required: true })}
-                />
-              </Box>
-              <Box className="d-flex justify-content-around mt-5">
-                <Button type="submit" className={`${styles.addSupplierButton}`}>
-                  Save Supplier
-                </Button>
-                <Button type="submit" className={`${styles.addAnotherButton}`}>
-                  Save and Add Another
-                </Button>
-              </Box>
-            </Grid>
+            </Box>
           </Grid>
         </form>
       </Box>

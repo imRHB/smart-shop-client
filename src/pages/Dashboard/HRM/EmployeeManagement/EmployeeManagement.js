@@ -1,5 +1,8 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Modal } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -19,11 +22,20 @@ import { Button, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import TextField from "@mui/material/TextField";
 import Swal from "sweetalert2";
 import { css } from "@emotion/react";
 import FadeLoader from "react-spinners/FadeLoader";
+import UpgradeIcon from "@mui/icons-material/Upgrade";
+import CloseIcon from "@mui/icons-material/Close";
+import cloudImage from "../../../../assets/images/cloud-upload.png";
 import styles from "./EmployeeManagement.module.css";
-import { deleteEmployeeToDB, loadEmployees } from "../../../../store/employee";
+import {
+  deleteEmployeeToDB,
+  loadEmployees,
+  setEditEmployee,
+  updateEmployeeToDB,
+} from "../../../../store/employee";
 
 const override = css`
   display: block;
@@ -51,6 +63,80 @@ function Row(props) {
         setReload(!reload);
       }
     });
+  };
+
+  // Getting all designation from store
+  const allDesignations = useSelector(
+    (state) => state.entities.designation.allDesignation
+  );
+
+  let sl = 0;
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    fetch("https://countriesnow.space/api/v0.1/countries")
+      .then((res) => res.json())
+      .then((result) => {
+        setCountries(result.data);
+      });
+  });
+
+  const employees = useSelector(
+    (state) => state.entities.employee.allEmployees
+  );
+  const editEmployee = useSelector(
+    (state) => state.entities.employee.editEmployee
+  );
+
+  // React Hook Form
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleNoBtn = () => setShow(false);
+  const onSubmit = (data) => {
+    let {
+      firstName,
+      lastName,
+      designation,
+      phone,
+      salary,
+      bloodGroup,
+      country,
+      city,
+      zip,
+      address1,
+      address2,
+      image,
+    } = data;
+    const name = `${firstName} ${lastName}`;
+    const address = `${address1} ${address2}`;
+    const formData = new FormData();
+
+    formData.append("_id", editEmployee._id);
+    formData.append("name", name);
+    formData.append("designation", designation);
+    formData.append("phone", phone);
+    formData.append("salary", salary);
+    formData.append("bloodGroup", bloodGroup);
+    formData.append("country", country);
+    formData.append("city", city);
+    formData.append("zip", zip);
+    formData.append("address", address);
+    formData.append("image", image[0]);
+
+    // Send updated data to the server
+    dispatch(updateEmployeeToDB(formData));
+    reset();
+  };
+
+  const handleEditEmployee = (id) => {
+    dispatch(setEditEmployee({ _id: id }));
+    return setShow(true);
   };
 
   return (
@@ -84,7 +170,12 @@ function Row(props) {
           />
         </TableCell>
         <TableCell align="center">
-          <EditIcon className={`${styles.editIcon}`} />
+          <EditIcon
+            onClick={() => {
+              return handleEditEmployee(employee._id);
+            }}
+            className={`${styles.editIcon}`}
+          />
           <Delete
             onClick={() => handleDelete(employee?._id)}
             className={`${styles.deleteIcon}`}
@@ -124,6 +215,366 @@ function Row(props) {
           </Collapse>
         </TableCell>
       </TableRow>
+
+      {/*Modal for Edit Employee  */}
+
+      <Modal
+        show={show}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        onHide={handleClose}
+        style={{ marginTop: "50px" }}
+        scrollable="true"
+      >
+        <div
+          className="shadow rounded"
+          style={{ background: "linear-gradient(to right, #1e3c72, #2a5298)" }}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title style={{ color: "white" }}>
+              Update Employee
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* form */}
+            <form className="pt-3 pb-3" onSubmit={handleSubmit(onSubmit)}>
+              <div className="row gx-3 mb-3">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-3 border bg-light">
+                    <div className="mb-3">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        First Name{" "}
+                        <sup className="text-danger fw-bold fs-6">*</sup>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="First Name"
+                        style={{ background: "#E5E5E5" }}
+                        {...register("name", { required: true })}
+                      />
+                      {errors.name && (
+                        <span className="text-danger">
+                          Please enter first name.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-3 border bg-light">
+                    <div className="mb-3">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Last Name{" "}
+                        <sup className="text-danger fw-bold fs-6">*</sup>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Last Name"
+                        style={{ background: "#E5E5E5" }}
+                        {...register("lastName", { required: true })}
+                      />
+                      {errors.lastName && (
+                        <span className="text-danger">
+                          Please enter last name.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-3 border bg-light">
+                    <div className="mb-3">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Designation{" "}
+                        <sup className="text-danger fw-bold fs-6">*</sup>
+                      </label>
+
+                      <select
+                        className="form-select"
+                        aria-label="Default select example"
+                        style={{ background: "#E5E5E5" }}
+                        {...register("designation", { required: true })}
+                      >
+                        <option>-- select one --</option>
+                        {allDesignations.map((designation) => (
+                          <option
+                            key={designation._id}
+                            value={designation?.name}
+                          >
+                            {designation?.name}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.designation && (
+                        <span className="text-danger">
+                          Please select a designation
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-3 border bg-light">
+                    <div className="mb-3">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Phone <sup className="text-danger fw-bold fs-6">*</sup>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Phone"
+                        style={{ background: "#E5E5E5" }}
+                        {...register("phone", { required: true })}
+                      />
+                      {errors.phone && (
+                        <span className="text-danger">
+                          Please enter phone number.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-3 border bg-light">
+                    <div className="mb-3">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Blood Group
+                      </label>
+
+                      <select
+                        className="form-select"
+                        aria-label="Default select example"
+                        style={{ background: "#E5E5E5" }}
+                        {...register("bloodGroup", { required: false })}
+                      >
+                        <option>-- select one --</option>
+                        <option value={"A+"}>{"A+"}</option>
+                        <option value={"A-"}>{"A-"}</option>
+                        <option value={"B+"}>{"B+"}</option>
+                        <option value={"B-"}>{"B-"}</option>
+                        <option value={"AB+"}>{"AB+"}</option>
+                        <option value={"AB-"}>{"AB-"}</option>
+                        <option value={"O+"}>{"O+"}</option>
+                        <option value={"O-"}>{"O-"}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-3 border bg-light">
+                    <div className="mb-3">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Salary
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Salary"
+                        style={{ background: "#E5E5E5" }}
+                        {...register("salary", { required: false })}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-3 border bg-light">
+                    <div className="mb-3">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        City
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="City"
+                        style={{ background: "#E5E5E5" }}
+                        {...register("city", { required: false })}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-3 border bg-light">
+                    <div className="mb-3">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Country
+                      </label>
+                      <select
+                        className="form-select"
+                        aria-label="Default select example"
+                        style={{ background: "#E5E5E5" }}
+                        {...register("country", { required: true })}
+                      >
+                        <option>-- select country --</option>
+                        {countries?.map((countryDetail) => (
+                          <option key={sl++} value={countryDetail?.country}>
+                            {countryDetail?.country}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-3 border bg-light">
+                    <div className="mb-3">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Zip
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Zip"
+                        style={{ background: "#E5E5E5" }}
+                        {...register("zip", { required: false })}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-3 border bg-light">
+                    <div className="mb-3">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Address
+                      </label>
+                      <textarea
+                        className="form-control"
+                        rows="3"
+                        placeholder="Address"
+                        style={{ background: "#E5E5E5" }}
+                        {...register("address", { required: false })}
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-3 border bg-light">
+                    <div className="mb-3">
+                      <span
+                        className="mb-2 d-inline-block"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Picture
+                      </span>
+                      <div className="input-group mb-4">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="form-control"
+                          style={{ background: "#E5E5E5" }}
+                          id="inputGroupFile02"
+                          {...register("image", { required: false })}
+                        />
+                        <label
+                          className="input-group-text"
+                          htmlFor="inputGroupFile02"
+                        >
+                          <img
+                            style={{ height: "35px" }}
+                            src={cloudImage}
+                            alt=""
+                          />{" "}
+                          <span
+                            style={{ color: "#251D58", fontWeight: "bold" }}
+                          >
+                            Upload image
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+                  <div className="p-3 border bg-light">
+                    <div className="mb-3">
+                      <Box sx={{ textAlign: "center", my: 2 }}>
+                        <input
+                          type="button"
+                          data-bs-dismiss="modal"
+                          className={`${"btn"} ${styles.resetBtn}`}
+                          style={{ background: "#251D58", color: "#fff" }}
+                          value="Cancel"
+                        />
+                        <input
+                          type="submit"
+                          className={`${"btn"} ${styles.saveBtn}`}
+                          style={{ background: "#251D58", color: "#fff" }}
+                          value="Update"
+                        />
+                      </Box>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <Modal.Footer className="mt-4">
+                {/* confirmation button */}
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  className={`${styles.updateBtn}`}
+                  endIcon={<UpgradeIcon />}
+                >
+                  Update
+                </Button>
+                <Button
+                  className={`${styles.receiptBtn}`}
+                  endIcon={<CloseIcon />}
+                  onClick={handleNoBtn}
+                >
+                  Cancel
+                </Button>
+              </Modal.Footer>
+            </form>
+          </Modal.Body>
+        </div>
+      </Modal>
     </React.Fragment>
   );
 }
