@@ -15,14 +15,14 @@ import Table from "@mui/material/Table";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
-import category from "../../../assets/data/category.json";
+import units from '../../../assets/data/unit.json';
 import styles from "./Unit.module.css";
 import { useForm } from "react-hook-form";
 
 function Row(props) {
   const { unit, serial } = props;
 
-  const handleDelete = () => {};
+  const handleDelete = () => { };
 
   return (
     <React.Fragment>
@@ -171,16 +171,16 @@ const Unit = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {category
+              {units
                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((unit, index) => (
                   <Row
                     key={unit._id}
                     unit={unit}
                     serial={index}
-                    // loading={loading}
-                    // reload={reload}
-                    // setReload={setReload}
+                  // loading={loading}
+                  // reload={reload}
+                  // setReload={setReload}
                   />
                 ))}
             </TableBody>
@@ -190,7 +190,7 @@ const Unit = () => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 15]}
             component="div"
-            count={category.length}
+            count={units.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
