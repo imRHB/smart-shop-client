@@ -40,6 +40,7 @@ import SupplierStock from "../SupplierStock/SupplierStock";
 import TestComponent from "../TestComponent/TestComponent";
 import EventCalender from "../EventCalender/EventCalender";
 import PurchaseProduct from "../Products/PurchaseProduct/PurchaseProduct";
+import Unit from "../Unit/Unit";
 //==============import your component here===================//
 
 const NestedRoutes = () => {
@@ -59,6 +60,7 @@ const NestedRoutes = () => {
         <Route path="add-product" element={<AddProduct />}></Route>
         <Route path="manage-product" element={<ManageProducts />}></Route>
         <Route path="purchase-product" element={<PurchaseProduct />}></Route>
+        <Route path="manage-unit" element={<Unit />}></Route>
         {/*============ Product Department All Routes End ==============*/}
 
         {/*============ Customer Department All Routes Start ==============*/}
@@ -125,7 +127,6 @@ const NestedRoutes = () => {
         {/* <Route path="expense-item" element={<TestComponent />}></Route> */}
         <Route path="test-component" element={<TestComponent />}></Route>
         {/*===================TEST YOUR COMPONENT HERE====================*/}
-
       </Routes>
     </>
   );
