@@ -23,8 +23,13 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from '@mui/material/InputLabel';
+import { useDispatch, useSelector } from "react-redux";
+import { saveInvoiceToDB } from "../../../../store/invoice";
+import { loadCustomers } from "../../../../store/customer"
+import { loadProducts, setSingleProduct } from "../../../../store/products"
 
 const AddInvoice = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [toggle, setToggle] = useState(false);
   const [tableRow, setTableRow] = useState(1);
@@ -40,13 +45,49 @@ const AddInvoice = () => {
     setToggle(!toggle);
   };
 
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  // Getting all customer from store
+  const allCustomer = useSelector(
+    (state) => state.entities.customer.allCustomer
+  );
 
+  // Load customers from Database
   useEffect(() => {
-    fetch("https://smart-shop-pos.herokuapp.com/products")
-      .then((res) => res.json())
-      .then((data) => setFilteredProducts(data))
-  }, [filteredProducts]);
+    dispatch(loadCustomers());
+  }, []);
+
+  // Getting all customer from store
+  const allProducts = useSelector(
+    (state) => state.entities.products.allProduct
+  );
+
+  // Load products from Database
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, []);
+
+  // product
+  const singleProduct = useSelector(
+    (state) => state.entities.products.singleProduct
+  );
+
+  // const handleSingleProduct = (id) => {
+  //   dispatch(setSingleProduct({ _id: id }));
+  // }
+
+
+  const [filteredProducts, setFilteredProducts] = useState('');
+  const productNames = allProducts.find(productName => {
+    if (productName.name === filteredProducts) {
+      return true
+    } return false;
+  })
+
+  // useEffect(() => {
+  //   fetch("https://smart-shop-pos.herokuapp.com/products")
+  //     .then((res) => res.json())
+  //     .then((data) => setFilteredProducts(data))
+  // }, [filteredProducts]);
+
 
 
   const [unit, setUnit] = React.useState('');
@@ -91,17 +132,20 @@ const AddInvoice = () => {
               <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
                 Customer Contact No.<span>*</span>
               </Typography>
+              <Stack spacing={2} >
+                <Autocomplete
+                  {...register("customerPhone", { required: true })}
+                  sx={{ width: "45%", backgroundColor: "white" }}
+                  freeSolo
+                  id="free-solo-demo"
+                  size="small"
+                  options={allCustomer.map((customer) => customer.phone)}
+                  renderInput={(params) => <TextField {...params} label=" customer Contact" />}
+                />
+              </Stack>
 
-              <TextField
-                id="outlined-basic"
-                size="small"
-                sx={{ width: "45%", backgroundColor: "white" }}
-                label="Customer Contact"
-                variant="outlined"
-                {...register("contact", { required: true })}
-              />
               <Button
-                sx={{ borderRadius: 0, marginTop: "2px" }}
+                sx={{ borderRadius: 0, marginTop: "5px" }}
                 onClick={() => {
                   setOpen(!open);
                   buttonToggle();
@@ -151,6 +195,7 @@ const AddInvoice = () => {
 
                 <TextField
                   size="small"
+
                   id="outlined-basic"
                   sx={{ width: "45%", backgroundColor: "white" }}
                   label="Customer Address"
@@ -246,16 +291,18 @@ const AddInvoice = () => {
                           <Stack spacing={2} sx={{ width: 300 }}>
                             <Autocomplete
                               {...register("product", { required: true })}
-                              style={{
-                                backgroundColor: "#f1f3f6",
-                              }}
+                              style={{ backgroundColor: "#f1f3f6" }}
                               freeSolo
                               id="free-solo-demo"
                               size="small"
-                              options={filteredProducts.map((product) => product.name)}
-                              renderInput={(params) => <TextField {...params} label=" Choose product" />}
+                              options={allProducts.map((product) => product.name)}
+                              renderInput={(params) => <TextField
+                                onBlur={(e) => setFilteredProducts(e.target.value)}
+                                {...params} label=" Choose product" />}
                             />
                           </Stack>
+
+
                         </TableCell>
 
                         <TableCell
@@ -277,6 +324,7 @@ const AddInvoice = () => {
                               p: 1,
                               borderRadius: "3px"
                             }}
+
                           />
                         </TableCell>
 
@@ -322,6 +370,7 @@ const AddInvoice = () => {
                               value={unit}
                               onChange={handleUnitChange}
                             >
+
                               <MenuItem value="cash">K.G.</MenuItem>
                               <MenuItem value="cheque">Gram</MenuItem>
                               <MenuItem value="card">Pcs.</MenuItem>
@@ -340,6 +389,7 @@ const AddInvoice = () => {
                             type="text"
                             placeholder="Price"
                             {...register("price", { required: true })}
+                            defaultValue={productNames?.price}
                             style={{
                               width: "70px",
                               padding: "8px",
