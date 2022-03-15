@@ -135,18 +135,17 @@ const SidebarNavigation = () => {
             <AccordionDetails sx={{ background: "#012C56 !important" }}>
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/add-new-invoice`}
+                to={`/dashboard/pos`}
               >
                 <Button
                   sx={{
                     color: "#fff !important",
-                    textTransform: "capitalize",
+                    textTransform: "uppercase",
                     fontWeight: "700",
                     fontSize: "12px",
                   }}
                 >
-                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add New
-                  Invoice
+                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> POS
                 </Button>
               </NavLink>
               <NavLink
@@ -163,21 +162,6 @@ const SidebarNavigation = () => {
                 >
                   <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
                   Invoice
-                </Button>
-              </NavLink>
-              <NavLink
-                style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/pos`}
-              >
-                <Button
-                  sx={{
-                    color: "#fff !important",
-                    textTransform: "uppercase",
-                    fontWeight: "700",
-                    fontSize: "12px",
-                  }}
-                >
-                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> POS
                 </Button>
               </NavLink>
             </AccordionDetails>
@@ -238,6 +222,38 @@ const SidebarNavigation = () => {
               </NavLink>
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/manage-unit`}
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
+                  Unit
+                </Button>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
+                to={`/dashboard/purchase-product`}
+              >
+                <Button
+                  sx={{
+                    color: "#fff !important",
+                    textTransform: "capitalize",
+                    fontWeight: "700",
+                    fontSize: "12px",
+                  }}
+                >
+                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
+                  Purchase Product
+                </Button>
+              </NavLink>
+              <NavLink
+                style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-product`}
               >
                 <Button
@@ -248,7 +264,7 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
+                  <Filter4Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
                   Product
                 </Button>
               </NavLink>
@@ -264,7 +280,7 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
+                  <Filter5Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
                   Product
                 </Button>
               </NavLink>
