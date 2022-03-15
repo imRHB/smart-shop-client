@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from "react-bootstrap";
 import { Box, Paper, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from 'react-redux';
+import Swal from "sweetalert2";
 import Table from "@mui/material/Table";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import category from '../../../assets/data/category.json';
 import styles from './AddCategory.module.css';
-import { useForm } from "react-hook-form";
+import { loadCategories, saveCategoryToDb, setReload } from '../../../store/category';
 
 function Row(props) {
     const { ctgry, serial } = props;
@@ -39,13 +42,24 @@ function Row(props) {
 }
 
 const AddCategory = () => {
+    const dispatch = useDispatch();
+    let reload = useSelector((state) => state.entities.category.reload);
+    const allCategory = useSelector((state) => state.entities.category.categories);
+
+    useEffect(() => {
+        dispatch(loadCategories());
+    }, [reload, dispatch]);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     const onSubmit = (data) => {
-        console.log(data);
+        dispatch(saveCategoryToDb(data));
+
+        dispatch(setReload({ reload: !reload }));
+        Swal.fire("Success", "New Category Added", "success");
     };
 
     const handleChangePage = (event, newPage) => {
@@ -87,13 +101,13 @@ const AddCategory = () => {
                                                     className="form-label"
                                                     style={{ fontWeight: "bold" }}
                                                 >
-                                                    Name{" "}
+                                                    Category{" "}
                                                     <sup className="text-danger fw-bold fs-6">*</sup>
                                                 </label>
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    placeholder="Category Name"
+                                                    placeholder="Category"
                                                     style={{ background: "#E5E5E5" }}
                                                     {...register("name", { required: true })}
                                                 />
@@ -116,10 +130,10 @@ const AddCategory = () => {
                                                 </label>
                                                 <textarea
                                                     className="form-control"
-                                                    rows="3"
-                                                    placeholder="Product Details"
+                                                    rows="1"
+                                                    placeholder="Details"
                                                     style={{ background: "#E5E5E5" }}
-                                                    {...register("description", { required: false })}
+                                                    {...register("details", { required: false })}
                                                 ></textarea>
                                             </div>
                                         </div>
@@ -127,14 +141,10 @@ const AddCategory = () => {
                                 </div>
 
                                 <div className="row gx-3 mb-3">
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
-                                        {/* some space */}
-                                    </div>
-
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
-                                        <div className="p-3 border bg-light">
-                                            <div className="mb-3">
-                                                <Box sx={{ textAlign: "center", my: 2 }}>
+                                    <div className="col-lg-12 col-md-12 col-sm-12 col-12 mt-1">
+                                        <div className="p-3">
+                                            <div>
+                                                <Box sx={{ textAlign: "center" }}>
                                                     <input
                                                         type="reset"
                                                         className={`${"btn"} ${styles.resetBtn}`}
@@ -180,7 +190,7 @@ const AddCategory = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {category
+                            {allCategory
                                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((ctgry, index) => (
                                     <Row
@@ -199,7 +209,7 @@ const AddCategory = () => {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 15]}
                         component="div"
-                        count={category.length}
+                        count={allCategory.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
