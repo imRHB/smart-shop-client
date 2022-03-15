@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Container } from "react-bootstrap";
-import { Box, Button, Typography } from "@mui/material";
+import { Autocomplete, Box, Button, Stack, TextField, Typography } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import styles from './AddProduct.module.css';
-import useCategory from "../../../hooks/useCategory";
-import useSuppliers from "../../../hooks/useSuppliers";
+import useProducts from "../../../hooks/useProducts";
 
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const category = useCategory();
-    const suppliers = useSuppliers();
+    const products = useProducts();
+
+    const [selectedProduct, setSelectedProduct] = useState({});
+
+    const findProduct = products.find(foundedPd => {
+        if (foundedPd.name === selectedProduct) {
+            return true;
+        }
+        return false;
+    })
+
 
     const onSubmit = (data) => {
         console.log(data);
@@ -40,7 +48,65 @@ const AddProduct = () => {
                     <div className="form-container">
                         <div>
                             <form onSubmit={handleSubmit(onSubmit)}>
-                                <div className="row gx-3 mb-3">
+                                <div className="row gx-3 mb-3 gy-3">
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div className="p-3 border bg-light">
+                                            <div className="mb-3">
+                                                <label
+                                                    className="form-label"
+                                                    style={{ fontWeight: "bold" }}
+                                                >
+                                                    Product Name{" "}
+                                                    <sup className="text-danger fw-bold fs-6">*</sup>
+                                                </label>
+                                                <Stack spacing={2} sx={{ width: 'auto' }}>
+                                                    <Autocomplete
+                                                        {...register("name", { required: false })}
+                                                        style={{ backgroundColor: "#f1f3f6", border: 'none' }}
+                                                        freeSolo
+                                                        id="free-solo-demo"
+                                                        size="small"
+                                                        options={products.map((product) => product.name)}
+                                                        renderInput={(params) => <TextField
+                                                            style={{ background: '#E5E5E5' }}
+                                                            onSelectCapture={(e) => setSelectedProduct(e.target.value)}
+                                                            {...params} />}
+                                                    />
+                                                </Stack>
+
+                                                {/* {errors.name && (
+                                                    <span className="text-danger">
+                                                        Please select product
+                                                    </span>
+                                                )} */}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div className="p-3 border bg-light">
+                                            <div className="mb-3">
+                                                <label
+                                                    className="form-label"
+                                                    style={{ fontWeight: "bold" }}
+                                                >
+                                                    Category{" "}
+                                                    <sup className="text-danger fw-bold fs-6">*</sup>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Product Category"
+                                                    defaultValue={findProduct?.category}
+                                                    style={{ background: "#E5E5E5" }}
+                                                    {...register("category", { required: false })}
+                                                    readOnly
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="row gx-3 mb-3 gy-3">
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                                         <div className="p-3 border bg-light">
                                             <div className="mb-3">
@@ -55,96 +121,36 @@ const AddProduct = () => {
                                                     className="form-control"
                                                     placeholder="Barcode/QR-code"
                                                     style={{ background: "#E5E5E5" }}
+                                                    {...register("barcode", { required: false })}
+                                                    readOnly
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div className="p-3 border bg-light">
+                                            <div className="mb-3">
+                                                <label
+                                                    className="form-label"
+                                                    style={{ fontWeight: "bold" }}
+                                                >
+                                                    Product ID{" "}
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Product ID"
+                                                    defaultValue={findProduct?.productId}
+                                                    style={{ background: "#E5E5E5" }}
                                                     {...register("productId", { required: false })}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                                        <div className="p-3 border bg-light">
-                                            <div className="mb-3">
-                                                <label
-                                                    className="form-label"
-                                                    style={{ fontWeight: "bold" }}
-                                                >
-                                                    Model{" "}
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Product Model"
-                                                    style={{ background: "#E5E5E5" }}
-                                                    {...register("model", { required: false })}
+                                                    readOnly
                                                 />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="row gx-3 mb-3">
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                                        <div className="p-3 border bg-light">
-                                            <div className="mb-3">
-                                                <label
-                                                    className="form-label"
-                                                    style={{ fontWeight: "bold" }}
-                                                >
-                                                    Product Name{" "}
-                                                    <sup className="text-danger fw-bold fs-6">*</sup>
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Enter Product Name"
-                                                    style={{ background: "#E5E5E5" }}
-                                                    {...register("name", { required: true })}
-                                                />
-                                                {errors.name && (
-                                                    <span className="text-danger">
-                                                        Please enter product name.
-                                                    </span>
-                                                )}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                                        <div className="p-3 border bg-light">
-                                            <div className="mb-3">
-                                                <label
-                                                    className="form-label"
-                                                    style={{ fontWeight: "bold" }}
-                                                >
-                                                    Category{" "}
-                                                    <sup className="text-danger fw-bold fs-6">*</sup>
-                                                </label>
-
-                                                <select
-                                                    className="form-select"
-                                                    aria-label="Default select example"
-                                                    style={{ background: "#E5E5E5" }}
-                                                    {...register("category", { required: true })}
-                                                >
-                                                    <option>-- select category --</option>
-                                                    {category.map((ctgry) => (
-                                                        <option
-                                                            key={ctgry._id}
-                                                            value={ctgry?.name}
-                                                        >
-                                                            {ctgry?.name}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                                {errors.category && (
-                                                    <span className="text-danger">
-                                                        Please select product category
-                                                    </span>
-                                                )}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="row gx-3 mb-3">
+                                <div className="row gx-3 mb-3 gy-3">
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                                         <div className="p-3 border bg-light">
                                             <div className="mb-3">
@@ -158,15 +164,12 @@ const AddProduct = () => {
                                                 <input
                                                     type="number"
                                                     className="form-control"
-                                                    placeholder="Enter Product Price"
+                                                    placeholder="Supplier Price"
+                                                    defaultValue={findProduct?.supplierPrice}
                                                     style={{ background: "#E5E5E5" }}
-                                                    {...register("name", { required: true })}
+                                                    {...register("supplierPrice", { required: false })}
+                                                    readOnly
                                                 />
-                                                {errors.name && (
-                                                    <span className="text-danger">
-                                                        Please enter product price.
-                                                    </span>
-                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -177,29 +180,19 @@ const AddProduct = () => {
                                                     className="form-label"
                                                     style={{ fontWeight: "bold" }}
                                                 >
-                                                    Supplier{" "}
+                                                    Sell Price{" "}
                                                     <sup className="text-danger fw-bold fs-6">*</sup>
                                                 </label>
-
-                                                <select
-                                                    className="form-select"
-                                                    aria-label="Default select example"
+                                                <input
+                                                    type="number"
+                                                    className="form-control"
+                                                    placeholder="Enter Product Sell Price"
                                                     style={{ background: "#E5E5E5" }}
-                                                    {...register("supplier", { required: true })}
-                                                >
-                                                    <option>-- select supplier --</option>
-                                                    {suppliers.map((supplier) => (
-                                                        <option
-                                                            key={supplier._id}
-                                                            value={supplier?.name}
-                                                        >
-                                                            {supplier?.name}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                                {errors.category && (
+                                                    {...register("sellPrice", { required: true })}
+                                                />
+                                                {errors.name && (
                                                     <span className="text-danger">
-                                                        Please select supplier
+                                                        Please enter product sell price.
                                                     </span>
                                                 )}
                                             </div>
@@ -207,7 +200,7 @@ const AddProduct = () => {
                                     </div>
                                 </div>
 
-                                <div className="row gx-3 mb-3">
+                                <div className="row gx-3 mb-3 gy-3">
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                                         <div className="p-3 border bg-light">
                                             <div className="mb-3">
