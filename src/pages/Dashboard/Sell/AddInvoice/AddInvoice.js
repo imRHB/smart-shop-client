@@ -26,13 +26,17 @@ import InputLabel from '@mui/material/InputLabel';
 import { useDispatch, useSelector } from "react-redux";
 import { saveInvoiceToDB } from "../../../../store/invoice";
 import { loadCustomers } from "../../../../store/customer"
-import { loadProducts, setSingleProduct } from "../../../../store/products"
+import { loadProducts } from "../../../../store/products"
 
 const AddInvoice = () => {
   const dispatch = useDispatch();
+  const [filteredProducts, setFilteredProducts] = useState('');
   const [open, setOpen] = React.useState(false);
   const [toggle, setToggle] = useState(false);
   const [tableRow, setTableRow] = useState(1);
+  const [quantity, setQuantity] = useState(0);
+  const [discount, setDiscount] = useState(0)
+  const [unit, setUnit] = React.useState('');
 
   const {
     register,
@@ -50,39 +54,26 @@ const AddInvoice = () => {
     (state) => state.entities.customer.allCustomer
   );
 
+  // Getting all product from store
+  const allProducts = useSelector(
+    (state) => state.entities.products.allProduct
+  );
+
   // Load customers from Database
   useEffect(() => {
     dispatch(loadCustomers());
   }, []);
-
-  // Getting all customer from store
-  const allProducts = useSelector(
-    (state) => state.entities.products.allProduct
-  );
 
   // Load products from Database
   useEffect(() => {
     dispatch(loadProducts());
   }, []);
 
-
-  const [filteredProducts, setFilteredProducts] = useState('');
   const productNames = allProducts.find(productName => {
     if (productName.name === filteredProducts) {
       return true
     } return false;
   })
-
-  // useEffect(() => {
-  //   fetch("https://smart-shop-pos.herokuapp.com/products")
-  //     .then((res) => res.json())
-  //     .then((data) => setFilteredProducts(data))
-  // }, [filteredProducts]);
-
-  const [quantity, setQuantity] = useState(0)
-
-
-  const [unit, setUnit] = React.useState('');
 
   const handleUnitChange = (event) => {
     setUnit(event.target.value);
@@ -141,8 +132,7 @@ const AddInvoice = () => {
                 onClick={() => {
                   setOpen(!open);
                   buttonToggle();
-                }}
-                className={`${styles.paymentBtn}`}
+                }} className={`${styles.paymentBtn}`}
               >
                 {toggle ? "Old Customer" : "New Customer"}
               </Button>
@@ -151,9 +141,7 @@ const AddInvoice = () => {
             <Collapse in={open} timeout="auto">
               <Box sx={{ width: "45%", display: "flex", flexContent: "between" }}>
                 <Box className={`${styles.addSupplierField} ${"pb-4, me-2"}`}>
-                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
-                    Customer Name <span>*</span>
-                  </Typography>
+                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>Customer Name <span>*</span></Typography>
 
                   <TextField
                     size="small"
@@ -165,9 +153,7 @@ const AddInvoice = () => {
                   />
                 </Box>
                 <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
-                    Customer Email
-                  </Typography>
+                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>Customer Email</Typography>
 
                   <TextField
                     size="small"
@@ -181,13 +167,10 @@ const AddInvoice = () => {
               </Box>
 
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
-                  Address
-                </Typography>
+                <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}> Address</Typography>
 
                 <TextField
                   size="small"
-
                   id="outlined-basic"
                   sx={{ width: "45%", backgroundColor: "white" }}
                   label="Customer Address"
@@ -202,8 +185,7 @@ const AddInvoice = () => {
                 Date<span>*</span>
               </Typography>
 
-              <input
-                type="date"
+              <input type="date"
                 {...register("date", { required: true })}
                 style={{
                   width: "45%",
@@ -214,33 +196,24 @@ const AddInvoice = () => {
                 }}
               />
             </Box>
-            <TableContainer
-              component={Paper}
-              sx={{ border: 1, borderColor: "grey.300" }}
-            >
+            <TableContainer component={Paper}
+              sx={{ border: 1, borderColor: "grey.300" }} >
               <Table aria-label="simple table">
                 <TableHead className={`${styles.tableHeader}`}>
                   <TableRow>
-                    <TableCell
-                      className={`${styles.tableCell}`}
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
-                    >
-                      Product Information<span>*</span>
+                    <TableCell className={`${styles.tableCell}`}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}>Product Information<span>*</span>
                     </TableCell>
                     <TableCell
                       align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
-                      className={`${styles.tableCell}`}
-                    >
-                      Available Quantity
-                    </TableCell>
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }} className={`${styles.tableCell}`}
+                    >Available Quantity</TableCell>
 
                     <TableCell
                       align="center"
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", textAlign: "center" }}
                       className={`${styles.tableCell}`}
-                    >
-                      Quantity
+                    >Quantity
                     </TableCell>
                     <TableCell
                       align="center"
@@ -291,58 +264,32 @@ const AddInvoice = () => {
                                 {...params} label=" Choose product" />}
                             />
                           </Stack>
-
-
                         </TableCell>
 
                         <TableCell
                           align="center"
-                          sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
-                            p: 1,
-                          }}
+                          sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                         >
                           <input
-                            onChange={(e) => console.log(e.target.value)}
-                            type="text"
+                            type="number"
                             placeholder="Available Qn."
                             {...register("ctn", { required: true })}
-                            style={{
-                              width: "100px",
-                              padding: "8px",
-                              backgroundColor: "#f1f3f6",
-                              border: "1px solid #aeaeae",
-                              p: 1,
-                              borderRadius: "3px"
-                            }}
-
+                            className={`${styles.tableCellInput}`}
                           />
                         </TableCell>
 
-                        <TableCell
-                          align="center"
-                          sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
-                            p: 1,
-                          }}
+                        <TableCell align="center"
+                          sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                         >
                           <input
-
-                            onBlur={(e) => setQuantity(e.target.value)}
+                            {...register("quantity", { required: true })}
+                            onChange={(e) => setQuantity(e.target.value)}
                             type="number"
                             placeholder="0"
-                            {...register("quantity", { required: true })}
-                            style={{
-                              width: "70px",
-                              padding: "8px",
-                              backgroundColor: "#f1f3f6",
-                              border: "1px solid #aeaeae",
-                              borderRadius: "3px"
-                            }}
+                            className={`${styles.tableCellInput}`}
                           />
                         </TableCell>
-                        <TableCell
-                          align="center"
+                        <TableCell align="center"
                           sx={{
                             borderRight: "1px solid rgba(224, 224, 224, 1)",
                             p: 1, width: "160px"
@@ -355,15 +302,11 @@ const AddInvoice = () => {
                               size="small"
                               className={`${styles.inputFields}`}
                               label="Select Unit"
-                              sx={{ padding: "4px" }}
-                              style={{
-                                backgroundColor: "#f1f3f6",
-                              }}
+                              sx={{ padding: "4px", backgroundColor: "#f1f3f6" }}
                               {...register("unit", { required: true })}
                               value={unit}
                               onChange={handleUnitChange}
                             >
-
                               <MenuItem value="cash">K.G.</MenuItem>
                               <MenuItem value="cheque">Gram</MenuItem>
                               <MenuItem value="card">Pcs.</MenuItem>
@@ -371,69 +314,45 @@ const AddInvoice = () => {
                           </FormControl>
                         </TableCell>
 
-                        <TableCell
-                          align="center"
-                          sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
-                            p: 1,
-                          }}
+                        <TableCell align="center"
+                          sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                         >
                           <input
-                            type="text"
+                            type="number"
                             placeholder="Price"
                             {...register("price", { required: true })}
                             defaultValue={productNames?.price}
-                            style={{
-                              width: "70px",
-                              padding: "8px",
-                              backgroundColor: "#f1f3f6",
-                              border: "1px solid #aeaeae",
-                              borderRadius: "3px"
-                            }}
+                            className={`${styles.tableCellInput}`}
                           />
                         </TableCell>
 
 
-                        <TableCell
-                          align="center"
-                          sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
-                            p: 1,
-                          }}
+                        <TableCell align="center"
+                          sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                         >
                           <input
-                            type="text"
-                            placeholder="0"
-                            value={quantity * (productNames?.price)}
                             {...register("total", { required: true })}
-                            style={{
-                              width: "70px",
-                              padding: "8px",
-                              backgroundColor: "#f1f3f6",
-                              border: "1px solid #aeaeae",
-                              borderRadius: "3px"
-                            }}
+                            type="number"
+                            placeholder="0"
+                            onChange={(e) => (e.target.value)}
+                            value={quantity * (productNames?.price)}
+                            className={`${styles.tableCellInput}`}
                           />
                         </TableCell>
-                        <TableCell
-                          onClick={() => {
-                            if (tableRow <= 1) {
-                              Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'There are only one row, you can not delete it!'
-                              })
-                            } else {
-                              setTableRow(tableRow - 1);
-                            }
-                          }}
-                          align="center"
+                        <TableCell onClick={() => {
+                          if (tableRow <= 1) {
+                            Swal.fire({
+                              icon: 'error',
+                              title: 'Oops...',
+                              text: 'There are only one row, you can not delete it!'
+                            })
+                          } else {
+                            setTableRow(tableRow - 1);
+                          }
+                        }} align="center"
                         >
                           {" "}
-                          <Delete
-                            color="error"
-                            className={`${styles.deleteIcon}`}
-                          />
+                          <Delete color="error" className={`${styles.deleteIcon}`} />
                         </TableCell>
                       </TableRow>
                     );
@@ -443,34 +362,23 @@ const AddInvoice = () => {
                     <TableCell />
                     <TableCell />
                     <TableCell />
-                    <TableCell
-                      align="center"
+                    <TableCell align="center"
                       sx={{
                         borderRight: "1px solid rgba(224, 224, 224, 1)",
-                        textAlign: "right",
-                        fontWeight: "bold",
+                        textAlign: "right", fontWeight: "bold"
                       }}
                     >
                       Total Discount:
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{
-                        borderRight: "1px solid rgba(224, 224, 224, 1)",
-                        p: 1,
-                      }}
+                    <TableCell align="center"
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                     >
                       <input
-                        type="text"
-                        placeholder="0.00"
                         {...register("totalDiscount", { required: true })}
-                        style={{
-                          width: "70px",
-                          padding: "8px",
-                          backgroundColor: "#f1f3f6",
-                          border: "1px solid #aeaeae",
-                          borderRadius: "3px"
-                        }}
+
+                        type="number"
+                        placeholder="0.00"
+                        className={`${styles.tableCellInput}`}
                       />
                     </TableCell>
                   </TableRow>
@@ -479,41 +387,30 @@ const AddInvoice = () => {
                     <TableCell />
                     <TableCell />
                     <TableCell />
-                    <TableCell
-                      align="center"
+                    <TableCell align="center"
                       sx={{
                         borderRight: "1px solid rgba(224, 224, 224, 1)",
-                        fontWeight: "bold",
-                        textAlign: "right",
+                        fontWeight: "bold", textAlign: "right",
                       }}
                     >
                       Grand Total:
                     </TableCell>
                     <TableCell
                       align="center"
-                      sx={{
-                        borderRight: "1px solid rgba(224, 224, 224, 1)",
-                        p: 1,
-                      }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                     >
                       <input
+                        {...register("grandTotal", { required: true })}
+
                         type="text"
                         placeholder="0"
-                        {...register("grandTotal", { required: true })}
-                        style={{
-                          width: "70px",
-                          padding: "8px",
-                          backgroundColor: "#f1f3f6",
-                          border: "1px solid #aeaeae",
-                          borderRadius: "3px"
-                        }}
+                        className={`${styles.tableCellInput}`}
                       />
                     </TableCell>
                   </TableRow>
 
                   <TableRow>
-                    <TableCell
-                      align="center"
+                    <TableCell align="center"
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     >
                       <Button
@@ -533,27 +430,17 @@ const AddInvoice = () => {
                       align="center"
                       sx={{
                         borderRight: "1px solid rgba(224, 224, 224, 1)",
-                        fontWeight: "bold",
-                        p: 1,
+                        fontWeight: "bold", p: 1
                       }}
                     >
                       Paid Amount:
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
-                    >
+                    <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
                       <input
                         type="text"
                         placeholder="0.00"
                         {...register("paid", { required: true })}
-                        style={{
-                          width: "70px",
-                          padding: "8px",
-                          backgroundColor: "#f1f3f6",
-                          border: "1px solid #aeaeae",
-                          borderRadius: "3px"
-                        }}
+                        className={`${styles.tableCellInput}`}
                       />
                     </TableCell>
                   </TableRow>
@@ -561,10 +448,7 @@ const AddInvoice = () => {
                   <TableRow>
                     <TableCell
                       align="center"
-                      sx={{
-                        borderRight: "1px solid rgba(224, 224, 224, 1)",
-                        p: 1,
-                      }}
+                      sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     >
                       <Button
                         sx={{ borderRadius: "0" }}
@@ -572,15 +456,15 @@ const AddInvoice = () => {
                         variant="contained"
                         color="success"
                       >
-                        Submit
+                        Submit Items
                       </Button>
-                      <Button
+                      {/* <Button
                         sx={{ borderRadius: "0" }}
                         variant="contained"
                         color="success"
                       >
                         Print Invoice
-                      </Button>
+                      </Button> */}
                     </TableCell>
                     <TableCell />
                     <TableCell />
@@ -604,13 +488,7 @@ const AddInvoice = () => {
                         type="text"
                         placeholder="0"
                         {...register("changeAmount", { required: true })}
-                        style={{
-                          width: "70px",
-                          padding: "8px",
-                          backgroundColor: "#f1f3f6",
-                          border: "1px solid #aeaeae",
-                          borderRadius: "3px"
-                        }}
+                        className={`${styles.tableCellInput}`}
                       />
                     </TableCell>
                   </TableRow>
