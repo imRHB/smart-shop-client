@@ -65,15 +65,6 @@ const AddInvoice = () => {
     dispatch(loadProducts());
   }, []);
 
-  // product
-  const singleProduct = useSelector(
-    (state) => state.entities.products.singleProduct
-  );
-
-  // const handleSingleProduct = (id) => {
-  //   dispatch(setSingleProduct({ _id: id }));
-  // }
-
 
   const [filteredProducts, setFilteredProducts] = useState('');
   const productNames = allProducts.find(productName => {
@@ -88,6 +79,7 @@ const AddInvoice = () => {
   //     .then((data) => setFilteredProducts(data))
   // }, [filteredProducts]);
 
+  const [quantity, setQuantity] = useState(0)
 
 
   const [unit, setUnit] = React.useState('');
@@ -284,9 +276,7 @@ const AddInvoice = () => {
                       <TableRow>
                         <TableCell
                           align="center"
-                          sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
-                          }}
+                          sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                         >
                           <Stack spacing={2} sx={{ width: 300 }}>
                             <Autocomplete
@@ -313,6 +303,7 @@ const AddInvoice = () => {
                           }}
                         >
                           <input
+                            onChange={(e) => console.log(e.target.value)}
                             type="text"
                             placeholder="Available Qn."
                             {...register("ctn", { required: true })}
@@ -336,7 +327,9 @@ const AddInvoice = () => {
                           }}
                         >
                           <input
-                            type="text"
+
+                            onBlur={(e) => setQuantity(e.target.value)}
+                            type="number"
                             placeholder="0"
                             {...register("quantity", { required: true })}
                             style={{
@@ -411,6 +404,7 @@ const AddInvoice = () => {
                           <input
                             type="text"
                             placeholder="0"
+                            value={quantity * (productNames?.price)}
                             {...register("total", { required: true })}
                             style={{
                               width: "70px",
