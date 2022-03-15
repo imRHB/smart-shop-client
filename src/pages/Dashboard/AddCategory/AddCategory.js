@@ -6,17 +6,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from "sweetalert2";
 import Table from "@mui/material/Table";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
-import category from '../../../assets/data/category.json';
 import styles from './AddCategory.module.css';
-import { loadCategories, saveCategoryToDb, setReload } from '../../../store/category';
+import { deleteCategoryFromDb, loadCategories, saveCategoryToDb, setReload } from '../../../store/category';
 
 function Row(props) {
-    const { ctgry, serial } = props;
+    const { category, serial, reload } = props;
+    const dispatch = useDispatch();
 
-    const handleDelete = () => {
-
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Do you want to delete the category?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Delete"
+        })
+            .then(result => {
+                if (result.isConfirmed) {
+                    dispatch(deleteCategoryFromDb(id));
+                    Swal.fire('Successfull', 'Category deleted!', 'success');
+                    setReload(!reload)
+                }
+            })
     };
 
     return (
@@ -28,11 +41,11 @@ function Row(props) {
                 <TableCell component="th" scope="row">
                     {serial + 1}
                 </TableCell>
-                <TableCell align="center">{ctgry.name}</TableCell>
+                <TableCell align="center">{category.name}</TableCell>
                 <TableCell align="center">
-                    <EditIcon className={`${styles.editIcon}`} />
+                    {/* <EditIcon className={`${styles.editIcon}`} /> */}
                     <Delete
-                        onClick={() => handleDelete(ctgry?._id)}
+                        onClick={() => handleDelete(category?._id)}
                         className={`${styles.deleteIcon}`}
                     />
                 </TableCell>
@@ -44,13 +57,13 @@ function Row(props) {
 const AddCategory = () => {
     const dispatch = useDispatch();
     let reload = useSelector((state) => state.entities.category.reload);
-    const allCategory = useSelector((state) => state.entities.category.categories);
+    const categories = useSelector((state) => state.entities.category.categories);
 
     useEffect(() => {
         dispatch(loadCategories());
     }, [reload, dispatch]);
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -60,6 +73,8 @@ const AddCategory = () => {
 
         dispatch(setReload({ reload: !reload }));
         Swal.fire("Success", "New Category Added", "success");
+
+        reset();
     };
 
     const handleChangePage = (event, newPage) => {
@@ -190,12 +205,12 @@ const AddCategory = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {allCategory
+                            {categories
                                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((ctgry, index) => (
+                                .map((category, index) => (
                                     <Row
-                                        key={ctgry._id}
-                                        ctgry={ctgry}
+                                        key={category._id}
+                                        category={category}
                                         serial={index}
                                     // loading={loading}
                                     // reload={reload}
@@ -209,7 +224,7 @@ const AddCategory = () => {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 15]}
                         component="div"
-                        count={allCategory.length}
+                        count={categories.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
