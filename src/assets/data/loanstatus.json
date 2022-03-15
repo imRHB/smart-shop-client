@@ -1,0 +1,64 @@
+[
+    {
+      "_id": 1,
+      "name": "Md Aksah",
+      "date": "14/01/2020",
+      "amount": "Manager",
+      "payyear": "2024",
+      "paidamount": "100000",
+      "status": "pending"
+      
+    },
+    {
+      "_id": 2,
+      "name": "Md Jibon",
+      "date": "10/11/2021",
+      "amount": "140000",
+      "payyear": "2024",
+      "paidamount": "16000",
+      "status": "pending"
+      
+    },
+    {
+      "_id": 3,
+      "name": "Miss Afsana",
+      "date": "11/11/2021",
+      "amount": "25000",
+      "payyear": "2025",
+      "paidamount": "1000",
+      "status": "pending"
+      
+    },
+    {
+      "_id": 5,
+      "name": "Maria Munni",
+      "date": "01/02/2022",
+      "amount": "600000",
+      "payyear": "2026",
+      "paidamount": "10000",
+      "status": "pending"
+      
+    },
+    {
+      "_id": 6,
+      "name": "Zahid Hasan",
+      "date": "10/11/2020",
+      "amount": "400000",
+      "payyear": "2028",
+      "paidamount": "14000",
+      "status": "pending"
+      
+    },
+    {
+      "_id": 6,
+      "name": "RH Babu",
+      "date": "02/01/2022",
+      "amount": "600000",
+      "payyear": "2026",
+      "paidamount": "15000",
+      "status": "pending"
+      
+    }
+    
+  ]
+  
