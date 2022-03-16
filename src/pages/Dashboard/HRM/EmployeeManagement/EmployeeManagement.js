@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -224,7 +225,6 @@ function Row(props) {
         centered
         onHide={handleClose}
         style={{ marginTop: "50px" }}
-        scrollable="true"
       >
         <div
           className="shadow rounded"
@@ -235,18 +235,23 @@ function Row(props) {
               Update Employee
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body
+            style={{
+              maxHeight: "calc(100vh - 210px)",
+              overflowY: "auto",
+            }}
+          >
             {/* form */}
             <form className="pt-3 pb-3" onSubmit={handleSubmit(onSubmit)}>
               <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
                       >
-                        First Name{" "}
+                        Full Name{" "}
                         <sup className="text-danger fw-bold fs-6">*</sup>
                       </label>
                       <input
@@ -265,36 +270,8 @@ function Row(props) {
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
-                      <label
-                        className="form-label"
-                        style={{ fontWeight: "bold" }}
-                      >
-                        Last Name{" "}
-                        <sup className="text-danger fw-bold fs-6">*</sup>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Last Name"
-                        style={{ background: "#E5E5E5" }}
-                        {...register("lastName", { required: true })}
-                      />
-                      {errors.lastName && (
-                        <span className="text-danger">
-                          Please enter last name.
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="row gx-3 mb-3">
-                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -327,9 +304,12 @@ function Row(props) {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -351,12 +331,9 @@ function Row(props) {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -383,9 +360,12 @@ function Row(props) {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -402,12 +382,9 @@ function Row(props) {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -424,9 +401,12 @@ function Row(props) {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -449,12 +429,9 @@ function Row(props) {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -471,9 +448,12 @@ function Row(props) {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+              </div>
+
+              <div className="row gx-3 mb-3">
+                <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -482,7 +462,7 @@ function Row(props) {
                       </label>
                       <textarea
                         className="form-control"
-                        rows="3"
+                        rows="2"
                         placeholder="Address"
                         style={{ background: "#E5E5E5" }}
                         {...register("address", { required: false })}
@@ -493,9 +473,9 @@ function Row(props) {
               </div>
 
               <div className="row gx-3 mb-3">
-                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <span
                         className="mb-2 d-inline-block"
                         style={{ fontWeight: "bold" }}
@@ -503,14 +483,6 @@ function Row(props) {
                         Picture
                       </span>
                       <div className="input-group mb-4">
-                        <input
-                          type="file"
-                          accept="image/*"
-                          className="form-control"
-                          style={{ background: "#E5E5E5" }}
-                          id="inputGroupFile02"
-                          {...register("image", { required: false })}
-                        />
                         <label
                           className="input-group-text"
                           htmlFor="inputGroupFile02"
@@ -526,34 +498,21 @@ function Row(props) {
                             Upload image
                           </span>
                         </label>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="form-control"
+                          style={{ background: "#E5E5E5" }}
+                          id="inputGroupFile02"
+                          {...register("image", { required: false })}
+                        />
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
-                      <Box sx={{ textAlign: "center", my: 2 }}>
-                        <input
-                          type="button"
-                          data-bs-dismiss="modal"
-                          className={`${"btn"} ${styles.resetBtn}`}
-                          style={{ background: "#251D58", color: "#fff" }}
-                          value="Cancel"
-                        />
-                        <input
-                          type="submit"
-                          className={`${"btn"} ${styles.saveBtn}`}
-                          style={{ background: "#251D58", color: "#fff" }}
-                          value="Update"
-                        />
-                      </Box>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <Modal.Footer className="mt-4">
+              <Modal.Footer className="mt-4 pe-0">
                 {/* confirmation button */}
                 <Button
                   type="submit"
@@ -633,8 +592,18 @@ const EmployeeManagement = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.designationBtn}`}>Designation</Button>
-        <Button className={`${styles.addEmployeeBtn}`}>Add Employee</Button>
+        <NavLink
+          to={`/dashboard/designation`}
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.designationBtn}`}>Designation</Button>
+        </NavLink>
+        <NavLink
+          style={{ textDecoration: "none" }}
+          to={`/dashboard/add-employee`}
+        >
+          <Button className={`${styles.addEmployeeBtn}`}>Add Employee</Button>
+        </NavLink>
       </Box>
       <Box className={`${styles.tableContainer}`}>
         <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
