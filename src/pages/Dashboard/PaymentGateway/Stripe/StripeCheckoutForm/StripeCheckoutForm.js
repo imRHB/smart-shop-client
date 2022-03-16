@@ -88,7 +88,7 @@ const StripeCheckoutForm = () => {
                     }
 
                     <div className={`${'bg-light'} ${styles.stripeFormContainer}`}>
-                        <form onSubmit={handleSubmit} className="p-3">
+                        <form onSubmit={handleSubmit} className="">
                             <CardElement
                                 options={{
                                     style: {
