@@ -148,6 +148,7 @@ const SidebarNavigation = () => {
                   <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> POS
                 </Button>
               </NavLink>
+              <br />
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-invoice`}

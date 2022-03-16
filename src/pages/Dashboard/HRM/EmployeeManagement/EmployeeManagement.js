@@ -37,6 +37,8 @@ import {
   setEditEmployee,
   updateEmployeeToDB,
 } from "../../../../store/employee";
+import { loadDesignations } from "../../../../store/designation";
+import bloodGroups from "../../../../assets/data/bloodGroups.json";
 
 const override = css`
   display: block;
@@ -66,11 +68,6 @@ function Row(props) {
     });
   };
 
-  // Getting all designation from store
-  const allDesignations = useSelector(
-    (state) => state.entities.designation.allDesignation
-  );
-
   let sl = 0;
   const [countries, setCountries] = useState([]);
 
@@ -80,7 +77,7 @@ function Row(props) {
       .then((result) => {
         setCountries(result.data);
       });
-  });
+  }, [reload]);
 
   const employees = useSelector(
     (state) => state.entities.employee.allEmployees
@@ -88,6 +85,16 @@ function Row(props) {
   const editEmployee = useSelector(
     (state) => state.entities.employee.editEmployee
   );
+
+  // Getting all designation from store
+  const designations = useSelector(
+    (state) => state.entities.designation.allDesignation
+  );
+
+  // Load all designations from Database
+  useEffect(() => {
+    dispatch(loadDesignations());
+  }, [reload, dispatch]);
 
   // React Hook Form
   const {
@@ -101,8 +108,7 @@ function Row(props) {
   const handleNoBtn = () => setShow(false);
   const onSubmit = (data) => {
     let {
-      firstName,
-      lastName,
+      name,
       designation,
       phone,
       salary,
@@ -110,12 +116,9 @@ function Row(props) {
       country,
       city,
       zip,
-      address1,
-      address2,
+      address,
       image,
     } = data;
-    const name = `${firstName} ${lastName}`;
-    const address = `${address1} ${address2}`;
     const formData = new FormData();
 
     formData.append("_id", editEmployee._id);
@@ -128,11 +131,14 @@ function Row(props) {
     formData.append("city", city);
     formData.append("zip", zip);
     formData.append("address", address);
-    formData.append("image", image[0]);
+    if (image) {
+      formData.append("image", image[0]);
+    }
 
+    console.log(formData);
     // Send updated data to the server
     dispatch(updateEmployeeToDB(formData));
-    reset();
+    setReload(!reload);
   };
 
   const handleEditEmployee = (id) => {
@@ -258,6 +264,7 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="First Name"
+                        defaultValue={editEmployee?.name}
                         style={{ background: "#E5E5E5" }}
                         {...register("name", { required: true })}
                       />
@@ -287,10 +294,15 @@ function Row(props) {
                         {...register("designation", { required: true })}
                       >
                         <option>-- select one --</option>
-                        {allDesignations.map((designation) => (
+                        {designations.map((designation) => (
                           <option
                             key={designation._id}
                             value={designation?.name}
+                            selected={
+                              editEmployee?.designation === designation?.name
+                                ? "selected"
+                                : ""
+                            }
                           >
                             {designation?.name}
                           </option>
@@ -320,6 +332,7 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="Phone"
+                        defaultValue={editEmployee?.phone}
                         style={{ background: "#E5E5E5" }}
                         {...register("phone", { required: true })}
                       />
@@ -348,14 +361,19 @@ function Row(props) {
                         {...register("bloodGroup", { required: false })}
                       >
                         <option>-- select one --</option>
-                        <option value={"A+"}>{"A+"}</option>
-                        <option value={"A-"}>{"A-"}</option>
-                        <option value={"B+"}>{"B+"}</option>
-                        <option value={"B-"}>{"B-"}</option>
-                        <option value={"AB+"}>{"AB+"}</option>
-                        <option value={"AB-"}>{"AB-"}</option>
-                        <option value={"O+"}>{"O+"}</option>
-                        <option value={"O-"}>{"O-"}</option>
+                        {bloodGroups.map((blood) => (
+                          <option
+                            key={blood._id}
+                            value={blood?.name}
+                            selected={
+                              editEmployee?.bloodGroup === blood?.name
+                                ? "selected"
+                                : ""
+                            }
+                          >
+                            {blood?.name}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>
@@ -376,6 +394,7 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="Salary"
+                        defaultValue={editEmployee?.salary}
                         style={{ background: "#E5E5E5" }}
                         {...register("salary", { required: false })}
                       />
@@ -395,6 +414,7 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="City"
+                        defaultValue={editEmployee?.city}
                         style={{ background: "#E5E5E5" }}
                         {...register("city", { required: false })}
                       />
@@ -421,7 +441,15 @@ function Row(props) {
                       >
                         <option>-- select country --</option>
                         {countries?.map((countryDetail) => (
-                          <option key={sl++} value={countryDetail?.country}>
+                          <option
+                            key={sl++}
+                            value={countryDetail?.country}
+                            selected={
+                              editEmployee?.country === countryDetail?.country
+                                ? "selected"
+                                : ""
+                            }
+                          >
                             {countryDetail?.country}
                           </option>
                         ))}
@@ -442,6 +470,7 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="Zip"
+                        defaultValue={editEmployee?.zip}
                         style={{ background: "#E5E5E5" }}
                         {...register("zip", { required: false })}
                       />
@@ -464,6 +493,7 @@ function Row(props) {
                         className="form-control"
                         rows="2"
                         placeholder="Address"
+                        defaultValue={editEmployee?.address}
                         style={{ background: "#E5E5E5" }}
                         {...register("address", { required: false })}
                       ></textarea>
