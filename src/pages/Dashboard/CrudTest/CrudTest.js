@@ -9,6 +9,56 @@ import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import products from '../../../assets/data/products.json';
 import styles from './CrudTest.module.css';
+import { Controller, useForm } from "react-hook-form";
+
+
+const CrudTest = () => {
+    const { register, handleSubmit, formState: { errors }, control } = useForm();
+
+    const onSubmit = (data) => {
+        console.log(data);
+    };
+
+    return (
+        <Container>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                {/* {<input type="text" {...register("item", { required: true })} placeholder="Expense Item" />} */}
+                <select {...register("item")}>
+                    <option value="">Select Expanse...</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="snacks">Snacks</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="electricity">Electricity</option>
+                    <option value="salary">Salary</option>
+                    {/* <option value="Advanture">Bounus</option>
+                    <option value="Advanture">Food</option>
+                    <option value="Advanture">Shop</option>
+                    <option value="Advanture">Water</option>
+                    <option value="Advanture">Gass</option> */}
+                </select>
+                <br />
+                {/* {<input type="date" {...register("date")} placeholder="Date" />} */}
+                <br />
+                {/* <input type="text" {...register("designation", { required: true })} placeholder="Designation Name" /> */}
+                <br />
+                {/* <input type="text" {...register("details", { required: true })} placeholder="Designation Details" /> */}
+                <br />
+                {/* <Controller as={TextField} name="TextField" control={control} defaultValue="hello" /> */}
+                {<input type="number" {...register("price")} defaultValue="20" readOnly />}
+                {<input type="number" {...register("balance")} placeholder="Balance" />}
+                <br />
+                <input type="submit" />
+            </form>
+        </Container>
+    );
+};
+
+export default CrudTest;
+
+
+
+
+/* 
 
 function Row(props) {
     const { product, serial } = props;
@@ -47,83 +97,67 @@ function Row(props) {
                         alt="Product"
                     // loading="lazy"
                     />
-                    {/* <img
+                    <img
                         style={{ width: "70px", height: "70px" }}
                         src={`data:image/jpeg;base64,${product.img}`}
                         alt="Product"
                     // loading="lazy"
-                    /> */}
-                </TableCell>
-                <TableCell align="center">
-                    <EditIcon className={`${styles.editIcon}`} />
-                    <Delete
-                        onClick={() => handleDelete(product?._id)}
-                        className={`${styles.deleteIcon}`}
                     />
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
-                            <Typography variant="h6" gutterBottom component="div">
-                                Product Details
-                            </Typography>
-                            <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell align="center">Product ID</TableCell>
-                                        <TableCell align="center">Name</TableCell>
-                                        <TableCell align="center">Category</TableCell>
-                                        <TableCell align="center">Unit</TableCell>
-                                        <TableCell align="center">Price</TableCell>
-                                        <TableCell align="center">Sale Price</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow key={product._id}>
-                                        <TableCell component="th" scope="row">
-                                            {product.productId}
-                                        </TableCell>
-                                        <TableCell align="center">{product.name}</TableCell>
-                                        <TableCell align="center">{product.category}</TableCell>
-                                        <TableCell align="center">{product.unit}</TableCell>
-                                        <TableCell align="center">BDT {product.price}</TableCell>
-                                        <TableCell align="center">BDT {product.salePrice}</TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </Box>
-                    </Collapse>
-                </TableCell>
-            </TableRow>
-        </React.Fragment>
-    );
-}
+                    </TableCell>
+                    <TableCell align="center">
+                        <EditIcon className={`${styles.editIcon}`} />
+                        <Delete
+                            onClick={() => handleDelete(product?._id)}
+                            className={`${styles.deleteIcon}`}
+                        />
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                            <Box sx={{ margin: 1 }}>
+                                <Typography variant="h6" gutterBottom component="div">
+                                    Product Details
+                                </Typography>
+                                <Table size="small" aria-label="purchases">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell align="center">Product ID</TableCell>
+                                            <TableCell align="center">Name</TableCell>
+                                            <TableCell align="center">Category</TableCell>
+                                            <TableCell align="center">Unit</TableCell>
+                                            <TableCell align="center">Price</TableCell>
+                                            <TableCell align="center">Sale Price</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <TableRow key={product._id}>
+                                            <TableCell component="th" scope="row">
+                                                {product.productId}
+                                            </TableCell>
+                                            <TableCell align="center">{product.name}</TableCell>
+                                            <TableCell align="center">{product.category}</TableCell>
+                                            <TableCell align="center">{product.unit}</TableCell>
+                                            <TableCell align="center">BDT {product.price}</TableCell>
+                                            <TableCell align="center">BDT {product.salePrice}</TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </Box>
+                        </Collapse>
+                    </TableCell>
+                </TableRow>
+            </React.Fragment>
+        );
+    }
+
+*/
 
 
-const CrudTest = () => {
-    const [open, setOpen] = React.useState(false);
-    const [inputValue, setInputValue] = React.useState("");
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+/* 
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
-
-    const handleProductSearch = (event) => {
-        event.preventDefault();
-    };
-
-
-    return (
-        <Container sx={{ width: "100%", mb: 5 }}>
+<Container sx={{ width: "100%", mb: 5 }}>
             <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
                 <Typography>
                     <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
@@ -215,53 +249,5 @@ const CrudTest = () => {
                 </Typography>
             </Box>
         </Container>
-    );
-};
-
-export default CrudTest;
-
-
-
-
-/* 
-
-<Container>
-                <h1 className="text-center my-5 fw-bold">CURD Operation Test</h1>
-
-                <ul>
-                    {
-                        products.map(product => <li>
-                            {product.name}
-                        </li>)
-                    }
-                </ul>
-
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    {<input type="text" {...register("item", { required: true })} placeholder="Expense Item" />}
-                    <select {...register("item")}>
-                        <option value="">Select Expanse...</option>
-                        <option value="lunch">Lunch</option>
-                        <option value="snacks">Snacks</option>
-                        <option value="breakfast">Breakfast</option>
-                        <option value="electricity">Electricity</option>
-                        <option value="salary">Salary</option>
-                        <option value="Advanture">Bounus</option>
-                        <option value="Advanture">Food</option>
-                        <option value="Advanture">Shop</option>
-                        <option value="Advanture">Water</option>
-                        <option value="Advanture">Gass</option>
-                    </select>
-                    <br />
-                    {<input type="date" {...register("date")} placeholder="Date" />}
-                    <br />
-                    <input type="text" {...register("designation", { required: true })} placeholder="Designation Name" />
-                    <br />
-                    <input type="text" {...register("details", { required: true })} placeholder="Designation Details" />
-                    <br />
-                    {<input type="number" {...register("balance")} placeholder="Balance" />}
-                    <br />
-                    <input type="submit" />
-                </form>
-            </Container>
 
 */

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -36,6 +37,8 @@ import {
   setEditEmployee,
   updateEmployeeToDB,
 } from "../../../../store/employee";
+import { loadDesignations } from "../../../../store/designation";
+import bloodGroups from "../../../../assets/data/bloodGroups.json";
 
 const override = css`
   display: block;
@@ -65,11 +68,6 @@ function Row(props) {
     });
   };
 
-  // Getting all designation from store
-  const allDesignations = useSelector(
-    (state) => state.entities.designation.allDesignation
-  );
-
   let sl = 0;
   const [countries, setCountries] = useState([]);
 
@@ -79,7 +77,7 @@ function Row(props) {
       .then((result) => {
         setCountries(result.data);
       });
-  });
+  }, [reload]);
 
   const employees = useSelector(
     (state) => state.entities.employee.allEmployees
@@ -87,6 +85,16 @@ function Row(props) {
   const editEmployee = useSelector(
     (state) => state.entities.employee.editEmployee
   );
+
+  // Getting all designation from store
+  const designations = useSelector(
+    (state) => state.entities.designation.allDesignation
+  );
+
+  // Load all designations from Database
+  useEffect(() => {
+    dispatch(loadDesignations());
+  }, [reload, dispatch]);
 
   // React Hook Form
   const {
@@ -100,8 +108,7 @@ function Row(props) {
   const handleNoBtn = () => setShow(false);
   const onSubmit = (data) => {
     let {
-      firstName,
-      lastName,
+      name,
       designation,
       phone,
       salary,
@@ -109,12 +116,9 @@ function Row(props) {
       country,
       city,
       zip,
-      address1,
-      address2,
+      address,
       image,
     } = data;
-    const name = `${firstName} ${lastName}`;
-    const address = `${address1} ${address2}`;
     const formData = new FormData();
 
     formData.append("_id", editEmployee._id);
@@ -127,11 +131,14 @@ function Row(props) {
     formData.append("city", city);
     formData.append("zip", zip);
     formData.append("address", address);
-    formData.append("image", image[0]);
+    if (image) {
+      formData.append("image", image[0]);
+    }
 
+    console.log(formData);
     // Send updated data to the server
     dispatch(updateEmployeeToDB(formData));
-    reset();
+    setReload(!reload);
   };
 
   const handleEditEmployee = (id) => {
@@ -224,7 +231,6 @@ function Row(props) {
         centered
         onHide={handleClose}
         style={{ marginTop: "50px" }}
-        scrollable="true"
       >
         <div
           className="shadow rounded"
@@ -235,24 +241,30 @@ function Row(props) {
               Update Employee
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body
+            style={{
+              maxHeight: "calc(100vh - 210px)",
+              overflowY: "auto",
+            }}
+          >
             {/* form */}
             <form className="pt-3 pb-3" onSubmit={handleSubmit(onSubmit)}>
               <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
                       >
-                        First Name{" "}
+                        Full Name{" "}
                         <sup className="text-danger fw-bold fs-6">*</sup>
                       </label>
                       <input
                         type="text"
                         className="form-control"
                         placeholder="First Name"
+                        defaultValue={editEmployee?.name}
                         style={{ background: "#E5E5E5" }}
                         {...register("name", { required: true })}
                       />
@@ -265,36 +277,8 @@ function Row(props) {
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
-                      <label
-                        className="form-label"
-                        style={{ fontWeight: "bold" }}
-                      >
-                        Last Name{" "}
-                        <sup className="text-danger fw-bold fs-6">*</sup>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Last Name"
-                        style={{ background: "#E5E5E5" }}
-                        {...register("lastName", { required: true })}
-                      />
-                      {errors.lastName && (
-                        <span className="text-danger">
-                          Please enter last name.
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="row gx-3 mb-3">
-                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -310,10 +294,15 @@ function Row(props) {
                         {...register("designation", { required: true })}
                       >
                         <option>-- select one --</option>
-                        {allDesignations.map((designation) => (
+                        {designations.map((designation) => (
                           <option
                             key={designation._id}
                             value={designation?.name}
+                            selected={
+                              editEmployee?.designation === designation?.name
+                                ? "selected"
+                                : ""
+                            }
                           >
                             {designation?.name}
                           </option>
@@ -327,9 +316,12 @@ function Row(props) {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -340,6 +332,7 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="Phone"
+                        defaultValue={editEmployee?.phone}
                         style={{ background: "#E5E5E5" }}
                         {...register("phone", { required: true })}
                       />
@@ -351,12 +344,9 @@ function Row(props) {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -371,21 +361,29 @@ function Row(props) {
                         {...register("bloodGroup", { required: false })}
                       >
                         <option>-- select one --</option>
-                        <option value={"A+"}>{"A+"}</option>
-                        <option value={"A-"}>{"A-"}</option>
-                        <option value={"B+"}>{"B+"}</option>
-                        <option value={"B-"}>{"B-"}</option>
-                        <option value={"AB+"}>{"AB+"}</option>
-                        <option value={"AB-"}>{"AB-"}</option>
-                        <option value={"O+"}>{"O+"}</option>
-                        <option value={"O-"}>{"O-"}</option>
+                        {bloodGroups.map((blood) => (
+                          <option
+                            key={blood._id}
+                            value={blood?.name}
+                            selected={
+                              editEmployee?.bloodGroup === blood?.name
+                                ? "selected"
+                                : ""
+                            }
+                          >
+                            {blood?.name}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -396,18 +394,16 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="Salary"
+                        defaultValue={editEmployee?.salary}
                         style={{ background: "#E5E5E5" }}
                         {...register("salary", { required: false })}
                       />
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -418,15 +414,19 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="City"
+                        defaultValue={editEmployee?.city}
                         style={{ background: "#E5E5E5" }}
                         {...register("city", { required: false })}
                       />
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -441,7 +441,15 @@ function Row(props) {
                       >
                         <option>-- select country --</option>
                         {countries?.map((countryDetail) => (
-                          <option key={sl++} value={countryDetail?.country}>
+                          <option
+                            key={sl++}
+                            value={countryDetail?.country}
+                            selected={
+                              editEmployee?.country === countryDetail?.country
+                                ? "selected"
+                                : ""
+                            }
+                          >
                             {countryDetail?.country}
                           </option>
                         ))}
@@ -449,12 +457,9 @@ function Row(props) {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -465,15 +470,19 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="Zip"
+                        defaultValue={editEmployee?.zip}
                         style={{ background: "#E5E5E5" }}
                         {...register("zip", { required: false })}
                       />
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+              </div>
+
+              <div className="row gx-3 mb-3">
+                <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <label
                         className="form-label"
                         style={{ fontWeight: "bold" }}
@@ -482,8 +491,9 @@ function Row(props) {
                       </label>
                       <textarea
                         className="form-control"
-                        rows="3"
+                        rows="2"
                         placeholder="Address"
+                        defaultValue={editEmployee?.address}
                         style={{ background: "#E5E5E5" }}
                         {...register("address", { required: false })}
                       ></textarea>
@@ -493,9 +503,9 @@ function Row(props) {
               </div>
 
               <div className="row gx-3 mb-3">
-                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
+                <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
                       <span
                         className="mb-2 d-inline-block"
                         style={{ fontWeight: "bold" }}
@@ -503,14 +513,6 @@ function Row(props) {
                         Picture
                       </span>
                       <div className="input-group mb-4">
-                        <input
-                          type="file"
-                          accept="image/*"
-                          className="form-control"
-                          style={{ background: "#E5E5E5" }}
-                          id="inputGroupFile02"
-                          {...register("image", { required: false })}
-                        />
                         <label
                           className="input-group-text"
                           htmlFor="inputGroupFile02"
@@ -526,34 +528,21 @@ function Row(props) {
                             Upload image
                           </span>
                         </label>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="form-control"
+                          style={{ background: "#E5E5E5" }}
+                          id="inputGroupFile02"
+                          {...register("image", { required: false })}
+                        />
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
-                  <div className="p-3 border bg-light">
-                    <div className="mb-3">
-                      <Box sx={{ textAlign: "center", my: 2 }}>
-                        <input
-                          type="button"
-                          data-bs-dismiss="modal"
-                          className={`${"btn"} ${styles.resetBtn}`}
-                          style={{ background: "#251D58", color: "#fff" }}
-                          value="Cancel"
-                        />
-                        <input
-                          type="submit"
-                          className={`${"btn"} ${styles.saveBtn}`}
-                          style={{ background: "#251D58", color: "#fff" }}
-                          value="Update"
-                        />
-                      </Box>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <Modal.Footer className="mt-4">
+              <Modal.Footer className="mt-4 pe-0">
                 {/* confirmation button */}
                 <Button
                   type="submit"
@@ -633,8 +622,18 @@ const EmployeeManagement = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.designationBtn}`}>Designation</Button>
-        <Button className={`${styles.addEmployeeBtn}`}>Add Employee</Button>
+        <NavLink
+          to={`/dashboard/designation`}
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.designationBtn}`}>Designation</Button>
+        </NavLink>
+        <NavLink
+          style={{ textDecoration: "none" }}
+          to={`/dashboard/add-employee`}
+        >
+          <Button className={`${styles.addEmployeeBtn}`}>Add Employee</Button>
+        </NavLink>
       </Box>
       <Box className={`${styles.tableContainer}`}>
         <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
