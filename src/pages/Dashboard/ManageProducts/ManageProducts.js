@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from "react-bootstrap";
+import { useDispatch, useSelector } from 'react-redux';
+import Swal from "sweetalert2";
 import { Box, Button, Collapse, IconButton, Paper, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Typography } from "@mui/material";
 import Table from "@mui/material/Table";
 import AssignmentIcon from "@mui/icons-material/Assignment";
@@ -7,15 +9,31 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
-import products from '../../../assets/data/products.json';
+// import products from '../../../assets/data/products.json';
 import styles from './ManageProducts.module.css';
+import { loadProducts, deleteProductFromDb, setReload } from '../../../store/products';
 
 function Row(props) {
-    const { product, serial } = props;
+    const { product, serial, reload } = props;
     const [open, setOpen] = React.useState(false);
+    const dispatch = useDispatch();
 
-    const handleDelete = () => {
-
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Do you want to delete the category?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Delete"
+        })
+            .then(result => {
+                if (result.isConfirmed) {
+                    dispatch(deleteProductFromDb(id));
+                    Swal.fire('Successfull', 'Category deleted!', 'success');
+                    setReload(!reload)
+                }
+            })
     };
 
     return (
@@ -55,7 +73,7 @@ function Row(props) {
                     /> */}
                 </TableCell>
                 <TableCell align="center">
-                    <EditIcon className={`${styles.editIcon}`} />
+                    {/* <EditIcon className={`${styles.editIcon}`} /> */}
                     <Delete
                         onClick={() => handleDelete(product?._id)}
                         className={`${styles.deleteIcon}`}
@@ -103,10 +121,17 @@ function Row(props) {
 
 
 const ManageProducts = () => {
+    const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
     const [inputValue, setInputValue] = React.useState("");
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    const products = useSelector((state) => state.entities.products.allProduct);
+
+    useEffect(() => {
+        dispatch(loadProducts());
+    }, [dispatch]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

@@ -70,6 +70,13 @@ export const {
 export default product.reducer;
 
 
+export const saveProductToDb = (data) => apiCallBegan({
+    url: '/products',
+    data,
+    method: 'post',
+    onSuccess: addProductToDB.type,
+});
+
 // Load product form Database
 export const loadProducts = () =>
     apiCallBegan({
@@ -78,4 +85,10 @@ export const loadProducts = () =>
         onSuccess: productReceived.type,
         onFailed: productRequestedFailed.type,
     });
+
+export const deleteProductFromDb = (id) => apiCallBegan({
+    url: `/products/${id}`,
+    method: 'delete',
+    onSuccess: setDeleteProduct.type,
+});
 
