@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,16 +10,48 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import { Button, Container } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
+import PreviewIcon from '@mui/icons-material/Preview';
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import invoices from "../../../../assets/data/invoice.json";
+import FadeLoader from "react-spinners/FadeLoader";
 import styles from "./ManageInvoice.module.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
+import { css } from "@emotion/react";
+import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { loadInvoices, deleteInvoice } from "../../../../store/invoice";
+
+
+const override = css`
+  display: block;
+  border-color: red;
+  margin: 0 auto;
+`;
 
 function Row(props) {
-  const { invoice } = props;
+  const dispatch = useDispatch();
+  const { invoice, reload, setReload } = props;
+
+  //delete invoice 
+  const handleDeleteInvoice = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteInvoice(id));
+        Swal.fire("Deleted!", "Invoice has been deleted.", "success");
+        // Set reload
+        setReload(!reload);
+      }
+    });
+  };
 
   return (
     <React.Fragment>
@@ -31,12 +63,18 @@ function Row(props) {
           {invoice._id}
         </TableCell>
         <TableCell align="center">{invoice.name}</TableCell>
-        <TableCell align="center">{invoice.item}</TableCell>
+        <TableCell align="center">{invoice.customerPhone}</TableCell>
         <TableCell align="center">{invoice.date}</TableCell>
-        <TableCell align="center">BDT {invoice.total}</TableCell>
+        <TableCell align="center">BDT {invoice.grandTotal}</TableCell>
         <TableCell align="center">
-          <EditIcon className={`${styles.editIcon}`} />
-          <Delete className={`${styles.deleteIcon}`} />
+          <NavLink to={`/customer-invoice/${invoice._id}`}>
+            <PreviewIcon
+              className={`${styles.editIcon}`} />
+          </NavLink>
+          <Delete
+            className={`${styles.deleteIcon}`}
+            onClick={() => handleDeleteInvoice(invoice?._id)}
+          />
         </TableCell>
       </TableRow>
     </React.Fragment>
@@ -44,8 +82,25 @@ function Row(props) {
 }
 
 const ManageInvoice = () => {
+  const dispatch = useDispatch();
+  const [reload, setReload] = React.useState(false);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+
+  //  get all orders from store
+  const invoices = useSelector(
+    (state) => state.entities.invoice.allInvoice
+  );
+
+  const invoiceLoader = useSelector(
+    (state) => state.entities.invoice.invoiceLoading
+  );
+
+  // Load orders from Database
+  useEffect(() => {
+    dispatch(loadInvoices());
+  }, [dispatch, reload]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -113,11 +168,34 @@ const ManageInvoice = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {invoices
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((invoice) => (
-                  <Row key={invoice._id} invoice={invoice} />
-                ))}
+
+              {invoiceLoader && (
+                <TableRow>
+                  <TableCell align="center" colSpan={8}>
+                    <FadeLoader
+                      color={"#123abc"}
+                      loading={invoiceLoader}
+                      css={override}
+                      height={10}
+                      width={5}
+                      radius={2}
+                      margin={2}
+                    />
+                  </TableCell>
+                </TableRow>
+              )}
+              {invoices.length > 0 &&
+                invoices
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((invoice, index) => (
+                    <Row
+                      key={invoice._id}
+                      invoice={invoice}
+                      serial={index}
+                      reload={reload}
+                      setReload={setReload}
+                    />
+                  ))}
             </TableBody>
           </Table>
         </TableContainer>

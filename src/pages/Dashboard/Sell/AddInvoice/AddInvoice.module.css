@@ -52,9 +52,6 @@
     padding: 50px;
 }
 
-.addSupplierField{
-    line-height: 10px;
-}
 
 .addSupplierField span{
     color: red;
@@ -79,9 +76,7 @@
 
 .addAnotherButton:hover{
     background-color: #00484d; 
-}
-
-         
+}   
 
 .tableContainer {
   background-color: #f1f3f6;
@@ -95,5 +90,14 @@
 
 .tableCell {
   color: #fff !important;
+  color: rgb(221, 222, 241) !important;
   font-weight: 700 !important;
+}
+
+.tableCellInput{
+  width: 70px;
+  padding: 8px;
+  background-color: #f1f3f6;
+  border: 1px solid #aeaeae;
+  border-radius: 3px;
 }

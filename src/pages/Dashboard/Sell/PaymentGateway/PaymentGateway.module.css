@@ -1,0 +1,55 @@
+.paymentPage{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     background-color: #d9d9fa;
+}
+
+.inputFields{
+    border-radius: 4px !important;
+    background-color: rgb(248, 243, 243) !important;
+    
+}
+
+.paymentFormSection{
+    background-color: #ffffff;
+   
+    text-align: start;
+    border-radius: 15px;
+    width: 350px;
+}
+.paymentForm{
+     padding: 10px 30px 30px 30px;
+}
+
+.inputContainer{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.paymentButton{
+    background-color: #001e3c !important;
+    padding: 10px;
+    color: white !important;
+    width: 100%;
+}
+.paymentDisabledButton{
+background-color: #034180 !important;
+    padding: 10px;
+    color: rgb(161, 160, 160) !important;
+    width: 100%;
+}
+
+.cardPay{
+border: 1px solid rgb(205, 205, 205);
+}
+
+.cancelButton{
+    margin-left: auto;
+    width: 100%;
+}
+.inputTitle{
+  font-weight: bold;
+}
