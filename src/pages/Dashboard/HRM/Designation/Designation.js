@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -8,6 +8,10 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import DisplayDesignation from "./DisplayDesignation/DisplayDesignation";
 
 const Designation = () => {
+  const [reload, setReload] = useState(false);
+  // const updateReload = (val) => {
+  //   setReload(val);
+  // };
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
       <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
@@ -28,8 +32,8 @@ const Designation = () => {
           Manage Employee
         </Button>
       </Box>
-      <AddDesignation />
-      <DisplayDesignation />
+      <AddDesignation updateReload={setReload} newReload={reload} />
+      <DisplayDesignation newReload={reload} />
     </Container>
   );
 };
