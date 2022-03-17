@@ -10,4 +10,14 @@
     color: #fff !important;
     font-weight: 700 !important;
   }
+  .btn {
+    background-color: #003366 !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-right: 5px !important;
+    margin-top: 50px !important;
+
+  }
   

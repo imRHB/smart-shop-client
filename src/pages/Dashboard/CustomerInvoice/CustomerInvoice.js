@@ -1,15 +1,16 @@
 import { Container, Grid, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect } from 'react';
-import { Table } from 'react-bootstrap';
+import React, { useEffect, useRef } from 'react';
+import { Button, Table } from 'react-bootstrap';
 import logo from '../../../assets/images/logo2.png'
 import styles from "./CustomerInvoice.module.css";
-
+import { savePDF } from "@progress/kendo-react-pdf";
 function Row(props) {
     const { product } = props;
 
     return (
         <React.Fragment>
+
             <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }} className={`${styles.tableHover}`}>
 
                 <TableCell align="center" component="th" scope="row">
@@ -38,10 +39,17 @@ const CustomerInvoice = () => {
     let total = 0;
     products.forEach(item => {
         total = total + item.salePrice * 5
-    })
+    });
+    const pdfExportComponent = useRef(null);
+    const handleExportWithComponent = () => {
+        savePDF(pdfExportComponent.current, { paperSize: "A4" })
+    }
     return (
+
         <Container >
-            <Box sx={{ mt: 5, bgcolor: "white", position: "relative" }} className={`${styles.containerBorder}`}>
+            <Button sx={{ mt: 5 }} onClick={handleExportWithComponent} className={`${styles.btn}`} >Download</Button>
+
+            <Box ref={pdfExportComponent} sx={{ mt: 2, bgcolor: "white", position: "relative" }} className={`${styles.containerBorder}`}>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ p: 5 }}>
                     <Grid item xs={12} sx={{ textAlign: "left" }}>
                         <Box >
