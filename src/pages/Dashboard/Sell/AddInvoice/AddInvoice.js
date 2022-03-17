@@ -31,12 +31,13 @@ import { loadProducts } from "../../../../store/products"
 const AddInvoice = () => {
   const dispatch = useDispatch();
   const [filteredProducts, setFilteredProducts] = useState('');
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [tableRow, setTableRow] = useState(1);
+  const [unit, setUnit] = useState('');
   const [quantity, setQuantity] = useState(0);
-  const [discount, setDiscount] = useState(0)
-  const [unit, setUnit] = React.useState('');
+  const [discount, setDiscount] = useState(0);
+  const [paidAmount, setPaidAmount] = useState(0);
 
   const {
     register,
@@ -79,6 +80,27 @@ const AddInvoice = () => {
     setUnit(event.target.value);
   };
 
+  let total = (quantity * (productNames?.sellPrice));
+  let grandTotal = total - (Number(total) * Number(discount) / 100);
+
+  const onSubmit = (data) => {
+    data.payment = "unpaid"
+    data.product = filteredProducts;
+    //Send form data to Server
+    dispatch(saveInvoiceToDB(data));
+
+    Swal.fire({
+      position: "top",
+      icon: "success",
+      title: "Product Purchased successfully!!",
+      showConfirmButton: true
+    });
+    reset();
+    console.log(data)
+  };
+
+
+
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
       <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
@@ -109,7 +131,7 @@ const AddInvoice = () => {
         </Typography>
         <hr />
 
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Box className={`${styles.tableContainer}`}>
             <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
               <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
@@ -117,13 +139,15 @@ const AddInvoice = () => {
               </Typography>
               <Stack spacing={2} >
                 <Autocomplete
-                  {...register("customerPhone", { required: true })}
+
                   sx={{ width: "45%", backgroundColor: "white" }}
                   freeSolo
                   id="free-solo-demo"
                   size="small"
-                  options={allCustomer.map((customer) => customer.phone)}
-                  renderInput={(params) => <TextField {...params} label=" customer Contact" />}
+                  options={allCustomer.map((customer) => customer?.phone)}
+                  renderInput={(params) => <TextField
+                    {...register("customerPhone", { required: true })}
+                    {...params} label=" customer Contact" />}
                 />
               </Stack>
 
@@ -253,13 +277,14 @@ const AddInvoice = () => {
                         >
                           <Stack spacing={2} sx={{ width: 300 }}>
                             <Autocomplete
-                              {...register("product", { required: true })}
+                              // {...register("product", { required: true })}
                               style={{ backgroundColor: "#f1f3f6" }}
                               freeSolo
                               id="free-solo-demo"
                               size="small"
                               options={allProducts.map((product) => product.name)}
                               renderInput={(params) => <TextField
+
                                 onBlur={(e) => setFilteredProducts(e.target.value)}
                                 {...params} label=" Choose product" />}
                             />
@@ -307,9 +332,9 @@ const AddInvoice = () => {
                               value={unit}
                               onChange={handleUnitChange}
                             >
-                              <MenuItem value="cash">K.G.</MenuItem>
-                              <MenuItem value="cheque">Gram</MenuItem>
-                              <MenuItem value="card">Pcs.</MenuItem>
+                              <MenuItem value="kg">K.G.</MenuItem>
+                              <MenuItem value="gram">Gram</MenuItem>
+                              <MenuItem value="pcs">Pcs.</MenuItem>
                             </Select>
                           </FormControl>
                         </TableCell>
@@ -317,25 +342,26 @@ const AddInvoice = () => {
                         <TableCell align="center"
                           sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                         >
-                          <input
-                            type="number"
-                            placeholder="Price"
-                            {...register("price", { required: true })}
-                            defaultValue={productNames?.price}
-                            className={`${styles.tableCellInput}`}
-                          />
+                          {productNames?.sellPrice &&
+                            <input
+                              {...register("price", { required: true })}
+                              type="number"
+                              placeholder="Price"
+                              defaultValue={productNames?.sellPrice}
+                              className={`${styles.tableCellInput}`}
+                            />}
                         </TableCell>
-
 
                         <TableCell align="center"
                           sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                         >
                           <input
-                            {...register("total", { required: true })}
+                            // {...register("total", { required: true })}
                             type="number"
                             placeholder="0"
-                            onChange={(e) => (e.target.value)}
-                            value={quantity * (productNames?.price)}
+                            // value={(quantity * (productNames?.price))}
+
+                            value={total}
                             className={`${styles.tableCellInput}`}
                           />
                         </TableCell>
@@ -374,8 +400,9 @@ const AddInvoice = () => {
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                     >
                       <input
-                        {...register("totalDiscount", { required: true })}
+                        // {...register("totalDiscount", { required: true })}
 
+                        onChange={(e) => setDiscount(e.target.value)}
                         type="number"
                         placeholder="0.00"
                         className={`${styles.tableCellInput}`}
@@ -392,8 +419,7 @@ const AddInvoice = () => {
                         borderRight: "1px solid rgba(224, 224, 224, 1)",
                         fontWeight: "bold", textAlign: "right",
                       }}
-                    >
-                      Grand Total:
+                    >Grand Total:
                     </TableCell>
                     <TableCell
                       align="center"
@@ -401,8 +427,8 @@ const AddInvoice = () => {
                     >
                       <input
                         {...register("grandTotal", { required: true })}
-
-                        type="text"
+                        type="number"
+                        value={grandTotal}
                         placeholder="0"
                         className={`${styles.tableCellInput}`}
                       />
@@ -437,9 +463,10 @@ const AddInvoice = () => {
                     </TableCell>
                     <TableCell align="center" sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}>
                       <input
-                        type="text"
+                        {...register("paidAmount", { required: true })}
+                        type="number"
+                        onChange={(e) => setPaidAmount(e.target.value)}
                         placeholder="0.00"
-                        {...register("paid", { required: true })}
                         className={`${styles.tableCellInput}`}
                       />
                     </TableCell>
@@ -451,6 +478,7 @@ const AddInvoice = () => {
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     >
                       <Button
+                        type="submit"
                         sx={{ borderRadius: "0" }}
                         className={`${styles.paymentBtn}`}
                         variant="contained"
@@ -485,9 +513,10 @@ const AddInvoice = () => {
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     >
                       <input
-                        type="text"
-                        placeholder="0"
                         {...register("changeAmount", { required: true })}
+                        type="number"
+                        placeholder="0"
+                        value={paidAmount - grandTotal}
                         className={`${styles.tableCellInput}`}
                       />
                     </TableCell>
