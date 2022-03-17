@@ -1,71 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from "react-bootstrap";
-import { Box, Button, Collapse, IconButton, Paper, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Typography } from "@mui/material";
+import { Box, Paper, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from 'react-redux';
+import Swal from "sweetalert2";
 import Table from "@mui/material/Table";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
-import products from '../../../assets/data/products.json';
 import styles from './CrudTest.module.css';
-import { Controller, useForm } from "react-hook-form";
-
-
-const CrudTest = () => {
-    const { register, handleSubmit, formState: { errors }, control } = useForm();
-
-    const onSubmit = (data) => {
-        console.log(data);
-    };
-
-    return (
-        <Container>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                {/* {<input type="text" {...register("item", { required: true })} placeholder="Expense Item" />} */}
-                <select {...register("item")}>
-                    <option value="">Select Expanse...</option>
-                    <option value="lunch">Lunch</option>
-                    <option value="snacks">Snacks</option>
-                    <option value="breakfast">Breakfast</option>
-                    <option value="electricity">Electricity</option>
-                    <option value="salary">Salary</option>
-                    {/* <option value="Advanture">Bounus</option>
-                    <option value="Advanture">Food</option>
-                    <option value="Advanture">Shop</option>
-                    <option value="Advanture">Water</option>
-                    <option value="Advanture">Gass</option> */}
-                </select>
-                <br />
-                {/* {<input type="date" {...register("date")} placeholder="Date" />} */}
-                <br />
-                {/* <input type="text" {...register("designation", { required: true })} placeholder="Designation Name" /> */}
-                <br />
-                {/* <input type="text" {...register("details", { required: true })} placeholder="Designation Details" /> */}
-                <br />
-                {/* <Controller as={TextField} name="TextField" control={control} defaultValue="hello" /> */}
-                {<input type="number" {...register("price")} defaultValue="20" readOnly />}
-                {<input type="number" {...register("balance")} placeholder="Balance" />}
-                <br />
-                <input type="submit" />
-            </form>
-        </Container>
-    );
-};
-
-export default CrudTest;
-
-
-
-
-/* 
+import { deleteExpenseItemFromDb, loadExpenseItems, saveExpenseItemToDb, setReload } from '../../../store/expenses';
 
 function Row(props) {
-    const { product, serial } = props;
-    const [open, setOpen] = React.useState(false);
+    const { category, serial, reload } = props;
+    const dispatch = useDispatch();
 
-    const handleDelete = () => {
-
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Do you want to delete the item?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Delete"
+        })
+            .then(result => {
+                if (result.isConfirmed) {
+                    dispatch(deleteExpenseItemFromDb(id));
+                    Swal.fire('Successfull', 'Category deleted!', 'success');
+                    setReload(!reload)
+                }
+            })
     };
 
     return (
@@ -74,121 +38,132 @@ function Row(props) {
                 className={`${styles.tableHover}`}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-                <TableCell>
-                    <IconButton
-                        aria-label="expand row"
-                        size="small"
-                        onClick={() => setOpen(!open)}
-                    >
-                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    </IconButton>
-                </TableCell>
                 <TableCell component="th" scope="row">
                     {serial + 1}
                 </TableCell>
-                <TableCell align="center">{product.name}</TableCell>
-                <TableCell align="center">{product.category}</TableCell>
-                <TableCell align="center">{product.price}</TableCell>
-                <TableCell align="center">{product.salePrice}</TableCell>
+                <TableCell align="center">{category.name}</TableCell>
                 <TableCell align="center">
-                    <img
-                        style={{ width: "70px", height: "70px" }}
-                        src={product.img}
-                        alt="Product"
-                    // loading="lazy"
+                    {/* <EditIcon className={`${styles.editIcon}`} /> */}
+                    <Delete
+                        onClick={() => handleDelete(category?._id)}
+                        className={`${styles.deleteIcon}`}
                     />
-                    <img
-                        style={{ width: "70px", height: "70px" }}
-                        src={`data:image/jpeg;base64,${product.img}`}
-                        alt="Product"
-                    // loading="lazy"
-                    />
-                    </TableCell>
-                    <TableCell align="center">
-                        <EditIcon className={`${styles.editIcon}`} />
-                        <Delete
-                            onClick={() => handleDelete(product?._id)}
-                            className={`${styles.deleteIcon}`}
-                        />
-                    </TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                        <Collapse in={open} timeout="auto" unmountOnExit>
-                            <Box sx={{ margin: 1 }}>
-                                <Typography variant="h6" gutterBottom component="div">
-                                    Product Details
-                                </Typography>
-                                <Table size="small" aria-label="purchases">
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align="center">Product ID</TableCell>
-                                            <TableCell align="center">Name</TableCell>
-                                            <TableCell align="center">Category</TableCell>
-                                            <TableCell align="center">Unit</TableCell>
-                                            <TableCell align="center">Price</TableCell>
-                                            <TableCell align="center">Sale Price</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        <TableRow key={product._id}>
-                                            <TableCell component="th" scope="row">
-                                                {product.productId}
-                                            </TableCell>
-                                            <TableCell align="center">{product.name}</TableCell>
-                                            <TableCell align="center">{product.category}</TableCell>
-                                            <TableCell align="center">{product.unit}</TableCell>
-                                            <TableCell align="center">BDT {product.price}</TableCell>
-                                            <TableCell align="center">BDT {product.salePrice}</TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                </Table>
-                            </Box>
-                        </Collapse>
-                    </TableCell>
-                </TableRow>
-            </React.Fragment>
-        );
-    }
+                </TableCell>
+            </TableRow>
+        </React.Fragment>
+    );
+}
 
-*/
+const CrudTest = () => {
+    const dispatch = useDispatch();
+    let reload = useSelector((state) => state.entities.category.reload);
+    const categories = useSelector((state) => state.entities.category.categories);
+
+    useEffect(() => {
+        dispatch(loadExpenseItems());
+    }, [reload, dispatch]);
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    const onSubmit = (data) => {
+        dispatch(saveExpenseItemToDb(data));
+
+        dispatch(setReload({ reload: !reload }));
+        Swal.fire("Success", "New Category Added", "success");
+
+        reset();
+    };
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
 
-
-/* 
-
-<Container sx={{ width: "100%", mb: 5 }}>
+    return (
+        <Container sx={{ width: "100%", mb: 5 }}>
             <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
                 <Typography>
                     <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
                 </Typography>
                 <Typography>
-                    <span style={{ fontSize: "26px", marginLeft: "-38px" }}>Product</span>{" "}
-                    <br /> <span style={{ color: "#969494" }}>Manage Product</span>
+                    <span style={{ fontSize: "26px", marginLeft: '-36px' }}>Expense</span>{" "}
+                    <br /> <span style={{ color: "#969494" }}>Manage Expenses</span>
                 </Typography>
             </Box>
 
-            <Box sx={{ textAlign: "left", mb: 1 }}>
-                <Button className={`${styles.btn}`} onClick={() => setOpen(!open)}>Filter</Button>
-                <Collapse in={open} sx={{ mt: 2, mb: 2 }} timeout="auto" unmountOnExit className={`${styles.tableContainer}`}>
-                    <form onSubmit={handleProductSearch}>
-                        <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <Typography sx={{ textAlign: "left", mr: 2 }} style={{ fontSize: "17px" }} >
-                                Search By Product:
-                            </Typography>
-                            <TextField onChange={(event) => setInputValue(event.target.value)} size="small" id="outlined-basic" label="Product Name" sx={{ mr: 1 }} variant="outlined" />
-                            <Button type="submit" className={`${styles.btn}`}>Search</Button>
-                        </Box>
-                    </form>
-                </Collapse>
-            </Box>
-
-            <Box sx={{ textAlign: "right", my: 2 }}>
-                <Button className={`${styles.addEmployeeBtn}`}>Add Product</Button>
-            </Box>
             <Box className={`${styles.tableContainer}`}>
                 <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
-                    Manage Product
+                    Add New Expense
+                </Typography>
+                <hr />
+                <div className="mt-2">
+                    <div className="form-container">
+                        <div>
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <div className="row gx-3 mb-3">
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div className="p-3 border bg-light">
+                                            <div className="mb-3">
+                                                <label
+                                                    className="form-label"
+                                                    style={{ fontWeight: "bold" }}
+                                                >
+                                                    Expense Name{" "}
+                                                    <sup className="text-danger fw-bold fs-6">*</sup>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Expense Name"
+                                                    style={{ background: "#E5E5E5" }}
+                                                    {...register("name", { required: true })}
+                                                />
+                                                {errors.name && (
+                                                    <span className="text-danger">
+                                                        Please enter expense item name.
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div className="p-4 border bg-light">
+                                            <div className="mb-3">
+                                                <Box sx={{ textAlign: "center", my: 2 }}>
+                                                    <input
+                                                        type="reset"
+                                                        className={`${"btn"} ${styles.resetBtn}`}
+                                                        style={{ background: "#251D58", color: "#fff" }}
+                                                        value="Reset"
+                                                    />
+                                                    <input
+                                                        type="submit"
+                                                        className={`${"btn"} ${styles.saveBtn}`}
+                                                        style={{ background: "#251D58", color: "#fff" }}
+                                                        value="Save"
+                                                    />
+                                                </Box>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </Box>
+
+            <Box sx={{ marginTop: 5 }} className={`${styles.tableContainer}`}>
+                <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+                    Manage Expense
                 </Typography>
                 <hr />
                 <TableContainer
@@ -198,22 +173,9 @@ function Row(props) {
                     <Table aria-label="simple table">
                         <TableHead className={`${styles.tableHeader}`}>
                             <TableRow>
-                                <TableCell />
                                 <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Name
-                                </TableCell>
-                                <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Category
-                                </TableCell>
-                                <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Price
-                                </TableCell>
-                                <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Sale Price
-                                </TableCell>
-                                <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Image
+                                    Expense Name
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
                                     Action
@@ -221,12 +183,12 @@ function Row(props) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {products
+                            {categories
                                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((product, index) => (
+                                .map((category, index) => (
                                     <Row
-                                        key={product._id}
-                                        product={product}
+                                        key={category._id}
+                                        category={category}
                                         serial={index}
                                     // loading={loading}
                                     // reload={reload}
@@ -240,7 +202,7 @@ function Row(props) {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 15]}
                         component="div"
-                        count={products.length}
+                        count={categories.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
@@ -249,5 +211,7 @@ function Row(props) {
                 </Typography>
             </Box>
         </Container>
+    );
+};
 
-*/
+export default CrudTest;

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Container } from "react-bootstrap";
-import { Autocomplete, Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Autocomplete, Box, Button, Container, Stack, TextField, Typography } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import styles from './AddProduct.module.css';
 import useProducts from "../../../hooks/useProducts";
@@ -11,7 +10,7 @@ const AddProduct = () => {
 
     const products = useProducts();
 
-    const [selectedProduct, setSelectedProduct] = useState({});
+    const [selectedProduct, setSelectedProduct] = useState("");
 
     const findProduct = products.find(foundedPd => {
         if (foundedPd.name === selectedProduct) {
@@ -22,6 +21,7 @@ const AddProduct = () => {
 
 
     const onSubmit = (data) => {
+        // data.name = selectedProduct;
         console.log(data);
     };
 
@@ -70,7 +70,7 @@ const AddProduct = () => {
                                                         renderInput={(params) => <TextField
                                                             style={{ background: '#E5E5E5' }}
                                                             onSelectCapture={(e) => setSelectedProduct(e.target.value)}
-                                                            {...params} />}
+                                                            {...params} label="Select product" />}
                                                     />
                                                 </Stack>
 
@@ -93,12 +93,12 @@ const AddProduct = () => {
                                                     <sup className="text-danger fw-bold fs-6">*</sup>
                                                 </label>
                                                 <input
+                                                    {...register("category", { required: false })}
                                                     type="text"
                                                     className="form-control"
                                                     placeholder="Product Category"
                                                     defaultValue={findProduct?.category}
                                                     style={{ background: "#E5E5E5" }}
-                                                    {...register("category", { required: false })}
                                                     readOnly
                                                 />
                                             </div>

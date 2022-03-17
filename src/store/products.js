@@ -43,7 +43,13 @@ const product = createSlice({
                 (product) => product._id === action.payload._id
             );
         },
-
+        setDeleteProduct: (state, action) => {
+            if (action.payload.deletedCount > 0) {
+                const index = state.allProduct.findIndex((product) => product._id === action.payload._id);
+                state.allProduct.splice(index, 1);
+                state.productDeletedSuccess = true;
+            }
+        },
         setUpdateProduct: (state, action) => {
             if (action.payload.modifiedCount)
                 Swal.fire("Good job!", "product Updated Successfully!", "success");
@@ -70,6 +76,13 @@ export const {
 export default product.reducer;
 
 
+export const saveProductToDb = (data) => apiCallBegan({
+    url: '/products',
+    data,
+    method: 'post',
+    onSuccess: addProductToDB.type,
+});
+
 // Load product form Database
 export const loadProducts = () =>
     apiCallBegan({
@@ -78,4 +91,10 @@ export const loadProducts = () =>
         onSuccess: productReceived.type,
         onFailed: productRequestedFailed.type,
     });
+
+export const deleteProductFromDb = (id) => apiCallBegan({
+    url: `/products/${id}`,
+    method: 'delete',
+    onSuccess: setDeleteProduct.type,
+});
 
