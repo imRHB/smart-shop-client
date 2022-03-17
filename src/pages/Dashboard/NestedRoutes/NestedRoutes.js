@@ -41,7 +41,6 @@ import TestComponent from "../TestComponent/TestComponent";
 import EventCalender from "../EventCalender/EventCalender";
 import PurchaseProduct from "../Products/PurchaseProduct/PurchaseProduct";
 import Unit from "../Unit/Unit";
-import CustomerInvoice from "../CustomerInvoice/CustomerInvoice";
 //==============import your component here===================//
 
 const NestedRoutes = () => {
@@ -68,7 +67,6 @@ const NestedRoutes = () => {
         <Route path="add-customer" element={<UpdateCustomer />}></Route>
         <Route path="manage-customer" element={<CustomerManagement />}></Route>
         <Route path="credit-customer" element={<CustomerStatus />}></Route>
-        <Route path="customer-invoice" element={<CustomerInvoice />}></Route>
         {/*============ Customer Department All Routes End ==============*/}
 
         {/*============ Supplier Department All Routes Start ==============*/}
