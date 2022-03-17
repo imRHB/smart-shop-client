@@ -14,7 +14,6 @@ import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
 import TableRow from "@mui/material/TableRow";
 import Delete from "@mui/icons-material/Delete";
-import Collapse from "@mui/material/Collapse";
 import { NavLink } from "react-router-dom";
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -27,28 +26,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveInvoiceToDB } from "../../../../store/invoice";
 import { loadCustomers } from "../../../../store/customer"
 import { loadProducts } from "../../../../store/products"
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 
 const AddInvoice = () => {
   const dispatch = useDispatch();
   const [filteredProducts, setFilteredProducts] = useState('');
-  const [open, setOpen] = useState(false);
-  const [toggle, setToggle] = useState(false);
   const [tableRow, setTableRow] = useState(1);
   const [unit, setUnit] = useState('');
   const [quantity, setQuantity] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [paidAmount, setPaidAmount] = useState(0);
+  const [value, setValue] = React.useState('one');
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
-
-  const buttonToggle = () => {
-    setToggle(!toggle);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
+
+  const { register, handleSubmit, reset, formState: { errors }, } = useForm();
 
   // Getting all customer from store
   const allCustomer = useSelector(
@@ -63,12 +60,12 @@ const AddInvoice = () => {
   // Load customers from Database
   useEffect(() => {
     dispatch(loadCustomers());
-  }, []);
+  }, [dispatch]);
 
   // Load products from Database
   useEffect(() => {
     dispatch(loadProducts());
-  }, []);
+  }, [dispatch]);
 
   const productNames = allProducts.find(productName => {
     if (productName.name === filteredProducts) {
@@ -94,11 +91,14 @@ const AddInvoice = () => {
       icon: "success",
       title: "Product Purchased successfully!!",
       showConfirmButton: true
-    });
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/payment-gateway"
+        }
+      });
     reset();
-    console.log(data)
   };
-
 
 
   return (
@@ -133,93 +133,98 @@ const AddInvoice = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <Box className={`${styles.tableContainer}`}>
-            <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-              <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
-                Customer Contact No.<span>*</span>
-              </Typography>
-              <Stack spacing={2} >
-                <Autocomplete
+            <Box sx={{ width: '100%', bgcolor: 'background.paper', mb: 3 }}>
+              <TabContext value={value}>
+                <Box sx={{ borderColor: 'divider', backgroundColor: "rgb(221, 222, 241)" }} >
+                  <TabList onChange={handleChange} aria-label="lab API tabs example"
+                    sx={{ textAlign: "center" }} centered
+                  >
+                    <Tab label="Old Customer" value="Old Customer" sx={{ color: "black" }} />
+                    <Tab label="New Customer" value="New Customer" sx={{ color: "black" }} />
+                  </TabList>
+                </Box>
 
-                  sx={{ width: "45%", backgroundColor: "white" }}
-                  freeSolo
-                  id="free-solo-demo"
-                  size="small"
-                  options={allCustomer.map((customer) => customer?.phone)}
-                  renderInput={(params) => <TextField
-                    {...register("customerPhone", { required: true })}
-                    {...params} label=" customer Contact" />}
-                />
-              </Stack>
+                <Box className={`${styles.addSupplierField} ${"pb-1"}`}>
+                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px", marginLeft: 5, mt: 2 }}>Customer Contact No.<span>*</span>
+                  </Typography>
 
-              <Button
-                sx={{ borderRadius: 0, marginTop: "5px" }}
-                onClick={() => {
-                  setOpen(!open);
-                  buttonToggle();
-                }} className={`${styles.paymentBtn}`}
-              >
-                {toggle ? "Old Customer" : "New Customer"}
-              </Button>
-            </Box>
+                  <Stack spacing={2} sx={{ marginLeft: 5, mb: 1 }}>
+                    <Autocomplete
+                      sx={{ width: "45%", backgroundColor: "#f1f3f6" }}
+                      freeSolo
+                      id="free-solo-demo"
+                      size="small"
+                      options={allCustomer.map((customer) => customer?.phone)}
+                      renderInput={(params) => <TextField
+                        {...register("customerPhone", { required: true })}
+                        {...params} label=" customer Contact" />}
+                    />
+                  </Stack>
+                </Box>
 
-            <Collapse in={open} timeout="auto">
-              <Box sx={{ width: "45%", display: "flex", flexContent: "between" }}>
-                <Box className={`${styles.addSupplierField} ${"pb-4, me-2"}`}>
-                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>Customer Name <span>*</span></Typography>
+                <TabPanel value="New Customer">
+                  <Box sx={{ width: "47%", display: "flex", flexContent: "between" }}>
+                    <Box className={`${styles.addSupplierField} ${"me-2"}`}>
+                      <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px", ml: 2 }}>Customer Name <span>*</span></Typography>
 
-                  <TextField
-                    size="small"
-                    id="outlined-basic"
-                    sx={{ backgroundColor: "white" }}
-                    label="Customer Name"
-                    variant="outlined"
-                    {...register("name", { required: true })}
+                      <TextField
+                        size="small"
+                        id="outlined-basic"
+                        sx={{ backgroundColor: "#f1f3f6", ml: 2 }}
+                        label="Customer Name"
+                        variant="outlined"
+                        {...register("name", { required: true })}
+                      />
+                    </Box>
+                    <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+                      <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>Customer Email</Typography>
+
+                      <TextField
+                        size="small"
+                        id="outlined-basic"
+                        sx={{ backgroundColor: "#f1f3f6" }}
+                        label="Customer Email"
+                        variant="outlined"
+                        {...register("email")}
+                      />
+                    </Box>
+                  </Box>
+
+                  <Box className={`${styles.addSupplierField}`}>
+                    <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px", ml: 2 }}> Address</Typography>
+
+                    <TextField
+                      size="small"
+                      id="outlined-basic"
+                      sx={{ width: "45%", backgroundColor: "#f1f3f6", ml: 2 }}
+                      label="Customer Address"
+                      variant="outlined"
+                      {...register("address")}
+                    />
+                  </Box>
+                </TabPanel>
+                <Box className={`${styles.addSupplierField}`}>
+                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px", ml: 5 }}>
+                    Date<span>*</span>
+                  </Typography>
+
+                  <input type="date"
+                    {...register("date", { required: true })}
+
+                    style={{
+                      width: "43%",
+                      padding: "10px",
+                      marginLeft: "40px",
+                      marginBottom: "20px",
+                      backgroundColor: "#f1f3f6",
+                      border: "1px solid #aeaeae",
+                      borderRadius: "3px",
+                    }}
                   />
                 </Box>
-                <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                  <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>Customer Email</Typography>
-
-                  <TextField
-                    size="small"
-                    id="outlined-basic"
-                    sx={{ backgroundColor: "white" }}
-                    label="Customer Email"
-                    variant="outlined"
-                    {...register("email")}
-                  />
-                </Box>
-              </Box>
-
-              <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-                <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}> Address</Typography>
-
-                <TextField
-                  size="small"
-                  id="outlined-basic"
-                  sx={{ width: "45%", backgroundColor: "white" }}
-                  label="Customer Address"
-                  variant="outlined"
-                  {...register("address")}
-                />
-              </Box>
-            </Collapse>
-
-            <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
-              <Typography sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}>
-                Date<span>*</span>
-              </Typography>
-
-              <input type="date"
-                {...register("date", { required: true })}
-                style={{
-                  width: "45%",
-                  padding: "10px",
-                  backgroundColor: "white",
-                  border: "1px solid #aeaeae",
-                  borderRadius: "3px",
-                }}
-              />
+              </TabContext>
             </Box>
+
             <TableContainer component={Paper}
               sx={{ border: 1, borderColor: "grey.300" }} >
               <Table aria-label="simple table">
@@ -284,15 +289,13 @@ const AddInvoice = () => {
                               size="small"
                               options={allProducts.map((product) => product.name)}
                               renderInput={(params) => <TextField
-
                                 onBlur={(e) => setFilteredProducts(e.target.value)}
                                 {...params} label=" Choose product" />}
                             />
                           </Stack>
                         </TableCell>
 
-                        <TableCell
-                          align="center"
+                        <TableCell align="center"
                           sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                         >
                           <input
@@ -316,8 +319,7 @@ const AddInvoice = () => {
                         </TableCell>
                         <TableCell align="center"
                           sx={{
-                            borderRight: "1px solid rgba(224, 224, 224, 1)",
-                            p: 1, width: "160px"
+                            borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1, width: "160px"
                           }}>
                           <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Select Unit</InputLabel>
@@ -342,25 +344,21 @@ const AddInvoice = () => {
                         <TableCell align="center"
                           sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                         >
-                          {productNames?.sellPrice &&
-                            <input
-                              {...register("price", { required: true })}
-                              type="number"
-                              placeholder="Price"
-                              defaultValue={productNames?.sellPrice}
-                              className={`${styles.tableCellInput}`}
-                            />}
+                          <input
+                            {...register("price", { required: true })}
+                            type="number"
+                            placeholder="Price"
+                            defaultValue={productNames?.sellPrice}
+                            className={`${styles.tableCellInput}`}
+                          />
                         </TableCell>
 
                         <TableCell align="center"
                           sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                         >
                           <input
-                            // {...register("total", { required: true })}
                             type="number"
                             placeholder="0"
-                            // value={(quantity * (productNames?.price))}
-
                             value={total}
                             className={`${styles.tableCellInput}`}
                           />
@@ -400,8 +398,6 @@ const AddInvoice = () => {
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)", p: 1 }}
                     >
                       <input
-                        // {...register("totalDiscount", { required: true })}
-
                         onChange={(e) => setDiscount(e.target.value)}
                         type="number"
                         placeholder="0.00"
@@ -439,7 +435,7 @@ const AddInvoice = () => {
                     <TableCell align="center"
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     >
-                      <Button
+                      {/* <Button
                         variant="contained"
                         sx={{ borderRadius: "0" }}
                         onClick={() => setTableRow(tableRow + 1)}
@@ -447,7 +443,7 @@ const AddInvoice = () => {
                         color="success"
                       >
                         Add New Item
-                      </Button>
+                      </Button> */}
                     </TableCell>
                     <TableCell />
                     <TableCell />
@@ -486,13 +482,7 @@ const AddInvoice = () => {
                       >
                         Submit Items
                       </Button>
-                      {/* <Button
-                        sx={{ borderRadius: "0" }}
-                        variant="contained"
-                        color="success"
-                      >
-                        Print Invoice
-                      </Button> */}
+
                     </TableCell>
                     <TableCell />
                     <TableCell />
@@ -532,3 +522,5 @@ const AddInvoice = () => {
 };
 
 export default AddInvoice;
+
+

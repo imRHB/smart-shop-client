@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
 
 let initialState = {
-    allInvoices: [],
+    allInvoice: [],
     invoiceLoading: false,
     reload: false,
     invoiceAdded: false,
@@ -84,9 +84,9 @@ export const loadInvoices = () =>
     });
 
 // Delete invoice from db
-export const deleteInvoiceToDB = (id) =>
+export const deleteInvoice = (id) =>
     apiCallBegan({
-        url: `/invoices/${id}`,
+        url: `/orders/${id}`,
         method: "delete",
         onSuccess: setDeleteInvoice.type,
     });

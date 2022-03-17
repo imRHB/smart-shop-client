@@ -20,7 +20,7 @@ const PaymentGateway = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders`)
+        fetch(`https://smart-shop-pos.herokuapp.com/orders`)
             .then(res => res.json())
             .then(data => setOrders(data[data.length - 1]))
     }, []);
@@ -33,7 +33,7 @@ const PaymentGateway = () => {
     const handleUpdateStatus = () => {
         const updated = { payment: 'paid' }
 
-        const url = `http://localhost:5000/orders/${orders._id}`
+        const url = `https://smart-shop-pos.herokuapp.com/orders/${_id}`
         fetch(url, {
             method: 'PUT',
             headers: { 'content-type': 'application/json' },
@@ -47,8 +47,11 @@ const PaymentGateway = () => {
                         icon: "success",
                         title: "Payment successful!!",
                         showConfirmButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = `/customer-invoice/${_id}`
+                        }
                     });
-
                 }
             })
     };
@@ -64,7 +67,17 @@ const PaymentGateway = () => {
                         <div>
                             <h5 className='fw-bold'>Total Amount </h5>
                         </div>
-                        <div style={{ padding: "5px 10px", marginLeft: "auto", backgroundColor: "rgb(248, 243, 243)", color: "#001e3c " }}><h4>${grandTotal}</h4> </div>
+                        <div style={{ padding: "5px 10px", marginLeft: "auto", backgroundColor: "rgb(248, 243, 243)", color: "#001e3c " }}>
+                            {orders.payment === "unpaid" ?
+                                <h4>
+                                    $ {grandTotal}
+                                </h4>
+                                :
+                                <h4>
+                                    $ 0.00
+                                </h4>
+                            }
+                        </div>
                     </div>
                     <hr />
 
