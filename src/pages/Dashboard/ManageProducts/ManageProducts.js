@@ -7,9 +7,7 @@ import Table from "@mui/material/Table";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
-// import products from '../../../assets/data/products.json';
 import styles from './ManageProducts.module.css';
 import { loadProducts, deleteProductFromDb, setReload } from '../../../store/products';
 
@@ -20,7 +18,7 @@ function Row(props) {
 
     const handleDelete = (id) => {
         Swal.fire({
-            title: 'Do you want to delete the category?',
+            title: 'Do you want to delete the product?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -73,7 +71,6 @@ function Row(props) {
                     /> */}
                 </TableCell>
                 <TableCell align="center">
-                    {/* <EditIcon className={`${styles.editIcon}`} /> */}
                     <Delete
                         onClick={() => handleDelete(product?._id)}
                         className={`${styles.deleteIcon}`}
@@ -122,16 +119,16 @@ function Row(props) {
 
 const ManageProducts = () => {
     const dispatch = useDispatch();
-    const [open, setOpen] = React.useState(false);
     const [inputValue, setInputValue] = React.useState("");
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+    let reload = useSelector((state) => state.entities.products.reload);
     const products = useSelector((state) => state.entities.products.allProduct);
 
     useEffect(() => {
         dispatch(loadProducts());
-    }, [dispatch]);
+    }, [reload, dispatch]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
