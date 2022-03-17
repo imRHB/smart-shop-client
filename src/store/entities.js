@@ -6,6 +6,7 @@ import customerReducer from "./customer";
 import invoiceReducer from "./invoice";
 import productReducer from "./products";
 import categoryReducer from './category';
+import expenseReducer from './expenses';
 
 export default combineReducers({
   employee: employeeReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   invoice: invoiceReducer,
   products: productReducer,
   category: categoryReducer,
+  expenses: expenseReducer,
 });

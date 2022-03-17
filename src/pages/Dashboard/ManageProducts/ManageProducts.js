@@ -54,8 +54,8 @@ function Row(props) {
                 </TableCell>
                 <TableCell align="center">{product.name}</TableCell>
                 <TableCell align="center">{product.category}</TableCell>
-                <TableCell align="center">{product.price}</TableCell>
-                <TableCell align="center">{product.salePrice}</TableCell>
+                {/* <TableCell align="center">{product.price}</TableCell> */}
+                <TableCell align="center">{product.sellPrice}</TableCell>
                 <TableCell align="center">
                     <img
                         style={{ width: "70px", height: "70px" }}
@@ -91,8 +91,8 @@ function Row(props) {
                                         <TableCell align="center">Name</TableCell>
                                         <TableCell align="center">Category</TableCell>
                                         <TableCell align="center">Unit</TableCell>
-                                        <TableCell align="center">Price</TableCell>
-                                        <TableCell align="center">Sale Price</TableCell>
+                                        <TableCell align="center">Supplier Price</TableCell>
+                                        <TableCell align="center">Sell Price</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -103,8 +103,8 @@ function Row(props) {
                                         <TableCell align="center">{product.name}</TableCell>
                                         <TableCell align="center">{product.category}</TableCell>
                                         <TableCell align="center">{product.unit}</TableCell>
-                                        <TableCell align="center">BDT {product.price}</TableCell>
-                                        <TableCell align="center">BDT {product.salePrice}</TableCell>
+                                        <TableCell align="center">BDT {product.supplierPrice}</TableCell>
+                                        <TableCell align="center">BDT {product.sellPrice}</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -211,9 +211,9 @@ const ManageProducts = () => {
                                 <TableCell align="center" className={`${styles.tableCell}`}>
                                     Price
                                 </TableCell>
-                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                {/* <TableCell align="center" className={`${styles.tableCell}`}>
                                     Sale Price
-                                </TableCell>
+                                </TableCell> */}
                                 <TableCell align="center" className={`${styles.tableCell}`}>
                                     Image
                                 </TableCell>
