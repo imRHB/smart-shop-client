@@ -10,7 +10,7 @@ const AddProduct = () => {
 
     const products = useProducts();
 
-    const [selectedProduct, setSelectedProduct] = useState({});
+    const [selectedProduct, setSelectedProduct] = useState("");
 
     const findProduct = products.find(foundedPd => {
         if (foundedPd.name === selectedProduct) {
@@ -21,6 +21,7 @@ const AddProduct = () => {
 
 
     const onSubmit = (data) => {
+        // data.name = selectedProduct;
         console.log(data);
     };
 
@@ -92,12 +93,12 @@ const AddProduct = () => {
                                                     <sup className="text-danger fw-bold fs-6">*</sup>
                                                 </label>
                                                 <input
+                                                    {...register("category", { required: false })}
                                                     type="text"
                                                     className="form-control"
                                                     placeholder="Product Category"
                                                     defaultValue={findProduct?.category}
                                                     style={{ background: "#E5E5E5" }}
-                                                    {...register("category", { required: false })}
                                                     readOnly
                                                 />
                                             </div>
