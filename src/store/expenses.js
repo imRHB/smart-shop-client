@@ -43,6 +43,9 @@ const expense = createSlice({
                 state.expenseItemDeletedSuccess = true;
             }
         },
+        addExpenseToDb: (state, action) => {
+            state.apiResponse = action.payload;
+        },
         setReload: (state, action) => {
             state.reload = action.payload.reload;
         },
@@ -57,6 +60,7 @@ export const {
     addExpenseItemToDb,
     setAuthError,
     setDeleteExpenseItem,
+    addExpenseToDb,
     setReload
 } = expense.actions;
 
@@ -81,4 +85,11 @@ export const deleteExpenseItemFromDb = (id) => apiCallBegan({
     url: `/expense-items/${id}`,
     method: 'delete',
     onSuccess: setDeleteExpenseItem.type,
+});
+
+export const saveExpenseToDb = (data) => apiCallBegan({
+    url: '/expenses',
+    data,
+    method: 'post',
+    onSuccess: addExpenseToDb.type,
 });
