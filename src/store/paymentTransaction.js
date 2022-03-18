@@ -65,28 +65,28 @@ export const {
 
 export default payment.reducer;
 
-// Add new payment to db
-export const savepaymentToDB = (data) =>
+// Add new payment transaction to db
+export const savePaymentToDB = (data) =>
     apiCallBegan({
-        url: "/orders",
+        url: "/transactions",
         data,
         method: "post",
         onSuccess: addPaymentToDB.type,
     });
 
-// Load payments form Database
+// Load transactions form Database
 export const loadPayments = () =>
     apiCallBegan({
-        url: "/orders",
+        url: "/transactions",
         onStart: paymentRequested.type,
         onSuccess: paymentReceived.type,
         onFailed: paymentRequestedFailed.type,
     });
 
-// Delete payment from db
+// Delete transaction from db
 export const deletePayment = (id) =>
     apiCallBegan({
-        url: `/orders/${id}`,
+        url: `/transactions/${id}`,
         method: "delete",
         onSuccess: setDeletePayment.type,
     });
