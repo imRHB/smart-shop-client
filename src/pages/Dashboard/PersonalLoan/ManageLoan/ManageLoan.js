@@ -1,6 +1,5 @@
 import React from "react";
 import Box from "@mui/material/Box";
-
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,11 +10,11 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import { Button, Container } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import users from "../../../../assets/data/users.json";
 import styles from "./ManageLoan.module.css";
-
+import { Delete } from "@mui/icons-material";
+import HowToRegSharpIcon from '@mui/icons-material/HowToRegSharp';
 function Row(props) {
   const { employee } = props;
 
@@ -25,12 +24,19 @@ function Row(props) {
         className={`${styles.tableHover}`}
         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       >
-        <TableCell align="center">{employee.name}</TableCell>
         <TableCell align="center">15 - 2 - 2022</TableCell>
-        <TableCell align="center">{2000}</TableCell>
-        <TableCell align="center">{1500}</TableCell>
+        <TableCell align="center">{employee.name}</TableCell>
+        <TableCell align="center">{employee.phone}</TableCell>
+        <TableCell align="center">{employee.address}</TableCell>
+        <TableCell align="center">{500000}</TableCell>
+        <TableCell align="center">{100000}</TableCell>
+        <TableCell align="center"><img style={{ width: "70px", height: "70px" }} className="img-fluid" src={employee.img} alt="employee" /></TableCell>
+        <TableCell align="center">Home Loan</TableCell>
         <TableCell align="center">
-          <EditIcon className={`${styles.editIcon}`} />
+          <HowToRegSharpIcon className={`${styles.approveIcon}`} />
+          <Delete
+            className={`${styles.deleteIcon}`}
+          />
         </TableCell>
       </TableRow>
     </React.Fragment>
@@ -83,16 +89,28 @@ const ManageLoan = () => {
             <TableHead className={`${styles.tableHeader}`}>
               <TableRow>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Name
-                </TableCell>
-                <TableCell align="center" className={`${styles.tableCell}`}>
                   Date
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Debit
+                  Name
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Credit
+                  Phone
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Address
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Amount
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Installment/Year
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Documents
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Reasons
                 </TableCell>
 
                 <TableCell align="center" className={`${styles.tableCell}`}>
@@ -109,17 +127,17 @@ const ManageLoan = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <Typography className="mt-3">
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 15]}
-            component="div"
-            count={users.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Typography>
+
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 15]}
+          component="div"
+          count={users.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+
       </Box>
     </Container>
   );
