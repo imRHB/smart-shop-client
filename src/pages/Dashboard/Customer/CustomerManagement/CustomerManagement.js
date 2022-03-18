@@ -29,7 +29,12 @@ import { css } from "@emotion/react";
 import FadeLoader from "react-spinners/FadeLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { deleteCustomerToDB, loadCustomers } from "../../../../store/customer";
+import {
+  deleteCustomerToDB,
+  loadCustomers,
+  setEditCustomer,
+  updateCustomerToDB,
+} from "../../../../store/customer";
 
 const override = css`
   display: block;
@@ -40,6 +45,7 @@ const override = css`
 function Row(props) {
   const dispatch = useDispatch();
   const { customer, serial, reload, setReload } = props;
+  const [open, setOpen] = React.useState(false);
   //   const customerDeleted = useSelector(
   //     (state) => state.entities.customer.customerDeletedSuccess
   //   );
@@ -63,9 +69,12 @@ function Row(props) {
       }
     });
   };
-  const [open, setOpen] = React.useState(false);
 
-  // React Hook Form
+  const editCustomer = useSelector(
+    (state) => state.entities.customer.editCustomer
+  );
+
+  // React Hook Form for Edit customer information
   const {
     register,
     handleSubmit,
@@ -78,42 +87,23 @@ function Row(props) {
   const handleNoBtn = () => setShow(false);
 
   const onSubmit = (data) => {
-    let {
-      name,
-      designation,
-      phone,
-      salary,
-      bloodGroup,
-      country,
-      city,
-      zip,
-      address,
-      image,
-    } = data;
+    let { name, email, city, zip, address } = data;
     const formData = new FormData();
 
-    // formData.append("_id", editEmployee._id);
+    formData.append("_id", editCustomer._id);
     formData.append("name", name);
-    formData.append("designation", designation);
-    formData.append("phone", phone);
-    formData.append("salary", salary);
-    formData.append("bloodGroup", bloodGroup);
-    formData.append("country", country);
+    formData.append("email", email);
     formData.append("city", city);
     formData.append("zip", zip);
     formData.append("address", address);
-    if (image) {
-      formData.append("image", image[0]);
-    }
 
-    console.log(formData);
     // Send updated data to the server
-    // dispatch(updateEmployeeToDB(formData));
+    dispatch(updateCustomerToDB(formData));
     setReload(!reload);
   };
 
   const handleEditCustomer = (id) => {
-    // dispatch(setEditCustomer({ _id: id }));
+    dispatch(setEditCustomer({ _id: id }));
     return setShow(true);
   };
 
@@ -203,15 +193,10 @@ function Row(props) {
               Update Customer Information
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body
-          // style={{
-          //   maxHeight: "calc(100vh - 210px)",
-          //   overflowY: "auto",
-          // }}
-          >
+          <Modal.Body>
             {/* form */}
             <form className="pt-3" onSubmit={handleSubmit(onSubmit)}>
-              <div className="row gx-3 mb-1">
+              <div className="row gx-3 mb-2">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                   <div className="p-2 border rounded bg-light">
                     <div className="mb-2">
@@ -226,7 +211,7 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="First Name"
-                        // defaultValue={editEmployee?.name}
+                        defaultValue={editCustomer?.name}
                         style={{ background: "#E5E5E5" }}
                         {...register("name", { required: true })}
                       />
@@ -251,7 +236,7 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="Email"
-                        // defaultValue={editEmployee?.phone}
+                        defaultValue={editCustomer?.email}
                         style={{ background: "#E5E5E5" }}
                         {...register("email", { required: true })}
                       />
@@ -263,28 +248,7 @@ function Row(props) {
                 </div>
               </div>
 
-              <div className="row gx-3 mb-3">
-                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-2 border rounded bg-light">
-                    <div className="mb-2">
-                      <label
-                        className="form-label"
-                        style={{ fontWeight: "bold" }}
-                      >
-                        Type
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Type"
-                        readOnly
-                        // defaultValue={editEmployee?.phone}
-                        style={{ background: "#E5E5E5" }}
-                        {...register("type", { required: true })}
-                      />
-                    </div>
-                  </div>
-                </div>
+              <div className="row gx-3 mb-2">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                   <div className="p-2 border bg-light">
                     <div className="mb-2">
@@ -298,16 +262,13 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="City"
-                        // defaultValue={editEmployee?.city}
+                        defaultValue={editCustomer?.city}
                         style={{ background: "#E5E5E5" }}
                         {...register("city", { required: false })}
                       />
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                   <div className="p-2 border rounded bg-light">
                     <div className="mb-2">
@@ -321,14 +282,17 @@ function Row(props) {
                         type="text"
                         className="form-control"
                         placeholder="Zip"
-                        // defaultValue={editEmployee?.zip}
+                        defaultValue={editCustomer?.zip}
                         style={{ background: "#E5E5E5" }}
                         {...register("zip", { required: false })}
                       />
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+              </div>
+
+              <div className="row gx-3 mb-2">
+                <div className="col-lg-12 col-md-12 col-sm-12 col-12">
                   <div className="p-2 border rounded bg-light">
                     <div className="mb-2">
                       <label
@@ -339,9 +303,9 @@ function Row(props) {
                       </label>
                       <textarea
                         className="form-control"
-                        rows="1"
+                        rows="2"
                         placeholder="Address"
-                        // defaultValue={editEmployee?.address}
+                        defaultValue={editCustomer?.address}
                         style={{ background: "#E5E5E5" }}
                         {...register("address", { required: false })}
                       ></textarea>
