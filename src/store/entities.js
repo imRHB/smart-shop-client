@@ -17,4 +17,5 @@ export default combineReducers({
   products: productReducer,
   category: categoryReducer,
   expenses: expenseReducer,
+  loans: loansReducer,
 });
