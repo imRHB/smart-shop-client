@@ -24,6 +24,7 @@ import Swal from "sweetalert2";
 import { css } from "@emotion/react";
 import FadeLoader from "react-spinners/FadeLoader";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { deleteCustomerToDB, loadCustomers } from "../../../store/customer";
 
 const override = css`
@@ -171,15 +172,24 @@ const CustomerManagement = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>Manager</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Manage Customer</span>
+          <span style={{ fontSize: "26px", marginLeft: "-25px" }}>
+            Customer
+          </span>{" "}
+          <br /> <span style={{ color: "#969494" }}>Manage Customer</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.addEmployeeBtn}`}>Add Customer</Button>
+        <NavLink
+          to={`/dashboard/add-customer`}
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.addEmployeeBtn}`}>Add Customer</Button>
+        </NavLink>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Manage Customer</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+          Manage Customer
+        </Typography>
         <hr />
         <TableContainer
           component={Paper}
