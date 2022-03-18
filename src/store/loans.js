@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 import { apiCallBegan } from "./api";
 
 let initialState = {
     allLoan: [],
     loanLoading: false,
     reload: false,
-    editLoan: {},
     loanAdded: false,
     loanDeletedSuccess: false,
     error: "",
@@ -46,10 +46,9 @@ const loan = createSlice({
                 state.loanDeletedSuccess = true;
             }
         },
-        setEditLoan: (state, action) => {
-            state.editLoan = state.allLoans.find(
-                (loan) => loan._id === action.payload._id
-            );
+        setUpdateLoan: (state, action) => {
+            if (action.payload.modifiedCount)
+                Swal.fire("Congratulations!", "Loan Approved Successfully!", "success");
         },
         setReload: (state, action) => {
             state.reload = action.payload.reload;
@@ -65,7 +64,7 @@ export const {
     addLoanToDB,
     setAuthError,
     setDeleteLoan,
-    setEditLoan,
+    setUpdateLoan,
     setReload,
 } = loan.actions;
 
@@ -74,7 +73,7 @@ export default loan.reducer;
 // Add new loan to db
 export const saveloanToDB = (data) =>
     apiCallBegan({
-        url: "/orders",
+        url: "/loans",
         data,
         method: "post",
         onSuccess: addLoanToDB.type,
@@ -83,7 +82,7 @@ export const saveloanToDB = (data) =>
 // Load loans form Database
 export const loadLoans = () =>
     apiCallBegan({
-        url: "/orders",
+        url: "/loans",
         onStart: loanRequested.type,
         onSuccess: loanReceived.type,
         onFailed: loanRequestedFailed.type,
@@ -92,8 +91,16 @@ export const loadLoans = () =>
 // Delete loan from db
 export const deleteLoan = (id) =>
     apiCallBegan({
-        url: `/orders/${id}`,
+        url: `/loans/${id}`,
         method: "delete",
         onSuccess: setDeleteLoan.type,
     });
 
+// Update loan status to DB
+export const updateLoanToDB = (data) =>
+    apiCallBegan({
+        url: "/loans",
+        data,
+        method: "put",
+        onSuccess: setUpdateLoan.type,
+    });
