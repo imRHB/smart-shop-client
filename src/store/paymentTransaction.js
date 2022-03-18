@@ -35,7 +35,7 @@ const payment = createSlice({
         setAuthError: (state, action) => {
             state.error = action.payload.error;
         },
-        // Delete a payment
+        // Delete a payment transaction
         setDeletePayment: (state, action) => {
             if (action.payload.deletedCount > 0) {
                 const index = state.allPayment.findIndex(
