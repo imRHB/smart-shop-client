@@ -1,5 +1,5 @@
 import { Box, Button, Container, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
@@ -7,7 +7,6 @@ import MenuItem from "@mui/material/MenuItem";
 import styles from "./Payment.module.css";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
-import SendIcon from "@mui/icons-material/Send";
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -16,6 +15,10 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { savePaymentToDB } from "../../../../store/paymentTransaction";
 import Swal from "sweetalert2";
+import Stack from "@mui/material/Stack";
+import Autocomplete from "@mui/material/Autocomplete";
+import { loadCustomers } from "../../../../store/customer";
+import { loadEmployees } from "../../../../store/employee";
 
 
 const Payment = () => {
@@ -38,6 +41,27 @@ const Payment = () => {
   //   setBank(event.target.value);
   // };
 
+  // Load customers from Database
+  useEffect(() => {
+    dispatch(loadCustomers());
+  }, [dispatch]);
+
+  // Getting all customer from store
+  const allCustomer = useSelector(
+    (state) => state.entities.customer.allCustomer
+  );
+
+  // Getting employees from store
+  const employees = useSelector(
+    (state) => state.entities.employee.allEmployees
+  );
+
+  // Load Employees from Database
+  useEffect(() => {
+    dispatch(loadEmployees());
+  }, [dispatch]);
+
+
   const onSubmit = (data) => {
     //Send payment to Server
     dispatch(savePaymentToDB(data));
@@ -47,7 +71,12 @@ const Payment = () => {
       icon: "success",
       title: "Payment Successful!!",
       showConfirmButton: true,
-    });
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/payment-invoice";
+        }
+      });
     reset();
   };
 
@@ -226,7 +255,7 @@ const Payment = () => {
                   />
                 </Box>
 
-                <Box className={`${styles.inputContainer}`}>
+                {/* <Box className={`${styles.inputContainer}`}>
                   <Typography className={`${styles.inputTitle}`} variant="f6">
                     Select Name
                     <span style={{ color: "#f44336" }}>*</span>
@@ -235,11 +264,43 @@ const Payment = () => {
                   <TextField
                     id="outlined-basic"
                     size="small"
+                    sx={{ pb: 1 }}
                     className={`${styles.inputFields}`}
                     label="Name"
                     variant="outlined"
                     {...register("name", { required: true })}
                   />
+                </Box> */}
+
+                <Box className={`${styles.inputContainer} ${"pb-4"}`}>
+                  <Typography className={`${styles.inputTitle}`} variant="f6">
+                    Select Name
+                    <span style={{ color: "#f44336" }}>*</span>
+                  </Typography>
+
+                  <Stack spacing={2}>
+                    <Autocomplete
+                      {...register("name", { required: true })}
+
+                      freeSolo
+                      id="free-solo-demo"
+                      size="small"
+                      className={`${styles.inputFields}`}
+                      options={
+                        category === "customer" ?
+                          allCustomer.map((customer) => customer?.name)
+                          :
+                          employees.map((employee) => employee?.name)
+                      }
+                      renderInput={(params) => (
+                        <TextField
+                          {...register("name", { required: true })}
+                          {...params}
+                          label="Name"
+                        />
+                      )}
+                    />
+                  </Stack>
                 </Box>
 
 
@@ -253,6 +314,7 @@ const Payment = () => {
                     id="outlined-basic"
                     size="small"
                     className={`${styles.inputFields}`}
+                    sx={{ pb: 1 }}
                     label="Payment Amount"
                     variant="outlined"
                     {...register("amount", { required: true })}
@@ -262,8 +324,7 @@ const Payment = () => {
                   <Button
                     type="submit"
                     className={`${styles.paymentBtn}`}
-                    sx={{ my: 2, width: "50%", fontWeight: "bold" }}
-                    endIcon={<SendIcon />}
+                    sx={{ my: 2, width: "100%", fontWeight: "bold" }}
                   >
                     Submit
                   </Button>

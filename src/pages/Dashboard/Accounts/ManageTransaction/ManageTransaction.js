@@ -67,7 +67,9 @@ function Row(props) {
                 <TableCell align="center">BDT {transaction.amount}</TableCell>
                 <TableCell align="center">BDT 0.00</TableCell>
                 <TableCell align="center">
-                    <PreviewIcon className={`${styles.editIcon}`} />
+                    <NavLink to={`/payment-invoice/${transaction._id}`}>
+                        <PreviewIcon className={`${styles.editIcon}`} />
+                    </NavLink>
                     <Delete className={`${styles.deleteIcon}`}
                         onClick={() => handleDeleteTransaction(transaction?._id)}
                     />
