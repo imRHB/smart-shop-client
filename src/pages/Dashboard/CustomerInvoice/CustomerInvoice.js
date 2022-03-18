@@ -5,7 +5,7 @@ import { Button, Table } from 'react-bootstrap';
 import logo from '../../../assets/images/logo2.png'
 import styles from "./CustomerInvoice.module.css";
 import { savePDF } from "@progress/kendo-react-pdf";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const CustomerInvoice = () => {
     const [orders, setOrders] = React.useState([]);
@@ -18,28 +18,28 @@ const CustomerInvoice = () => {
             })
     }, [id]);
 
-    // let total = 0;
-    // orderss.forEach(item => {
-    //     total = total + item.salePrice * 5
-    // });
+
     const pdfExportComponent = useRef(null);
     const handleExportWithComponent = () => {
         savePDF(pdfExportComponent.current, { paperSize: "A4" })
     }
     return (
 
-        <Container >
-            <Button sx={{ mt: 5 }} onClick={handleExportWithComponent} className={`${styles.btn}`} >Download</Button>
+        <Container sx={{ mt: 2 }} >
 
+            <Box sx={{ mt: 5 }}>
+                <Button onClick={handleExportWithComponent} className={`${styles.btn}`} >Download</Button>
+                <Link to="/dashboard/add-new-invoice" style={{ textDecoration: 'none' }}>    <Button className={`${styles.btn}`} >New POS</Button></Link>
+            </Box>
             <Box ref={pdfExportComponent} sx={{ bgcolor: "white", position: "relative" }} className={`${styles.containerBorder}`}>
-                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ p: 5 }}>
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ p: 2 }}>
                     <Grid item xs={12} sx={{ textAlign: "left" }}>
                         <Box >
-                            <Typography sx={{ textAlign: "left", fontWeight: "bold", mb: 3, fontStyle: 'italic' }} variant="h3">Invoice</Typography>
+                            <Typography sx={{ textAlign: "left", fontWeight: "bold", fontStyle: 'italic' }} variant="h4">Invoice</Typography>
 
                         </Box>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} >
                         <Box >
                             <Typography sx={{ textAlign: "left" }} >Bill TO: {orders.name}</Typography>
 
@@ -50,7 +50,7 @@ const CustomerInvoice = () => {
                     </Grid>
                     <Grid item xs={6} >
                         <Box sx={{ ml: "auto" }}>
-                            <Typography sx={{ textAlign: "right " }}>Invoice ID:{orders._id} </Typography>
+                            <Typography sx={{ textAlign: "right " }}>Invoice ID:#fss{Math.floor(Math.random() * 1000) + 1} </Typography>
                             <Typography sx={{ textAlign: "right" }}>Invoice Date: {orders.date}</Typography>
                         </Box>
                     </Grid>
@@ -69,7 +69,7 @@ const CustomerInvoice = () => {
                                 <TableHead className={`${styles.tableHeader}`}>
                                     <TableRow hover>
                                         <TableCell className={`${styles.tableCell}`} align="center">SL.</TableCell>
-                                        <TableCell className={`${styles.tableCell}`} align="center">orders Name</TableCell>
+                                        <TableCell className={`${styles.tableCell}`} align="center">Product Name</TableCell>
                                         <TableCell className={`${styles.tableCell}`} align="center">Unit Price</TableCell>
 
                                         <TableCell className={`${styles.tableCell}`} align="center">Quantity </TableCell>
@@ -83,7 +83,7 @@ const CustomerInvoice = () => {
                                     <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }} className={`${styles.tableHover}`}>
 
                                         <TableCell align="center" component="th" scope="row">
-                                            {orders._id}              </TableCell>
+                                            1            </TableCell>
                                         <TableCell align="center">{orders.product}</TableCell>
                                         <TableCell align="center">BDT {orders.price}</TableCell>
                                         <TableCell align="center">{orders.quantity}</TableCell>
@@ -108,8 +108,8 @@ const CustomerInvoice = () => {
                     </Box>
                 </Container>
                 <Typography sx={{ color: "#e0e0e0", position: "absolute", right: "10px", bottom: "-35px" }}>An exciting place for the whole family to shop</Typography>
-
             </Box >
+
         </Container >
     );
 };

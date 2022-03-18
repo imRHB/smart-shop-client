@@ -1,6 +1,7 @@
 .containerBorder{
     border-top: 50px solid #003366;
     border-bottom: 50px solid #003366;
+    height: 90vh;
 }
 .tableHeader {
     background-color: #001e3c;
@@ -17,7 +18,7 @@
     padding-left: 15px !important;
     padding-right: 15px !important;
     margin-right: 5px !important;
-    margin-top: 50px !important;
+
 
   }
   
