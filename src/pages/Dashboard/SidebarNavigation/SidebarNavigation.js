@@ -135,7 +135,7 @@ const SidebarNavigation = () => {
             <AccordionDetails sx={{ background: "#012C56 !important" }}>
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/pos`}
+                to={`/dashboard/add-new-invoice`}
               >
                 <Button
                   sx={{
@@ -695,7 +695,7 @@ const SidebarNavigation = () => {
               </NavLink> */}
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/manage-transition`}
+                to={`/dashboard/manage-transaction`}
               >
                 <Button
                   sx={{
@@ -706,7 +706,7 @@ const SidebarNavigation = () => {
                   }}
                 >
                   <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
-                  Transition
+                  Transaction
                 </Button>
               </NavLink>
               {/* <NavLink

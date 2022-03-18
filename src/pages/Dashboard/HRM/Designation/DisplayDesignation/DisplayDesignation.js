@@ -101,7 +101,7 @@ const DisplayDesignation = ({ newReload }) => {
   // Load all designations from Database
   useEffect(() => {
     dispatch(loadDesignations());
-  }, [newReload, dispatch]);
+  }, [newReload]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
