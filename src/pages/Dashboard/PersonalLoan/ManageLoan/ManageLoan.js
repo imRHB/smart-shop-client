@@ -15,9 +15,30 @@ import users from "../../../../assets/data/users.json";
 import styles from "./ManageLoan.module.css";
 import { Delete } from "@mui/icons-material";
 import HowToRegSharpIcon from '@mui/icons-material/HowToRegSharp';
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { deleteLoan, setReload } from "../../../../store/loans";
+import { Link } from "react-router-dom";
 function Row(props) {
   const { employee } = props;
-
+  const dispatch = useDispatch();
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteLoan(id));
+        Swal.fire("Deleted!", "Employee has been deleted.", "success");
+        // setReload(!reload);
+      }
+    });
+  };
   return (
     <React.Fragment>
       <TableRow
@@ -35,6 +56,7 @@ function Row(props) {
         <TableCell align="center">
           <HowToRegSharpIcon className={`${styles.approveIcon}`} />
           <Delete
+            onClick={() => handleDelete(employee?._id)}
             className={`${styles.deleteIcon}`}
           />
         </TableCell>
@@ -71,9 +93,10 @@ const ManageLoan = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.addPersonBtn}`}>Add Person</Button>
-        <Button className={`${styles.managePerson}`}>Manage Person</Button>
-        <Button className={`${styles.addLoanBtn}`}>Add Loan</Button>
+        <Link to='/dashboard/add-personal-loan' style={{ textDecoration: "none" }}>
+          <Button className={`${styles.addLoanBtn}`}>Add Loan</Button>
+        </Link>
+
         <Button className={`${styles.addPaymentBtn}`}>Add Payment</Button>
       </Box>
       <Box className={`${styles.tableContainer}`}>
