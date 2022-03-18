@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,15 +12,45 @@ import TablePagination from "@mui/material/TablePagination";
 import { Button, Container } from "@mui/material";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import transactions from "../../../../assets/data/transaction.json";
 import styles from "./ManageTransaction.module.css";
 import MenuIcon from '@mui/icons-material/Menu';
 import PreviewIcon from '@mui/icons-material/Preview';
 import { NavLink } from 'react-router-dom';
+import Swal from "sweetalert2";
+import { css } from "@emotion/react";
+import FadeLoader from "react-spinners/FadeLoader";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTransaction, loadPayments } from "../../../../store/paymentTransaction";
 
+const override = css`
+  display: block;
+  border-color: red;
+  margin: 0 auto;
+`;
 
 function Row(props) {
-    const { transaction } = props;
+    const { transaction, reload, setReload } = props;
+    const dispatch = useDispatch();
+
+    //delete transaction
+    const handleDeleteTransaction = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteTransaction(id));
+                Swal.fire("Deleted!", "Transaction has been deleted.", "success");
+                // Set reload
+                setReload(!reload);
+            }
+        });
+    };
 
     return (
         <React.Fragment>
@@ -45,8 +75,24 @@ function Row(props) {
 }
 
 const ManageTransaction = () => {
+    const dispatch = useDispatch();
+    const [reload, setReload] = React.useState(false);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    //  get all transactions from store
+    const transactions = useSelector(
+        (state) => state.entities.payment.allPayment
+    );
+
+    const transactionLoader = useSelector(
+        (state) => state.entities.payment.paymentLoading
+    );
+
+    // Load transactions from Database
+    useEffect(() => {
+        dispatch(loadPayments());
+    }, [dispatch, reload]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -107,11 +153,41 @@ const ManageTransaction = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {transactions
+                            {/* {transactions
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((transaction) => (
                                     <Row key={transaction._id} transaction={transaction} />
-                                ))}
+                                ))} */}
+
+
+
+                            {transactionLoader && (
+                                <TableRow>
+                                    <TableCell align="center" colSpan={8}>
+                                        <FadeLoader
+                                            color={"#123abc"}
+                                            loading={transactionLoader}
+                                            css={override}
+                                            height={10}
+                                            width={5}
+                                            radius={2}
+                                            margin={2}
+                                        />
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                            {transactions.length > 0 &&
+                                transactions
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((invoice, index) => (
+                                        <Row
+                                            key={invoice._id}
+                                            invoice={invoice}
+                                            serial={index}
+                                            reload={reload}
+                                            setReload={setReload}
+                                        />
+                                    ))}
                         </TableBody>
                     </Table>
                 </TableContainer>

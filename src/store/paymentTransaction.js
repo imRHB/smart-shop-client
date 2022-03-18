@@ -84,7 +84,7 @@ export const loadPayments = () =>
     });
 
 // Delete transaction from db
-export const deletePayment = (id) =>
+export const deleteTransaction = (id) =>
     apiCallBegan({
         url: `/transactions/${id}`,
         method: "delete",

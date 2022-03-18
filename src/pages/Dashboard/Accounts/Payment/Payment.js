@@ -22,7 +22,7 @@ const Payment = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [mode, setMode] = React.useState('');
   const [category, setCategory] = React.useState('');
-  const [bank, setBank] = React.useState('');
+  // const [bank, setBank] = React.useState('');
   const dispatch = useDispatch();
 
 
@@ -34,12 +34,12 @@ const Payment = () => {
     setMode(event.target.value);
   };
 
-  const handleBankChange = (event) => {
-    setBank(event.target.value);
-  };
+  // const handleBankChange = (event) => {
+  //   setBank(event.target.value);
+  // };
 
   const onSubmit = (data) => {
-    //Send form data to Server
+    //Send payment to Server
     dispatch(savePaymentToDB(data));
 
     Swal.fire({
@@ -149,9 +149,7 @@ const Payment = () => {
                       onChange={handleModeChange}
                     >
                       <MenuItem value="cash">Cash</MenuItem>
-                      <MenuItem value="cheque">Cheque</MenuItem>
                       <MenuItem value="card">Card</MenuItem>
-                      <MenuItem value="payOrder">Pay Order</MenuItem>
                     </Select>
                   </FormControl>
                 </Box>
@@ -162,7 +160,7 @@ const Payment = () => {
                   </Box>
                 }
 
-                {
+                {/* {
                   (mode === "cheque" || mode === "payOrder") &&
 
                   <Box>
@@ -209,7 +207,7 @@ const Payment = () => {
                       </FormControl>
                     </Box>
                   </Box>
-                }
+                } */}
 
               </Grid>
               <Grid item md={8} sm={16} sx={16}>
@@ -230,7 +228,7 @@ const Payment = () => {
 
                 <Box className={`${styles.inputContainer}`}>
                   <Typography className={`${styles.inputTitle}`} variant="f6">
-                    Select Option Name
+                    Select Name
                     <span style={{ color: "#f44336" }}>*</span>
                   </Typography>
 
@@ -238,9 +236,9 @@ const Payment = () => {
                     id="outlined-basic"
                     size="small"
                     className={`${styles.inputFields}`}
-                    label="Supplier Contact No."
+                    label="Name"
                     variant="outlined"
-                    {...register("contact", { required: true })}
+                    {...register("name", { required: true })}
                   />
                 </Box>
 
@@ -262,6 +260,7 @@ const Payment = () => {
                 </Box>
                 <Box sx={{ textAlign: "center" }}>
                   <Button
+                    type="submit"
                     className={`${styles.paymentBtn}`}
                     sx={{ my: 2, width: "50%", fontWeight: "bold" }}
                     endIcon={<SendIcon />}
