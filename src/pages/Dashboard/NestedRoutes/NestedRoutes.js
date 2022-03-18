@@ -75,7 +75,7 @@ const NestedRoutes = () => {
 
         {/*============ Accounts Department All Routes Start ==============*/}
         <Route path="payment" element={<Payment />}></Route>
-        <Route path="manage-transition" element={<ManageTransaction />}></Route>
+        <Route path="manage-transaction" element={<ManageTransaction />}></Route>
         {/*============ Accounts Department All Routes End ==============*/}
 
         {/*============ Stock Department All Routes Start ==============*/}
