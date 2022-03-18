@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import styles from "./UpdateCustomer.module.css";
 import { useDispatch } from "react-redux";
 import { saveCustomerToDB } from "../../../../store/customer";
+import { NavLink } from "react-router-dom";
 
 const UpdateCustomer = () => {
   const dispatch = useDispatch();
@@ -73,19 +74,27 @@ const UpdateCustomer = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>Manage Customer</span> <br />{" "}
-          <span style={{ color: "#969494" }}>
-            <i class="fas fa-address-book    "></i> Customer Information
-          </span>
+          <span style={{ fontSize: "26px", marginLeft: "-47px" }}>
+            Customer
+          </span>{" "}
+          <br /> <span style={{ color: "#969494" }}>Customer Information</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.manageEmployeeBtn}`}>
-          Manage Customer
-        </Button>
+        <NavLink
+          to={`/dashboard/manage-customer`}
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.manageEmployeeBtn}`}>
+            Manage Customer
+          </Button>
+        </NavLink>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Add Customer</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+          {" "}
+          <i class="fas fa-address-book"></i> Add Customer
+        </Typography>
         <hr />
         <div className="mt-2">
           <div className="form-container">
@@ -303,7 +312,7 @@ const UpdateCustomer = () => {
                         </label>
                         <textarea
                           className="form-control"
-                          rows="3"
+                          rows="2"
                           placeholder="Address"
                           style={{ background: "#E5E5E5" }}
                           {...register("address", { required: false })}
