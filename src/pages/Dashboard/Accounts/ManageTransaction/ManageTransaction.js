@@ -62,6 +62,7 @@ function Row(props) {
                     {transaction._id}
                 </TableCell>
                 <TableCell align="center">{transaction.category}</TableCell>
+                <TableCell align="center">{transaction.name}</TableCell>
                 <TableCell align="center">{transaction.date}</TableCell>
                 <TableCell align="center">BDT {transaction.amount}</TableCell>
                 <TableCell align="center">BDT 0.00</TableCell>
@@ -137,6 +138,9 @@ const ManageTransaction = () => {
                                 <TableCell className={`${styles.tableCell}`}>Transaction ID</TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
                                     Transaction Category
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Name
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
                                     Transaction Date
