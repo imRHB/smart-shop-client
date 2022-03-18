@@ -135,7 +135,7 @@ const SidebarNavigation = () => {
             <AccordionDetails sx={{ background: "#012C56 !important" }}>
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
-                to={`/dashboard/pos`}
+                to={`/dashboard/add-new-invoice`}
               >
                 <Button
                   sx={{
