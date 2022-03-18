@@ -12,24 +12,6 @@ import { NavLink } from "react-router-dom";
 
 const UpdateCustomer = () => {
   const dispatch = useDispatch();
-  const categories = [
-    {
-      _id: 1,
-      name: "Gold",
-    },
-    {
-      _id: 2,
-      name: "Silver",
-    },
-    {
-      _id: 3,
-      name: "Platinum",
-    },
-    {
-      _id: 4,
-      name: "Regular",
-    },
-  ];
   const {
     register,
     handleSubmit,
@@ -37,25 +19,15 @@ const UpdateCustomer = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    let {
-      firstName,
-      lastName,
-      category,
-      phone,
-      email,
-      fax,
-      city,
-      zip,
-      address,
-    } = data;
+    let { firstName, lastName, phone, email, city, zip, address } = data;
     const name = `${firstName} ${lastName}`;
+    const category = "Regular";
 
     const customerData = {
       name,
       category,
       phone,
       email,
-      fax,
       city,
       zip,
       address,
@@ -161,25 +133,19 @@ const UpdateCustomer = () => {
                           className="form-label"
                           style={{ fontWeight: "bold" }}
                         >
-                          Type <sup className="text-danger fw-bold fs-6">*</sup>
+                          Email{" "}
+                          <sup className="text-danger fw-bold fs-6">*</sup>
                         </label>
-
-                        <select
-                          className="form-select"
-                          aria-label="Default select example"
+                        <input
+                          type="email"
+                          className="form-control"
+                          placeholder="Email"
                           style={{ background: "#E5E5E5" }}
-                          {...register("category", { required: true })}
-                        >
-                          <option>-- select one --</option>
-                          {categories.map((category) => (
-                            <option key={category._id} value={category?.name}>
-                              {category?.name}
-                            </option>
-                          ))}
-                        </select>
-                        {errors.category && (
+                          {...register("email", { required: true })}
+                        />
+                        {errors.email && (
                           <span className="text-danger">
-                            Please select a type
+                            Please enter email.
                           </span>
                         )}
                       </div>
@@ -207,53 +173,6 @@ const UpdateCustomer = () => {
                             Please enter phone number.
                           </span>
                         )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row gx-3 mb-3">
-                  <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div className="p-3 border bg-light">
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          Email{" "}
-                          <sup className="text-danger fw-bold fs-6">*</sup>
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          placeholder="Email"
-                          style={{ background: "#E5E5E5" }}
-                          {...register("email", { required: true })}
-                        />
-                        {errors.email && (
-                          <span className="text-danger">
-                            Please enter email.
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div className="p-3 border bg-light">
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          Fax
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Fax"
-                          style={{ background: "#E5E5E5" }}
-                          {...register("fax", { required: false })}
-                        />
                       </div>
                     </div>
                   </div>
