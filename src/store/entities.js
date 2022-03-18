@@ -7,6 +7,7 @@ import invoiceReducer from "./invoice";
 import productReducer from "./products";
 import categoryReducer from './category';
 import expenseReducer from './expenses';
+import paymentTransactionReducer from "./paymentTransaction";
 
 export default combineReducers({
   employee: employeeReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   products: productReducer,
   category: categoryReducer,
   expenses: expenseReducer,
+  payment: paymentTransactionReducer,
 });

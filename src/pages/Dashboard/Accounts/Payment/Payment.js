@@ -1,5 +1,5 @@
 import { Box, Button, Container, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
@@ -7,37 +7,77 @@ import MenuItem from "@mui/material/MenuItem";
 import styles from "./Payment.module.css";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
-import SendIcon from "@mui/icons-material/Send";
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import StripePayment from "../../PaymentGateway/Stripe/StripePayment/StripePayment";
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { savePaymentToDB } from "../../../../store/paymentTransaction";
+import Swal from "sweetalert2";
+import Stack from "@mui/material/Stack";
+import Autocomplete from "@mui/material/Autocomplete";
+import { loadCustomers } from "../../../../store/customer";
+import { loadEmployees } from "../../../../store/employee";
+
 
 const Payment = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
-
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const [mode, setMode] = React.useState('');
   const [category, setCategory] = React.useState('');
+  // const [bank, setBank] = React.useState('');
+  const dispatch = useDispatch();
+
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
 
-  const [mode, setMode] = React.useState('');
-
   const handleModeChange = (event) => {
     setMode(event.target.value);
   };
 
-  const [bank, setBank] = React.useState('');
+  // const handleBankChange = (event) => {
+  //   setBank(event.target.value);
+  // };
 
-  const handleBankChange = (event) => {
-    setBank(event.target.value);
+  // Load customers from Database
+  useEffect(() => {
+    dispatch(loadCustomers());
+  }, [dispatch]);
+
+  // Getting all customer from store
+  const allCustomer = useSelector(
+    (state) => state.entities.customer.allCustomer
+  );
+
+  // Getting employees from store
+  const employees = useSelector(
+    (state) => state.entities.employee.allEmployees
+  );
+
+  // Load Employees from Database
+  useEffect(() => {
+    dispatch(loadEmployees());
+  }, [dispatch]);
+
+
+  const onSubmit = (data) => {
+    //Send payment to Server
+    dispatch(savePaymentToDB(data));
+
+    Swal.fire({
+      position: "top",
+      icon: "success",
+      title: "Payment Successful!!",
+      showConfirmButton: true,
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/payment-invoice";
+        }
+      });
+    reset();
   };
 
 
@@ -67,7 +107,9 @@ const Payment = () => {
         <hr />
         <Box>
 
-          <form className={`${styles.paymentForm} ${"shadow"}`}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className={`${styles.paymentForm} ${"shadow"}`}>
             <Grid
               container
               spacing={4}
@@ -136,9 +178,7 @@ const Payment = () => {
                       onChange={handleModeChange}
                     >
                       <MenuItem value="cash">Cash</MenuItem>
-                      <MenuItem value="cheque">Cheque</MenuItem>
                       <MenuItem value="card">Card</MenuItem>
-                      <MenuItem value="payOrder">Pay Order</MenuItem>
                     </Select>
                   </FormControl>
                 </Box>
@@ -147,10 +187,9 @@ const Payment = () => {
                   <Box className={`${styles.cardPay}`} >
                     <StripePayment />
                   </Box>
-
                 }
 
-                {
+                {/* {
                   (mode === "cheque" || mode === "payOrder") &&
 
                   <Box>
@@ -197,7 +236,7 @@ const Payment = () => {
                       </FormControl>
                     </Box>
                   </Box>
-                }
+                } */}
 
               </Grid>
               <Grid item md={8} sm={16} sx={16}>
@@ -216,20 +255,52 @@ const Payment = () => {
                   />
                 </Box>
 
-                <Box className={`${styles.inputContainer}`}>
+                {/* <Box className={`${styles.inputContainer}`}>
                   <Typography className={`${styles.inputTitle}`} variant="f6">
-                    Select Option Name
+                    Select Name
                     <span style={{ color: "#f44336" }}>*</span>
                   </Typography>
 
                   <TextField
                     id="outlined-basic"
                     size="small"
+                    sx={{ pb: 1 }}
                     className={`${styles.inputFields}`}
-                    label="Supplier Contact No."
+                    label="Name"
                     variant="outlined"
-                    {...register("contact", { required: true })}
+                    {...register("name", { required: true })}
                   />
+                </Box> */}
+
+                <Box className={`${styles.inputContainer} ${"pb-4"}`}>
+                  <Typography className={`${styles.inputTitle}`} variant="f6">
+                    Select Name
+                    <span style={{ color: "#f44336" }}>*</span>
+                  </Typography>
+
+                  <Stack spacing={2}>
+                    <Autocomplete
+                      {...register("name", { required: true })}
+
+                      freeSolo
+                      id="free-solo-demo"
+                      size="small"
+                      className={`${styles.inputFields}`}
+                      options={
+                        category === "customer" ?
+                          allCustomer.map((customer) => customer?.name)
+                          :
+                          employees.map((employee) => employee?.name)
+                      }
+                      renderInput={(params) => (
+                        <TextField
+                          {...register("name", { required: true })}
+                          {...params}
+                          label="Name"
+                        />
+                      )}
+                    />
+                  </Stack>
                 </Box>
 
 
@@ -243,6 +314,7 @@ const Payment = () => {
                     id="outlined-basic"
                     size="small"
                     className={`${styles.inputFields}`}
+                    sx={{ pb: 1 }}
                     label="Payment Amount"
                     variant="outlined"
                     {...register("amount", { required: true })}
@@ -250,9 +322,9 @@ const Payment = () => {
                 </Box>
                 <Box sx={{ textAlign: "center" }}>
                   <Button
+                    type="submit"
                     className={`${styles.paymentBtn}`}
-                    sx={{ my: 2, width: "50%", fontWeight: "bold" }}
-                    endIcon={<SendIcon />}
+                    sx={{ my: 2, width: "100%", fontWeight: "bold" }}
                   >
                     Submit
                   </Button>
