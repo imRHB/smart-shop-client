@@ -2,6 +2,20 @@
     margin-left: 15px;
 }
 
+.eventsNotification{
+    color: white;
+    text-decoration: none;
+}
+
+.eventsNotification:hover{
+   color: black;
+}
+
+.eventsDropdown{
+   padding: 0;
+   margin: 0;
+}
+
 .usersDPDropdown:hover{
 background-color: #003366;
 cursor: default;

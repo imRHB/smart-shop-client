@@ -43,13 +43,13 @@ const DashboardNavbar = () => {
   });
 
 
-  const [notification, setNotification] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   useEffect(() => {
     fetch("https://smart-shop-pos.herokuapp.com/events")
       .then(res => res.json())
-      .then(data => setNotification(data))
+      .then(data => setNotifications(data))
 
-  }, [notification]);
+  }, [notifications]);
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -75,12 +75,43 @@ const DashboardNavbar = () => {
           {" "}
           <AddIcon sx={{ color: "#0d6efd" }}> </AddIcon>
         </NavLink>
-        <Badge color="error" badgeContent={notification.length} max={10}>
+
+        <Badge color="error" badgeContent={notifications.length} max={5}>
           <NotificationsNoneIcon
             sx={{ color: "#0d6efd" }}
             className={`${styles.usersProfileDropdown}`}
           />
         </Badge>
+        {/* <div>
+          <NavDropdown
+            title={
+              <Badge color="error" badgeContent={notifications.length} max={5}>
+                <NotificationsNoneIcon
+                  sx={{ color: "#0d6efd" }}
+                  className={`${styles.usersProfileDropdown}`}
+                />
+              </Badge>
+            }
+            className={`${styles.usersProfileDropdown}`}
+          >
+            <div className={`${styles.alldropdownItems}`}>
+              {
+                notifications.map(notification =>
+                  <NavDropdown.Item className={`${styles.eventsDropdown}`}>
+                    <NavLink className={`${styles.eventsNotification}`} to="/dashboard/events">
+                      <h6>{notification?.title}</h6>
+                      <p style={{ fontSize: "10px" }}>  {notification.start}</p>
+                      <hr />
+                    </NavLink>
+                  </NavDropdown.Item>
+                )
+              }
+              <NavDropdown.Item className={`${styles.eventsNotification}`}>
+                see all events
+              </NavDropdown.Item>
+            </div>
+          </NavDropdown>
+        </div> */}
 
         <div>
           <NavDropdown
