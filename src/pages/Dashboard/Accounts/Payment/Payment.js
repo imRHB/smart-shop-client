@@ -13,31 +13,42 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import StripePayment from "../../PaymentGateway/Stripe/StripePayment/StripePayment";
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { savePaymentToDB } from "../../../../store/paymentTransaction";
+import Swal from "sweetalert2";
+
 
 const Payment = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
-
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const [mode, setMode] = React.useState('');
   const [category, setCategory] = React.useState('');
+  const [bank, setBank] = React.useState('');
+  const dispatch = useDispatch();
+
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
 
-  const [mode, setMode] = React.useState('');
-
   const handleModeChange = (event) => {
     setMode(event.target.value);
   };
 
-  const [bank, setBank] = React.useState('');
-
   const handleBankChange = (event) => {
     setBank(event.target.value);
+  };
+
+  const onSubmit = (data) => {
+    //Send form data to Server
+    dispatch(savePaymentToDB(data));
+
+    Swal.fire({
+      position: "top",
+      icon: "success",
+      title: "Payment Successful!!",
+      showConfirmButton: true,
+    });
+    reset();
   };
 
 
@@ -67,7 +78,9 @@ const Payment = () => {
         <hr />
         <Box>
 
-          <form className={`${styles.paymentForm} ${"shadow"}`}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className={`${styles.paymentForm} ${"shadow"}`}>
             <Grid
               container
               spacing={4}
@@ -147,7 +160,6 @@ const Payment = () => {
                   <Box className={`${styles.cardPay}`} >
                     <StripePayment />
                   </Box>
-
                 }
 
                 {
