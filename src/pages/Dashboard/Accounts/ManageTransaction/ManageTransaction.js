@@ -67,7 +67,9 @@ function Row(props) {
                 <TableCell align="center">BDT 0.00</TableCell>
                 <TableCell align="center">
                     <PreviewIcon className={`${styles.editIcon}`} />
-                    <Delete className={`${styles.deleteIcon}`} />
+                    <Delete className={`${styles.deleteIcon}`}
+                        onClick={() => handleDeleteTransaction(transaction?._id)}
+                    />
                 </TableCell>
             </TableRow>
         </React.Fragment>
