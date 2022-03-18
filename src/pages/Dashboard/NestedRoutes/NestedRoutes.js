@@ -5,10 +5,9 @@ import Payment from "../Accounts/Payment/Payment";
 import AddExpense from "../AddExpense/AddExpense";
 import AddSupplier from "../AddSupplier/AddSupplier";
 import AddProduct from "../AddProduct/AddProduct";
-import CrudTest from "../CrudTest/CrudTest";
-import CustomerManagement from "../CustomerManagement/CustomerManagement";
-import CustomerStatus from "../CustomerManagement/CustomerStatus/CustomerStatus";
-import UpdateCustomer from "../CustomerManagement/UpdateCustomer/UpdateCustomer";
+import CustomerManagement from "../Customer/CustomerManagement/CustomerManagement";
+import CustomerStatus from "../Customer/CustomerStatus/CustomerStatus";
+import AddCustomer from "../Customer/AddCustomer/AddCustomer";
 import Dashboard from "../Dashboard/Dashboard";
 import ExpenseItem from "../Expense/ExpenseItem";
 import AddEmployee from "../HRM/AddEmployee/AddEmployee";
@@ -64,7 +63,7 @@ const NestedRoutes = () => {
         {/*============ Product Department All Routes End ==============*/}
 
         {/*============ Customer Department All Routes Start ==============*/}
-        <Route path="add-customer" element={<UpdateCustomer />}></Route>
+        <Route path="add-customer" element={<AddCustomer />}></Route>
         <Route path="manage-customer" element={<CustomerManagement />}></Route>
         <Route path="credit-customer" element={<CustomerStatus />}></Route>
         {/*============ Customer Department All Routes End ==============*/}

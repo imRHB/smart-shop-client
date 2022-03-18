@@ -29,7 +29,7 @@ import { css } from "@emotion/react";
 import FadeLoader from "react-spinners/FadeLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { deleteCustomerToDB, loadCustomers } from "../../../store/customer";
+import { deleteCustomerToDB, loadCustomers } from "../../../../store/customer";
 
 const override = css`
   display: block;

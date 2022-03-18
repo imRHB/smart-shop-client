@@ -5,12 +5,12 @@ import { Button, Container } from "@mui/material";
 import { useForm } from "react-hook-form";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
-import styles from "./UpdateCustomer.module.css";
+import styles from "./AddCustomer.module.css";
 import { useDispatch } from "react-redux";
 import { saveCustomerToDB } from "../../../../store/customer";
 import { NavLink } from "react-router-dom";
 
-const UpdateCustomer = () => {
+const AddCustomer = () => {
   const dispatch = useDispatch();
   const {
     register,
@@ -270,4 +270,4 @@ const UpdateCustomer = () => {
   );
 };
 
-export default UpdateCustomer;
+export default AddCustomer;
