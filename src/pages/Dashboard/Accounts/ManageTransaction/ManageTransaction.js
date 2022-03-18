@@ -179,10 +179,10 @@ const ManageTransaction = () => {
                             {transactions.length > 0 &&
                                 transactions
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((invoice, index) => (
+                                    .map((transaction, index) => (
                                         <Row
-                                            key={invoice._id}
-                                            invoice={invoice}
+                                            key={transaction._id}
+                                            transaction={transaction}
                                             serial={index}
                                             reload={reload}
                                             setReload={setReload}
