@@ -192,7 +192,7 @@ function Row(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         onHide={handleClose}
-        style={{ marginTop: "50px" }}
+        style={{ marginTop: "42px" }}
       >
         <div
           className="shadow rounded"
@@ -200,18 +200,18 @@ function Row(props) {
         >
           <Modal.Header closeButton>
             <Modal.Title style={{ color: "white" }}>
-              Update Customer
+              Update Customer Information
             </Modal.Title>
           </Modal.Header>
           <Modal.Body
-            style={{
-              maxHeight: "calc(100vh - 210px)",
-              overflowY: "auto",
-            }}
+          // style={{
+          //   maxHeight: "calc(100vh - 210px)",
+          //   overflowY: "auto",
+          // }}
           >
             {/* form */}
-            <form className="pt-3 pb-3" onSubmit={handleSubmit(onSubmit)}>
-              <div className="row gx-3 mb-3">
+            <form className="pt-3" onSubmit={handleSubmit(onSubmit)}>
+              <div className="row gx-3 mb-1">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                   <div className="p-2 border rounded bg-light">
                     <div className="mb-2">
@@ -271,52 +271,20 @@ function Row(props) {
                         className="form-label"
                         style={{ fontWeight: "bold" }}
                       >
-                        Type <sup className="text-danger fw-bold fs-6">*</sup>
-                      </label>
-
-                      <select
-                        className="form-select"
-                        aria-label="Default select example"
-                        style={{ background: "#E5E5E5" }}
-                        {...register("type", { required: true })}
-                      >
-                        <option>-- select one --</option>
-                        <option value="Gold">Gold</option>
-                        <option value="Silver">Silver</option>
-                        <option value="Platinum">Platinum</option>
-                        <option value="Regular">Regular</option>
-                      </select>
-                      {errors.designation && (
-                        <span className="text-danger">
-                          Please select a designation
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div className="p-2 border rounded bg-light">
-                    <div className="mb-2">
-                      <label
-                        className="form-label"
-                        style={{ fontWeight: "bold" }}
-                      >
-                        Fax
+                        Type
                       </label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Fax"
-                        // defaultValue={editEmployee?.salary}
+                        placeholder="Type"
+                        readOnly
+                        // defaultValue={editEmployee?.phone}
                         style={{ background: "#E5E5E5" }}
-                        {...register("fax", { required: false })}
+                        {...register("type", { required: true })}
                       />
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                   <div className="p-2 border bg-light">
                     <div className="mb-2">
@@ -337,6 +305,9 @@ function Row(props) {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                   <div className="p-2 border rounded bg-light">
                     <div className="mb-2">
@@ -357,10 +328,7 @@ function Row(props) {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="row gx-3 mb-3">
-                <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                   <div className="p-2 border rounded bg-light">
                     <div className="mb-2">
                       <label
@@ -371,7 +339,7 @@ function Row(props) {
                       </label>
                       <textarea
                         className="form-control"
-                        rows="2"
+                        rows="1"
                         placeholder="Address"
                         // defaultValue={editEmployee?.address}
                         style={{ background: "#E5E5E5" }}
