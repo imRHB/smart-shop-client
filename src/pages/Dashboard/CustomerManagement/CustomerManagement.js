@@ -18,6 +18,10 @@ import { Button, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import { Modal } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import UpgradeIcon from "@mui/icons-material/Upgrade";
+import CloseIcon from "@mui/icons-material/Close";
 import styles from "./CustomerManagement.module.css";
 // import users from "../../../assets/data/users.json";
 import Swal from "sweetalert2";
@@ -61,6 +65,58 @@ function Row(props) {
   };
   const [open, setOpen] = React.useState(false);
 
+  // React Hook Form
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleNoBtn = () => setShow(false);
+
+  const onSubmit = (data) => {
+    let {
+      name,
+      designation,
+      phone,
+      salary,
+      bloodGroup,
+      country,
+      city,
+      zip,
+      address,
+      image,
+    } = data;
+    const formData = new FormData();
+
+    // formData.append("_id", editEmployee._id);
+    formData.append("name", name);
+    formData.append("designation", designation);
+    formData.append("phone", phone);
+    formData.append("salary", salary);
+    formData.append("bloodGroup", bloodGroup);
+    formData.append("country", country);
+    formData.append("city", city);
+    formData.append("zip", zip);
+    formData.append("address", address);
+    if (image) {
+      formData.append("image", image[0]);
+    }
+
+    console.log(formData);
+    // Send updated data to the server
+    // dispatch(updateEmployeeToDB(formData));
+    setReload(!reload);
+  };
+
+  const handleEditCustomer = (id) => {
+    // dispatch(setEditCustomer({ _id: id }));
+    return setShow(true);
+  };
+
   return (
     <React.Fragment>
       <TableRow
@@ -84,7 +140,12 @@ function Row(props) {
         <TableCell align="center">{customer?.phone}</TableCell>
         <TableCell align="center">{customer?.email}</TableCell>
         <TableCell align="center">
-          <EditIcon className={`${styles.editIcon}`} />
+          <EditIcon
+            onClick={() => {
+              return handleEditCustomer(customer._id);
+            }}
+            className={`${styles.editIcon}`}
+          />
           <Delete
             onClick={() => handleDeleteCustomer(customer?._id)}
             className={`${styles.deleteIcon}`}
@@ -123,6 +184,226 @@ function Row(props) {
           </Collapse>
         </TableCell>
       </TableRow>
+
+      {/*Modal for Edit Customer Information  */}
+
+      <Modal
+        show={show}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        onHide={handleClose}
+        style={{ marginTop: "50px" }}
+      >
+        <div
+          className="shadow rounded"
+          style={{ background: "linear-gradient(to right, #1e3c72, #2a5298)" }}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title style={{ color: "white" }}>
+              Update Customer
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body
+            style={{
+              maxHeight: "calc(100vh - 210px)",
+              overflowY: "auto",
+            }}
+          >
+            {/* form */}
+            <form className="pt-3 pb-3" onSubmit={handleSubmit(onSubmit)}>
+              <div className="row gx-3 mb-3">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Full Name{" "}
+                        <sup className="text-danger fw-bold fs-6">*</sup>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="First Name"
+                        // defaultValue={editEmployee?.name}
+                        style={{ background: "#E5E5E5" }}
+                        {...register("name", { required: true })}
+                      />
+                      {errors.name && (
+                        <span className="text-danger">
+                          Please enter full name.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Email <sup className="text-danger fw-bold fs-6">*</sup>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Email"
+                        // defaultValue={editEmployee?.phone}
+                        style={{ background: "#E5E5E5" }}
+                        {...register("email", { required: true })}
+                      />
+                      {errors.phone && (
+                        <span className="text-danger">Please enter email.</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Type <sup className="text-danger fw-bold fs-6">*</sup>
+                      </label>
+
+                      <select
+                        className="form-select"
+                        aria-label="Default select example"
+                        style={{ background: "#E5E5E5" }}
+                        {...register("type", { required: true })}
+                      >
+                        <option>-- select one --</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Platinum">Platinum</option>
+                        <option value="Regular">Regular</option>
+                      </select>
+                      {errors.designation && (
+                        <span className="text-danger">
+                          Please select a designation
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Fax
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Fax"
+                        // defaultValue={editEmployee?.salary}
+                        style={{ background: "#E5E5E5" }}
+                        {...register("fax", { required: false })}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-2 border bg-light">
+                    <div className="mb-2">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        City
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="City"
+                        // defaultValue={editEmployee?.city}
+                        style={{ background: "#E5E5E5" }}
+                        {...register("city", { required: false })}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Zip
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Zip"
+                        // defaultValue={editEmployee?.zip}
+                        style={{ background: "#E5E5E5" }}
+                        {...register("zip", { required: false })}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row gx-3 mb-3">
+                <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Address
+                      </label>
+                      <textarea
+                        className="form-control"
+                        rows="2"
+                        placeholder="Address"
+                        // defaultValue={editEmployee?.address}
+                        style={{ background: "#E5E5E5" }}
+                        {...register("address", { required: false })}
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <Modal.Footer className="mt-4 pe-0">
+                {/* confirmation button */}
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  className={`${styles.updateBtn}`}
+                  endIcon={<UpgradeIcon />}
+                >
+                  Update
+                </Button>
+                <Button
+                  className={`${styles.receiptBtn}`}
+                  endIcon={<CloseIcon />}
+                  onClick={handleNoBtn}
+                >
+                  Cancel
+                </Button>
+              </Modal.Footer>
+            </form>
+          </Modal.Body>
+        </div>
+      </Modal>
     </React.Fragment>
   );
 }
