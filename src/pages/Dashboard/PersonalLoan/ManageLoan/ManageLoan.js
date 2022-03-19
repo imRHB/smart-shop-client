@@ -15,6 +15,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import users from "../../../../assets/data/users.json";
 import styles from "./ManageLoan.module.css";
+import { NavLink } from "react-router-dom";
 
 function Row(props) {
   const { employee } = props;
@@ -65,10 +66,18 @@ const ManageLoan = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.addPersonBtn}`}>Add Person</Button>
-        <Button className={`${styles.managePerson}`}>Manage Person</Button>
-        <Button className={`${styles.addLoanBtn}`}>Add Loan</Button>
-        <Button className={`${styles.addPaymentBtn}`}>Add Payment</Button>
+        {/* <NavLink
+          to="/dashboard/add-personal-loan"
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.addLoanBtn}`}>Add Loan</Button>
+        </NavLink> */}
+        <NavLink
+          to="/dashboard/add-payment"
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.addPaymentBtn}`}>Add Payment</Button>
+        </NavLink>
       </Box>
       <Box className={`${styles.tableContainer}`}>
         <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>

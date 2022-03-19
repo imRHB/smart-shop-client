@@ -95,7 +95,7 @@ const Payment = () => {
       </Box>
 
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <NavLink to="/dashboard/manage-transition" style={{ textDecoration: "none" }}>
+        <NavLink to="/dashboard/manage-transaction" style={{ textDecoration: "none" }}>
           <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
             Manage Transaction
           </Button>

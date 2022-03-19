@@ -221,7 +221,7 @@ const SidebarNavigation = () => {
                   Category
                 </Button>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-unit`}
               >
@@ -236,7 +236,7 @@ const SidebarNavigation = () => {
                   <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
                   Unit
                 </Button>
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/purchase-product`}
@@ -249,7 +249,7 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
+                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
                   Purchase Product
                 </Button>
               </NavLink>
@@ -265,7 +265,7 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter4Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
+                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
                   Product
                 </Button>
               </NavLink>
@@ -281,7 +281,7 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter5Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
+                  <Filter4Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
                   Product
                 </Button>
               </NavLink>
@@ -357,7 +357,7 @@ const SidebarNavigation = () => {
                   Customer
                 </Button>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/credit-customer`}
               >
@@ -372,7 +372,7 @@ const SidebarNavigation = () => {
                   <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} />{" "}
                   Customer Status
                 </Button>
-              </NavLink>
+              </NavLink> */}
               {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/paid-customer`}
@@ -1240,7 +1240,7 @@ const SidebarNavigation = () => {
           {/*======= Expense Nav Menu End ======*/}
 
           {/*======= Office Loan Nav Menu Start ======*/}
-          <Accordion
+          {/* <Accordion
             TransitionProps={{ unmountOnExit: true }}
             sx={{
               background: "#003366 !important",
@@ -1308,7 +1308,7 @@ const SidebarNavigation = () => {
                 </Button>
               </NavLink>
             </AccordionDetails>
-          </Accordion>
+          </Accordion> */}
           {/*======= Office Loan Nav Menu End ======*/}
 
           {/*======= Personal Loan Nav Menu Start ======*/}
@@ -1347,7 +1347,7 @@ const SidebarNavigation = () => {
               </Button>
             </AccordionSummary>
             <AccordionDetails sx={{ background: "#012C56 !important" }}>
-              <NavLink
+              {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-person`}
               >
@@ -1362,8 +1362,8 @@ const SidebarNavigation = () => {
                   <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
                   Person
                 </Button>
-              </NavLink>
-              <NavLink
+              </NavLink> */}
+              {/* <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/manage-person`}
               >
@@ -1378,7 +1378,7 @@ const SidebarNavigation = () => {
                   <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
                   Person
                 </Button>
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 style={{ textDecoration: "none", marginTop: "0 !important" }}
                 to={`/dashboard/add-personal-loan`}
@@ -1391,7 +1391,7 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
+                  <Filter1Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
                   Loan
                 </Button>
               </NavLink>
@@ -1407,7 +1407,7 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter4Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
+                  <Filter2Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Manage
                   Loan
                 </Button>
               </NavLink>
@@ -1423,7 +1423,7 @@ const SidebarNavigation = () => {
                     fontSize: "12px",
                   }}
                 >
-                  <Filter5Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
+                  <Filter3Icon sx={{ mr: 1, ml: 1, color: "yellow" }} /> Add
                   Payment
                 </Button>
               </NavLink>

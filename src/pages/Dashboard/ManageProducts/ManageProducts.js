@@ -9,6 +9,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Delete from "@mui/icons-material/Delete";
 import styles from './ManageProducts.module.css';
 import { loadProducts, deleteProductFromDb, setReload } from '../../../store/products';
+import { NavLink } from "react-router-dom";
 
 function Row(props) {
     const { product, serial, reload } = props;
@@ -185,7 +186,12 @@ const ManageProducts = () => {
             </Box>
 
             <Box sx={{ textAlign: "right", my: 2 }}>
-                <Button className={`${styles.addProductBtn}`}>Add Product</Button>
+                <NavLink
+                    to="/dashboard/add-product"
+                    style={{ textDecoration: "none" }}
+                >
+                    <Button className={`${styles.addProductBtn}`}>Add Product</Button>
+                </NavLink>
             </Box>
             <Box className={`${styles.tableContainer}`}>
                 <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>

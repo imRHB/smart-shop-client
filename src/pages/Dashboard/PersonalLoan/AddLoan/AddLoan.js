@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
 import styles from "./AddLoan.module.css";
+import { NavLink } from "react-router-dom";
 
 const AddLoan = () => {
   const categories = [
@@ -56,8 +57,18 @@ const AddLoan = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.designationBtn}`}>Add Person</Button>
-        <Button className={`${styles.manageEmployeeBtn}`}>Add Payment</Button>
+        {/* <NavLink
+          to="/dashboard/manage-personal-loan"
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.designationBtn}`}>Manage Loan</Button>
+        </NavLink>
+        <NavLink
+          to="/dashboard/add-payment"
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.manageEmployeeBtn}`}>Add Payment</Button>
+        </NavLink> */}
       </Box>
       <Box className={`${styles.tableContainer}`}>
         <Typography sx={{ fontWeight: "bold" }}>Add Loan</Typography>

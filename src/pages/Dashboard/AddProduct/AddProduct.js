@@ -4,6 +4,7 @@ import { Autocomplete, Box, Button, Container, Stack, TextField, Typography } fr
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import styles from './AddProduct.module.css';
 import useProducts from "../../../hooks/useProducts";
+import { NavLink } from "react-router-dom";
 
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -37,7 +38,12 @@ const AddProduct = () => {
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "right", my: 2 }}>
-                <Button className={`${styles.manageProductBtn}`}>Manage Products</Button>
+                <NavLink
+                    to="/dashboard/manage-product"
+                    style={{ textDecoration: "none" }}
+                >
+                    <Button className={`${styles.manageProductBtn}`}>Manage Products</Button>
+                </NavLink>
             </Box>
             <Box className={`${styles.tableContainer}`}>
                 <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
