@@ -217,7 +217,7 @@ const AddInvoice = () => {
                           ml: 2,
                         }}
                       >
-                        Customer Name <span>*</span>
+                        Customer Name
                       </Typography>
 
                       <TextField
@@ -226,7 +226,7 @@ const AddInvoice = () => {
                         sx={{ backgroundColor: "#f1f3f6", ml: 2 }}
                         label="Customer Name"
                         variant="outlined"
-                        {...register("name", { required: true })}
+                        {...register("name")}
                       />
                     </Box>
                     <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
@@ -420,7 +420,7 @@ const AddInvoice = () => {
                           <input
                             type="number"
                             placeholder="Available Qn."
-                            {...register("ctn", { required: true })}
+                            {...register("ctn")}
                             className={`${styles.tableCellInput}`}
                           />
                         </TableCell>
@@ -433,7 +433,7 @@ const AddInvoice = () => {
                           }}
                         >
                           <input
-                            {...register("quantity", { required: true })}
+                            {...register("quantity")}
                             onChange={(e) => setQuantity(e.target.value)}
                             type="number"
                             placeholder="0"
@@ -462,7 +462,7 @@ const AddInvoice = () => {
                                 padding: "4px",
                                 backgroundColor: "#f1f3f6",
                               }}
-                              {...register("unit", { required: true })}
+                              {...register("unit")}
                               value={unit}
                               onChange={handleUnitChange}
                             >
@@ -481,7 +481,7 @@ const AddInvoice = () => {
                           }}
                         >
                           <input
-                            {...register("price", { required: true })}
+                            {...register("price")}
                             type="number"
                             placeholder="Price"
                             defaultValue={productNames?.sellPrice}
@@ -579,7 +579,7 @@ const AddInvoice = () => {
                       }}
                     >
                       <input
-                        {...register("grandTotal", { required: true })}
+                        {...register("grandTotal")}
                         type="number"
                         value={grandTotal}
                         placeholder="0"
@@ -621,7 +621,7 @@ const AddInvoice = () => {
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     >
                       <input
-                        {...register("paidAmount", { required: true })}
+                        {...register("paidAmount")}
                         type="number"
                         onChange={(e) => setPaidAmount(e.target.value)}
                         placeholder="0.00"
@@ -664,7 +664,7 @@ const AddInvoice = () => {
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     >
                       <input
-                        {...register("changeAmount", { required: true })}
+                        {...register("changeAmount")}
                         type="number"
                         placeholder="0"
                         value={paidAmount - grandTotal}
