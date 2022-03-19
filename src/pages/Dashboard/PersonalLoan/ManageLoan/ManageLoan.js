@@ -17,10 +17,10 @@ import { Delete } from "@mui/icons-material";
 import HowToRegSharpIcon from '@mui/icons-material/HowToRegSharp';
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { deleteLoan, setReload } from "../../../../store/loans";
+import { deleteLoan, setEditLoan, updateLoanToDB } from "../../../../store/loans";
 import { Link } from "react-router-dom";
 function Row(props) {
-  const { employee } = props;
+  const { employee, reload, setReload } = props;
   const dispatch = useDispatch();
   const handleDelete = (id) => {
     Swal.fire({
@@ -35,9 +35,15 @@ function Row(props) {
       if (result.isConfirmed) {
         dispatch(deleteLoan(id));
         Swal.fire("Deleted!", "Employee has been deleted.", "success");
-        // setReload(!reload);
+        setReload(!reload);
       }
     });
+  };
+  const handleLoanStatus = (id) => {
+    dispatch(setEditLoan({ _id: id }));
+    const updateStatus = { status: "approved" };
+    dispatch(updateLoanToDB(updateStatus));
+    setReload(!reload)
   };
   return (
     <React.Fragment>
@@ -54,7 +60,9 @@ function Row(props) {
         <TableCell align="center"><img style={{ width: "70px", height: "70px" }} className="img-fluid" src={employee.img} alt="employee" /></TableCell>
         <TableCell align="center">Home Loan</TableCell>
         <TableCell align="center">
-          <HowToRegSharpIcon className={`${styles.approveIcon}`} />
+          <HowToRegSharpIcon onClick={() => {
+            return handleLoanStatus(employee._id);
+          }} className={`${styles.approveIcon}`} />
           <Delete
             onClick={() => handleDelete(employee?._id)}
             className={`${styles.deleteIcon}`}
@@ -65,6 +73,7 @@ function Row(props) {
   );
 }
 const ManageLoan = () => {
+  const [reload, setReload] = React.useState(false);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -145,7 +154,7 @@ const ManageLoan = () => {
               {users
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((employee) => (
-                  <Row key={employee._id} employee={employee} />
+                  <Row key={employee._id} employee={employee} setReload={setReload} reload={reload} />
                 ))}
             </TableBody>
           </Table>

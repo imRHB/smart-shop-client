@@ -7,6 +7,7 @@ let initialState = {
     loanLoading: false,
     reload: false,
     loanAdded: false,
+    editLoan: {},
     loanDeletedSuccess: false,
     error: "",
     apiResponse: {},
@@ -46,6 +47,11 @@ const loan = createSlice({
                 state.loanDeletedSuccess = true;
             }
         },
+        setEditLoan: (state, action) => {
+            state.editLoan = state.allLoan.find(
+                (loan) => loan._id === action.payload._id
+            );
+        },
         setUpdateLoan: (state, action) => {
             if (action.payload.modifiedCount)
                 Swal.fire("Congratulations!", "Loan Approved Successfully!", "success");
@@ -65,6 +71,7 @@ export const {
     setAuthError,
     setDeleteLoan,
     setUpdateLoan,
+    setEditLoan,
     setReload,
 } = loan.actions;
 
