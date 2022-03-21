@@ -216,35 +216,35 @@ const PurchaseProduct = () => {
                       textAlign: "center",
                     }}
                   >
-                    Item Information<span>*</span>
+                    Product Information<span>*</span>
                   </TableCell>
                   <TableCell
                     align="center"
                     sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     className={`${styles.tableCell}`}
                   >
-                    Available Ctn.
+                    Prod. ID
                   </TableCell>
                   <TableCell
                     align="center"
                     sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     className={`${styles.tableCell}`}
                   >
-                    Carton
+                    Total Ctn.<span>*</span>
                   </TableCell>
                   <TableCell
                     align="center"
                     sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     className={`${styles.tableCell}`}
                   >
-                    Item
+                    Each Ctn.<span>*</span>
                   </TableCell>
                   <TableCell
                     align="center"
                     sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     className={`${styles.tableCell}`}
                   >
-                    Quantity
+                    Total Qnty<span>*</span>
                   </TableCell>
                   <TableCell
                     align="center"
@@ -286,7 +286,7 @@ const PurchaseProduct = () => {
                         <input
                           type="text"
                           placeholder="Product Name"
-                          {...register("product", { required: true })}
+                          {...register("p_name", { required: true })}
                           style={{
                             padding: "8px",
                             backgroundColor: "#f1f3f6",
@@ -304,8 +304,28 @@ const PurchaseProduct = () => {
                       >
                         <input
                           type="text"
-                          placeholder="Available Ctn."
-                          {...register("ctn", { required: true })}
+                          placeholder="Prod ID"
+                          {...register("p_id", { required: true })}
+                          style={{
+                            width: "70px",
+                            padding: "8px",
+                            backgroundColor: "#f1f3f6",
+                            border: "1px solid #aeaeae",
+                          }}
+                        />
+                      </TableCell>
+
+                      <TableCell
+                        align="center"
+                        sx={{
+                          borderRight: "1px solid rgba(224, 224, 224, 1)",
+                          p: 1,
+                        }}
+                      >
+                        <input
+                          type="text"
+                          placeholder="Total Ctn."
+                          {...register("t_ctn", { required: true })}
                           style={{
                             width: "70px",
                             padding: "8px",
@@ -325,7 +345,7 @@ const PurchaseProduct = () => {
                         <input
                           type="number"
                           placeholder="0"
-                          {...register("carton", { required: true })}
+                          {...register("ctn", { required: true })}
                           style={{
                             width: "70px",
                             padding: "8px",
@@ -344,7 +364,7 @@ const PurchaseProduct = () => {
                         <input
                           type="text"
                           placeholder="0"
-                          {...register("quantity", { required: true })}
+                          {...register("qnty", { required: true })}
                           style={{
                             width: "70px",
                             padding: "8px",
@@ -363,27 +383,7 @@ const PurchaseProduct = () => {
                       >
                         <input
                           type="text"
-                          placeholder="0"
-                          {...register("item", { required: true })}
-                          style={{
-                            width: "70px",
-                            padding: "8px",
-                            backgroundColor: "#f1f3f6",
-                            border: "1px solid #aeaeae",
-                          }}
-                        />
-                      </TableCell>
-
-                      <TableCell
-                        align="center"
-                        sx={{
-                          borderRight: "1px solid rgba(224, 224, 224, 1)",
-                          p: 1,
-                        }}
-                      >
-                        <input
-                          type="text"
-                          placeholder="Rating"
+                          placeholder="Rate"
                           {...register("rate", { required: true })}
                           style={{
                             width: "70px",
@@ -543,7 +543,7 @@ const PurchaseProduct = () => {
                       className={`${styles.receiptBtn}`}
                       color="success"
                     >
-                      Add New Item
+                      Add New Product
                     </Button>
                   </TableCell>
                   <TableCell />
