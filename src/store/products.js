@@ -92,6 +92,12 @@ export const loadProducts = () =>
         onFailed: productRequestedFailed.type,
     });
 
+export const selectedProduct = (id) =>
+    apiCallBegan({
+        url: `/details/${id}`,
+        onSuccess: setSingleProduct.type,
+    });
+
 export const deleteProductFromDb = (id) => apiCallBegan({
     url: `/products/${id}`,
     method: 'delete',

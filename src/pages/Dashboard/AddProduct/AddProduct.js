@@ -11,7 +11,12 @@ const AddProduct = () => {
 
     const products = useProducts();
 
-    const [selectedProduct, setSelectedProduct] = useState("");
+    const [selectedProduct, setSelectedProduct] = useState({});
+    console.log(selectedProduct);
+
+    const handleProductSelect = (_id) => {
+        console.log(_id);
+    };
 
     const findProduct = products.find(foundedPd => {
         if (foundedPd.name === selectedProduct) {
@@ -65,7 +70,26 @@ const AddProduct = () => {
                                                     Product Name{" "}
                                                     <sup className="text-danger fw-bold fs-6">*</sup>
                                                 </label>
-                                                <Stack spacing={2} sx={{ width: 'auto' }}>
+
+                                                <select
+                                                    className="form-select"
+                                                    aria-label="Default select example"
+                                                    style={{ background: "#E5E5E5" }}
+                                                    {...register("name")}
+                                                >
+                                                    {
+                                                        products.map(product => (
+                                                            <option
+                                                                key={product._id}
+                                                                value={product?.name}
+                                                                onSelect={() => console.log(product)}
+                                                            >
+                                                                {product?.name}
+                                                            </option>
+                                                        ))
+                                                    }
+                                                </select>
+                                                {/* <Stack spacing={2} sx={{ width: 'auto' }}>
                                                     <Autocomplete
                                                         {...register("name", { required: false })}
                                                         style={{ backgroundColor: "#f1f3f6", border: 'none' }}
@@ -78,7 +102,7 @@ const AddProduct = () => {
                                                             onSelectCapture={(e) => setSelectedProduct(e.target.value)}
                                                             {...params} label="Select product" />}
                                                     />
-                                                </Stack>
+                                                </Stack> */}
 
                                                 {/* {errors.name && (
                                                     <span className="text-danger">
