@@ -93,7 +93,7 @@ const AddInvoice = () => {
     dispatch(saveInvoiceToDB(data));
 
     Swal.fire({
-      position: "top",
+      position: "center",
       icon: "success",
       title: "Product Purchased successfully!!",
       showConfirmButton: true,
@@ -127,11 +127,6 @@ const AddInvoice = () => {
             Manage Invoice
           </Button>
         </NavLink>
-        {/* <NavLink to="/dashboard/pos" style={{ textDecoration: "none" }}>
-          <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
-            POS
-          </Button>
-        </NavLink> */}
       </Box>
 
       <Box className={`${styles.invoiceContainer}`}>
@@ -153,18 +148,18 @@ const AddInvoice = () => {
                   <TabList
                     onChange={handleChange}
                     aria-label="lab API tabs example"
-                    sx={{ textAlign: "center" }}
+                    sx={{ textAlign: "center", backgroundColor: "#d2d4fc" }}
                     centered
                   >
                     <Tab
                       label="Old Customer"
                       value="Old Customer"
-                      sx={{ color: "black" }}
+                      sx={{ color: "black", fontWeight: "bold" }}
                     />
                     <Tab
                       label="New Customer"
                       value="New Customer"
-                      sx={{ color: "black" }}
+                      sx={{ color: "black", fontWeight: "bold" }}
                     />
                   </TabList>
                 </Box>
@@ -217,7 +212,7 @@ const AddInvoice = () => {
                           ml: 2,
                         }}
                       >
-                        Customer Name
+                        Customer Name<span>*</span>
                       </Typography>
 
                       <TextField
@@ -418,10 +413,12 @@ const AddInvoice = () => {
                           }}
                         >
                           <input
+                            {...register("availableQuantity", { required: true })}
                             type="number"
                             placeholder="Available Qn."
-                            {...register("ctn")}
                             className={`${styles.tableCellInput}`}
+                            defaultValue={
+                              productNames?.quantity}
                           />
                         </TableCell>
 
@@ -433,7 +430,7 @@ const AddInvoice = () => {
                           }}
                         >
                           <input
-                            {...register("quantity")}
+                            {...register("quantity", { required: true })}
                             onChange={(e) => setQuantity(e.target.value)}
                             type="number"
                             placeholder="0"
@@ -462,7 +459,7 @@ const AddInvoice = () => {
                                 padding: "4px",
                                 backgroundColor: "#f1f3f6",
                               }}
-                              {...register("unit")}
+                              {...register("unit", { required: true })}
                               value={unit}
                               onChange={handleUnitChange}
                             >
@@ -481,7 +478,7 @@ const AddInvoice = () => {
                           }}
                         >
                           <input
-                            {...register("price")}
+                            {...register("price", { required: true })}
                             type="number"
                             placeholder="Price"
                             defaultValue={productNames?.sellPrice}
@@ -579,7 +576,7 @@ const AddInvoice = () => {
                       }}
                     >
                       <input
-                        {...register("grandTotal")}
+                        {...register("grandTotal", { required: true })}
                         type="number"
                         value={grandTotal}
                         placeholder="0"
@@ -621,7 +618,7 @@ const AddInvoice = () => {
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     >
                       <input
-                        {...register("paidAmount")}
+                        {...register("paidAmount", { required: true })}
                         type="number"
                         onChange={(e) => setPaidAmount(e.target.value)}
                         placeholder="0.00"
@@ -664,7 +661,7 @@ const AddInvoice = () => {
                       sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     >
                       <input
-                        {...register("changeAmount")}
+                        {...register("changeAmount", { required: true })}
                         type="number"
                         placeholder="0"
                         value={paidAmount - grandTotal}
