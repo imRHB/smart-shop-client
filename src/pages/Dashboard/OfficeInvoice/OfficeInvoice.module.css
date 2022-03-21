@@ -1,0 +1,24 @@
+.containerBorder{
+    border-top: 50px solid #003366;
+    border-bottom: 50px solid #003366;
+    height: 90vh;
+}
+.tableHeader {
+    background-color: #001e3c;
+    color: white;
+  }
+  .tableCell {
+    color: #fff !important;
+    font-weight: 700 !important;
+  }
+  .btn {
+    background-color: #003366 !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-right: 5px !important;
+
+
+  }
+  
