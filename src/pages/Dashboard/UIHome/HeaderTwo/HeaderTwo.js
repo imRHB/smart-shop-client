@@ -133,7 +133,7 @@ const HeaderTwo = () => {
                 </div>
               )}
               <hr />
-              <h6
+              {/* <h6
                 style={{
                   marginTop: "30px",
                   textAlign: "center",
@@ -145,7 +145,7 @@ const HeaderTwo = () => {
 
               <h6 style={{ textAlign: "center", fontSize: "12px" }}>
                 Last Logout Time: 04:45pm
-              </h6>
+              </h6> */}
             </Col>
             <Col
               md={6}

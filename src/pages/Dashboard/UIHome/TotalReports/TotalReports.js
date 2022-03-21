@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import styles from "./TotalReports.module.css";
@@ -9,14 +9,58 @@ import ShopTwoIcon from "@mui/icons-material/ShopTwo";
 import GroupsIcon from "@mui/icons-material/Groups";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import { useDispatch, useSelector } from "react-redux";
+import { loadCustomers } from "../../../../store/customer";
+import { loadSuppliers } from "../../../../store/supplier";
+import { loadProducts } from '../../../../store/products';
+import { loadInvoices } from "../../../../store/invoice";
+
 
 const TotalReports = () => {
   const [num, setNum] = useState("");
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setNum(e.target.value);
   };
   const formatValue = (num) => num.toFixed();
+
+  // Getting all customer from store
+  const allCustomer = useSelector(
+    (state) => state.entities.customer.allCustomer
+  );
+
+  // Load customers from Database
+  useEffect(() => {
+    dispatch(loadCustomers());
+  }, [dispatch]);
+
+  // Getting all supplier from store
+  const allSuppliers = useSelector(
+    (state) => state.entities.supplier.allSupplier
+  );
+
+  // Load supplier from Database
+  useEffect(() => {
+    dispatch(loadSuppliers());
+  }, [dispatch]);
+
+  const products = useSelector((state) => state.entities.products.allProduct);
+
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, [dispatch]);
+
+
+  //  get all orders from store
+  const invoices = useSelector(
+    (state) => state.entities.invoice.allInvoice
+  );
+
+  // Load orders from Database
+  useEffect(() => {
+    dispatch(loadInvoices());
+  }, [dispatch]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -59,11 +103,11 @@ const TotalReports = () => {
                   <Box className={`${styles.reports}`}>
                     <Box sx={{ color: "rgb(0, 82, 73)" }}>
                       <AnimatedNumber
-                        value="570"
+                        value={allCustomer.length}
                         formatValue={formatValue}
                         onChange={handleChange}
                         className={`${styles.animatedNum}`}
-                        duration="7000"
+                        duration="3000"
                       />
                       <ArrowDropUpIcon
                         sx={{
@@ -121,11 +165,11 @@ const TotalReports = () => {
                   <Box className={`${styles.reports}`}>
                     <Box sx={{ color: "rgb(4, 41, 122)" }}>
                       <AnimatedNumber
-                        value="790"
+                        value={products.length}
                         formatValue={formatValue}
                         onChange={handleChange}
                         className={`${styles.animatedNum}`}
-                        duration="7000"
+                        duration="3000"
                       />
                       <ArrowDropUpIcon
                         sx={{
@@ -181,11 +225,11 @@ const TotalReports = () => {
                   <Box className={`${styles.reports}`}>
                     <Box sx={{ color: "rgb(183, 129, 3)" }}>
                       <AnimatedNumber
-                        value="350"
+                        value={allSuppliers.length}
                         formatValue={formatValue}
                         onChange={handleChange}
                         className={`${styles.animatedNum}`}
-                        duration="7000"
+                        duration="3000"
                       />
                       <ArrowDropUpIcon
                         sx={{
@@ -240,11 +284,11 @@ const TotalReports = () => {
                   <Box className={`${styles.reports}`}>
                     <Box sx={{ color: "rgb(122, 12, 46)" }}>
                       <AnimatedNumber
-                        value="1220"
+                        value={invoices.length}
                         formatValue={formatValue}
                         onChange={handleChange}
                         className={`${styles.animatedNum}`}
-                        duration="7000"
+                        duration="3000"
                       />
                       <ArrowDropUpIcon
                         sx={{
