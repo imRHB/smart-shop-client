@@ -18,7 +18,6 @@ import { Delete } from "@mui/icons-material";
 
 function Row(props) {
   const { employee } = props;
-
   return (
     <React.Fragment>
       <TableRow
