@@ -36,13 +36,7 @@ const loans = createSlice({
         setAuthError: (state, action) => {
             state.error = action.payload.error;
         },
-        setDeleteloans: (state, action) => {
-            if (action.payload.deletedCount > 0) {
-                const index = state.loan.findIndex((loans) => loans._id === action.payload._id);
-                state.loan.splice(index, 1);
-                state.loansDeletedSuccess = true;
-            }
-        },
+
         setReload: (state, action) => {
             state.reload = action.payload.reload;
         },
@@ -56,7 +50,6 @@ export const {
     loansReceived,
     addloansToDb,
     setAuthError,
-    setDeleteloans,
     setReload
 } = loans.actions;
 
@@ -70,15 +63,3 @@ export const saveloansToDb = (data) => apiCallBegan({
     onSuccess: addloansToDb.type,
 });
 
-export const loadloan = () => apiCallBegan({
-    url: '/loans',
-    onStart: loansReuested.type,
-    onSuccess: loansReceived.type,
-    onFailed: loansReuestFailed.type,
-});
-
-export const deleteloansFromDb = (id) => apiCallBegan({
-    url: `/loans/${id}`,
-    method: 'delete',
-    onSuccess: setDeleteloans.type,
-});
