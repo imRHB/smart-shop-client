@@ -5,8 +5,13 @@ import { useForm } from "react-hook-form";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
 import styles from "./AddLoan.module.css";
+import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { saveloansToDb, setReload } from "../../../../store/loans";
 
 const AddLoan = () => {
+  const dispatch = useDispatch();
+  let reload = useSelector((state) => state.entities.loans.reload);
   const categories = [
     {
       _id: 1,
@@ -32,17 +37,23 @@ const AddLoan = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    let { firstName, category, phone, date, amount, details, address } = data;
-    const name = `${firstName}`;
+    /*  let { firstName, category, phone, date, amount, details, address } = data;
+     const name = `${firstName}`;
+ 
+     const formData = new FormData();
+     formData.append("name", name);
+     formData.append("category", category);
+     formData.append("phone", phone);
+     formData.append("date", date);
+     formData.append("amount", amount);
+     formData.append("details", details);
+     formData.append("address", address); */
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("category", category);
-    formData.append("phone", phone);
-    formData.append("date", date);
-    formData.append("amount", amount);
-    formData.append("details", details);
-    formData.append("address", address);
+    dispatch(saveloansToDb(data));
+    dispatch(setReload({ reload: !reload }));
+    Swal.fire("Success", "New loans Added", "success");
+
+    reset();
   };
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
@@ -56,8 +67,18 @@ const AddLoan = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.designationBtn}`}>Add Person</Button>
-        <Button className={`${styles.manageEmployeeBtn}`}>Add Payment</Button>
+        {/* <NavLink
+          to="/dashboard/manage-personal-loan"
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.designationBtn}`}>Manage Loan</Button>
+        </NavLink>
+        <NavLink
+          to="/dashboard/add-payment"
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.manageEmployeeBtn}`}>Add Payment</Button>
+        </NavLink> */}
       </Box>
       <Box className={`${styles.tableContainer}`}>
         <Typography sx={{ fontWeight: "bold" }}>Add Loan</Typography>

@@ -5,30 +5,13 @@ import { Button, Container } from "@mui/material";
 import { useForm } from "react-hook-form";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
-import styles from "./UpdateCustomer.module.css";
+import styles from "./AddCustomer.module.css";
 import { useDispatch } from "react-redux";
 import { saveCustomerToDB } from "../../../../store/customer";
+import { NavLink } from "react-router-dom";
 
-const UpdateCustomer = () => {
+const AddCustomer = () => {
   const dispatch = useDispatch();
-  const categories = [
-    {
-      _id: 1,
-      name: "Gold",
-    },
-    {
-      _id: 2,
-      name: "Silver",
-    },
-    {
-      _id: 3,
-      name: "Platinum",
-    },
-    {
-      _id: 4,
-      name: "Regular",
-    },
-  ];
   const {
     register,
     handleSubmit,
@@ -36,25 +19,15 @@ const UpdateCustomer = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    let {
-      firstName,
-      lastName,
-      category,
-      phone,
-      email,
-      fax,
-      city,
-      zip,
-      address,
-    } = data;
+    let { firstName, lastName, phone, email, city, zip, address } = data;
     const name = `${firstName} ${lastName}`;
+    const category = "Regular";
 
     const customerData = {
       name,
       category,
       phone,
       email,
-      fax,
       city,
       zip,
       address,
@@ -73,19 +46,27 @@ const UpdateCustomer = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>Manage Customer</span> <br />{" "}
-          <span style={{ color: "#969494" }}>
-            <i class="fas fa-address-book    "></i> Customer Information
-          </span>
+          <span style={{ fontSize: "26px", marginLeft: "-47px" }}>
+            Customer
+          </span>{" "}
+          <br /> <span style={{ color: "#969494" }}>Customer Information</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.manageEmployeeBtn}`}>
-          Manage Customer
-        </Button>
+        <NavLink
+          to={`/dashboard/manage-customer`}
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.manageEmployeeBtn}`}>
+            Manage Customer
+          </Button>
+        </NavLink>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Add Customer</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+          {" "}
+          <i class="fas fa-address-book"></i> Add Customer
+        </Typography>
         <hr />
         <div className="mt-2">
           <div className="form-container">
@@ -152,25 +133,19 @@ const UpdateCustomer = () => {
                           className="form-label"
                           style={{ fontWeight: "bold" }}
                         >
-                          Type <sup className="text-danger fw-bold fs-6">*</sup>
+                          Email{" "}
+                          <sup className="text-danger fw-bold fs-6">*</sup>
                         </label>
-
-                        <select
-                          className="form-select"
-                          aria-label="Default select example"
+                        <input
+                          type="email"
+                          className="form-control"
+                          placeholder="Email"
                           style={{ background: "#E5E5E5" }}
-                          {...register("category", { required: true })}
-                        >
-                          <option>-- select one --</option>
-                          {categories.map((category) => (
-                            <option key={category._id} value={category?.name}>
-                              {category?.name}
-                            </option>
-                          ))}
-                        </select>
-                        {errors.category && (
+                          {...register("email", { required: true })}
+                        />
+                        {errors.email && (
                           <span className="text-danger">
-                            Please select a type
+                            Please enter email.
                           </span>
                         )}
                       </div>
@@ -198,53 +173,6 @@ const UpdateCustomer = () => {
                             Please enter phone number.
                           </span>
                         )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row gx-3 mb-3">
-                  <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div className="p-3 border bg-light">
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          Email{" "}
-                          <sup className="text-danger fw-bold fs-6">*</sup>
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          placeholder="Email"
-                          style={{ background: "#E5E5E5" }}
-                          {...register("email", { required: true })}
-                        />
-                        {errors.email && (
-                          <span className="text-danger">
-                            Please enter email.
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div className="p-3 border bg-light">
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          Fax
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Fax"
-                          style={{ background: "#E5E5E5" }}
-                          {...register("fax", { required: false })}
-                        />
                       </div>
                     </div>
                   </div>
@@ -303,7 +231,7 @@ const UpdateCustomer = () => {
                         </label>
                         <textarea
                           className="form-control"
-                          rows="3"
+                          rows="2"
                           placeholder="Address"
                           style={{ background: "#E5E5E5" }}
                           {...register("address", { required: false })}
@@ -342,4 +270,4 @@ const UpdateCustomer = () => {
   );
 };
 
-export default UpdateCustomer;
+export default AddCustomer;

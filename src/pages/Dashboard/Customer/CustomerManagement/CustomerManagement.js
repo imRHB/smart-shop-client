@@ -18,13 +18,23 @@ import { Button, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import { Modal } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import UpgradeIcon from "@mui/icons-material/Upgrade";
+import CloseIcon from "@mui/icons-material/Close";
 import styles from "./CustomerManagement.module.css";
 // import users from "../../../assets/data/users.json";
 import Swal from "sweetalert2";
 import { css } from "@emotion/react";
 import FadeLoader from "react-spinners/FadeLoader";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCustomerToDB, loadCustomers } from "../../../store/customer";
+import { NavLink } from "react-router-dom";
+import {
+  deleteCustomerToDB,
+  loadCustomers,
+  setEditCustomer,
+  updateCustomerToDB,
+} from "../../../../store/customer";
 
 const override = css`
   display: block;
@@ -35,6 +45,7 @@ const override = css`
 function Row(props) {
   const dispatch = useDispatch();
   const { customer, serial, reload, setReload } = props;
+  const [open, setOpen] = React.useState(false);
   //   const customerDeleted = useSelector(
   //     (state) => state.entities.customer.customerDeletedSuccess
   //   );
@@ -58,7 +69,43 @@ function Row(props) {
       }
     });
   };
-  const [open, setOpen] = React.useState(false);
+
+  const editCustomer = useSelector(
+    (state) => state.entities.customer.editCustomer
+  );
+
+  // React Hook Form for Edit customer information
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleNoBtn = () => setShow(false);
+
+  const onSubmit = (data) => {
+    let { name, email, city, zip, address } = data;
+    const formData = new FormData();
+
+    formData.append("_id", editCustomer._id);
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("city", city);
+    formData.append("zip", zip);
+    formData.append("address", address);
+
+    // Send updated data to the server
+    dispatch(updateCustomerToDB(formData));
+    setReload(!reload);
+  };
+
+  const handleEditCustomer = (id) => {
+    dispatch(setEditCustomer({ _id: id }));
+    return setShow(true);
+  };
 
   return (
     <React.Fragment>
@@ -83,7 +130,12 @@ function Row(props) {
         <TableCell align="center">{customer?.phone}</TableCell>
         <TableCell align="center">{customer?.email}</TableCell>
         <TableCell align="center">
-          <EditIcon className={`${styles.editIcon}`} />
+          <EditIcon
+            onClick={() => {
+              return handleEditCustomer(customer._id);
+            }}
+            className={`${styles.editIcon}`}
+          />
           <Delete
             onClick={() => handleDeleteCustomer(customer?._id)}
             className={`${styles.deleteIcon}`}
@@ -122,6 +174,168 @@ function Row(props) {
           </Collapse>
         </TableCell>
       </TableRow>
+
+      {/*Modal for Edit Customer Information  */}
+
+      <Modal
+        show={show}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        onHide={handleClose}
+        style={{ marginTop: "42px" }}
+      >
+        <div
+          className="shadow rounded"
+          style={{ background: "linear-gradient(to right, #1e3c72, #2a5298)" }}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title style={{ color: "white" }}>
+              Update Customer Information
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* form */}
+            <form className="pt-3" onSubmit={handleSubmit(onSubmit)}>
+              <div className="row gx-3 mb-2">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Full Name{" "}
+                        <sup className="text-danger fw-bold fs-6">*</sup>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="First Name"
+                        defaultValue={editCustomer?.name}
+                        style={{ background: "#E5E5E5" }}
+                        {...register("name", { required: true })}
+                      />
+                      {errors.name && (
+                        <span className="text-danger">
+                          Please enter full name.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Email <sup className="text-danger fw-bold fs-6">*</sup>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Email"
+                        defaultValue={editCustomer?.email}
+                        style={{ background: "#E5E5E5" }}
+                        {...register("email", { required: true })}
+                      />
+                      {errors.phone && (
+                        <span className="text-danger">Please enter email.</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row gx-3 mb-2">
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-2 border bg-light">
+                    <div className="mb-2">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        City
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="City"
+                        defaultValue={editCustomer?.city}
+                        style={{ background: "#E5E5E5" }}
+                        {...register("city", { required: false })}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Zip
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Zip"
+                        defaultValue={editCustomer?.zip}
+                        style={{ background: "#E5E5E5" }}
+                        {...register("zip", { required: false })}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row gx-3 mb-2">
+                <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div className="p-2 border rounded bg-light">
+                    <div className="mb-2">
+                      <label
+                        className="form-label"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Address
+                      </label>
+                      <textarea
+                        className="form-control"
+                        rows="2"
+                        placeholder="Address"
+                        defaultValue={editCustomer?.address}
+                        style={{ background: "#E5E5E5" }}
+                        {...register("address", { required: false })}
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <Modal.Footer className="mt-4 pe-0">
+                {/* confirmation button */}
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  className={`${styles.updateBtn}`}
+                  endIcon={<UpgradeIcon />}
+                >
+                  Update
+                </Button>
+                <Button
+                  className={`${styles.receiptBtn}`}
+                  endIcon={<CloseIcon />}
+                  onClick={handleNoBtn}
+                >
+                  Cancel
+                </Button>
+              </Modal.Footer>
+            </form>
+          </Modal.Body>
+        </div>
+      </Modal>
     </React.Fragment>
   );
 }
@@ -171,15 +385,24 @@ const CustomerManagement = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>Manager</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Manage Customer</span>
+          <span style={{ fontSize: "26px", marginLeft: "-25px" }}>
+            Customer
+          </span>{" "}
+          <br /> <span style={{ color: "#969494" }}>Manage Customer</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.addEmployeeBtn}`}>Add Customer</Button>
+        <NavLink
+          to={`/dashboard/add-customer`}
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.addEmployeeBtn}`}>Add Customer</Button>
+        </NavLink>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Manage Customer</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+          Manage Customer
+        </Typography>
         <hr />
         <TableContainer
           component={Paper}

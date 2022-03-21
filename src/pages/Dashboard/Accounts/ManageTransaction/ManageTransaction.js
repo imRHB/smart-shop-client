@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,17 +10,47 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import { Button, Container } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import transactions from "../../../../assets/data/transaction.json";
 import styles from "./ManageTransaction.module.css";
 import MenuIcon from '@mui/icons-material/Menu';
-import ReceiptIcon from '@mui/icons-material/Receipt';
+import PreviewIcon from '@mui/icons-material/Preview';
+import { NavLink } from 'react-router-dom';
+import Swal from "sweetalert2";
+import { css } from "@emotion/react";
+import FadeLoader from "react-spinners/FadeLoader";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTransaction, loadPayments } from "../../../../store/paymentTransaction";
 
+const override = css`
+  display: block;
+  border-color: red;
+  margin: 0 auto;
+`;
 
 function Row(props) {
-    const { transaction } = props;
+    const { transaction, reload, setReload } = props;
+    const dispatch = useDispatch();
+
+    //delete transaction
+    const handleDeleteTransaction = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteTransaction(id));
+                Swal.fire("Deleted!", "Transaction has been deleted.", "success");
+                // Set reload
+                setReload(!reload);
+            }
+        });
+    };
 
     return (
         <React.Fragment>
@@ -28,27 +58,46 @@ function Row(props) {
                 className={`${styles.tableHover}`}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-
                 <TableCell component="th" scope="row">
                     {transaction._id}
                 </TableCell>
+                <TableCell align="center">{transaction.category}</TableCell>
                 <TableCell align="center">{transaction.name}</TableCell>
-                <TableCell align="center">{transaction.account}</TableCell>
-                <TableCell align="center">BDT {transaction.receipt}</TableCell>
-                <TableCell align="center">BDT {transaction.pay}</TableCell>
+                <TableCell align="center">{transaction.date}</TableCell>
+                <TableCell align="center">BDT {transaction.amount}</TableCell>
+                <TableCell align="center">BDT 0.00</TableCell>
                 <TableCell align="center">
-                    <EditIcon className={`${styles.editIcon}`} />
-                    <Delete className={`${styles.deleteIcon}`} />
+                    <NavLink to={`/payment-invoice/${transaction._id}`}>
+                        <PreviewIcon className={`${styles.editIcon}`} />
+                    </NavLink>
+                    <Delete className={`${styles.deleteIcon}`}
+                        onClick={() => handleDeleteTransaction(transaction?._id)}
+                    />
                 </TableCell>
             </TableRow>
-
         </React.Fragment>
     );
 }
 
 const ManageTransaction = () => {
+    const dispatch = useDispatch();
+    const [reload, setReload] = React.useState(false);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    //  get all transactions from store
+    const transactions = useSelector(
+        (state) => state.entities.payment.allPayment
+    );
+
+    const transactionLoader = useSelector(
+        (state) => state.entities.payment.paymentLoading
+    );
+
+    // Load transactions from Database
+    useEffect(() => {
+        dispatch(loadPayments());
+    }, [dispatch, reload]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -71,10 +120,11 @@ const ManageTransaction = () => {
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "right", my: 2 }}>
-                <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>Create Account</Button>
-                <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>Manage Account</Button>
-                <Button className={`${styles.paymentBtn}`} startIcon={<ReceiptIcon />}>Payment</Button>
-                <Button className={`${styles.receiptBtn}`} startIcon={<ReceiptIcon />}>Receipt</Button>
+                <NavLink to="/dashboard/payment" style={{ textDecoration: "none" }}>
+                    <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
+                        Make Payment
+                    </Button>
+                </NavLink>
             </Box>
             <Box className={`${styles.tableContainer}`}>
                 <Typography sx={{ fontWeight: "bold" }}>Manage Transaction</Typography>
@@ -87,18 +137,22 @@ const ManageTransaction = () => {
                         <TableHead className={`${styles.tableHeader}`}>
                             <TableRow>
 
-                                <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
+                                <TableCell className={`${styles.tableCell}`}>Transaction ID</TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Transaction Category
+                                </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
                                     Name
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Account Name
+                                    Transaction Date
+
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Receipt Amount
+                                    Paid Amount
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Paid
+                                    Due Amount
                                 </TableCell>
 
                                 <TableCell align="center" className={`${styles.tableCell}`}>
@@ -107,11 +161,41 @@ const ManageTransaction = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {transactions
+                            {/* {transactions
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((transaction) => (
                                     <Row key={transaction._id} transaction={transaction} />
-                                ))}
+                                ))} */}
+
+
+
+                            {transactionLoader && (
+                                <TableRow>
+                                    <TableCell align="center" colSpan={8}>
+                                        <FadeLoader
+                                            color={"#123abc"}
+                                            loading={transactionLoader}
+                                            css={override}
+                                            height={10}
+                                            width={5}
+                                            radius={2}
+                                            margin={2}
+                                        />
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                            {transactions.length > 0 &&
+                                transactions
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((transaction, index) => (
+                                        <Row
+                                            key={transaction._id}
+                                            transaction={transaction}
+                                            serial={index}
+                                            reload={reload}
+                                            setReload={setReload}
+                                        />
+                                    ))}
                         </TableBody>
                     </Table>
                 </TableContainer>

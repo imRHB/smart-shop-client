@@ -9,7 +9,6 @@ import ShopTwoIcon from "@mui/icons-material/ShopTwo";
 import GroupsIcon from "@mui/icons-material/Groups";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import ImportantRoutes from "../ImportantRoutes/ImportantRoutes";
 
 const TotalReports = () => {
   const [num, setNum] = useState("");
@@ -33,7 +32,7 @@ const TotalReports = () => {
                   backgroundColor: "rgb(200, 250, 205)",
                   borderRadius: "10px",
                   height: "180px",
-                  margin: "20px"
+                  margin: "20px",
                 }}
               >
                 <Box className={`${styles.reportContainer}`}>
@@ -46,11 +45,15 @@ const TotalReports = () => {
                       width: "70px",
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center"
+                      justifyContent: "center",
                     }}
                   >
                     <PeopleAltIcon
-                      sx={{ display: "block", margin: "auto", color: "rgb(0, 123, 85)" }}
+                      sx={{
+                        display: "block",
+                        margin: "auto",
+                        color: "rgb(0, 123, 85)",
+                      }}
                     ></PeopleAltIcon>
                   </Box>
                   <Box className={`${styles.reports}`}>
@@ -90,7 +93,7 @@ const TotalReports = () => {
                   backgroundColor: "rgb(208, 242, 255)",
                   borderRadius: "10px",
                   height: "180px",
-                  margin: "20px"
+                  margin: "20px",
                 }}
               >
                 <Box className={`${styles.reportContainer}`}>
@@ -103,11 +106,15 @@ const TotalReports = () => {
                       width: "70px",
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center"
+                      justifyContent: "center",
                     }}
                   >
                     <ShopTwoIcon
-                      sx={{ display: "block", margin: "auto", color: "rgb(4, 41, 122)" }}
+                      sx={{
+                        display: "block",
+                        margin: "auto",
+                        color: "rgb(4, 41, 122)",
+                      }}
                     />
                   </Box>
 
@@ -137,7 +144,7 @@ const TotalReports = () => {
               </Box>
             </Grid>
 
-            <Grid xs={3} >
+            <Grid xs={3}>
               <Box
                 sx={{
                   display: "flex",
@@ -146,7 +153,7 @@ const TotalReports = () => {
                   backgroundColor: "rgb(255, 247, 205)",
                   borderRadius: "10px",
                   height: "180px",
-                  margin: "20px"
+                  margin: "20px",
                 }}
               >
                 <Box className={`${styles.reportContainer}`}>
@@ -159,11 +166,15 @@ const TotalReports = () => {
                       width: "70px",
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center"
+                      justifyContent: "center",
                     }}
                   >
                     <GroupsIcon
-                      sx={{ display: "block", margin: "auto", color: "rgb(183, 129, 3)" }}
+                      sx={{
+                        display: "block",
+                        margin: "auto",
+                        color: "rgb(183, 129, 3)",
+                      }}
                     ></GroupsIcon>
                   </Box>
 
@@ -178,7 +189,7 @@ const TotalReports = () => {
                       />
                       <ArrowDropUpIcon
                         sx={{
-                          fontSize: "30px"
+                          fontSize: "30px",
                         }}
                       />
                     </Box>
@@ -192,7 +203,7 @@ const TotalReports = () => {
                 </Box>
               </Box>
             </Grid>
-            <Grid xs={3} >
+            <Grid xs={3}>
               <Box
                 sx={{
                   display: "flex",
@@ -201,7 +212,7 @@ const TotalReports = () => {
                   backgroundColor: "rgb(255, 231, 217)",
                   borderRadius: "10px",
                   height: "180px",
-                  margin: "20px"
+                  margin: "20px",
                 }}
               >
                 <Box className={`${styles.reportContainer}`}>
@@ -214,11 +225,15 @@ const TotalReports = () => {
                       width: "70px",
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center"
+                      justifyContent: "center",
                     }}
                   >
                     <StorefrontIcon
-                      sx={{ display: "block", margin: "auto", color: "rgb(122, 12, 46)" }}
+                      sx={{
+                        display: "block",
+                        margin: "auto",
+                        color: "rgb(122, 12, 46)",
+                      }}
                     ></StorefrontIcon>
                   </Box>
 
@@ -233,7 +248,7 @@ const TotalReports = () => {
                       />
                       <ArrowDropUpIcon
                         sx={{
-                          fontSize: "30px"
+                          fontSize: "30px",
                         }}
                       />
                     </Box>
@@ -250,7 +265,6 @@ const TotalReports = () => {
           </Grid>
         </Box>
       </Box>
-      <ImportantRoutes />
     </Box>
   );
 };

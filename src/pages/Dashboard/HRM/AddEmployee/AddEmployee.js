@@ -5,13 +5,14 @@ import { Button, Container, Grid, Input } from "@mui/material";
 import { useForm } from "react-hook-form";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
-import designations from "../../../../assets/data/designations.json";
 import cloudImage from "../../../../assets/images/cloud-upload.png";
 import styles from "./AddEmployee.module.css";
 import useAuth from "../../../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveEmployeeToDB } from "../../../../store/employee";
+import { loadDesignations } from "../../../../store/designation";
+import bloodGroups from "../../../../assets/data/bloodGroups.json";
 
 const AddEmployee = () => {
   const { registerEmployee, loading, authError } = useAuth();
@@ -29,6 +30,16 @@ const AddEmployee = () => {
         setCountries(result.data);
       });
   });
+
+  // Getting all designation from store
+  const designations = useSelector(
+    (state) => state.entities.designation.allDesignation
+  );
+
+  // Load all designations from Database
+  useEffect(() => {
+    dispatch(loadDesignations());
+  }, []);
 
   const {
     register,
@@ -293,14 +304,11 @@ const AddEmployee = () => {
                           {...register("bloodGroup", { required: false })}
                         >
                           <option>-- select one --</option>
-                          <option value={"A+"}>{"A+"}</option>
-                          <option value={"A-"}>{"A-"}</option>
-                          <option value={"B+"}>{"B+"}</option>
-                          <option value={"B-"}>{"B-"}</option>
-                          <option value={"AB+"}>{"AB+"}</option>
-                          <option value={"AB-"}>{"AB-"}</option>
-                          <option value={"O+"}>{"O+"}</option>
-                          <option value={"O-"}>{"O-"}</option>
+                          {bloodGroups.map((blood) => (
+                            <option key={blood._id} value={blood?.name}>
+                              {blood?.name}
+                            </option>
+                          ))}
                         </select>
                       </div>
                     </div>

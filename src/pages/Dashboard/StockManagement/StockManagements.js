@@ -16,6 +16,8 @@ import TablePagination from "@mui/material/TablePagination";
 import { Button, Container, TextField } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import styles from "./StockManagements.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { loadProducts } from "../../../store/products";
 
 function Row(props) {
     const { product } = props;
@@ -41,27 +43,24 @@ function Row(props) {
                 </TableCell>
                 <TableCell align="center">{product.name}</TableCell>
                 <TableCell align="center">{product.category}</TableCell>
-                <TableCell align="center">{10}</TableCell>
                 <TableCell align="center">{50}</TableCell>
-                <TableCell align="center">{35}</TableCell>
-                <TableCell align="center">{15}</TableCell>
-                <TableCell align="center">{product.price}</TableCell>
-                <TableCell align="center">{product.salePrice}</TableCell>
+                <TableCell align="center">{product.supplierPrice}</TableCell>
+                <TableCell align="center">{product.sellPrice}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
                             <Typography variant="h6" gutterBottom component="div">
-                                product Details
+                                Product Details
                             </Typography>
                             <Table size="small" aria-label="purchases">
-                                <TableHead>
+                                <TableHead >
                                     <TableRow>
                                         <TableCell align="center">Product Name</TableCell>
                                         <TableCell align="center">Category</TableCell>
-                                        <TableCell align="center">Supplier Price</TableCell>
-                                        <TableCell align="center">Sale Price</TableCell>
+                                        <TableCell align="center">Product Image</TableCell>
+                                        <TableCell align="center">Product Details</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -70,8 +69,11 @@ function Row(props) {
                                             {product.name}
                                         </TableCell>
                                         <TableCell align="center">{product.category}</TableCell>
-                                        <TableCell align="center">{product.price}</TableCell>
-                                        <TableCell align="center">{product.salePrice}</TableCell>
+                                        <TableCell align="center"><img
+                                            style={{ width: "70px", height: "70px" }}
+                                            src={product.img}
+                                            alt="Product" /></TableCell>
+                                        <TableCell align="left">{product.description}</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -86,21 +88,34 @@ function Row(props) {
 
 const StockManagements = () => {
     const [page, setPage] = React.useState(0);
+    const dispatch = useDispatch();
     const [inputValue, setInputValue] = React.useState("");
-    const [productDisplayed, setProductDisplayed] = React.useState([]);
-    const [allProducts, setAllProducts] = React.useState([]);
+
+    // const [allProducts, setAllProducts] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    useEffect(() => {
-        fetch("https://zahidhasan2806.github.io/productData/products.json")
-            .then(res => res.json())
-            .then(data => {
+    // useEffect(() => {
+    //     fetch("https://zahidhasan2806.github.io/productData/products.json")
+    //         .then(res => res.json())
+    //         .then(data => {
 
-                setAllProducts(data)
-                setProductDisplayed(data)
-            })
-    }, [])
+    //             setAllProducts(data)
+    //             setProductDisplayed(data)
+    //         })
+    // }, [])
+
+    // Getting all product from store
+    const allProducts = useSelector(
+        (state) => state.entities.products.allProduct
+    );
+    const [productDisplayed, setProductDisplayed] = React.useState(allProducts);
+    // Load products from Database
+    useEffect(() => {
+        dispatch(loadProducts());
+    }, [dispatch, allProducts]);
+
+
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -116,6 +131,7 @@ const StockManagements = () => {
         setProductDisplayed(matchedProduct);
 
     }
+
     return (
         <Container sx={{ width: "100%", mb: 5 }}>
             <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 1 }}>
@@ -125,7 +141,7 @@ const StockManagements = () => {
                 <Typography>
                     <span style={{ fontSize: "26px" }}>
                         Stock Report</span> <br />{" "}
-                    <span style={{ color: "#969494", marginRight: "-10px" }}>All Stock Report</span>
+                    <span style={{ color: "#969494", marginRight: "31px" }}>All Stock Report</span>
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "left", mb: 1 }}>
@@ -162,17 +178,9 @@ const StockManagements = () => {
                                     Category
                                 </TableCell>
                                 <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Quantity per carton
+                                    Available Quantity
                                 </TableCell>
-                                <TableCell align="center" className={`${styles.tableCell}`}>
-                                    In Ctn.
-                                </TableCell>
-                                <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Out Ctn.
-                                </TableCell>
-                                <TableCell align="center" className={`${styles.tableCell}`}>
-                                    Stock
-                                </TableCell>
+
                                 <TableCell align="center" className={`${styles.tableCell}`}>
                                     Supplier Price
                                 </TableCell>
