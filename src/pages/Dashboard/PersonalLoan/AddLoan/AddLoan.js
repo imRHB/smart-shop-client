@@ -6,8 +6,12 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
 import styles from "./AddLoan.module.css";
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { saveloansToDb, setReload } from "../../../../store/loans";
 
 const AddLoan = () => {
+  const dispatch = useDispatch();
+  let reload = useSelector((state) => state.entities.loans.reload);
   const categories = [
     {
       _id: 1,
@@ -33,17 +37,23 @@ const AddLoan = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    let { firstName, category, phone, date, amount, details, address } = data;
-    const name = `${firstName}`;
+    /*  let { firstName, category, phone, date, amount, details, address } = data;
+     const name = `${firstName}`;
+ 
+     const formData = new FormData();
+     formData.append("name", name);
+     formData.append("category", category);
+     formData.append("phone", phone);
+     formData.append("date", date);
+     formData.append("amount", amount);
+     formData.append("details", details);
+     formData.append("address", address); */
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("category", category);
-    formData.append("phone", phone);
-    formData.append("date", date);
-    formData.append("amount", amount);
-    formData.append("details", details);
-    formData.append("address", address);
+    dispatch(saveloansToDb(data));
+    dispatch(setReload({ reload: !reload }));
+    Swal.fire("Success", "New loans Added", "success");
+
+    reset();
   };
   return (
     <Container sx={{ width: "100%", mb: 5 }}>

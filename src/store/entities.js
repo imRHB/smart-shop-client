@@ -8,6 +8,7 @@ import productReducer from "./products";
 import categoryReducer from './category';
 import expenseReducer from './expenses';
 import paymentTransactionReducer from "./paymentTransaction";
+import loanReducer from "./loans";
 
 export default combineReducers({
   employee: employeeReducer,
@@ -19,4 +20,5 @@ export default combineReducers({
   category: categoryReducer,
   expenses: expenseReducer,
   payment: paymentTransactionReducer,
+  loans: loanReducer,
 });
