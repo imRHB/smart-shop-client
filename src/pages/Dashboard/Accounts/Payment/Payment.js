@@ -17,7 +17,7 @@ import { savePaymentToDB } from "../../../../store/paymentTransaction";
 import Swal from "sweetalert2";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
-import { loadCustomers } from "../../../../store/customer";
+import { loadSuppliers } from "../../../../store/supplier";
 import { loadEmployees } from "../../../../store/employee";
 
 
@@ -41,14 +41,14 @@ const Payment = () => {
   //   setBank(event.target.value);
   // };
 
-  // Load customers from Database
+  // Load suppliers from Database
   useEffect(() => {
-    dispatch(loadCustomers());
+    dispatch(loadSuppliers());
   }, [dispatch]);
 
-  // Getting all customer from store
-  const allCustomer = useSelector(
-    (state) => state.entities.customer.allCustomer
+  // Getting all supplier from store
+  const allSupplier = useSelector(
+    (state) => state.entities.supplier.allSupplier
   );
 
   // Getting employees from store
@@ -152,7 +152,7 @@ const Payment = () => {
                       value={category}
                       onChange={handleCategoryChange}
                     >
-                      <MenuItem value="customer">Customer</MenuItem>
+                      <MenuItem value="supplier">Supplier</MenuItem>
                       <MenuItem value="employee">Employee</MenuItem>
                     </Select>
                   </FormControl>
@@ -287,8 +287,8 @@ const Payment = () => {
                       size="small"
                       className={`${styles.inputFields}`}
                       options={
-                        category === "customer" ?
-                          allCustomer.map((customer) => customer?.name)
+                        category === "supplier" ?
+                          allSupplier.map((supplier) => supplier?.name)
                           :
                           employees.map((employee) => employee?.name)
                       }
