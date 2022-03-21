@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
-import { Button, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import loanstatus from "../../../../assets/data/loanstatus.json";
 import styles from "./LoanStatus.module.css";
@@ -62,10 +62,10 @@ const LoanStatus = () => {
             Loan Status
           </span>{" "}
           <br />{" "}
-          
+
         </Typography>
       </Box>
-    
+
       <Box className={`${styles.tableContainer}`}>
         <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
           Loan Status
