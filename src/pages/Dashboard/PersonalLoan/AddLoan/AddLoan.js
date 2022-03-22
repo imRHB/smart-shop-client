@@ -169,7 +169,7 @@ const AddLoan = () => {
                           Date
                         </label>
                         <input
-                          type="text"
+                          type="date"
                           className="form-control"
                           placeholder="Date"
                           style={{ background: "#E5E5E5" }}
