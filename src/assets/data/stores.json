@@ -1,0 +1,73 @@
+[
+    {
+        "name": "Apple (Green Apple)",
+        "storeQuantity": 75,
+        "supplierPrice": 120
+    },
+    {
+        "name": "Orange (South Africa)",
+        "storeQuantity": 50,
+        "supplierPrice": 90
+    },
+    {
+        "name": "Green Grapes (Angur Sobuj)",
+        "storeQuantity": 35,
+        "supplierPrice": 190
+    },
+    {
+        "name": "Beef Premium Cube",
+        "storeQuantity": 55,
+        "supplierPrice": 560
+    },
+    {
+        "name": "Khashir Mangsho (Kg)",
+        "storeQuantity": 40,
+        "supplierPrice": 680
+    },
+    {
+        "name": "Golda (Chingri) Medium (30-40 PCs/ Kg)",
+        "storeQuantity": 46,
+        "supplierPrice": 350
+    },
+    {
+        "name": "Rui Deshi (P)-1.5 To 1.99kg",
+        "storeQuantity": 78,
+        "supplierPrice": 80
+    },
+    {
+        "name": "Frutika Mango Drink 250 Ml",
+        "storeQuantity": 40,
+        "supplierPrice": 20
+    },
+    {
+        "_id": 16,
+        "name": "Garden Fresh Mango Fruit Drink 500ml",
+        "storeQuantity": 75,
+        "supplierPrice": 25
+    },
+    {
+        "name": "Mountain Dew Pet Bottle 600ml",
+        "storeQuantity": 70,
+        "supplierPrice": 35
+    },
+    {
+        "name": "7 Up Lemon Flavor 1.25Ltr",
+        "storeQuantity": 67,
+        "supplierPrice": 25
+    },
+    {
+        "name": "Mr. Energy Biscuit 240g",
+        "storeQuantity": 60,
+        "supplierPrice": 15
+    },
+    {
+        "name": "Danish Florida Orange Biscuits 70±5g",
+        "storeQuantity": 50,
+        "supplierPrice": 23
+    },
+    {
+        "name": "GoldMark Yo Yo Vanilla Cream Biscuit 56g",
+        "storeQuantity": 120,
+        "supplierPrice": 12
+    }
+]

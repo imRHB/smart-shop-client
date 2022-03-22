@@ -8,44 +8,78 @@ import useProducts from "../../../hooks/useProducts";
 import { NavLink } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { saveProductToDb, loadProducts, selectedProduct, setReload } from '../../../store/products';
+import stores from '../../../assets/data/stores.json';
+import { loadCategories } from '../../../store/category';
+
 
 const CrudTest = () => {
+    // const IMGBB_API_KEY = '5d1c37eb09d87c5b07fdf71e7ccf3dc9';
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const dispatch = useDispatch();
 
     const products = useSelector((state) => state.entities.products.allProduct);
+    const categories = useSelector((state) => state.entities.category.categories);
+
     useEffect(() => {
         dispatch(loadProducts());
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(loadCategories());
     }, [dispatch]);
 
     // const [selectedProduct, setSelectedProduct] = useState("");
     // console.log(selectedProduct);
 
     const [selectPd, setSelectPd] = useState("--- select product ---");
+    // const [imgFile, setImgFile] = useState('');
+    // const [imgbbUri, setImgbbUri] = useState('');
+    // const [category, setCategory] = useState('');
+    // const [productId, setProductId] = useState('');
 
+    // console.log(imgFile);
+    // console.log(imgbbUri);
+
+    const handleProduct = () => {
+        console.log('clicked');
+    };
 
     const handleProductSelect = (_id, name) => {
-        // console.log('selected product:', _id);
-        // console.log('selected product:', name);
-        dispatch(selectedProduct(_id));
-        setSelectPd(name);
+        console.log('selected product:', _id);
+        console.log('selected product:', name);
+        // dispatch(selectedProduct(_id));
+        // setSelectPd(name);
     };
 
     const singleProduct = useSelector((state) => state.entities.products.singleProduct);
-    console.log(singleProduct);
+    // console.log(singleProduct);
 
-    const findProduct = products.find(foundedPd => {
+    /* const findProduct = products.find(foundedPd => {
         if (foundedPd.name === selectedProduct) {
             return true;
         }
         return false;
-    })
+    }) */
 
 
     const onSubmit = (data) => {
-        // data.name = selectedProduct;
+        let { name, category, barcode, productId, supplierPrice, sellPrice, description, img } = data;
+
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('category', category);
+        formData.append('barcode', barcode);
+        formData.append('productId', productId);
+        formData.append('supplierPrice', supplierPrice);
+        formData.append('sellPrice', sellPrice);
+        formData.append('description', description);
+        formData.append('img', img[0]);
+
         console.log(data);
+
+        dispatch(saveProductToDb(formData));
     };
 
     return (
@@ -75,7 +109,7 @@ const CrudTest = () => {
                 <div className="mt-2">
                     <div className="form-container">
                         <div>
-                            <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                            {/* <div className="col-lg-6 col-md-6 col-sm-12 col-12 my-3">
                                 <div className="p-3 border bg-light">
                                     <div className="mb-3">
                                         <label
@@ -100,10 +134,47 @@ const CrudTest = () => {
                                         </Dropdown>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
+
 
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="row gx-3 mb-3 gy-3">
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div className="p-3 border bg-light">
+                                            <div className="mb-3">
+                                                <label
+                                                    className="form-label"
+                                                    style={{ fontWeight: "bold" }}
+                                                >
+                                                    Product{" "}
+                                                    <sup className="text-danger fw-bold fs-6">*</sup>
+                                                </label>
+
+                                                <select
+                                                    className="form-select"
+                                                    aria-label="Default select example"
+                                                    style={{ background: "#E5E5E5" }}
+                                                    {...register("name", { required: true })}
+                                                >
+                                                    {/* <option>-- select one --</option> */}
+                                                    {stores.map((product) => (
+                                                        <option
+                                                            key={product._id}
+                                                            value={product?.name}
+                                                            onChange={handleProduct}
+                                                        >
+                                                            {product?.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                                {errors.name && (
+                                                    <span className="text-danger">
+                                                        Please select a product
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                                         <div className="p-3 border bg-light">
@@ -115,15 +186,22 @@ const CrudTest = () => {
                                                     Category{" "}
                                                     <sup className="text-danger fw-bold fs-6">*</sup>
                                                 </label>
-                                                <input
-                                                    {...register("category", { required: false })}
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Product Category"
-                                                    value={singleProduct?.category}
+                                                <select
+                                                    className="form-select"
+                                                    aria-label="Default select example"
                                                     style={{ background: "#E5E5E5" }}
-                                                    readOnly
-                                                />
+                                                    {...register("name", { required: true })}
+                                                >
+                                                    {/* <option>-- select one --</option> */}
+                                                    {categories.map((category) => (
+                                                        <option
+                                                            key={category._id}
+                                                            value={category?.name}
+                                                        >
+                                                            {category?.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -145,7 +223,7 @@ const CrudTest = () => {
                                                     placeholder="Barcode/QR-code"
                                                     style={{ background: "#E5E5E5" }}
                                                     {...register("barcode", { required: false })}
-                                                    readOnly
+
                                                 />
                                             </div>
                                         </div>
@@ -166,7 +244,7 @@ const CrudTest = () => {
                                                     defaultValue={singleProduct?.productId}
                                                     style={{ background: "#E5E5E5" }}
                                                     {...register("productId", { required: false })}
-                                                    readOnly
+
                                                 />
                                             </div>
                                         </div>
@@ -191,7 +269,7 @@ const CrudTest = () => {
                                                     defaultValue={singleProduct?.supplierPrice}
                                                     style={{ background: "#E5E5E5" }}
                                                     {...register("supplierPrice", { required: false })}
-                                                    readOnly
+
                                                 />
                                             </div>
                                         </div>
@@ -253,6 +331,14 @@ const CrudTest = () => {
                                                     Image
                                                 </span>
                                                 <div className="input-group mb-4">
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        className="form-control"
+                                                        style={{ background: "#E5E5E5" }}
+                                                        id="inputGroupFile02"
+                                                        {...register("img")}
+                                                    />
                                                     <label
                                                         className="input-group-text"
                                                         htmlFor="inputGroupFile02"
@@ -268,14 +354,6 @@ const CrudTest = () => {
                                                             Upload image
                                                         </span>
                                                     </label>
-                                                    <input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        className="form-control"
-                                                        style={{ background: "#E5E5E5" }}
-                                                        id="inputGroupFile02"
-                                                        {...register("img", { required: false })}
-                                                    />
                                                 </div>
                                             </div>
                                         </div>
@@ -305,20 +383,43 @@ const CrudTest = () => {
                                     </div>
                                 </div>
                             </form>
+
                         </div>
-
-
                     </div>
                 </div>
                 <hr />
-
             </Box>
-
-            {/* test dropdown */}
-
         </Container >
     );
 
 };
 
 export default CrudTest;
+
+
+
+/* original */
+
+
+/* 
+
+e.preventDefault();
+
+        //     const formData = new FormData();
+
+        //     formData.set('key', IMGBB_API_KEY);
+        //     formData.append('image', imgFile[0]);
+        //     formData.append('img', imgbbUri);
+        //     formData.append('category', category);
+        //     formData.append('productId', productId);
+
+        //     await axios.post('https://api.imgbb.com/1/upload', formData)
+        //         .then(res => {
+        //             setImgbbUri(res.data.data.display_url);
+        //             // console.log(res.data.data.display_url);
+        //         })
+
+        //     await axios.post('http://localhost:4000/images', formData)
+        //         .then(res => console.log(res));
+
+*/
