@@ -54,7 +54,7 @@ const HeaderTwo = () => {
                     borderRadius: "50%",
                     border: "1px solid rgb(65, 65, 65)",
                   }}
-                  src={setEmployee.image}
+                  src={setEmployee?.image}
                   alt=""
                 />
                 :
@@ -142,7 +142,7 @@ const HeaderTwo = () => {
                     }}
                     className="img-fluid"
                     // src={`data:image/jpeg;base64,${setEmployee.image}`}
-                    src={setEmployee.image}
+                    src={setEmployee?.image}
                     alt=""
                   />
                 ) : (

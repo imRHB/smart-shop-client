@@ -1,73 +1,101 @@
 [
     {
         "name": "Apple (Green Apple)",
+        "productId": "0525509288",
         "storeQuantity": 75,
+        "unit": "KG",
         "supplierPrice": 120
     },
     {
         "name": "Orange (South Africa)",
+        "productId": "0525505412",
         "storeQuantity": 50,
+        "unit": "KG",
         "supplierPrice": 90
     },
     {
         "name": "Green Grapes (Angur Sobuj)",
+        "productId": "0525505411",
         "storeQuantity": 35,
+        "unit": "KG",
         "supplierPrice": 190
     },
     {
         "name": "Beef Premium Cube",
+        "productId": "0525505521",
         "storeQuantity": 55,
+        "unit": "KG",
         "supplierPrice": 560
     },
     {
         "name": "Khashir Mangsho (Kg)",
+        "productId": "0525505487",
         "storeQuantity": 40,
+        "unit": "KG",
         "supplierPrice": 680
     },
     {
         "name": "Golda (Chingri) Medium (30-40 PCs/ Kg)",
+        "productId": "0525504545",
         "storeQuantity": 46,
+        "unit": "KG",
         "supplierPrice": 350
     },
     {
         "name": "Rui Deshi (P)-1.5 To 1.99kg",
+        "productId": "0525506321",
         "storeQuantity": 78,
+        "unit": "KG",
         "supplierPrice": 80
     },
     {
         "name": "Frutika Mango Drink 250 Ml",
+        "productId": "0525502213",
         "storeQuantity": 40,
+        "unit": "Pcs",
         "supplierPrice": 20
     },
     {
         "_id": 16,
         "name": "Garden Fresh Mango Fruit Drink 500ml",
+        "productId": "0525505419",
         "storeQuantity": 75,
+        "unit": "Pcs",
         "supplierPrice": 25
     },
     {
         "name": "Mountain Dew Pet Bottle 600ml",
+        "productId": "0525508589",
         "storeQuantity": 70,
+        "unit": "Pcs",
         "supplierPrice": 35
     },
     {
         "name": "7 Up Lemon Flavor 1.25Ltr",
+        "productId": "0525509877",
         "storeQuantity": 67,
+        "unit": "Pcs",
         "supplierPrice": 25
     },
     {
         "name": "Mr. Energy Biscuit 240g",
+        "productId": "0525505887",
         "storeQuantity": 60,
+        "unit": "Pcs",
         "supplierPrice": 15
     },
     {
         "name": "Danish Florida Orange Biscuits 70±5g",
+        "productId": "0525503289",
         "storeQuantity": 50,
+        "unit": "Pcs",
         "supplierPrice": 23
     },
     {
         "name": "GoldMark Yo Yo Vanilla Cream Biscuit 56g",
+        "productId": "0525500226",
         "storeQuantity": 120,
+        "unit": "Pcs",
         "supplierPrice": 12
     }
 ]

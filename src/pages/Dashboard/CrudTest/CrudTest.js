@@ -6,8 +6,8 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import styles from './CrudTest.module.css';
 import useProducts from "../../../hooks/useProducts";
 import { NavLink } from "react-router-dom";
-import { Dropdown } from "react-bootstrap";
-import { saveProductToDb, loadProducts, selectedProduct, setReload } from '../../../store/products';
+import { Dropdown, InputGroup } from "react-bootstrap";
+import { saveProductToDb, loadProducts, selectedStoreProduct, loadStoreProducts, setReload } from '../../../store/products';
 import stores from '../../../assets/data/stores.json';
 import { loadCategories } from '../../../store/category';
 
@@ -15,15 +15,15 @@ import { loadCategories } from '../../../store/category';
 const CrudTest = () => {
     // const IMGBB_API_KEY = '5d1c37eb09d87c5b07fdf71e7ccf3dc9';
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const dispatch = useDispatch();
 
-    const products = useSelector((state) => state.entities.products.allProduct);
+    const products = useSelector((state) => state.entities.products.storeProducts);
     const categories = useSelector((state) => state.entities.category.categories);
 
     useEffect(() => {
-        dispatch(loadProducts());
+        dispatch(loadStoreProducts());
     }, [dispatch]);
 
     useEffect(() => {
@@ -31,9 +31,11 @@ const CrudTest = () => {
     }, [dispatch]);
 
     // const [selectedProduct, setSelectedProduct] = useState("");
-    // console.log(selectedProduct);
+    // console.log(selectedStoreProduct);
 
     const [selectPd, setSelectPd] = useState("--- select product ---");
+    // const [fmData, setFmData] = useState({});
+    // console.log(fmData);
     // const [imgFile, setImgFile] = useState('');
     // const [imgbbUri, setImgbbUri] = useState('');
     // const [category, setCategory] = useState('');
@@ -42,19 +44,15 @@ const CrudTest = () => {
     // console.log(imgFile);
     // console.log(imgbbUri);
 
-    const handleProduct = () => {
-        console.log('clicked');
-    };
-
     const handleProductSelect = (_id, name) => {
-        console.log('selected product:', _id);
-        console.log('selected product:', name);
-        // dispatch(selectedProduct(_id));
-        // setSelectPd(name);
+        // console.log('selected product:', _id);
+        // console.log('selected product:', name);
+        dispatch(selectedStoreProduct(_id));
+        setSelectPd(name);
     };
 
-    const singleProduct = useSelector((state) => state.entities.products.singleProduct);
-    // console.log(singleProduct);
+    const singleProduct = useSelector((state) => state.entities.products.singleStoreProduct);
+    console.log(singleProduct);
 
     /* const findProduct = products.find(foundedPd => {
         if (foundedPd.name === selectedProduct) {
@@ -63,23 +61,29 @@ const CrudTest = () => {
         return false;
     }) */
 
+    const handleProductSubmit = (singleProduct) => {
+        console.log(singleProduct);
+    };
 
     const onSubmit = (data) => {
-        let { name, category, barcode, productId, supplierPrice, sellPrice, description, img } = data;
+        let { name, category, productId, supplierPrice, sellPrice, quantity, unit, description, img } = data;
 
         const formData = new FormData();
+
         formData.append('name', name);
         formData.append('category', category);
-        formData.append('barcode', barcode);
         formData.append('productId', productId);
         formData.append('supplierPrice', supplierPrice);
         formData.append('sellPrice', sellPrice);
+        formData.append('quantity', quantity);
+        formData.append('unit', unit);
         formData.append('description', description);
         formData.append('img', img[0]);
 
-        console.log(data);
+        // setFmData(formData);
+        // dispatch(saveProductToDb(formData));
 
-        dispatch(saveProductToDb(formData));
+        reset();
     };
 
     return (
@@ -109,35 +113,40 @@ const CrudTest = () => {
                 <div className="mt-2">
                     <div className="form-container">
                         <div>
-                            {/* <div className="col-lg-6 col-md-6 col-sm-12 col-12 my-3">
-                                <div className="p-3 border bg-light">
-                                    <div className="mb-3">
-                                        <label
-                                            className="form-label"
-                                            style={{ fontWeight: "bold" }}
-                                        >
-                                            Product{" "}
-                                            <sup className="text-danger fw-bold fs-6">*</sup>
-                                        </label>
-                                        <Dropdown className="form-control">
-                                            <Dropdown.Toggle id="dropdown-basic" style={{ background: "#E5E5E5", color: '#000' }}>
-                                                {selectPd}
-                                            </Dropdown.Toggle>
+                            <div>
+                                <button onClick={handleProductSubmit}>Click Me!</button>
+                            </div>
 
-                                            <Dropdown.Menu>
-                                                {
-                                                    products.map(product => (
-                                                        <Dropdown.Item onClick={() => handleProductSelect(product._id, product.name)}>{product.name}</Dropdown.Item>
-                                                    ))
-                                                }
-                                            </Dropdown.Menu>
-                                        </Dropdown>
+                            <div className="row gx-3 mb-3 gy-3">
+                                <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div className="p-3 border bg-light">
+                                        <div className="mb-3">
+                                            <label
+                                                className="form-label"
+                                                style={{ fontWeight: "bold" }}
+                                            >
+                                                Product{" "}
+                                                <sup className="text-danger fw-bold fs-6">*</sup>
+                                            </label>
+                                            <Dropdown className="form-control">
+                                                <Dropdown.Toggle id="dropdown-basic" style={{ background: "#E5E5E5", color: '#000' }}>
+                                                    {selectPd}
+                                                </Dropdown.Toggle>
+
+                                                <Dropdown.Menu>
+                                                    {
+                                                        products.map(product => (
+                                                            <Dropdown.Item onClick={() => handleProductSelect(product._id, product.name)}>{product.name}</Dropdown.Item>
+                                                        ))
+                                                    }
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+                                        </div>
                                     </div>
                                 </div>
-                            </div> */}
+                            </div>
 
-
-                            <form onSubmit={handleSubmit(onSubmit)}>
+                            {/* <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="row gx-3 mb-3 gy-3">
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                                         <div className="p-3 border bg-light">
@@ -151,17 +160,17 @@ const CrudTest = () => {
                                                 </label>
 
                                                 <select
+                                                    onChange={handlePdChange}
                                                     className="form-select"
                                                     aria-label="Default select example"
-                                                    style={{ background: "#E5E5E5" }}
                                                     {...register("name", { required: true })}
+                                                    style={{ background: "#E5E5E5" }}
                                                 >
-                                                    {/* <option>-- select one --</option> */}
+                                                    <option>-- select one --</option>
                                                     {stores.map((product) => (
                                                         <option
                                                             key={product._id}
-                                                            value={product?.name}
-                                                            onChange={handleProduct}
+                                                            value={products?.name}
                                                         >
                                                             {product?.name}
                                                         </option>
@@ -172,6 +181,33 @@ const CrudTest = () => {
                                                         Please select a product
                                                     </span>
                                                 )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form> */}
+
+
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <div className="row gx-3 mb-3 gy-3">
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div className="p-3 border bg-light">
+                                            <div className="mb-3">
+                                                <label
+                                                    className="form-label"
+                                                    style={{ fontWeight: "bold" }}
+                                                >
+                                                    Product ID{" "}
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Product ID"
+                                                    defaultValue={singleProduct?.productId}
+                                                    style={{ background: "#E5E5E5" }}
+                                                    {...register("productId", { required: false })}
+
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -190,13 +226,13 @@ const CrudTest = () => {
                                                     className="form-select"
                                                     aria-label="Default select example"
                                                     style={{ background: "#E5E5E5" }}
-                                                    {...register("name", { required: true })}
+                                                    {...register("category", { required: true })}
                                                 >
                                                     {/* <option>-- select one --</option> */}
                                                     {categories.map((category) => (
                                                         <option
                                                             key={category._id}
-                                                            value={category?.name}
+                                                            defaultValue={category?.name}
                                                         >
                                                             {category?.name}
                                                         </option>
@@ -207,7 +243,7 @@ const CrudTest = () => {
                                     </div>
                                 </div>
 
-                                <div className="row gx-3 mb-3 gy-3">
+                                {/* <div className="row gx-3 mb-3 gy-3">
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                                         <div className="p-3 border bg-light">
                                             <div className="mb-3">
@@ -246,6 +282,62 @@ const CrudTest = () => {
                                                     {...register("productId", { required: false })}
 
                                                 />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> */}
+
+                                <div className="row gx-3 mb-3 gy-3">
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div className="p-3 border bg-light">
+                                            <div className="mb-3">
+                                                <label
+                                                    className="form-label"
+                                                    style={{ fontWeight: "bold" }}
+                                                >
+                                                    Available In Stock{" "}
+                                                    <sup className="text-danger fw-bold fs-6">*</sup>
+                                                </label>
+                                                <div className="d-flex">
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        placeholder="Available in Stock"
+                                                        defaultValue={singleProduct?.storeQuantity}
+                                                        style={{ background: "#E5E5E5", borderRadius: '4px 0 0 4px' }}
+                                                        {...register("storeQuantity", { required: false })}
+                                                        readOnly
+                                                    />
+                                                    <InputGroup.Text id="basic-addon2" style={{ background: "#E5E5E5", borderRadius: '0 4px 4px 0' }}>{singleProduct?.unit ? singleProduct?.unit : 'unit'}</InputGroup.Text>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div className="p-3 border bg-light">
+                                            <div className="mb-3">
+                                                <label
+                                                    className="form-label"
+                                                    style={{ fontWeight: "bold" }}
+                                                >
+                                                    Add Quantity{" "}
+                                                    <sup className="text-danger fw-bold fs-6">*</sup>
+                                                </label>
+                                                <div className="d-flex">
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        placeholder="Enter Quantity for Selling"
+                                                        style={{ background: "#E5E5E5", borderRadius: '4px 0 0 4px' }}
+                                                        {...register("quantity", { min: 1, max: `${singleProduct?.storeQuantity}`, required: true })}
+                                                    />
+                                                    <InputGroup.Text id="basic-addon2" style={{ background: "#E5E5E5", borderRadius: '0 4px 4px 0' }}>{singleProduct?.unit ? singleProduct?.unit : 'unit'}</InputGroup.Text>
+                                                </div>
+                                                {errors.name && (
+                                                    <span className="text-danger">
+                                                        Please enter quantity less or equal of available in stock.
+                                                    </span>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -421,5 +513,48 @@ e.preventDefault();
 
         //     await axios.post('http://localhost:4000/images', formData)
         //         .then(res => console.log(res));
+
+
+
+
+
+
+
+        <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div className="p-3 border bg-light">
+                                            <div className="mb-3">
+                                                <label
+                                                    className="form-label"
+                                                    style={{ fontWeight: "bold" }}
+                                                >
+                                                    Product{" "}
+                                                    <sup className="text-danger fw-bold fs-6">*</sup>
+                                                </label>
+
+                                                <select
+                                                    onChange={handlePdChange}
+                                                    className="form-select"
+                                                    aria-label="Default select example"
+                                                    {...register("name", { required: true })}
+                                                    style={{ background: "#E5E5E5" }}
+                                                >
+                                                    <option>-- select one --</option>
+                                                    {stores.map((product) => (
+                                                        <option
+                                                            key={product._id}
+                                                            value={products?.name}
+                                                        >
+                                                            {product?.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                                {errors.name && (
+                                                    <span className="text-danger">
+                                                        Please select a product
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
 
 */
