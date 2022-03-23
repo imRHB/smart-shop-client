@@ -8,6 +8,7 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
 import { loadExpenseItems, saveExpenseToDb, setReload } from '../../../store/expenses';
 import styles from "./AddExpense.module.css";
+import { NavLink } from "react-router-dom";
 
 const AddExpense = () => {
   const dispatch = useDispatch();
@@ -47,7 +48,12 @@ const AddExpense = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.manageEmployeeBtn}`}>Manage Expense</Button>
+        <NavLink
+          to="/dashboard/expense-item"
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.manageEmployeeBtn}`}>Add Expense Item</Button>
+        </NavLink>
       </Box>
       <Box className={`${styles.tableContainer}`}>
         <Typography sx={{ fontWeight: "bold", textAlign: 'start', marginLeft: '6px' }}>Add Expense</Typography>

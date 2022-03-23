@@ -8,8 +8,13 @@ import { Button } from "@mui/material";
 import PreviewIcon from "@mui/icons-material/Preview";
 import ChatIcon from "@mui/icons-material/Chat";
 import { NavLink } from "react-router-dom";
+import useAuth from "../../../../hooks/useAuth";
+import { loadEmployees } from "../../../../store/employee";
+import { useDispatch, useSelector } from "react-redux";
 
 const HeaderTwo = () => {
+  const dispatch = useDispatch();
+  const { employee, admin } = useAuth();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -19,41 +24,53 @@ const HeaderTwo = () => {
     fetch("https://smart-shop-pos.herokuapp.com/events")
       .then(res => res.json())
       .then(data => setNotification(data))
-
   }, [notification]);
+
+  const employees = useSelector(
+    (state) => state.entities.employee.allEmployees
+  );
+
+  // Load all designations from Database
+  useEffect(() => {
+    dispatch(loadEmployees());
+  }, [dispatch]);
+
+
+  const setEmployee = employees.find(filteredEmployee => filteredEmployee.email === employee.email);
+  // console.log(setEmployee)
 
   return (
     <div className={`${styles.navContainer} ${"shadow"}`}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={3} md={2}>
           <Box>
-            {true && (
-              <div className="mx-3 text-center">
-                {false ? (
-                  <img
-                    style={{
-                      width: "80px",
-                      height: "80px",
-                      borderRadius: "50%",
-                      border: "1px solid rgb(65, 65, 65)",
-                    }}
-                    src={""}
-                    alt=""
-                  />
-                ) : (
-                  <img
-                    style={{
-                      width: "80px",
-                      height: "80px",
-                      borderRadius: "50%",
-                      border: "1px solid rgb(65, 65, 65)",
-                    }}
-                    src={defaultUser}
-                    alt=""
-                  />
-                )}
-              </div>
-            )}
+
+            <div className="mx-3 text-center">
+              {employee ?
+                <img
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                    border: "1px solid rgb(65, 65, 65)",
+                  }}
+                  src={setEmployee?.image}
+                  alt=""
+                />
+                :
+                <img
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                    border: "1px solid rgb(65, 65, 65)",
+                  }}
+                  src={defaultUser}
+                  alt=""
+                />
+              }
+            </div>
+
           </Box>
         </Grid>
         <Grid
@@ -68,7 +85,7 @@ const HeaderTwo = () => {
           }}
         >
           <Box sx={{ textAlign: "start" }}>
-            <h4>Welcome Back! Admin</h4>
+            <h4>Welcome Back! {setEmployee?.name}</h4>
             <p>You have <span className="text-white">{notification.length}</span> new notifications! Check it out!</p>
           </Box>
         </Grid>
@@ -113,27 +130,28 @@ const HeaderTwo = () => {
                   marginBottom: "30px",
                 }}
               >
-                AFSANA MEEM
+                {/* {filteredEmployee.map(employee => employee.name)} */}
               </h4>
-              {true && (
-                <div className="mx-3 text-center border border-1 p-3">
-                  {false ? (
-                    <img
-                      style={{
-                        width: "150px",
-                        height: "150px",
-                      }}
-                      className="img-fluid"
-                      src={""}
-                      alt=""
-                    />
-                  ) : (
-                    <img className="img-fluid" src={defaultUser} alt="" />
-                  )}
-                </div>
-              )}
+
+              <div className="mx-3 text-center border border-1 p-3">
+                {employee ? (
+                  <img
+                    style={{
+                      width: "150px",
+                      height: "150px",
+                    }}
+                    className="img-fluid"
+                    // src={`data:image/jpeg;base64,${setEmployee.image}`}
+                    src={setEmployee?.image}
+                    alt=""
+                  />
+                ) : (
+                  <img className="img-fluid" src={defaultUser} alt="" />
+                )}
+              </div>
+
               <hr />
-              <h6
+              {/* <h6
                 style={{
                   marginTop: "30px",
                   textAlign: "center",
@@ -145,7 +163,7 @@ const HeaderTwo = () => {
 
               <h6 style={{ textAlign: "center", fontSize: "12px" }}>
                 Last Logout Time: 04:45pm
-              </h6>
+              </h6> */}
             </Col>
             <Col
               md={6}
@@ -165,15 +183,15 @@ const HeaderTwo = () => {
                 Designation
                 <span className={`${styles.employeeInfo}`}>
                   <br />
-                  Admin
+                  {setEmployee?.designation}
                 </span>
                 <hr />
               </h6>
 
               <h6 className={`${styles.employeeTitle}`}>
-                Joined Date
+                Employee ID
                 <span className={`${styles.employeeInfo}`}>
-                  <br /> 01/01/2022
+                  <br />   {setEmployee?.employeeId}
                 </span>
                 <hr />
               </h6>
@@ -182,7 +200,7 @@ const HeaderTwo = () => {
                 Email
                 <span className={`${styles.employeeInfo}`}>
                   <br />
-                  admin@admin.com
+                  {setEmployee?.email}
                 </span>
                 <hr />
               </h6>
@@ -191,7 +209,7 @@ const HeaderTwo = () => {
                 Phone
                 <span className={`${styles.employeeInfo}`}>
                   <br />
-                  01723456789
+                  {setEmployee?.phone}
                 </span>
               </h6>
             </Col>

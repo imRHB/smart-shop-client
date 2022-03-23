@@ -24,6 +24,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import TextField from "@mui/material/TextField";
+import Divider from "@mui/material/Divider";
 import Swal from "sweetalert2";
 import { css } from "@emotion/react";
 import FadeLoader from "react-spinners/FadeLoader";
@@ -189,28 +190,47 @@ function Row(props) {
           />
         </TableCell>
       </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+      <TableRow style={{ background: "#D0F2FF" }}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
+              <Typography
+                sx={{
+                  textAlign: "center",
+                  py: 1,
+                  color: "#001E3C",
+                  fontWeight: "900",
+                }}
+                variant="h6"
+                gutterBottom
+                component="div"
+              >
                 Employee Details
               </Typography>
+              <Divider sx={{ mb: 1 }} />
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Name</TableCell>
-                    <TableCell align="center">Phone</TableCell>
-                    <TableCell align="center">Position</TableCell>
-                    <TableCell align="center">Address</TableCell>
-                    <TableCell align="center">Salary</TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                      Name
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                      Phone
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                      Position
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                      Address
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                      Salary
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <TableRow key={employee._id}>
-                    <TableCell component="th" scope="row">
-                      {employee.name}
-                    </TableCell>
+                    <TableCell align="center">{employee.name}</TableCell>
                     <TableCell align="center">{employee.phone}</TableCell>
                     <TableCell align="center">{employee.designation}</TableCell>
                     <TableCell align="center">{employee.address}</TableCell>
@@ -218,6 +238,7 @@ function Row(props) {
                   </TableRow>
                 </TableBody>
               </Table>
+              <Divider sx={{ mt: 1 }} />
             </Box>
           </Collapse>
         </TableCell>

@@ -41,7 +41,7 @@ const PaymentGateway = () => {
       .then((data) => {
         if (data.modifiedCount > 0) {
           Swal.fire({
-            position: "top",
+            position: "center",
             icon: "success",
             title: "Payment successful!!",
             showConfirmButton: true,
@@ -124,7 +124,7 @@ const PaymentGateway = () => {
 
           {mode === "card" && (
             <Box className={`${styles.cardPay}`}>
-              <StripePayment />
+              <StripePayment grandTotal={grandTotal} handleUpdateStatus={handleUpdateStatus} />
             </Box>
           )}
           {mode === "cash" && (

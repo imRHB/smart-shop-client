@@ -93,7 +93,7 @@ const AddInvoice = () => {
     dispatch(saveInvoiceToDB(data));
 
     Swal.fire({
-      position: "top",
+      position: "center",
       icon: "success",
       title: "Product Purchased successfully!!",
       showConfirmButton: true,
@@ -127,11 +127,6 @@ const AddInvoice = () => {
             Manage Invoice
           </Button>
         </NavLink>
-        {/* <NavLink to="/dashboard/pos" style={{ textDecoration: "none" }}>
-          <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
-            POS
-          </Button>
-        </NavLink> */}
       </Box>
 
       <Box className={`${styles.invoiceContainer}`}>
@@ -153,18 +148,18 @@ const AddInvoice = () => {
                   <TabList
                     onChange={handleChange}
                     aria-label="lab API tabs example"
-                    sx={{ textAlign: "center" }}
+                    sx={{ textAlign: "center", backgroundColor: "#d2d4fc" }}
                     centered
                   >
                     <Tab
                       label="Old Customer"
                       value="Old Customer"
-                      sx={{ color: "black" }}
+                      sx={{ color: "black", fontWeight: "bold" }}
                     />
                     <Tab
                       label="New Customer"
                       value="New Customer"
-                      sx={{ color: "black" }}
+                      sx={{ color: "black", fontWeight: "bold" }}
                     />
                   </TabList>
                 </Box>
@@ -217,7 +212,7 @@ const AddInvoice = () => {
                           ml: 2,
                         }}
                       >
-                        Customer Name <span>*</span>
+                        Customer Name<span>*</span>
                       </Typography>
 
                       <TextField
@@ -226,7 +221,7 @@ const AddInvoice = () => {
                         sx={{ backgroundColor: "#f1f3f6", ml: 2 }}
                         label="Customer Name"
                         variant="outlined"
-                        {...register("name", { required: true })}
+                        {...register("name")}
                       />
                     </Box>
                     <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
@@ -418,10 +413,12 @@ const AddInvoice = () => {
                           }}
                         >
                           <input
+                            {...register("availableQuantity", { required: true })}
                             type="number"
                             placeholder="Available Qn."
-                            {...register("ctn", { required: true })}
                             className={`${styles.tableCellInput}`}
+                            defaultValue={
+                              productNames?.quantity}
                           />
                         </TableCell>
 
