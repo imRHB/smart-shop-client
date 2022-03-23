@@ -32,12 +32,15 @@ const AddLoan = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    let { loanpay } = data;
+    let { loanpay, img, details } = data;
 
     const formData = new FormData();
     formData.append("loanpay", loanpay);
-    dispatch(saveloansToDb(data));
+    formData.append("img", img[0]);
+    formData.append("details", details);
+    dispatch(saveloansToDb(formData));
     dispatch(setReload({ reload: !reload }));
+    //Alert message
     Swal.fire("Success", "New loans Added", "success");
 
     reset();
