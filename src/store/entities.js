@@ -7,13 +7,9 @@ import invoiceReducer from "./invoice";
 import productReducer from "./products";
 import categoryReducer from './category';
 import expenseReducer from './expenses';
-<<<<<<< HEAD
-import loansReducer from "./loans"
-=======
 import paymentTransactionReducer from "./paymentTransaction";
 import loanReducer from "./loans";
 
->>>>>>> f9562177e3716ffc97fe6b6ecc42a18af61133ca
 export default combineReducers({
   employee: employeeReducer,
   designation: designationReducer,
@@ -23,10 +19,6 @@ export default combineReducers({
   products: productReducer,
   category: categoryReducer,
   expenses: expenseReducer,
-<<<<<<< HEAD
-  loans: loansReducer,
-=======
   payment: paymentTransactionReducer,
   loans: loanReducer,
->>>>>>> f9562177e3716ffc97fe6b6ecc42a18af61133ca
 });
