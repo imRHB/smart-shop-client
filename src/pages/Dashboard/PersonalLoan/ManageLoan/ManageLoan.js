@@ -23,7 +23,7 @@ function Row(props) {
   const { loan, setLoans, loans } = props;
 
   const handleDelete = (id) => {
-    const url = `http://localhost:5000/loans/${id}`;
+    const url = `https://smart-shop-pos.herokuapp.com/loans/${id}`;
     fetch(url, {
       method: 'DELETE'
     })
