@@ -28,7 +28,6 @@ const Payment = () => {
   // const [bank, setBank] = React.useState('');
   const dispatch = useDispatch();
 
-
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
@@ -74,12 +73,11 @@ const Payment = () => {
     })
       .then((result) => {
         if (result.isConfirmed) {
-          window.location.href = "/payment-invoice";
+          window.location.href = `/dashboard/manage-transaction`;
         }
       });
     reset();
   };
-
 
 
   return (
@@ -272,7 +270,7 @@ const Payment = () => {
                   />
                 </Box> */}
 
-                <Box className={`${styles.inputContainer} ${"pb-4"}`}>
+                <Box className={`${styles.inputContainer}`} sx={{ paddingBottom: "30px" }}>
                   <Typography className={`${styles.inputTitle}`} variant="f6">
                     Select Name
                     <span style={{ color: "#f44336" }}>*</span>
