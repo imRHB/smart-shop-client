@@ -86,7 +86,7 @@ const HeaderTwo = () => {
         >
           <Box sx={{ textAlign: "start" }}>
             <h4>Welcome Back! {setEmployee?.name}</h4>
-            <p>You have <span className="text-white">{notification.length}</span> new notifications! Check it out!</p>
+            <p>You have <span className="text-white">{notification.length}</span> new events! Check it out!</p>
           </Box>
         </Grid>
         <Grid
@@ -137,7 +137,7 @@ const HeaderTwo = () => {
                 {employee ? (
                   <img
                     style={{
-                      width: "150px",
+                      width: "170px",
                       height: "150px",
                     }}
                     className="img-fluid"
