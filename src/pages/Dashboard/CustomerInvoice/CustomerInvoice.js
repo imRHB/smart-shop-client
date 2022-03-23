@@ -11,7 +11,7 @@ const CustomerInvoice = () => {
     const [orders, setOrders] = React.useState([]);
     const { id } = useParams()
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${id}`)
+        fetch(`https://smart-shop-pos.herokuapp.com/orders/${id}`)
             .then(res => res.json())
             .then(data => {
                 setOrders(data)
