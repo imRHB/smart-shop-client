@@ -21,8 +21,12 @@ import Delete from "@mui/icons-material/Delete";
 import Collapse from "@mui/material/Collapse";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveSupplierToDB } from "../../../../store/supplier";
+import { saveProductsToStore } from "../../../../store/products";
 
 const PurchaseProduct = () => {
+  const dispatch = useDispatch();
   const [productName, setProductName] = useState("");
   const [productId, setProductId] = useState(0);
   const [totalCartn, setTotalCartn] = useState(0);
@@ -116,6 +120,7 @@ const PurchaseProduct = () => {
       barcode,
       supplierName,
       contactNo,
+      company,
       supplierEmail,
       supplierAddress,
       date,
@@ -131,23 +136,33 @@ const PurchaseProduct = () => {
       paidAmount: paidAmount,
     };
 
-    //Send form data to Server
-    // dispatch(saveInvoiceToDB(data));
-    console.log(supplierInvoice);
+    if (supplierName) {
+      const supplierDetails = {
+        name: supplierName,
+        email: supplierEmail,
+        company: company,
+        companyAddress: supplierAddress,
+      };
+      // Send form data to Server
+      dispatch(saveSupplierToDB(supplierDetails));
+    }
+
+    // Send form data to Server
+    dispatch(saveProductsToStore(supplierInvoice));
     setTableRow(1);
     setQuantity(0);
     setTotal(0);
+    setTotalDiscount(0);
+    setGrandTotal(0);
+    setPaidAmount(0);
+    setDueAmount(0);
 
-    // Swal.fire({
-    //   position: "top",
-    //   icon: "success",
-    //   title: "Product Purchased successfully!!",
-    //   showConfirmButton: true,
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     window.location.href = "/payment-gateway";
-    //   }
-    // });
+    //Alert message
+    Swal.fire(
+      "Good job!",
+      "Products Details Added Successfully To Store!",
+      "success"
+    );
     reset();
   };
 
@@ -195,7 +210,12 @@ const PurchaseProduct = () => {
         <Box className={`${styles.tableContainer}`}>
           <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
             <Typography
-              sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}
+              sx={{
+                textAlign: "start",
+                fontWeight: "bold",
+                fontSize: "14px",
+                marginBottom: "12px !important",
+              }}
             >
               Barcode<span>*</span>
             </Typography>
@@ -213,7 +233,12 @@ const PurchaseProduct = () => {
 
           <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
             <Typography
-              sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}
+              sx={{
+                textAlign: "start",
+                fontWeight: "bold",
+                fontSize: "14px",
+                marginBottom: "12px !important",
+              }}
             >
               Supplier Contact no.<span>*</span>
             </Typography>
@@ -246,9 +271,10 @@ const PurchaseProduct = () => {
                     textAlign: "start",
                     fontWeight: "bold",
                     fontSize: "14px",
+                    marginBottom: "12px !important",
                   }}
                 >
-                  Supplier Name <span>*</span>
+                  Supplier Name
                 </Typography>
 
                 <TextField
@@ -260,12 +286,13 @@ const PurchaseProduct = () => {
                   {...register("supplierName", { required: false })}
                 />
               </Box>
-              <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
+              <Box className={`${styles.addSupplierField} ${"pb-4, me-2"}`}>
                 <Typography
                   sx={{
                     textAlign: "start",
                     fontWeight: "bold",
                     fontSize: "14px",
+                    marginBottom: "12px !important",
                   }}
                 >
                   Supplier Email
@@ -280,6 +307,27 @@ const PurchaseProduct = () => {
                   {...register("supplierEmail")}
                 />
               </Box>
+              <Box className={`${styles.addSupplierField} ${"pb-4, me-2"}`}>
+                <Typography
+                  sx={{
+                    textAlign: "start",
+                    fontWeight: "bold",
+                    fontSize: "14px",
+                    marginBottom: "12px !important",
+                  }}
+                >
+                  Company Name
+                </Typography>
+
+                <TextField
+                  size="small"
+                  id="outlined-basic"
+                  sx={{ backgroundColor: "white" }}
+                  label="Company Name"
+                  variant="outlined"
+                  {...register("company", { required: false })}
+                />
+              </Box>
             </Box>
 
             <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
@@ -288,6 +336,7 @@ const PurchaseProduct = () => {
                   textAlign: "start",
                   fontWeight: "bold",
                   fontSize: "14px",
+                  marginBottom: "12px !important",
                 }}
               >
                 Address
@@ -306,7 +355,12 @@ const PurchaseProduct = () => {
 
           <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
             <Typography
-              sx={{ textAlign: "start", fontWeight: "bold", fontSize: "14px" }}
+              sx={{
+                textAlign: "start",
+                fontWeight: "bold",
+                fontSize: "14px",
+                marginBottom: "10px !important",
+              }}
             >
               Date<span>*</span>
             </Typography>
@@ -316,7 +370,7 @@ const PurchaseProduct = () => {
               {...register("date", { required: true })}
               style={{
                 width: "45%",
-                padding: "8px",
+                padding: "10px",
                 backgroundColor: "white",
                 border: "1px solid #aeaeae",
                 borderRadius: "3px",
@@ -453,7 +507,9 @@ const PurchaseProduct = () => {
                         <input
                           type="number"
                           placeholder="0"
-                          onBlur={(e) => setTotalCartn(e.target.value)}
+                          onBlur={(e) =>
+                            setTotalCartn(parseInt(e.target.value))
+                          }
                           style={{
                             width: "70px",
                             padding: "8px",
@@ -473,7 +529,9 @@ const PurchaseProduct = () => {
                         <input
                           type="number"
                           placeholder="0"
-                          onBlur={(e) => handleEachCartn(e.target.value)}
+                          onBlur={(e) =>
+                            handleEachCartn(parseInt(e.target.value))
+                          }
                           style={{
                             width: "70px",
                             padding: "8px",
@@ -491,7 +549,7 @@ const PurchaseProduct = () => {
                       >
                         <input
                           type="number"
-                          value={totalCartn * eachCartn}
+                          value={quantity}
                           readOnly
                           style={{
                             width: "70px",
@@ -544,7 +602,7 @@ const PurchaseProduct = () => {
                         <input
                           type="number"
                           placeholder="0.00"
-                          onBlur={(e) => handleRate(e.target.value)}
+                          onBlur={(e) => handleRate(parseInt(e.target.value))}
                           style={{
                             width: "70px",
                             padding: "8px",
@@ -564,7 +622,9 @@ const PurchaseProduct = () => {
                         <input
                           type="number"
                           placeholder="0.00"
-                          onBlur={(e) => handleDiscount(e.target.value)}
+                          onBlur={(e) =>
+                            handleDiscount(parseInt(e.target.value))
+                          }
                           style={{
                             width: "70px",
                             padding: "8px",
@@ -742,7 +802,7 @@ const PurchaseProduct = () => {
                     <input
                       type="number"
                       placeholder="0.00"
-                      onBlur={(e) => handlePaidAmount(e.target.value)}
+                      onBlur={(e) => handlePaidAmount(parseInt(e.target.value))}
                       style={{
                         width: "70px",
                         padding: "8px",
