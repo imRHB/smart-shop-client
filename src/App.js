@@ -16,7 +16,7 @@ function App() {
       <Route path="/customer-invoice/:id" element={<CustomerInvoice />} />
       <Route path="/payment-gateway" element={<PaymentGateway />} />
       <Route path="/dashboard/*" element={<DashboardHome />} />
-      <Route path="/payment-invoice" element={<OfficeInvoice />} />
+      <Route path="/payment-invoice/:id" element={<OfficeInvoice />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

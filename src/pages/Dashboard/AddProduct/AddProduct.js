@@ -333,7 +333,7 @@ const AddProduct = () => {
                                                         <span
                                                             style={{ color: "#251D58", fontWeight: "bold" }}
                                                         >
-                                                            Upload image
+                                                            Upload document
                                                         </span>
                                                     </label>
                                                 </div>

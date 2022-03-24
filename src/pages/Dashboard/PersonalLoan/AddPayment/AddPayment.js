@@ -306,10 +306,10 @@ const AddPayment = () => {
                     </div>
                   </div>
 
-                  <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+                  <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                     <div className="p-3 border bg-light">
                       <div className="mb-3">
-                        <Box sx={{ textAlign: "center", my: 2 }}>
+                        <Box sx={{ textAlign: "center", my: 3 }}>
                           <input
                             type="reset"
                             className={`${"btn"} ${styles.resetBtn}`}

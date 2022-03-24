@@ -22,6 +22,8 @@ import { Link } from "react-router-dom";
 function Row(props) {
   const { loan, setLoans, loans } = props;
 
+  let installment = parseFloat(loan.amount / (loan.duration * 12)).toFixed(2);
+
   const handleDelete = (id) => {
     const url = `https://smart-shop-pos.herokuapp.com/loans/${id}`;
     fetch(url, {
@@ -61,14 +63,14 @@ function Row(props) {
         className={`${styles.tableHover}`}
         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       >
-        <TableCell align="center">{loan.date}</TableCell>
-        <TableCell align="center">{loan.firstName}</TableCell>
-        <TableCell align="center">{loan.phone}</TableCell>
+        <TableCell align="center">{loan.firstName ? loan.firstName : 'Admin'}</TableCell>
         <TableCell align="center">{loan.address ? loan.address : address}</TableCell>
         <TableCell align="center">{loan.amount}</TableCell>
-        <TableCell align="center">{100000}</TableCell>
+        <TableCell align="center">{loan.duration} Year</TableCell>
+        <TableCell align="center">{installment}</TableCell>
         <TableCell align="center"><img style={{ width: "70px", height: "70px" }} className="img-fluid" src={`data:image/jpeg;base64,${loan.img}`} alt="employee" /></TableCell>
         <TableCell align="center">{loan.details}</TableCell>
+        <TableCell align="center">{loan.status}</TableCell>
         <TableCell align="center">
           {/* <HowToRegSharpIcon onClick={() => {
             return handleLoanStatus(loan._id);
@@ -135,13 +137,7 @@ const ManageLoan = () => {
             <TableHead className={`${styles.tableHeader}`}>
               <TableRow>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Date
-                </TableCell>
-                <TableCell align="center" className={`${styles.tableCell}`}>
                   Name
-                </TableCell>
-                <TableCell align="center" className={`${styles.tableCell}`}>
-                  Phone
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
                   Address
@@ -150,7 +146,10 @@ const ManageLoan = () => {
                   Amount
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Installment/Year
+                  Pay (Year)
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Installment (monthly)
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
                   Documents
@@ -158,7 +157,9 @@ const ManageLoan = () => {
                 <TableCell align="center" className={`${styles.tableCell}`}>
                   Reasons
                 </TableCell>
-
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Status
+                </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
                   Action
                 </TableCell>
