@@ -1717,7 +1717,7 @@ const SidebarNavigation = () => {
           {/*======= Software Setting Nav Menu End ======*/}
 
           {/*======= Test Component Nav Menu Start ======*/}
-          <Accordion
+          {/* <Accordion
             TransitionProps={{ unmountOnExit: true }}
             sx={{
               background: "#003366 !important",
@@ -1743,7 +1743,7 @@ const SidebarNavigation = () => {
                 </Button>
               </NavLink>
             </AccordionSummary>
-          </Accordion>
+          </Accordion> */}
           {/*======= Test Component Nav Menu End ======*/}
         </>
       ) : (

@@ -20,12 +20,12 @@ const Dashboard = () => {
       <div className="container px-4 mt-3">
         <ConversionRate />
       </div>
-      <div className="container px-1 mt-3">
+      <div className="container px-4 mt-3 mb-5">
         <ImportantRoutes />
       </div>
-      <div className="container px-4 mt-4">
+      {/* <div className="container px-4 mt-4">
         <OrderTimeline />
-      </div>
+      </div> */}
     </>
   );
 };
