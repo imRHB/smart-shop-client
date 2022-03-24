@@ -26,7 +26,7 @@ const AddLoan = () => {
     },
     {
       _id: 4,
-      duration: 5
+      duration: 5,
     }
   ];
 
@@ -39,12 +39,12 @@ const AddLoan = () => {
 
   const onSubmit = (data) => {
     data.status = 'Pending';
-    let { amount, loanpay, img, details, status } = data;
+    let { amount, duration, img, details, status } = data;
 
     const formData = new FormData();
 
     formData.append("amount", amount)
-    formData.append("loanpay", loanpay);
+    formData.append("duration", duration);
     formData.append("img", img[0]);
     formData.append("details", details);
     formData.append("status", status);

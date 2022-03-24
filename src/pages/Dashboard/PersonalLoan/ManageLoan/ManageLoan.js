@@ -23,6 +23,7 @@ function Row(props) {
   const { loan, setLoans, loans } = props;
 
   let installment = parseFloat(loan.amount / (loan.duration * 12)).toFixed(2);
+  console.log(loan);
 
   const handleDelete = (id) => {
     const url = `https://smart-shop-pos.herokuapp.com/loans/${id}`;
@@ -66,7 +67,7 @@ function Row(props) {
         <TableCell align="center">{loan.firstName ? loan.firstName : 'Admin'}</TableCell>
         <TableCell align="center">{loan.address ? loan.address : address}</TableCell>
         <TableCell align="center">{loan.amount}</TableCell>
-        <TableCell align="center">{loan.duration} Year</TableCell>
+        <TableCell align="center">{loan.duration} Year/s</TableCell>
         <TableCell align="center">{installment}</TableCell>
         <TableCell align="center"><img style={{ width: "70px", height: "70px" }} className="img-fluid" src={`data:image/jpeg;base64,${loan.img}`} alt="employee" /></TableCell>
         <TableCell align="center">{loan.details}</TableCell>
