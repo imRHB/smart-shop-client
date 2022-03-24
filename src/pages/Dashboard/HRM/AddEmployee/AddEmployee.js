@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import cloudImage from "../../../../assets/images/cloud-upload.png";
 import styles from "./AddEmployee.module.css";
 import useAuth from "../../../../hooks/useAuth";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveEmployeeToDB } from "../../../../store/employee";
 import { loadDesignations } from "../../../../store/designation";
@@ -109,10 +109,20 @@ const AddEmployee = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.designationBtn}`}>Designation</Button>
-        <Button className={`${styles.manageEmployeeBtn}`}>
-          Manage Employee
-        </Button>
+        <NavLink
+          to="/dashboard/designation"
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.designationBtn}`}>Designation</Button>
+        </NavLink>
+        <NavLink
+          to="/dashboard/manage-employee"
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.manageEmployeeBtn}`}>
+            Manage Employee
+          </Button>
+        </NavLink>
       </Box>
       <Box className={`${styles.tableContainer}`}>
         <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>

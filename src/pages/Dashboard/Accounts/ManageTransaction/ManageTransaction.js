@@ -115,7 +115,7 @@ const ManageTransaction = () => {
                     <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
                 </Typography>
                 <Typography>
-                    <span style={{ fontSize: "26px" }}>ACCOUNTS</span> <br />{" "}
+                    <span style={{ fontSize: "26px", marginLeft: "-36px" }}>Accounts</span> <br />{" "}
                     <span style={{ color: "#969494" }}>Manage Transaction</span>
                 </Typography>
             </Box>
@@ -127,7 +127,7 @@ const ManageTransaction = () => {
                 </NavLink>
             </Box>
             <Box className={`${styles.tableContainer}`}>
-                <Typography sx={{ fontWeight: "bold" }}>Manage Transaction</Typography>
+                <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>Manage Transaction</Typography>
                 <hr />
                 <TableContainer
                     component={Paper}

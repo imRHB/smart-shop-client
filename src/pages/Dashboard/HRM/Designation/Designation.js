@@ -28,8 +28,6 @@ const Designation = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-
-
         <NavLink
           to="/dashboard/add-employee"
           style={{ textDecoration: "none" }}

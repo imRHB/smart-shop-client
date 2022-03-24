@@ -118,8 +118,8 @@ const ManageInvoice = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>MANAGE INVOICE</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Manage your Invoice</span>
+          <span style={{ fontSize: "26px" }}>Sell (Customer)</span> <br />{" "}
+          <span style={{ color: "#969494", marginLeft: '-64px' }}>Manage Invoice</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
@@ -128,15 +128,15 @@ const ManageInvoice = () => {
             Add New Invoice
           </Button>
         </NavLink>
-        <NavLink to="/dashboard/pos" style={{ textDecoration: "none" }}>
+        {/* <NavLink to="/dashboard/pos" style={{ textDecoration: "none" }}>
           <Button className={`${styles.receiptBtn}`} startIcon={<MenuIcon />}>
             POS
           </Button>
-        </NavLink>
+        </NavLink> */}
 
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Manage Invoice</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>Manage Invoice</Typography>
         <hr />
         <TableContainer
           component={Paper}

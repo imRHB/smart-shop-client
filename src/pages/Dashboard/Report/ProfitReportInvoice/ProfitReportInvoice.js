@@ -41,12 +41,12 @@ const ProfitReportInvoice = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px", marginLeft: "-10px" }}>
-            Profit Report (Invoice Wise)
+          <span style={{ fontSize: "26px", marginLeft: "-80px" }}>
+            Report
           </span>{" "}
           <br />{" "}
-          <span style={{ color: "#969494", marginLeft: "-210px" }}>
-            Total profit report
+          <span style={{ color: "#969494", marginLeft: "2px" }}>
+            Profit Report (Invoice)
           </span>
         </Typography>
       </Box>

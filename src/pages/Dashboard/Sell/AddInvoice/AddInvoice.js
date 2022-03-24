@@ -112,8 +112,8 @@ const AddInvoice = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>POS (CUSTOMER)</span> <br />
-          <span style={{ color: "#969494", marginLeft: "-104px" }}>
+          <span style={{ fontSize: "26px" }}>Sell (Customer)</span> <br />
+          <span style={{ color: "#969494", marginLeft: "-58px" }}>
             Add New Invoice
           </span>
         </Typography>

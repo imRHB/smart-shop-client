@@ -87,7 +87,7 @@ const Payment = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>ADD PAYMENT</span> <br />{" "}
+          <span style={{ fontSize: "26px", marginLeft: "-30px" }}>Accounts</span> <br />{" "}
           <span style={{ color: "#969494" }}>Add New Payment</span>
         </Typography>
       </Box>

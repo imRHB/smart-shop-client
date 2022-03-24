@@ -66,7 +66,7 @@ const AddPayment = () => {
         </Typography>
         <Typography>
           <span style={{ fontSize: "26px" }}>Personal Loan</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Add Payment</span>
+          <span style={{ color: "#969494", marginLeft: "-64px" }}>Add Payment</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
@@ -78,7 +78,7 @@ const AddPayment = () => {
         </NavLink>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Add Payment</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>Add Payment</Typography>
         <hr />
         <div className="mt-2">
           <div className="form-container">

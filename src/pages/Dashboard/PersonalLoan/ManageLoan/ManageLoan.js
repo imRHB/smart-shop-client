@@ -18,7 +18,7 @@ import { Delete } from "@mui/icons-material";
 import Swal from "sweetalert2";
 
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 function Row(props) {
   const { loan, setLoans, loans } = props;
 
@@ -106,11 +106,11 @@ const ManageLoan = () => {
     <Container sx={{ width: "100%", mb: 5 }}>
       <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
         <Typography>
-          <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
+          <AssignmentIcon className={`${styles.assignmentIcon} ${'me-2'}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px", marginLeft: "-10px" }}>
-            Manage Loan
+          <span style={{ fontSize: "26px" }}>
+            Personal Loan
           </span>{" "}
           <br />{" "}
           <span style={{ color: "#969494", marginLeft: "-65px" }}>
@@ -122,8 +122,12 @@ const ManageLoan = () => {
         <Link to='/dashboard/add-personal-loan' style={{ textDecoration: "none" }}>
           <Button className={`${styles.addLoanBtn}`}>Add Loan</Button>
         </Link>
-
-        <Button className={`${styles.addPaymentBtn}`}>Add Payment</Button>
+        <NavLink
+          to="/dashboard/add-payment"
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.addPaymentBtn}`}>Add Payment</Button>
+        </NavLink>
       </Box>
       <Box className={`${styles.tableContainer}`}>
         <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>

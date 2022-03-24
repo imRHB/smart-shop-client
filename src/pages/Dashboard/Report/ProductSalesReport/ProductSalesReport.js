@@ -65,9 +65,9 @@ const ProductSalesReport = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>Sales Report (Product Wise)</span>{" "}
+          <span style={{ fontSize: "26px", marginLeft: "-88px" }}>Report</span>{" "}
           <br />{" "}
-          <span style={{ color: "#969494", marginLeft: "-120px" }}>Sales Report (Product Wise)</span>
+          <span style={{ color: "#969494" }}>Sales Report (Product)</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "left", mb: 1 }}>
@@ -100,7 +100,7 @@ const ProductSalesReport = () => {
         </Collapse>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
           Sales Report (Product Wise)
         </Typography>
         <hr />

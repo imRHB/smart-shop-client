@@ -134,14 +134,14 @@ const StockManagements = () => {
 
     return (
         <Container sx={{ width: "100%", mb: 5 }}>
-            <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 1 }}>
+            <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
                 <Typography>
                     <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
                 </Typography>
                 <Typography>
-                    <span style={{ fontSize: "26px" }}>
-                        Stock Report</span> <br />{" "}
-                    <span style={{ color: "#969494", marginRight: "31px" }}>All Stock Report</span>
+                    <span style={{ fontSize: "26px", marginLeft: "-60px" }}>
+                        Stock</span> <br />{" "}
+                    <span style={{ color: "#969494", marginRight: "31px" }}>Stock Report</span>
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "left", mb: 1 }}>

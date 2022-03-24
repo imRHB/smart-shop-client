@@ -259,8 +259,8 @@ const ManageSupplier = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>Manage Supplier</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Manage your Supplier</span>
+          <span style={{ fontSize: "26px", marginLeft: "-28px" }}>Supplier</span> <br />{" "}
+          <span style={{ color: "#969494" }}>Manage Supplier</span>
         </Typography>
       </Box>
 
@@ -273,7 +273,7 @@ const ManageSupplier = () => {
       </Box>
 
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Manage Supplier</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>Manage Supplier</Typography>
         <hr />
         <TableContainer
           component={Paper}

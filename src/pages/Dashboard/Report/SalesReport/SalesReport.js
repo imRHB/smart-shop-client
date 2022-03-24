@@ -20,8 +20,8 @@ const SalesReport = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>Sales Report</span> <br />{" "}
-          <span style={{ color: "#969494", marginLeft: "-15px" }}>Total Sales Report</span>
+          <span style={{ fontSize: "26px", marginLeft: "-14px" }}>Report</span> <br />{" "}
+          <span style={{ color: "#969494" }}>Sales Report</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "left", mb: 1 }}>

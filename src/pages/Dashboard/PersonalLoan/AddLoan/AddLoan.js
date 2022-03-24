@@ -64,14 +64,14 @@ const AddLoan = () => {
         </Typography>
         <Typography>
           <span style={{ fontSize: "26px" }}>Personal Loan</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Add Loan</span>
+          <span style={{ color: "#969494", marginLeft: "-94px" }}>Add Loan</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
 
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Add Loan</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>Add Loan</Typography>
         <hr />
         <div className="mt-2">
           <div className="form-container">
