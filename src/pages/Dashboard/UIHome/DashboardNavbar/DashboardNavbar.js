@@ -115,7 +115,8 @@ const DashboardNavbar = () => {
                         borderRadius: "50%",
                         border: "1px solid gray",
                       }}
-                      src={setEmployee?.image}
+                      // src={setEmployee?.image}
+                      src={`data:image/*;base64,${setEmployee?.image}`}
                       alt=""
                     />
                     :
