@@ -3,6 +3,10 @@ import { useForm } from "react-hook-form";
 import styles from "./PurchaseProduct.module.css";
 import TextField from "@mui/material/TextField";
 import { Box, Button, Container } from "@mui/material";
+import Select from "@mui/material/Select";
+import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
 import Typography from "@mui/material/Typography";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -19,9 +23,86 @@ import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
 
 const PurchaseProduct = () => {
+  const [productName, setProductName] = useState("");
+  const [productId, setProductId] = useState(0);
+  const [totalCartn, setTotalCartn] = useState(0);
+  const [eachCartn, setEachCartn] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+  const [unit, setUnit] = useState("");
+  const [rate, setRate] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [totalDiscount, setTotalDiscount] = useState(0);
+  const [grandTotal, setGrandTotal] = useState(0);
+  const [paidAmount, setPaidAmount] = useState(0);
+  const [dueAmount, setDueAmount] = useState(0);
+  const [products, setProducts] = useState([]);
+
+  const handleEachCartn = (num) => {
+    setEachCartn(num);
+    setQuantity(totalCartn * num);
+  };
+
+  const handleUnitChange = (event) => {
+    setUnit(event.target.value);
+  };
+
+  const handleRate = (val) => {
+    setRate(val);
+    const newTotal = quantity * val;
+    setTotal(newTotal);
+    setGrandTotal(grandTotal + newTotal);
+  };
+
+  const handleDiscount = (val) => {
+    setDiscount(val);
+    const newTotal = quantity * rate - val;
+    setTotal(newTotal);
+    setTotalDiscount(parseInt(totalDiscount) + parseInt(val));
+    setGrandTotal(grandTotal - val);
+  };
+
+  const handlePaidAmount = (amount) => {
+    setPaidAmount(amount);
+    setDueAmount(grandTotal - amount);
+  };
+
   const [open, setOpen] = React.useState(false);
   const [toggle, setToggle] = useState(false);
   const [tableRow, setTableRow] = useState(1);
+
+  const handleNewProduct = (row) => {
+    setTableRow(row);
+    const newProduct = {
+      p_name: productName,
+      p_id: productId,
+      t_cartn: totalCartn,
+      e_cartn: eachCartn,
+      qty: quantity,
+      unit: unit,
+      rate: rate,
+      discount: discount,
+      total: quantity * rate - discount,
+    };
+    setProducts([...products, newProduct]);
+  };
+
+  const handleLastProduct = () => {
+    const newProduct = {
+      p_name: productName,
+      p_id: productId,
+      t_cartn: totalCartn,
+      e_cartn: eachCartn,
+      qty: quantity,
+      unit: unit,
+      rate: rate,
+      discount: discount,
+      total: quantity * rate - discount,
+    };
+    setProducts([...products, newProduct]);
+  };
+
+  // console.log(products);
 
   const {
     register,
@@ -29,6 +110,46 @@ const PurchaseProduct = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  const onSubmit = (data) => {
+    const {
+      barcode,
+      supplierName,
+      contactNo,
+      supplierEmail,
+      supplierAddress,
+      date,
+    } = data;
+
+    const supplierInvoice = {
+      barcode,
+      contactNo,
+      date,
+      products: products,
+      totalDiscount: totalDiscount,
+      grandTotal: grandTotal,
+      paidAmount: paidAmount,
+    };
+
+    //Send form data to Server
+    // dispatch(saveInvoiceToDB(data));
+    console.log(supplierInvoice);
+    setTableRow(1);
+    setQuantity(0);
+    setTotal(0);
+
+    // Swal.fire({
+    //   position: "top",
+    //   icon: "success",
+    //   title: "Product Purchased successfully!!",
+    //   showConfirmButton: true,
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     window.location.href = "/payment-gateway";
+    //   }
+    // });
+    reset();
+  };
 
   const buttonToggle = () => {
     setToggle(!toggle);
@@ -70,7 +191,7 @@ const PurchaseProduct = () => {
         <hr />
       </Box>
 
-      <form className={`${"shadow"}`}>
+      <form onSubmit={handleSubmit(onSubmit)} className={`${"shadow"}`}>
         <Box className={`${styles.tableContainer}`}>
           <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
             <Typography
@@ -136,7 +257,7 @@ const PurchaseProduct = () => {
                   sx={{ backgroundColor: "white" }}
                   label="Supplier Name"
                   variant="outlined"
-                  {...register("supplierName", { required: true })}
+                  {...register("supplierName", { required: false })}
                 />
               </Box>
               <Box className={`${styles.addSupplierField} ${"pb-4"}`}>
@@ -251,6 +372,13 @@ const PurchaseProduct = () => {
                     sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                     className={`${styles.tableCell}`}
                   >
+                    Unit
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                    className={`${styles.tableCell}`}
+                  >
                     Rate<span>*</span>
                   </TableCell>
                   <TableCell
@@ -286,7 +414,7 @@ const PurchaseProduct = () => {
                         <input
                           type="text"
                           placeholder="Product Name"
-                          {...register("p_name", { required: true })}
+                          onBlur={(e) => setProductName(e.target.value)}
                           style={{
                             padding: "8px",
                             backgroundColor: "#f1f3f6",
@@ -305,27 +433,7 @@ const PurchaseProduct = () => {
                         <input
                           type="text"
                           placeholder="Prod ID"
-                          {...register("p_id", { required: true })}
-                          style={{
-                            width: "70px",
-                            padding: "8px",
-                            backgroundColor: "#f1f3f6",
-                            border: "1px solid #aeaeae",
-                          }}
-                        />
-                      </TableCell>
-
-                      <TableCell
-                        align="center"
-                        sx={{
-                          borderRight: "1px solid rgba(224, 224, 224, 1)",
-                          p: 1,
-                        }}
-                      >
-                        <input
-                          type="text"
-                          placeholder="Total Ctn."
-                          {...register("t_ctn", { required: true })}
+                          onBlur={(e) => setProductId(e.target.value)}
                           style={{
                             width: "70px",
                             padding: "8px",
@@ -345,7 +453,7 @@ const PurchaseProduct = () => {
                         <input
                           type="number"
                           placeholder="0"
-                          {...register("ctn", { required: true })}
+                          onBlur={(e) => setTotalCartn(e.target.value)}
                           style={{
                             width: "70px",
                             padding: "8px",
@@ -354,6 +462,7 @@ const PurchaseProduct = () => {
                           }}
                         />
                       </TableCell>
+
                       <TableCell
                         align="center"
                         sx={{
@@ -362,9 +471,28 @@ const PurchaseProduct = () => {
                         }}
                       >
                         <input
-                          type="text"
+                          type="number"
                           placeholder="0"
-                          {...register("qnty", { required: true })}
+                          onBlur={(e) => handleEachCartn(e.target.value)}
+                          style={{
+                            width: "70px",
+                            padding: "8px",
+                            backgroundColor: "#f1f3f6",
+                            border: "1px solid #aeaeae",
+                          }}
+                        />
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        sx={{
+                          borderRight: "1px solid rgba(224, 224, 224, 1)",
+                          p: 1,
+                        }}
+                      >
+                        <input
+                          type="number"
+                          value={totalCartn * eachCartn}
+                          readOnly
                           style={{
                             width: "70px",
                             padding: "8px",
@@ -379,19 +507,31 @@ const PurchaseProduct = () => {
                         sx={{
                           borderRight: "1px solid rgba(224, 224, 224, 1)",
                           p: 1,
+                          width: "160px",
                         }}
                       >
-                        <input
-                          type="text"
-                          placeholder="Rate"
-                          {...register("rate", { required: true })}
-                          style={{
-                            width: "70px",
-                            padding: "8px",
-                            backgroundColor: "#f1f3f6",
-                            border: "1px solid #aeaeae",
-                          }}
-                        />
+                        <FormControl fullWidth>
+                          <InputLabel id="demo-simple-select-label">
+                            Select Unit
+                          </InputLabel>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            size="small"
+                            className={`${styles.inputFields}`}
+                            label="Select Unit"
+                            sx={{
+                              padding: "4px",
+                              backgroundColor: "#f1f3f6",
+                            }}
+                            value={unit}
+                            onChange={handleUnitChange}
+                          >
+                            <MenuItem value="kg">K.G.</MenuItem>
+                            <MenuItem value="gram">Gram</MenuItem>
+                            <MenuItem value="pcs">Pcs.</MenuItem>
+                          </Select>
+                        </FormControl>
                       </TableCell>
 
                       <TableCell
@@ -402,9 +542,9 @@ const PurchaseProduct = () => {
                         }}
                       >
                         <input
-                          type="text"
+                          type="number"
                           placeholder="0.00"
-                          {...register("discount", { required: true })}
+                          onBlur={(e) => handleRate(e.target.value)}
                           style={{
                             width: "70px",
                             padding: "8px",
@@ -422,9 +562,30 @@ const PurchaseProduct = () => {
                         }}
                       >
                         <input
-                          type="text"
+                          type="number"
+                          placeholder="0.00"
+                          onBlur={(e) => handleDiscount(e.target.value)}
+                          style={{
+                            width: "70px",
+                            padding: "8px",
+                            backgroundColor: "#f1f3f6",
+                            border: "1px solid #aeaeae",
+                          }}
+                        />
+                      </TableCell>
+
+                      <TableCell
+                        align="center"
+                        sx={{
+                          borderRight: "1px solid rgba(224, 224, 224, 1)",
+                          p: 1,
+                        }}
+                      >
+                        <input
+                          type="number"
                           placeholder="0"
-                          {...register("total", { required: true })}
+                          value={total}
+                          readOnly
                           style={{
                             width: "70px",
                             padding: "8px",
@@ -481,9 +642,10 @@ const PurchaseProduct = () => {
                     }}
                   >
                     <input
-                      type="text"
+                      type="number"
                       placeholder="0.00"
-                      {...register("totalDiscount", { required: true })}
+                      value={totalDiscount}
+                      readOnly
                       style={{
                         width: "70px",
                         padding: "8px",
@@ -518,9 +680,10 @@ const PurchaseProduct = () => {
                     }}
                   >
                     <input
-                      type="text"
+                      type="number"
                       placeholder="0"
-                      {...register("grandTotal", { required: true })}
+                      value={grandTotal}
+                      readOnly
                       style={{
                         width: "70px",
                         padding: "8px",
@@ -539,16 +702,27 @@ const PurchaseProduct = () => {
                     <Button
                       variant="contained"
                       sx={{ borderRadius: "0" }}
-                      onClick={() => setTableRow(tableRow + 1)}
+                      onClick={() => handleNewProduct(tableRow + 1)}
                       className={`${styles.receiptBtn}`}
                       color="success"
                     >
                       Add New Product
                     </Button>
                   </TableCell>
-                  <TableCell />
-                  <TableCell />
-                  <TableCell />
+                  <TableCell
+                    colSpan={3}
+                    align="center"
+                    sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                  >
+                    <Button
+                      variant="contained"
+                      sx={{ borderRadius: "0" }}
+                      onClick={() => handleLastProduct()}
+                      className={`${styles.addLastBtn}`}
+                    >
+                      Add Last Product
+                    </Button>
+                  </TableCell>
                   <TableCell />
                   <TableCell />
                   <TableCell
@@ -566,9 +740,9 @@ const PurchaseProduct = () => {
                     sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                   >
                     <input
-                      type="text"
+                      type="number"
                       placeholder="0.00"
-                      {...register("paid", { required: true })}
+                      onBlur={(e) => handlePaidAmount(e.target.value)}
                       style={{
                         width: "70px",
                         padding: "8px",
@@ -588,6 +762,7 @@ const PurchaseProduct = () => {
                     }}
                   >
                     <Button
+                      type="submit"
                       sx={{ borderRadius: "0", mb: 1 }}
                       className={`${styles.paymentBtn}`}
                       variant="contained"
@@ -624,9 +799,10 @@ const PurchaseProduct = () => {
                     sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
                   >
                     <input
-                      type="text"
+                      type="number"
                       placeholder="0"
-                      {...register("grandTotal", { required: true })}
+                      value={dueAmount}
+                      readOnly
                       style={{
                         width: "70px",
                         padding: "8px",
