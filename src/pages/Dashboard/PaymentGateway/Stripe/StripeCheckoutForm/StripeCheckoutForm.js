@@ -3,9 +3,9 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { Alert, Button, Container, Spinner } from "react-bootstrap";
 import styles from './StripeCheckoutForm.module.css';
 
-const payAmount = 300;
+// const payAmount = 300;
 
-const StripeCheckoutForm = () => {
+const StripeCheckoutForm = ({ grandTotal, handleUpdateStatus }) => {
     const stripe = useStripe();
     const elements = useElements();
 
@@ -20,11 +20,11 @@ const StripeCheckoutForm = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ payAmount })
+            body: JSON.stringify({ grandTotal })
         })
             .then(res => res.json())
             .then(data => setClientSecret(data.clientSecret));
-    }, []);
+    }, [grandTotal]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -111,8 +111,8 @@ const StripeCheckoutForm = () => {
                                     <Spinner animation="border" variant="dark" />
                                 </div>
                                     :
-                                    <Button type="submit" className="mt-4" disabled={!stripe || stripeSuccess}>
-                                        Pay ${payAmount}
+                                    <Button type="submit" className="mt-4" disabled={!stripe || stripeSuccess} onClick={handleUpdateStatus}>
+                                        Pay ${grandTotal}
                                     </Button>
                             }
                         </form>

@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 let initialState = {
     allProduct: [],
+    storeProducts: [],
     productLoading: false,
     reload: false,
     productAdded: false,
@@ -31,15 +32,29 @@ const product = createSlice({
             state.allProduct = action.payload;
             state.productLoading = false;
         },
+        storeProductRequested: (state, action) => {
+            state.productLoading = true;
+        },
+        storeProductRequestedFailed: (state, action) => {
+            state.productLoading = false;
+        },
+        storeProductReceived: (state, action) => {
+            state.storeProducts = action.payload;
+            state.productLoading = false;
+        },
         addProductToDB: (state, action) => {
             state.apiResponse = action.payload;
         },
         setAuthError: (state, action) => {
             state.error = action.payload.error;
         },
-
         setSingleProduct: (state, action) => {
             state.singleProduct = state.allProduct.find(
+                (product) => product._id === action.payload._id
+            );
+        },
+        setSingleStoreProduct: (state, action) => {
+            state.singleStoreProduct = state.storeProducts.find(
                 (product) => product._id === action.payload._id
             );
         },
@@ -54,6 +69,10 @@ const product = createSlice({
             if (action.payload.modifiedCount)
                 Swal.fire("Good job!", "product Updated Successfully!", "success");
         },
+        /* setUpdateStoreProduct: (state, action) => {
+            if (action.payload.modifiedCount)
+                // Swal.fire("Good job!", "product Updated Successfully!", "success");
+        }, */
         setReload: (state, action) => {
             state.reload = action.payload.reload;
         },
@@ -65,10 +84,14 @@ export const {
     productRequested,
     productRequestedFailed,
     productReceived,
+    storeProductRequested,
+    storeProductRequestedFailed,
+    storeProductReceived,
     addProductToDB,
     setAuthError,
     setDeleteProduct,
     setSingleProduct,
+    setSingleStoreProduct,
     setUpdateProduct,
     setReload,
 } = product.actions;
@@ -92,9 +115,35 @@ export const loadProducts = () =>
         onFailed: productRequestedFailed.type,
     });
 
+export const selectedProduct = (id) =>
+    apiCallBegan({
+        url: `/details/${id}`,
+        onSuccess: setSingleProduct.type,
+    });
+
 export const deleteProductFromDb = (id) => apiCallBegan({
     url: `/products/${id}`,
     method: 'delete',
     onSuccess: setDeleteProduct.type,
 });
 
+/* stored products load */
+
+export const loadStoreProducts = () => apiCallBegan({
+    url: '/stores',
+    onStart: storeProductRequested.type,
+    onSuccess: storeProductReceived.type,
+    onFailed: storeProductRequestedFailed.type,
+});
+
+export const selectedStoreProduct = (id) => apiCallBegan({
+    url: `/stores/${id}`,
+    onSuccess: setSingleStoreProduct.type,
+});
+
+export const updateStoreProduct = (id, data) => apiCallBegan({
+    url: `/stores/${id}`,
+    data,
+    method: 'put',
+    onSuccess: setSingleStoreProduct.type,
+});

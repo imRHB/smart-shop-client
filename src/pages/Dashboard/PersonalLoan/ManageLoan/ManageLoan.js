@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,27 +10,73 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import { Button, Container } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import users from "../../../../assets/data/users.json";
 import styles from "./ManageLoan.module.css";
-import { NavLink } from "react-router-dom";
+import { Delete } from "@mui/icons-material";
+// import HowToRegSharpIcon from '@mui/icons-material/HowToRegSharp';
+import Swal from "sweetalert2";
 
+
+import { Link } from "react-router-dom";
 function Row(props) {
-  const { employee } = props;
+  const { loan, setLoans, loans } = props;
 
+  const handleDelete = (id) => {
+    const url = `https://smart-shop-pos.herokuapp.com/loans/${id}`;
+    fetch(url, {
+      method: 'DELETE'
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.deletedCount > 0) {
+          Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const remainingLoans = loans.filter(
+                (filteredLoan) => filteredLoan._id !== id
+              );
+              setLoans(remainingLoans)
+            }
+          });
+        }
+      })
+
+
+  };
+  // const handleLoanStatus = (id) => {
+
+  // };
+  const address = "Dhaka,Bangladesh"
   return (
     <React.Fragment>
       <TableRow
         className={`${styles.tableHover}`}
         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       >
-        <TableCell align="center">{employee.name}</TableCell>
-        <TableCell align="center">15 - 2 - 2022</TableCell>
-        <TableCell align="center">{2000}</TableCell>
-        <TableCell align="center">{1500}</TableCell>
+        <TableCell align="center">{loan.date}</TableCell>
+        <TableCell align="center">{loan.firstName}</TableCell>
+        <TableCell align="center">{loan.phone}</TableCell>
+        <TableCell align="center">{loan.address ? loan.address : address}</TableCell>
+        <TableCell align="center">{loan.amount}</TableCell>
+        <TableCell align="center">{100000}</TableCell>
+        <TableCell align="center"><img style={{ width: "70px", height: "70px" }} className="img-fluid" src={`data:image/jpeg;base64,${loan.img}`} alt="employee" /></TableCell>
+        <TableCell align="center">{loan.details}</TableCell>
         <TableCell align="center">
-          <EditIcon className={`${styles.editIcon}`} />
+          {/* <HowToRegSharpIcon onClick={() => {
+            return handleLoanStatus(loan._id);
+          }} className={`${styles.approveIcon}`} /> */}
+          <Delete
+            onClick={() => handleDelete(loan?._id)}
+            className={`${styles.deleteIcon}`}
+          />
         </TableCell>
       </TableRow>
     </React.Fragment>
@@ -40,10 +85,15 @@ function Row(props) {
 const ManageLoan = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+  const [loans, setLoans] = useState([])
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  useEffect(() => {
+    fetch('http://localhost:5000/loans')
+      .then(res => res.json())
+      .then(data => setLoans(data))
+  }, [])
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
@@ -66,18 +116,11 @@ const ManageLoan = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        {/* <NavLink
-          to="/dashboard/add-personal-loan"
-          style={{ textDecoration: "none" }}
-        >
+        <Link to='/dashboard/add-personal-loan' style={{ textDecoration: "none" }}>
           <Button className={`${styles.addLoanBtn}`}>Add Loan</Button>
-        </NavLink> */}
-        <NavLink
-          to="/dashboard/add-payment"
-          style={{ textDecoration: "none" }}
-        >
-          <Button className={`${styles.addPaymentBtn}`}>Add Payment</Button>
-        </NavLink>
+        </Link>
+
+        <Button className={`${styles.addPaymentBtn}`}>Add Payment</Button>
       </Box>
       <Box className={`${styles.tableContainer}`}>
         <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
@@ -92,16 +135,28 @@ const ManageLoan = () => {
             <TableHead className={`${styles.tableHeader}`}>
               <TableRow>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Name
-                </TableCell>
-                <TableCell align="center" className={`${styles.tableCell}`}>
                   Date
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Debit
+                  Name
                 </TableCell>
                 <TableCell align="center" className={`${styles.tableCell}`}>
-                  Credit
+                  Phone
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Address
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Amount
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Installment/Year
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Documents
+                </TableCell>
+                <TableCell align="center" className={`${styles.tableCell}`}>
+                  Reasons
                 </TableCell>
 
                 <TableCell align="center" className={`${styles.tableCell}`}>
@@ -110,25 +165,25 @@ const ManageLoan = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users
+              {loans
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((employee) => (
-                  <Row key={employee._id} employee={employee} />
+                .map((loan) => (
+                  <Row key={loan._id} loans={loans} loan={loan} setLoans={setLoans} />
                 ))}
             </TableBody>
           </Table>
         </TableContainer>
-        <Typography className="mt-3">
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 15]}
-            component="div"
-            count={users.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Typography>
+
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 15]}
+          component="div"
+          count={users.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+
       </Box>
     </Container>
   );

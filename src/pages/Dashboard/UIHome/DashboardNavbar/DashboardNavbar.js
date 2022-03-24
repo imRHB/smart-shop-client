@@ -14,9 +14,12 @@ import { NavLink } from "react-router-dom";
 import { Modal, Row, Col } from "react-bootstrap";
 import { Box, Button } from "@mui/material";
 import useAuth from "../../../../hooks/useAuth";
+import { loadEmployees } from "../../../../store/employee";
+import { useDispatch, useSelector } from "react-redux";
 
 const DashboardNavbar = () => {
-  const { logOut } = useAuth();
+  const { employee, logOut } = useAuth();
+  const dispatch = useDispatch();
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -42,14 +45,28 @@ const DashboardNavbar = () => {
     minute: "numeric",
   });
 
+  const employees = useSelector(
+    (state) => state.entities.employee.allEmployees
+  );
 
-  const [notification, setNotification] = useState([]);
+  // Load all designations from Database
   useEffect(() => {
-    fetch("https://smart-shop-pos.herokuapp.com/events")
-      .then(res => res.json())
-      .then(data => setNotification(data))
+    dispatch(loadEmployees());
+  }, [dispatch]);
 
-  }, [notification]);
+
+  const setEmployee = employees.find(filteredEmployee => filteredEmployee.email === employee.email);
+
+
+  // const [notification, setNotification] = useState([]);
+  // useEffect(() => {
+  //   fetch("https://smart-shop-pos.herokuapp.com/events")
+  //     .then(res => res.json())
+  //     .then(data => setNotification(data))
+
+  // }, [notification]);
+
+
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -71,16 +88,16 @@ const DashboardNavbar = () => {
         }}
         component="div"
       >
-        <NavLink to="/dashboard/pos">
+        <NavLink to="/dashboard/add-new-invoice">
           {" "}
           <AddIcon sx={{ color: "#0d6efd" }}> </AddIcon>
         </NavLink>
-        <Badge color="error" badgeContent={notification.length} max={10}>
+        {/* <Badge color="error" badgeContent={notification.length} max={10}>
           <NotificationsNoneIcon
             sx={{ color: "#0d6efd" }}
             className={`${styles.usersProfileDropdown}`}
           />
-        </Badge>
+        </Badge> */}
 
         <div>
           <NavDropdown
@@ -89,41 +106,39 @@ const DashboardNavbar = () => {
           >
             <div className={`${styles.alldropdownItems}`}>
               <NavDropdown.Item className={`${styles.usersDPDropdown}`}>
-                {true && (
-                  <div className="mx-3 text-center">
-                    {false ? (
-                      <img
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          borderRadius: "50%",
-                          border: "1px solid gray",
-                        }}
-                        src={""}
-                        alt=""
-                      />
-                    ) : (
-                      <img
-                        style={{
-                          width: "60px",
-                          height: "60px",
-                          borderRadius: "50%",
-                          border: "1px solid gray",
-                          marginTop: "10px",
-                        }}
-                        src={defaultUser}
-                        alt=""
-                      />
-                    )}
-                  </div>
-                )}
+                <div className="mx-3 text-center">
+                  {employee ?
+                    <img
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        borderRadius: "50%",
+                        border: "1px solid gray",
+                      }}
+                      src={setEmployee?.image}
+                      alt=""
+                    />
+                    :
+                    <img
+                      style={{
+                        width: "60px",
+                        height: "60px",
+                        borderRadius: "50%",
+                        border: "1px solid gray",
+                        marginTop: "10px",
+                      }}
+                      src={defaultUser}
+                      alt=""
+                    />
+                  }
+                </div>
               </NavDropdown.Item>
               <hr />
               <NavDropdown.Item className={`${styles.usersDropdown}`}>
                 <PersonOutlineIcon sx={{ marginRight: "10px" }} />
                 <span className="">
                   {" "}
-                  {"Najmul Ovi"} | {true ? "Admin" : "Subscriber"}
+                  {setEmployee?.name} |  {setEmployee?.designation}
                 </span>
               </NavDropdown.Item>
 

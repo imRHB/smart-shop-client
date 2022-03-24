@@ -1,20 +1,20 @@
+import React, { useEffect, useRef } from 'react';
 import { Container, Grid, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect, useRef } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import logo from '../../../assets/images/logo2.png'
-import styles from "./CustomerInvoice.module.css";
+import styles from "./OfficeInvoice.module.css";
 import { savePDF } from "@progress/kendo-react-pdf";
 import { Link, useParams } from 'react-router-dom';
 
-const CustomerInvoice = () => {
-    const [orders, setOrders] = React.useState([]);
+const OfficeInvoice = () => {
+    const [transactions, setTransactions] = React.useState([]);
     const { id } = useParams()
     useEffect(() => {
-        fetch(`https://smart-shop-pos.herokuapp.com/orders/${id}`)
+        fetch(`https://smart-shop-pos.herokuapp.com/${id}`)
             .then(res => res.json())
             .then(data => {
-                setOrders(data)
+                setTransactions(data)
             })
     }, [id]);
 
@@ -24,7 +24,6 @@ const CustomerInvoice = () => {
         savePDF(pdfExportComponent.current, { paperSize: "A4" })
     }
     return (
-
         <Container sx={{ mt: 2 }} >
 
             <Box sx={{ mt: 5 }}>
@@ -41,17 +40,17 @@ const CustomerInvoice = () => {
                     </Grid>
                     <Grid item xs={6} >
                         <Box >
-                            <Typography sx={{ textAlign: "left" }} >Bill TO: {orders.name}</Typography>
+                            <Typography sx={{ textAlign: "left" }} >Bill TO: {transactions.name}</Typography>
 
-                            <Typography sx={{ textAlign: "left" }} variant="body1">Phone Number: {orders.customerPhone}</Typography>
+                            <Typography sx={{ textAlign: "left" }} variant="body1">Phone Number: {transactions.customerPhone}</Typography>
 
-                            <Typography sx={{ textAlign: "left" }} variant="body1">Address: {orders.address}</Typography>
+                            <Typography sx={{ textAlign: "left" }} variant="body1">Address: {transactions.address}</Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={6} >
                         <Box sx={{ ml: "auto" }}>
                             <Typography sx={{ textAlign: "right " }}>Invoice ID:#fss{Math.floor(Math.random() * 1000) + 1} </Typography>
-                            <Typography sx={{ textAlign: "right" }}>Invoice Date: {orders.date}</Typography>
+                            <Typography sx={{ textAlign: "right" }}>Invoice Date: {transactions.date}</Typography>
                         </Box>
                     </Grid>
                 </Grid>
@@ -68,34 +67,24 @@ const CustomerInvoice = () => {
                             <Table aria-label="simple table">
                                 <TableHead className={`${styles.tableHeader}`}>
                                     <TableRow hover>
-                                        <TableCell className={`${styles.tableCell}`} align="center">SL.</TableCell>
-                                        <TableCell className={`${styles.tableCell}`} align="center">Product Name</TableCell>
-                                        <TableCell className={`${styles.tableCell}`} align="center">Unit Price</TableCell>
+                                        <TableCell className={`${styles.tableCell}`} align="center">Transactions Date</TableCell>
+                                        <TableCell className={`${styles.tableCell}`} align="center"> Name</TableCell>
+                                        <TableCell className={`${styles.tableCell}`} align="center">Transactions Category</TableCell>
 
-                                        <TableCell className={`${styles.tableCell}`} align="center">Quantity </TableCell>
-
-                                        <TableCell className={`${styles.tableCell}`} align="right">Amount</TableCell>
-
+                                        <TableCell className={`${styles.tableCell}`} align="right">Paid Amount</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
 
                                     <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }} className={`${styles.tableHover}`}>
-
                                         <TableCell align="center" component="th" scope="row">
-                                            1            </TableCell>
-                                        <TableCell align="center">{orders.product}</TableCell>
-                                        <TableCell align="center">BDT {orders.price}</TableCell>
-                                        <TableCell align="center">{orders.quantity}</TableCell>
-                                        <TableCell align="right">BDT {orders.price * orders.quantity}</TableCell>
+                                            {transactions.date}</TableCell>
+                                        <TableCell align="center" component="th" scope="row">
+                                            {transactions.name}</TableCell>
 
-
+                                        <TableCell align="center">{transactions.category}</TableCell>
+                                        <TableCell align="right">BDT {transactions.amount}</TableCell>
                                     </TableRow>
-                                    <TableCell colSpan={4} align="right" sx={{ borderRight: 1 }} style={{ fontWeight: "bold" }}>
-                                        Total Amount (With Discount):
-                                    </TableCell>
-                                    <TableCell align="right" style={{ fontWeight: "bold" }}>BDT {orders.grandTotal}</TableCell>
-
                                 </TableBody>
                             </Table>
 
@@ -114,4 +103,4 @@ const CustomerInvoice = () => {
     );
 };
 
-export default CustomerInvoice;
+export default OfficeInvoice;

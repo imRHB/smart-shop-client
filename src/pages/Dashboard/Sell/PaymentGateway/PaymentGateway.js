@@ -124,7 +124,7 @@ const PaymentGateway = () => {
 
           {mode === "card" && (
             <Box className={`${styles.cardPay}`}>
-              <StripePayment />
+              <StripePayment grandTotal={grandTotal} handleUpdateStatus={handleUpdateStatus} />
             </Box>
           )}
           {mode === "cash" && (

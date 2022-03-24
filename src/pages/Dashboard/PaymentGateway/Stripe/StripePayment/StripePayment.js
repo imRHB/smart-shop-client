@@ -8,9 +8,8 @@ const stripePromise = loadStripe(
   "pk_test_51JvolqDDx1eUK2QE6EQUXOtHXlcxn3Mh8emlRCkKOIr28p0yAhQ03BXSiaOizrX90axYizuhY4FrsSAmshvUHEUV00SRG0P7pa"
 );
 
-const StripePayment = () => {
-  const amount = 300;
-
+const StripePayment = ({ grandTotal, handleUpdateStatus }) => {
+  // const amount = 300;
   const { id } = useParams();
 
   const [service, setService] = useState({});
@@ -29,9 +28,9 @@ const StripePayment = () => {
 
   return (
     <div>
-      {amount && (
+      {/* grandTotal will be need to view the form */(
         <Elements stripe={stripePromise}>
-          <StripeCheckoutForm service={service} />
+          <StripeCheckoutForm service={service} grandTotal={grandTotal} handleUpdateStatus={handleUpdateStatus} />
         </Elements>
       )}
     </div>
