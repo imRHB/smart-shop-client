@@ -104,7 +104,7 @@ function Row(props) {
 
   const handleEditCustomer = (id) => {
     dispatch(setEditCustomer({ _id: id }));
-    return setShow(true);
+    setShow(true);
   };
 
   return (
