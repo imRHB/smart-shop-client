@@ -27,6 +27,7 @@ import styles from "./CustomerManagement.module.css";
 import Swal from "sweetalert2";
 import { css } from "@emotion/react";
 import FadeLoader from "react-spinners/FadeLoader";
+import Divider from "@mui/material/Divider";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import {
@@ -146,30 +147,51 @@ function Row(props) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
+              <Typography
+                sx={{
+                  textAlign: "center",
+                  py: 1,
+                  color: "#001E3C",
+                  fontWeight: "900",
+                }}
+                variant="h6"
+                gutterBottom
+                component="div"
+              >
                 Customer Details
               </Typography>
+              <Divider sx={{ mb: 1 }} />
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Name</TableCell>
-                    <TableCell align="center">Phone</TableCell>
-                    <TableCell align="center">Position</TableCell>
-                    <TableCell align="center">Address</TableCell>
-                    <TableCell align="center">Salary</TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                      Name
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                      Phone
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                      Email
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                      Address
+                    </TableCell>
+                    <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                      Category
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow key={customer?._id}>
-                    <TableCell component="th" scope="row">
-                      {customer?.name}
-                    </TableCell>
+                  <TableRow key={customer._id}>
+                    <TableCell align="center">{customer?.name}</TableCell>
                     <TableCell align="center">{customer?.phone}</TableCell>
-                    <TableCell align="center">{customer?.position}</TableCell>
+                    <TableCell align="center">{customer?.email}</TableCell>
                     <TableCell align="center">{customer?.address}</TableCell>
+                    <TableCell align="center">{customer?.category}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
+              <Divider sx={{ mt: 1 }} />
             </Box>
           </Collapse>
         </TableCell>
