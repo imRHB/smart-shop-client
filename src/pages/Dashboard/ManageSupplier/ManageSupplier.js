@@ -81,13 +81,14 @@ function Row(props) {
   );
 
   const onSubmit = (data) => {
-    const { name, contact, company, companyAddress } = data;
+    const { name, contact, email, company, companyAddress } = data;
 
     const formData = new FormData();
 
     formData.append("_id", editSupplier._id);
     formData.append("name", name);
     formData.append("contact", contact);
+    formData.append("email", email);
     formData.append("company", company);
     formData.append("companyAddress", companyAddress);
 
@@ -175,6 +176,18 @@ function Row(props) {
                     defaultValue={editSupplier?.contact}
                     readonly
                     {...register("contact", { required: true })}
+                  />
+                </Box>
+                <Box className={`${styles.addSupplierField}`}>
+                  <TextField
+                    id="outlined-basic"
+                    size="small"
+                    className={`${styles.supplierTextField}`}
+                    label="Supplier Email"
+                    variant="outlined"
+                    defaultValue={editSupplier?.email}
+                    readonly
+                    {...register("email", { required: false })}
                   />
                 </Box>
                 <Box className={`${styles.addSupplierField}`}>
