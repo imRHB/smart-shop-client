@@ -39,7 +39,7 @@ const AddInvoice = () => {
   const [quantity, setQuantity] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [paidAmount, setPaidAmount] = useState(0);
-  const [value, setValue] = React.useState("one");
+  const [value, setValue] = React.useState("Old Customer");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
