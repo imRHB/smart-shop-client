@@ -1,22 +1,27 @@
-import React, { useEffect } from 'react';
-import { Container, Grid, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import React, { useEffect, useRef } from 'react';
+import { Button, Container, Grid, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { Table } from 'react-bootstrap';
 import logo from '../../../assets/images/logo2.png';
 import styles from './SupplierInvoice.module.css'
+import useAuth from '../../../hooks/useAuth';
+import { loadEmployees } from "../../../store/employee";
+import { useDispatch, useSelector } from "react-redux";
+import { savePDF } from "@progress/kendo-react-pdf";
+import { Link } from 'react-router-dom';
 function Row(props) {
-    const { product } = props;
-
+    const { product, index } = props;
     return (
         <React.Fragment>
             <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }} className={`${styles.tableHover}`}>
 
                 <TableCell align="center" component="th" scope="row">
-                    {product._id}              </TableCell>
-                <TableCell align="center">{product.name}</TableCell>
-                <TableCell align="center">BDT {product.salePrice}</TableCell>
-                <TableCell align="center">5</TableCell>
-                <TableCell align="right">BDT {product.salePrice * 5}</TableCell>
+                    {index + 1} </TableCell>
+                <TableCell align="center">{product.p_name}</TableCell>
+                <TableCell align="center">{product.p_id}</TableCell>
+                <TableCell align="center">{product.qty}</TableCell>
+                <TableCell align="center">BDT {product.rate}</TableCell>
+                <TableCell align="right">BDT {product.total}</TableCell>
 
 
             </TableRow>
@@ -24,22 +29,45 @@ function Row(props) {
     );
 }
 const SupplierInvoice = () => {
-    const [products, setProducts] = React.useState([]);
+    const [purchaseProducts, setPurchaseProducts] = React.useState([]);
+    const { employee } = useAuth()
     useEffect(() => {
-        fetch("https://zahidhasan2806.github.io/productData/products.json")
+        fetch("https://smart-shop-pos.herokuapp.com/stores")
             .then(res => res.json())
             .then(data => {
-
-                setProducts(data.slice(0, 4))
+                setPurchaseProducts(data[data.length - 1])
             })
     }, []);
-    let total = 0;
-    products.forEach(item => {
-        total = total + item.salePrice * 5
-    })
+    const employees = useSelector(
+        (state) => state.entities.employee.allEmployees
+    );
+
+    // Load all designations from Database
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadEmployees());
+    }, [dispatch]);
+
+
+    const setEmployee = employees.find(filteredEmployee => filteredEmployee.email === employee.email);
+
+    const dummyName = "Supplier";
+    const dummyAddress = "N/A";
+    const { supplierName, contactNo, supplierAddress, date, products, grandTotal } = purchaseProducts;
+
+    const pdfExportComponent = useRef(null);
+    const handleExportWithComponent = () => {
+        savePDF(pdfExportComponent.current, { paperSize: "A4" })
+    }
+
     return (
         <Container >
-            <Box sx={{ mt: 5, bgcolor: "white", position: "relative" }} className={`${styles.containerBorder}`}>
+            <Box sx={{ my: 3 }}>
+                <Button onClick={handleExportWithComponent} className={`${styles.btn}`} >Download</Button>
+                <Link to="/dashboard/purchase-product" style={{ textDecoration: 'none' }}>    <Button className={`${styles.btn}`} >Purchase Another Product</Button></Link>
+            </Box>
+            <Box ref={pdfExportComponent} sx={{ bgcolor: "white", position: "relative" }} className={`${styles.containerBorder}`}>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ p: 5 }}>
                     <Grid item xs={12} sx={{ textAlign: "left" }}>
                         <Box >
@@ -49,17 +77,17 @@ const SupplierInvoice = () => {
                     </Grid>
                     <Grid item xs={6}>
                         <Box >
-                            <Typography sx={{ textAlign: "left" }} >Bill TO: MD Zahid Hasan</Typography>
+                            <Typography sx={{ textAlign: "left" }} >Bill To: {supplierName ? supplierName : dummyName}</Typography>
 
-                            <Typography sx={{ textAlign: "left" }} variant="body1">Phone Number: +8801646190607</Typography>
+                            <Typography sx={{ textAlign: "left" }} variant="body1">Phone Number: {contactNo}</Typography>
 
-                            <Typography sx={{ textAlign: "left" }} variant="body1">Address: 59 GM Bari Wasa Masjid road</Typography>
+                            <Typography sx={{ textAlign: "left" }} variant="body1">Address: {supplierAddress ? supplierAddress : dummyAddress}</Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={6} >
                         <Box sx={{ ml: "auto" }}>
-                            <Typography sx={{ textAlign: "right " }}>Invoice ID:#22222FSS </Typography>
-                            <Typography sx={{ textAlign: "right" }}>Invoice Date: 12-03-2022</Typography>
+                            <Typography sx={{ textAlign: "right " }}>Invoice ID:#fss{Math.floor(Math.random() * 1000) + 1} </Typography>
+                            <Typography sx={{ textAlign: "right" }}>Invoice Date: {date}</Typography>
                         </Box>
                     </Grid>
                 </Grid>
@@ -78,22 +106,22 @@ const SupplierInvoice = () => {
                                     <TableRow hover>
                                         <TableCell className={`${styles.tableCell}`} align="center">SL.</TableCell>
                                         <TableCell className={`${styles.tableCell}`} align="center">Product Name</TableCell>
+                                        <TableCell className={`${styles.tableCell}`} align="center">Product ID</TableCell>
+                                        <TableCell className={`${styles.tableCell}`} align="center">Total Quantity</TableCell>
                                         <TableCell className={`${styles.tableCell}`} align="center">Unit Price</TableCell>
 
-                                        <TableCell className={`${styles.tableCell}`} align="center">Quantity </TableCell>
-
-                                        <TableCell className={`${styles.tableCell}`} align="right">Amount</TableCell>
+                                        <TableCell className={`${styles.tableCell}`} align="center">Total </TableCell>
 
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {products.map((product) => (
-                                        <Row key={product._id} product={product} />
+                                    {products?.map((product, index) => (
+                                        <Row key={product._id} product={product} index={index} />
                                     ))}
-                                    <TableCell colSpan={4} align="right" sx={{ borderRight: 1 }} style={{ fontWeight: "bold" }}>
-                                        Total Amount:
+                                    <TableCell colSpan={5} align="right" sx={{ borderRight: 1 }} style={{ fontWeight: "bold" }}>
+                                        Total Amount(with Discount):
                                     </TableCell>
-                                    <TableCell align="right" style={{ fontWeight: "bold" }}>BDT {total}</TableCell>
+                                    <TableCell align="right" style={{ fontWeight: "bold" }}>BDT {grandTotal}</TableCell>
 
                                 </TableBody>
                             </Table>
@@ -103,7 +131,7 @@ const SupplierInvoice = () => {
 
                             <Grid item xs={6}>
                                 <Box >
-                                    <Typography sx={{ textAlign: "left", mt: 8, mb: 3, fontWeight: "bold" }}>Prepared By: Hasan Zahid</Typography>
+                                    <Typography sx={{ textAlign: "left", mt: 8, mb: 3, fontWeight: "bold" }}>Prepared By: {setEmployee?.name}</Typography>
 
                                     <Typography sx={{ textAlign: "left" }}>Smart Shop | Dhaka,Bangladesh  <br /> https://smart-shop-pos.web.app </Typography>
                                 </Box>
