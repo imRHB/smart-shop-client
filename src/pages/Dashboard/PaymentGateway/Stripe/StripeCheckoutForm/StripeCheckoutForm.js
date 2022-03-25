@@ -50,7 +50,7 @@ const StripeCheckoutForm = ({ grandTotal, handleUpdateStatus }) => {
         }
         else {
             setStripeError('');
-            console.log(paymentMethod);
+
         }
 
         // Peyment Intent
@@ -70,7 +70,7 @@ const StripeCheckoutForm = ({ grandTotal, handleUpdateStatus }) => {
         else {
             setStripeError('');
             setStripeSuccess('Your payment is successfully completed');
-            console.log(paymentIntent);
+
             setProcessing(false);
         }
     };

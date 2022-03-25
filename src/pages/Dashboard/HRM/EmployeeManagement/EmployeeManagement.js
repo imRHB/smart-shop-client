@@ -136,7 +136,7 @@ function Row(props) {
       formData.append("image", image[0]);
     }
 
-    console.log(formData);
+
     // Send updated data to the server
     dispatch(updateEmployeeToDB(formData));
     setReload(!reload);
@@ -174,7 +174,7 @@ function Row(props) {
             style={{ width: "70px", height: "70px" }}
             src={`data:image/jpeg;base64,${employee.image}`}
             alt="Product"
-            // loading="lazy"
+          // loading="lazy"
           />
         </TableCell>
         <TableCell align="center">

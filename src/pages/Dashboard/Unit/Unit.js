@@ -57,7 +57,7 @@ const Unit = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const onSubmit = (data) => {
-    console.log(data);
+
   };
 
   const handleChangePage = (event, newPage) => {

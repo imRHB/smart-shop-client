@@ -23,7 +23,7 @@ function Row(props) {
   const { loan, setLoans, loans } = props;
 
   let installment = parseFloat(loan.amount / (loan.duration * 12)).toFixed(2);
-  console.log(loan);
+
 
   const handleDelete = (id) => {
     const url = `https://smart-shop-pos.herokuapp.com/loans/${id}`;

@@ -37,7 +37,6 @@ const HeaderTwo = () => {
 
 
   const setEmployee = employees.find(filteredEmployee => filteredEmployee.email === employee.email);
-  // console.log(setEmployee)
 
   return (
     <div className={`${styles.navContainer} ${"shadow"}`}>

@@ -78,10 +78,9 @@ const EventCalender = () => {
 
                 }
 
-                console.log(data);
+
             })
     }
-    console.log(allEvents);
 
 
 

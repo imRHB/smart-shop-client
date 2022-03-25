@@ -106,7 +106,7 @@ const PurchaseProduct = () => {
     setProducts([...products, newProduct]);
   };
 
-  // console.log(products);
+
 
   const {
     register,
@@ -830,13 +830,19 @@ const PurchaseProduct = () => {
                     >
                       Submit
                     </Button>
-                    <Button
-                      sx={{ borderRadius: "0" }}
-                      variant="contained"
-                      color="success"
+                    <NavLink
+                      to="/supplier-invoice"
+                      style={{ textDecoration: "none" }}
                     >
-                      Print Invoice
-                    </Button>
+                      <Button
+                        sx={{ borderRadius: "0" }}
+                        variant="contained"
+                        color="success"
+                      >
+                        Print Invoice
+                      </Button>
+                      {/* <Button className={`${styles.addProductBtn}`}>Add Product</Button> */}
+                    </NavLink>
                   </TableCell>
                   <TableCell />
                   <TableCell />
