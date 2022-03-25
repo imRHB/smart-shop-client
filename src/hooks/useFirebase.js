@@ -102,11 +102,11 @@ const useFirebase = () => {
       if (employee) {
         dispatch(
           setEmployee({
-            email: employee.email,
-            displayName: employee.displayName,
+            email: employee?.email,
+            displayName: employee?.displayName,
           })
         );
-        // dispatch(setLoading({ loading: false }));
+        dispatch(setLoading({ loading: false }));
       } else {
       }
     });

@@ -15,12 +15,11 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/customer-invoice/:id" element={<CustomerInvoice />} />
-      <Route path="/payment-gateway" element={<PaymentGateway />} />
-      {/* <Route path="/dashboard/*" element={<DashboardHome />} /> */}
+      <Route path="/customer-invoice/:id" element={<PrivateRoute><CustomerInvoice /></PrivateRoute>} />
+      <Route path="/payment-gateway" element={<PrivateRoute><PaymentGateway /></PrivateRoute>} />
       <Route path="/dashboard/*" element={<PrivateRoute><DashboardHome /></PrivateRoute>} />
-      <Route path="/payment-invoice/:id" element={<OfficeInvoice />} />
-      <Route path="/supplier-invoice" element={<SupplierInvoice />} />
+      <Route path="/payment-invoice/:id" element={<PrivateRoute><OfficeInvoice /></PrivateRoute>} />
+      <Route path="/supplier-invoice" element={<PrivateRoute><SupplierInvoice /></PrivateRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
