@@ -24,7 +24,7 @@ initializeFirebase();
 const useFirebase = () => {
   const auth = getAuth();
   const dispatch = useDispatch();
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const employee = useSelector((state) => state.entities.employee.employeeInfo);
   const authError = useSelector((state) => state.entities.employee.error);
@@ -106,9 +106,10 @@ const useFirebase = () => {
             displayName: employee?.displayName,
           })
         );
-        dispatch(setLoading({ loading: false }));
+        // dispatch(setLoading({ loading: false }));
       } else {
       }
+      setIsLoading(false);
     });
     return () => unsubscribe;
   }, [auth]);
@@ -135,6 +136,7 @@ const useFirebase = () => {
     employee,
     authError,
     loading,
+    isLoading,
     admin,
     registerEmployee,
     loginWithEmailAndPassword,

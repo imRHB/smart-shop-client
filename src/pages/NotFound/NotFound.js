@@ -16,7 +16,7 @@ const NotFound = () => {
           <span className="text-muted"><small>couldn't repair</small></span>
           <h1 className="fw-bold text-danger">Error 404</h1>
           <p className="text-muted">The requested URL was not found on this server.</p>
-          {/* <p>Visit <Link to="/dashboard/*" className={`${styles.redirUrl}`}>Dashboard</Link> until the problem is resolved.</p> */}
+          <p>Visit <Link to="/dashboard" className={`${styles.redirUrl}`}>Dashboard</Link> until the problem is resolved.</p>
         </div>
       </Container>
     </div>
