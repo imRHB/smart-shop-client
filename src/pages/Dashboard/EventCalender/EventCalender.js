@@ -120,7 +120,7 @@ const EventCalender = () => {
             <div className="row mt-5">
                 <div className="col-12 col-lg-3 col-md-3">
                     <div className="rounded-3" style={{ backgroundColor: 'white' }}>
-                        <h5 className="pt-4 mb-2 text-center">ALl Event List</h5>
+                        <h5 className="pt-4 mb-2 text-center">All Event List</h5>
                         <hr />
                         <div className="pb-2 mx-1">
                             {
