@@ -1,19 +1,34 @@
-import React from 'react';
-import { Container } from "react-bootstrap";
-import { Box, Paper, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
+import React, { useEffect } from 'react';
+import { Box, Container, Paper, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from 'react-redux';
+import Swal from "sweetalert2";
 import Table from "@mui/material/Table";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import EditIcon from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
-import category from '../../../assets/data/category.json';
 import styles from './AddCategory.module.css';
-import { useForm } from "react-hook-form";
+import { deleteCategoryFromDb, loadCategories, saveCategoryToDb, setReload } from '../../../store/category';
 
 function Row(props) {
-    const { ctgry, serial } = props;
+    const { category, serial, reload } = props;
+    const dispatch = useDispatch();
 
-    const handleDelete = () => {
-
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Do you want to delete the category?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Delete"
+        })
+            .then(result => {
+                if (result.isConfirmed) {
+                    dispatch(deleteCategoryFromDb(id));
+                    Swal.fire('Successfull', 'Category deleted!', 'success');
+                    setReload(!reload)
+                }
+            })
     };
 
     return (
@@ -25,11 +40,11 @@ function Row(props) {
                 <TableCell component="th" scope="row">
                     {serial + 1}
                 </TableCell>
-                <TableCell align="center">{ctgry.name}</TableCell>
+                <TableCell align="center">{category.name}</TableCell>
                 <TableCell align="center">
-                    <EditIcon className={`${styles.editIcon}`} />
+                    {/* <EditIcon className={`${styles.editIcon}`} /> */}
                     <Delete
-                        onClick={() => handleDelete(ctgry?._id)}
+                        onClick={() => handleDelete(category?._id)}
                         className={`${styles.deleteIcon}`}
                     />
                 </TableCell>
@@ -39,13 +54,26 @@ function Row(props) {
 }
 
 const AddCategory = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const dispatch = useDispatch();
+    let reload = useSelector((state) => state.entities.category.reload);
+    const categories = useSelector((state) => state.entities.category.categories);
+
+    useEffect(() => {
+        dispatch(loadCategories());
+    }, [reload, dispatch]);
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     const onSubmit = (data) => {
-        console.log(data);
+        dispatch(saveCategoryToDb(data));
+
+        dispatch(setReload({ reload: !reload }));
+        Swal.fire("Success", "New Category Added", "success");
+
+        reset();
     };
 
     const handleChangePage = (event, newPage) => {
@@ -87,13 +115,13 @@ const AddCategory = () => {
                                                     className="form-label"
                                                     style={{ fontWeight: "bold" }}
                                                 >
-                                                    Name{" "}
+                                                    Category{" "}
                                                     <sup className="text-danger fw-bold fs-6">*</sup>
                                                 </label>
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    placeholder="Category Name"
+                                                    placeholder="Category"
                                                     style={{ background: "#E5E5E5" }}
                                                     {...register("name", { required: true })}
                                                 />
@@ -116,10 +144,10 @@ const AddCategory = () => {
                                                 </label>
                                                 <textarea
                                                     className="form-control"
-                                                    rows="3"
-                                                    placeholder="Product Details"
+                                                    rows="1"
+                                                    placeholder="Details"
                                                     style={{ background: "#E5E5E5" }}
-                                                    {...register("description", { required: false })}
+                                                    {...register("details", { required: false })}
                                                 ></textarea>
                                             </div>
                                         </div>
@@ -127,14 +155,10 @@ const AddCategory = () => {
                                 </div>
 
                                 <div className="row gx-3 mb-3">
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
-                                        {/* some space */}
-                                    </div>
-
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
-                                        <div className="p-3 border bg-light">
-                                            <div className="mb-3">
-                                                <Box sx={{ textAlign: "center", my: 2 }}>
+                                    <div className="col-lg-12 col-md-12 col-sm-12 col-12 mt-1">
+                                        <div className="p-3">
+                                            <div>
+                                                <Box sx={{ textAlign: "center" }}>
                                                     <input
                                                         type="reset"
                                                         className={`${"btn"} ${styles.resetBtn}`}
@@ -180,12 +204,12 @@ const AddCategory = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {category
+                            {categories
                                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((ctgry, index) => (
+                                .map((category, index) => (
                                     <Row
-                                        key={ctgry._id}
-                                        ctgry={ctgry}
+                                        key={category._id}
+                                        category={category}
                                         serial={index}
                                     // loading={loading}
                                     // reload={reload}
@@ -199,7 +223,7 @@ const AddCategory = () => {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 15]}
                         component="div"
-                        count={category.length}
+                        count={categories.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}

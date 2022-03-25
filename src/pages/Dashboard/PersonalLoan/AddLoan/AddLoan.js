@@ -1,48 +1,60 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Button, Container, Grid, Input } from "@mui/material";
+import { Container } from "@mui/material";
 import { useForm } from "react-hook-form";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
 import styles from "./AddLoan.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { saveloansToDb, setReload } from "../../../../store/loans";
 
 const AddLoan = () => {
-  const categories = [
+  const dispatch = useDispatch();
+  let reload = useSelector((state) => state.entities.loans.reload);
+  const loanpays = [
     {
       _id: 1,
-      name: "Gold",
+      duration: 1,
     },
     {
       _id: 2,
-      name: "Silver",
+      duration: 2,
     },
     {
       _id: 3,
-      name: "Platinum",
+      duration: 3,
     },
     {
       _id: 4,
-      name: "Regular",
-    },
+      duration: 5,
+    }
   ];
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
-    let { firstName, category, phone, date, amount, details, address } = data;
-    const name = `${firstName}`;
+    data.status = 'Pending';
+    let { amount, duration, img, details, status } = data;
 
     const formData = new FormData();
-    formData.append("name", name);
-    formData.append("category", category);
-    formData.append("phone", phone);
-    formData.append("date", date);
-    formData.append("amount", amount);
+
+    formData.append("amount", amount)
+    formData.append("duration", duration);
+    formData.append("img", img[0]);
     formData.append("details", details);
-    formData.append("address", address);
+    formData.append("status", status);
+
+    dispatch(saveloansToDb(formData));
+    dispatch(setReload({ reload: !reload }));
+    //Alert message
+    Swal.fire("Success", "New loan request added", "success");
+
+    reset();
   };
   return (
     <Container sx={{ width: "100%", mb: 5 }}>
@@ -52,15 +64,14 @@ const AddLoan = () => {
         </Typography>
         <Typography>
           <span style={{ fontSize: "26px" }}>Personal Loan</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Add Loan</span>
+          <span style={{ color: "#969494", marginLeft: "-94px" }}>Add Loan</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.designationBtn}`}>Add Person</Button>
-        <Button className={`${styles.manageEmployeeBtn}`}>Add Payment</Button>
+
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Add Loan</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>Add Loan</Typography>
         <hr />
         <div className="mt-2">
           <div className="form-container">
@@ -74,51 +85,25 @@ const AddLoan = () => {
                           className="form-label"
                           style={{ fontWeight: "bold" }}
                         >
-                          Name <sup className="text-danger fw-bold fs-6">*</sup>
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Name"
-                          style={{ background: "#E5E5E5" }}
-                          {...register("firstName", { required: true })}
-                        />
-                        {errors.firstName && (
-                          <span className="text-danger">
-                            Please enter your name.
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div className="p-3 border bg-light">
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          Phone{" "}
+                          Amount{" "}
                           <sup className="text-danger fw-bold fs-6">*</sup>
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
-                          placeholder="Phone"
+                          placeholder="Enter loan amount"
                           style={{ background: "#E5E5E5" }}
-                          {...register("phone", { required: true })}
+                          {...register("amount", { required: true })}
                         />
-                        {errors.phone && (
+                        {errors.name && (
                           <span className="text-danger">
-                            Please enter phone number.
+                            Please enter loan amount.
                           </span>
                         )}
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="row gx-3 mb-3">
                   <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                     <div className="p-3 border bg-light">
                       <div className="mb-3">
@@ -126,34 +111,27 @@ const AddLoan = () => {
                           className="form-label"
                           style={{ fontWeight: "bold" }}
                         >
-                          Amount
+                          Pay within (Year) <sup className="text-danger fw-bold fs-6">*</sup>
                         </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Amount"
+
+                        <select
+                          className="form-select"
+                          aria-label="Default select example"
                           style={{ background: "#E5E5E5" }}
-                          {...register("amount", { required: false })}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div className="p-3 border bg-light">
-                      <div className="mb-3">
-                        <label
-                          className="form-label"
-                          style={{ fontWeight: "bold" }}
+                          {...register("duration", { required: true })}
                         >
-                          Date
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Date"
-                          style={{ background: "#E5E5E5" }}
-                          {...register("date", { required: false })}
-                        />
+                          <option>-- select year --</option>
+                          {loanpays.map((loanpay) => (
+                            <option key={loanpay._id} value={loanpay?.duration}>
+                              {loanpay?.duration}
+                            </option>
+                          ))}
+                        </select>
+                        {errors.loanpay && (
+                          <span className="text-danger">
+                            Please select a year
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -168,21 +146,64 @@ const AddLoan = () => {
                           style={{ fontWeight: "bold" }}
                         >
                           Details
+                          <sup className="text-danger fw-bold fs-6">*</sup>
                         </label>
                         <textarea
                           className="form-control"
-                          rows="3"
-                          placeholder="Details"
+                          rows="1"
+                          placeholder="Reason of taking loan"
                           style={{ background: "#E5E5E5" }}
-                          {...register("details", { required: false })}
+                          {...register("details", { required: true })}
                         ></textarea>
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+
+                  <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                     <div className="p-3 border bg-light">
                       <div className="mb-3">
-                        <Box sx={{ textAlign: "center", my: 2 }}>
+                        <span
+                          className="mb-2 d-inline-block"
+                          style={{ fontWeight: "bold" }}
+                        >
+                          Realated Document
+                          <sup className="text-danger fw-bold fs-6">*</sup>
+                        </span>
+                        <div className="input-group mb-4">
+                          <label
+                            className="input-group-text"
+                            htmlFor="inputGroupFile02"
+                          >
+                            <img
+                              style={{ height: "35px" }}
+                              src=""
+                              alt=""
+                            />{" "}
+                            <span
+                              style={{ color: "#251D58", fontWeight: "bold" }}
+                            >
+                              Upload image
+                            </span>
+                          </label>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            className="form-control"
+                            style={{ background: "#E5E5E5" }}
+                            id="inputGroupFile02"
+                            {...register("img", { required: true })}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row gx-3 mb-3">
+                  <div className="col-lg-12 col-md-12 col-sm-12 col-12 mt-1">
+                    <div className="p-3">
+                      <div>
+                        <Box sx={{ textAlign: "center" }}>
                           <input
                             type="reset"
                             className={`${"btn"} ${styles.resetBtn}`}
@@ -200,8 +221,6 @@ const AddLoan = () => {
                     </div>
                   </div>
                 </div>
-
-                <div className="row gx-3 mb-3"></div>
               </form>
             </div>
           </div>

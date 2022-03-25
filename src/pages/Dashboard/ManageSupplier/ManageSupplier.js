@@ -81,24 +81,25 @@ function Row(props) {
   );
 
   const onSubmit = (data) => {
-    const { name, contact, company, companyAddress } = data;
+    const { name, contact, email, company, companyAddress } = data;
 
-    const newData = {
-      id: editSupplier._id,
-      name,
-      contact,
-      company,
-      companyAddress
-    };
+    const formData = new FormData();
+
+    formData.append("_id", editSupplier._id);
+    formData.append("name", name);
+    formData.append("contact", contact);
+    formData.append("email", email);
+    formData.append("company", company);
+    formData.append("companyAddress", companyAddress);
 
     // Send updated data to the server
-    dispatch(updateSupplierToDB(newData));
-    reset();
+    dispatch(updateSupplierToDB(formData));
+    setReload(!reload);
   };
 
   const handleEditSupplier = (id) => {
     dispatch(setEditSupplier({ _id: id }));
-    return setShow(true);
+    setShow(true);
   };
 
   return (
@@ -161,6 +162,9 @@ function Row(props) {
                     variant="outlined"
                     {...register("name", { required: true })}
                   />
+                  {errors.name && (
+                    <span className="text-danger">Please enter name.</span>
+                  )}
                 </Box>
                 <Box className={`${styles.addSupplierField}`}>
                   <TextField
@@ -170,7 +174,20 @@ function Row(props) {
                     label="Supplier Contact No."
                     variant="outlined"
                     defaultValue={editSupplier?.contact}
+                    readonly
                     {...register("contact", { required: true })}
+                  />
+                </Box>
+                <Box className={`${styles.addSupplierField}`}>
+                  <TextField
+                    id="outlined-basic"
+                    size="small"
+                    className={`${styles.supplierTextField}`}
+                    label="Supplier Email"
+                    variant="outlined"
+                    defaultValue={editSupplier?.email}
+                    readonly
+                    {...register("email", { required: false })}
                   />
                 </Box>
                 <Box className={`${styles.addSupplierField}`}>
@@ -183,6 +200,9 @@ function Row(props) {
                     multiline
                     {...register("company", { required: true })}
                   />
+                  {errors.company && (
+                    <span className="text-danger">Please enter company.</span>
+                  )}
                 </Box>
                 <Box className={`${styles.addSupplierField}`}>
                   <TextField
@@ -194,6 +214,11 @@ function Row(props) {
                     defaultValue={editSupplier?.companyAddress}
                     {...register("companyAddress", { required: true })}
                   />
+                  {errors.companyAddress && (
+                    <span className="text-danger">
+                      Please enter company address.
+                    </span>
+                  )}
                 </Box>
               </Box>
 
@@ -259,13 +284,18 @@ const ManageSupplier = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>Manage Supplier</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Manage your Supplier</span>
+          <span style={{ fontSize: "26px", marginLeft: "-28px" }}>
+            Supplier
+          </span>{" "}
+          <br /> <span style={{ color: "#969494" }}>Manage Supplier</span>
         </Typography>
       </Box>
 
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <NavLink to="/dashboard/add-supplier" style={{ textDecoration: "none" }}>
+        <NavLink
+          to="/dashboard/add-supplier"
+          style={{ textDecoration: "none" }}
+        >
           <Button className={`${styles.paymentBtn}`} startIcon={<MenuIcon />}>
             Add Supplier
           </Button>
@@ -273,7 +303,9 @@ const ManageSupplier = () => {
       </Box>
 
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Manage Supplier</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+          Manage Supplier
+        </Typography>
         <hr />
         <TableContainer
           component={Paper}

@@ -5,10 +5,9 @@ import Payment from "../Accounts/Payment/Payment";
 import AddExpense from "../AddExpense/AddExpense";
 import AddSupplier from "../AddSupplier/AddSupplier";
 import AddProduct from "../AddProduct/AddProduct";
-import CrudTest from "../CrudTest/CrudTest";
-import CustomerManagement from "../CustomerManagement/CustomerManagement";
-import CustomerStatus from "../CustomerManagement/CustomerStatus/CustomerStatus";
-import UpdateCustomer from "../CustomerManagement/UpdateCustomer/UpdateCustomer";
+import CustomerManagement from "../Customer/CustomerManagement/CustomerManagement";
+import CustomerStatus from "../Customer/CustomerStatus/CustomerStatus";
+import AddCustomer from "../Customer/AddCustomer/AddCustomer";
 import Dashboard from "../Dashboard/Dashboard";
 import ExpenseItem from "../Expense/ExpenseItem";
 import AddEmployee from "../HRM/AddEmployee/AddEmployee";
@@ -39,6 +38,8 @@ import SupplierStock from "../SupplierStock/SupplierStock";
 // import TestComponent from "../TestComponent/TestComponent";
 import TestComponent from "../TestComponent/TestComponent";
 import EventCalender from "../EventCalender/EventCalender";
+import PurchaseProduct from "../Products/PurchaseProduct/PurchaseProduct";
+import Unit from "../Unit/Unit";
 //==============import your component here===================//
 
 const NestedRoutes = () => {
@@ -57,10 +58,12 @@ const NestedRoutes = () => {
         <Route path="product-category" element={<AddCategory />}></Route>
         <Route path="add-product" element={<AddProduct />}></Route>
         <Route path="manage-product" element={<ManageProducts />}></Route>
+        <Route path="purchase-product" element={<PurchaseProduct />}></Route>
+        <Route path="manage-unit" element={<Unit />}></Route>
         {/*============ Product Department All Routes End ==============*/}
 
         {/*============ Customer Department All Routes Start ==============*/}
-        <Route path="add-customer" element={<UpdateCustomer />}></Route>
+        <Route path="add-customer" element={<AddCustomer />}></Route>
         <Route path="manage-customer" element={<CustomerManagement />}></Route>
         <Route path="credit-customer" element={<CustomerStatus />}></Route>
         {/*============ Customer Department All Routes End ==============*/}
@@ -72,7 +75,7 @@ const NestedRoutes = () => {
 
         {/*============ Accounts Department All Routes Start ==============*/}
         <Route path="payment" element={<Payment />}></Route>
-        <Route path="manage-transition" element={<ManageTransaction />}></Route>
+        <Route path="manage-transaction" element={<ManageTransaction />}></Route>
         {/*============ Accounts Department All Routes End ==============*/}
 
         {/*============ Stock Department All Routes Start ==============*/}

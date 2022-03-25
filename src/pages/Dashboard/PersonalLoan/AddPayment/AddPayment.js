@@ -7,6 +7,7 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import Swal from "sweetalert2";
 import cloudImage from "../../../../assets/images/cloud-upload.png";
 import styles from "./AddPayment.module.css";
+import { NavLink } from "react-router-dom";
 
 const AddPayment = () => {
   const categories = [
@@ -65,15 +66,19 @@ const AddPayment = () => {
         </Typography>
         <Typography>
           <span style={{ fontSize: "26px" }}>Personal Loan</span> <br />{" "}
-          <span style={{ color: "#969494" }}>Add Payment</span>
+          <span style={{ color: "#969494", marginLeft: "-64px" }}>Add Payment</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "right", my: 2 }}>
-        <Button className={`${styles.designationBtn}`}>Add Person</Button>
-        <Button className={`${styles.manageEmployeeBtn}`}>Add Loan</Button>
+        <NavLink
+          to="/dashboard/manage-personal-loan"
+          style={{ textDecoration: "none" }}
+        >
+          <Button className={`${styles.manageEmployeeBtn}`}>Manage Loan</Button>
+        </NavLink>
       </Box>
       <Box className={`${styles.tableContainer}`}>
-        <Typography sx={{ fontWeight: "bold" }}>Add Payment</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>Add Payment</Typography>
         <hr />
         <div className="mt-2">
           <div className="form-container">
@@ -301,10 +306,10 @@ const AddPayment = () => {
                     </div>
                   </div>
 
-                  <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+                  <div className="col-lg-6 col-md-6 col-sm-12 col-12">
                     <div className="p-3 border bg-light">
                       <div className="mb-3">
-                        <Box sx={{ textAlign: "center", my: 2 }}>
+                        <Box sx={{ textAlign: "center", my: 3 }}>
                           <input
                             type="reset"
                             className={`${"btn"} ${styles.resetBtn}`}

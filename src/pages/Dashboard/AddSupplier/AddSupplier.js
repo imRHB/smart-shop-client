@@ -51,7 +51,7 @@ const AddSupplier = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>ADD SUPPLIER</span> <br />{" "}
+          <span style={{ fontSize: "26px", marginLeft: "-34px" }}>Supplier</span> <br />{" "}
           <span style={{ color: "#969494" }}>Add New Supplier</span>
         </Typography>
       </Box>

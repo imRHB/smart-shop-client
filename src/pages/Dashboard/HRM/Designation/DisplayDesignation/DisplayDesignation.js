@@ -86,7 +86,7 @@ Row.propTypes = {
   }).isRequired,
 };
 
-const DisplayDesignation = () => {
+const DisplayDesignation = ({ newReload }) => {
   const dispatch = useDispatch();
   // Getting all designation from store
   const allDesignations = useSelector(
@@ -96,12 +96,12 @@ const DisplayDesignation = () => {
     (state) => state.entities.designation.designationLoading
   );
   //get reload value from store
-  const reload = useSelector((state) => state.entities.designation.reload);
+  // const reload = useSelector((state) => state.entities.designation.reload);
 
   // Load all designations from Database
   useEffect(() => {
     dispatch(loadDesignations());
-  }, [reload, dispatch]);
+  }, [newReload]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -163,7 +163,6 @@ const DisplayDesignation = () => {
                     key={designation._id}
                     designation={designation}
                     serial={index}
-                    reload={reload}
                   />
                 ))}
           </TableBody>

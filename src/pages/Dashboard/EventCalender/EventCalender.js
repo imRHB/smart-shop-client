@@ -86,10 +86,9 @@ const EventCalender = () => {
 
 
     return (
-        <div className="mt-5">
-
-            <div style={{ backgroundColor: 'white' }} className="pt-3 bg-light pb-4">
-                <h5 className="text-start ms-2">Please Add A Event <EventAvailableIcon style={{ color: '#003366', fontSize: '3rem' }}></EventAvailableIcon> </h5>
+        <div className="my-5 mx-4">
+            <div style={{ backgroundColor: 'white' }} className="pt-3 bg-light pb-4 rounded-3">
+                <h5 className="text-start mx-3">Add an Event <EventAvailableIcon style={{ color: '#003366', fontSize: '3rem' }}></EventAvailableIcon> </h5>
                 <form >
                     <div className="row">
                         <div className="col-12 col-lg-3 col-md-3">
@@ -109,7 +108,7 @@ const EventCalender = () => {
 
                         <div className="col-12 col-lg-3 col-md-3 ">
                             <button style={{ backgroundColor: '#003366' }} type="submit" className="btn text-light fw-bold mt-1 me-5 w-75" onClick={handleAddEvent}>
-                                <AddCommentIcon></AddCommentIcon>   Add Event
+                                <AddCommentIcon></AddCommentIcon><span className="ms-2">Add Event</span>
                             </button>
                         </div>
                     </div>
@@ -119,11 +118,11 @@ const EventCalender = () => {
             </div>
 
             <div className="row mt-5">
-                <div className="col-12 col-lg-3 col-md-3 ">
-
-                    <div className="m-1" style={{ backgroundColor: 'white', height: '' }}>
-                        <h5 style={{ borderBottom: '2px solid gray' }} className="pt-4">ALl Event List:</h5>
-                        <div className="pb-3">
+                <div className="col-12 col-lg-3 col-md-3">
+                    <div className="rounded-3" style={{ backgroundColor: 'white' }}>
+                        <h5 className="pt-4 mb-2 text-center">All Event List</h5>
+                        <hr />
+                        <div className="pb-2 mx-1">
                             {
                                 allEvents?.map(event =>
                                     <h6 style={{ color: 'white', backgroundColor: "#4682B4" }} className="mt-2 me-3 ms-2  p-1 border rounded"><FiberSmartRecordIcon style={{ color: '#FFA500' }} ></FiberSmartRecordIcon>  {event?.title}</h6>
@@ -134,14 +133,11 @@ const EventCalender = () => {
                     </div>
                 </div>
                 <div className="col-12 col-lg-9 col-md-9">
-                    <div style={{ backgroundColor: 'white' }} className="p-1" >
+                    <div style={{ backgroundColor: 'white' }} className="p-1 rounded-3">
                         <Calendar localizer={localizer} events={allEvents} startAccessor="start" endAccessor="end" style={{ height: 500, margin: "20px" }} />
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     );
 }

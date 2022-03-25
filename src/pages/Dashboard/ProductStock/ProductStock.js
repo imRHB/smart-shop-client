@@ -58,8 +58,8 @@ const ProductStock = () => {
                     <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
                 </Typography>
                 <Typography>
-                    <span style={{ fontSize: "26px" }}>Stock Report (Product Wise)</span> <br />{" "}
-                    <span style={{ color: "#969494" }}>Stock Report (Product Wise)</span>
+                    <span style={{ fontSize: "26px", marginLeft: "-102px" }}>Stock</span> <br />{" "}
+                    <span style={{ color: "#969494" }}>Stock Report (Product)</span>
                 </Typography>
             </Box>
             <Box className={`${styles.tableContainer}`}>

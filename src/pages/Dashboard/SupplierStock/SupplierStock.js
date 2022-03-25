@@ -54,14 +54,14 @@ const SupplierStock = () => {
     };
     return (
         <Container sx={{ width: "100%" }}>
-            <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 1 }}>
+            <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
                 <Typography>
                     <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
                 </Typography>
                 <Typography>
-                    <span style={{ fontSize: "26px" }}>
-                        Stock Report (Supplier Wise)</span> <br />{" "}
-                    <span style={{ color: "#969494" }}>Stock Report (Supplier Wise)</span>
+                    <span style={{ fontSize: "26px", marginLeft: "-104px" }}>
+                        Stock</span> <br />{" "}
+                    <span style={{ color: "#969494" }}>Stock Report (Supplier)</span>
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "left", mb: 1 }}>

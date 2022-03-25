@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Smart Shop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+(A POS Management System)
 
-## Available Scripts
+### Project Overview
 
-In the project directory, you can run:
+A point of sale system, or POS, is the place where your customer makes a payment for products or services at your store. Simply put, every time a customer makes a purchase, they’re completing a point-of-the-sale transaction.
+You can visit out [Smart Shop](https://smart-shop-pos.web.app/) website to know more detail.
 
-### `npm start`
+### Project Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Login
+- Dashboard for admin and employees
+- POS management system for customers
+- Purchase product POS system for suppliers
+- Customer management system
+- Supplier management system
+- Accounts and payment management
+- HRM for employees
+- Expense system for all kind of expenses
+- Loan management system
+- Add event system for employees
+- Unit testing
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Technologies and Tools
 
-### `npm test`
+- React JS
+- Redux-Toolkit
+- Node JS
+- Express JS
+- MongoDB
+- React Router DOM
+- React Bootstrap
+- ApexCharts
+- Material UI
+- React Hook Form
+- Stripe Payment Gateway
+- JWT Token
+- Firebase
+- Heroku
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Future Implementation
 
-### `npm run build`
+- Real time notification system
+- Real time chatting system within employees
+- Employee attendence system
+- File upload system
+- Improve user experience
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+##### Server
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [GitHub (Smart Shop Server)](https://github.com/imRHB/smart-shop-server)

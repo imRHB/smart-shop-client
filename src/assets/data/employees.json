@@ -66,5 +66,20 @@
     "email": "meem@gmail.com",
     "address": "Gazipur, Dhaka",
     "salary": "15000"
+  },
+  {
+    "name": "Admin",
+    "designation": "Admin",
+    "role": "admin",
+    "employeeId": "5422552145",
+    "phone": "01777777787",
+    "email": "admin@ssp.com",
+    "salary": 250000,
+    "bloodGroup": "A+",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "zip": "1215",
+    "address": "Dhanmondi",
+    "image": "https://i.ibb.co/BZJmKxS/admin.png"
   }
 ]

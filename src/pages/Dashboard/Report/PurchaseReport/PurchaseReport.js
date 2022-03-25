@@ -20,8 +20,8 @@ const PurchaseReport = () => {
           <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
         </Typography>
         <Typography>
-          <span style={{ fontSize: "26px" }}>Purchase Report</span> <br />{" "}
-          <span style={{ color: "#969494", marginLeft: "-35px" }}>Total Purchase Report</span>
+          <span style={{ fontSize: "26px", marginLeft: "-44px" }}>Report</span> <br />{" "}
+          <span style={{ color: "#969494", marginLeft: "2px" }}>Purchase Report</span>
         </Typography>
       </Box>
       <Box sx={{ textAlign: "left", mb: 1 }}>
@@ -55,7 +55,7 @@ const PurchaseReport = () => {
       </Box>
 
       <Box className={`${styles.tableContainer}`} sx={{ mt: 2 }}>
-        <Typography sx={{ fontWeight: "bold" }}>Purchase Report</Typography>
+        <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>Purchase Report</Typography>
         <hr />
         <TableContainer
           component={Paper}

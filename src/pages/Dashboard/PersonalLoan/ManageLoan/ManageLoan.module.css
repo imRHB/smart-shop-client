@@ -16,7 +16,7 @@
     font-weight: 700 !important;
   }
   
-  .editIcon {
+  .approveIcon {
     background-color: #003366;
     color: #fff;
     font-weight: 700;
@@ -50,7 +50,7 @@
     margin-right: 5px !important;
   }
   .addPaymentBtn {
-    background-color: #FFB61E !important;
+    background-color: #45c203 !important;
     color: #fff !important;
     text-transform: capitalize !important;
     padding-left: 15px !important;
@@ -74,4 +74,12 @@
     background-color: #f1f3f6;
     padding: 17px;
     border-radius: 5px;
+  }
+  .deleteIcon {
+    background-color: #ee101b;
+    color: #fff;
+    font-weight: 700;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
   }

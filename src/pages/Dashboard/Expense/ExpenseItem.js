@@ -1,51 +1,80 @@
-import React from "react";
-import Box from "@mui/material/Box";
+import React, { useEffect } from 'react';
+import { Box, Container, Paper, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from 'react-redux';
+import Swal from "sweetalert2";
 import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import TablePagination from "@mui/material/TablePagination";
-import { Button, Container, Grid, Link, TextField } from "@mui/material";
-import expenses from "../../../assets/data/expenses.json";
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import EditIcon from '@mui/icons-material/Edit';
-import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import Delete from "@mui/icons-material/Delete";
+import styles from './ExpenseItem.module.css';
+import { deleteExpenseItemFromDb, loadExpenseItems, saveExpenseItemToDb, setReload } from '../../../store/expenses';
 
 function Row(props) {
-    const { expense } = props;
-    const [open, setOpen] = React.useState(false);
+    const { expItem, serial, reload } = props;
+    const dispatch = useDispatch();
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Do you want to delete the item?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Delete"
+        })
+            .then(result => {
+                if (result.isConfirmed) {
+                    dispatch(deleteExpenseItemFromDb(id));
+                    Swal.fire('Successfull', 'Expense item deleted!', 'success');
+                    setReload(!reload)
+                }
+            })
+    };
 
     return (
         <React.Fragment>
-            <TableRow className="colunm" sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-
-                <TableCell width="15%" align="center" component="th" scope="row">
-                    {expense._id}
+            <TableRow
+                className={`${styles.tableHover}`}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+                <TableCell component="th" scope="row">
+                    {serial + 1}
                 </TableCell>
-                <TableCell align="center">{expense.item}</TableCell>
-
+                <TableCell align="center">{expItem.name}</TableCell>
                 <TableCell align="center">
-
-              
-
-                    <Button>
-                        <DeleteForeverIcon sx={{ backgroundColor: 'red', borderRadius: '5px', color: 'white', padding: '2px' }} />
-                    </Button>
+                    {/* <EditIcon className={`${styles.editIcon}`} /> */}
+                    <Delete
+                        onClick={() => handleDelete(expItem?._id)}
+                        className={`${styles.deleteIcon}`}
+                    />
                 </TableCell>
             </TableRow>
-
         </React.Fragment>
     );
 }
 
 const ExpenseItem = () => {
+    const dispatch = useDispatch();
+    let reload = useSelector((state) => state.entities.expenses.reload);
+    const expenseItems = useSelector((state) => state.entities.expenses.expenseItems);
+
+    useEffect(() => {
+        dispatch(loadExpenseItems());
+    }, [reload, dispatch]);
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    const onSubmit = (data) => {
+        dispatch(saveExpenseItemToDb(data));
+
+        dispatch(setReload({ reload: !reload }));
+        Swal.fire("Success", "New Expense Item Added", "success");
+
+        reset();
+    };
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -57,118 +86,129 @@ const ExpenseItem = () => {
     };
 
     return (
-        <Box className="mt-3">
-            <Box sx={{ marginBottom: '30px', backgroundColor: '#f1f3f6' }}>
-                <div className='d-flex justify-content-between  border'>
-                    <div className='d-flex text-start ms-2 p-2 '>
-                        <AssignmentIcon style={{ fontSize: '60px', backgroundColor: '#002447', color: 'white' }}></AssignmentIcon>
+        <Container sx={{ width: "100%", mb: 5 }}>
+            <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
+                <Typography>
+                    <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
+                </Typography>
+                <Typography>
+                    <span style={{ fontSize: "26px", marginLeft: '-36px' }}>Expense</span>{" "}
+                    <br /> <span style={{ color: "#969494" }}>Manage Expenses</span>
+                </Typography>
+            </Box>
 
-                        <div className="ms-2">
-                            <h5> Expense </h5>
-                            <small className=''>Manage Expense Item</small>
+            <Box className={`${styles.tableContainer}`}>
+                <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+                    Add New Expense
+                </Typography>
+                <hr />
+                <div className="mt-2">
+                    <div className="form-container">
+                        <div>
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <div className="row gx-3 mb-3">
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div className="p-3 border bg-light">
+                                            <div className="mb-3">
+                                                <label
+                                                    className="form-label"
+                                                    style={{ fontWeight: "bold" }}
+                                                >
+                                                    Expense Name{" "}
+                                                    <sup className="text-danger fw-bold fs-6">*</sup>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Expense Name"
+                                                    style={{ background: "#E5E5E5" }}
+                                                    {...register("name", { required: true })}
+                                                />
+                                                {errors.name && (
+                                                    <span className="text-danger">
+                                                        Please enter expense item name.
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div className="p-4 border bg-light">
+                                            <div className="mb-3">
+                                                <Box sx={{ textAlign: "center", my: 2 }}>
+                                                    <input
+                                                        type="reset"
+                                                        className={`${"btn"} ${styles.resetBtn}`}
+                                                        style={{ background: "#251D58", color: "#fff" }}
+                                                        value="Reset"
+                                                    />
+                                                    <input
+                                                        type="submit"
+                                                        className={`${"btn"} ${styles.saveBtn}`}
+                                                        style={{ background: "#251D58", color: "#fff" }}
+                                                        value="Save"
+                                                    />
+                                                </Box>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div>
-                        <small className=' fw-bold border p-1'>Manage Expense Item</small>
-                    </div>
-
                 </div>
             </Box>
-            <div className='text-end '>
 
-                <Link to="/addExpense">
-                <button style={{ backgroundColor: '#45c203 ' }} className='  text-light btn fw-bold py-2 me-3'><FormatAlignJustifyIcon></FormatAlignJustifyIcon> Add ExpenseItem</button>
-                </Link>
-            </div>
-            <Container sx={{ width: "100%", marginTop:'20px' }}>
-
-
-                <Box sx={{ boxShadow: '0px 0px 01px 2px whiteSmoke', backgroundColor: '#f1f3f6' }}>
-                    <Typography variant="h6" sx={{ borderBottom: '1px solid lightGray', color: 'gray' }}>
-                        Add Expense Item
-
-                    </Typography>
-                    <Grid sx={{ padding: '20px' }} container spacing={2}>
-                        <Grid item xs={2}>
-                            <Typography variant="small" sx={{ fontWeight: 'bold', color: 'gray' }}>
-                                Expence Name *
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={10} sx={{ marginBottom: '50px' }}>
-                            <TextField sx={{ width: '50%' }} id="outlined-basic" label="Category Name" variant="outlined" />
-                            <Button variant="contained" sx={{ marginLeft: '20px', marginTop: '5px', backgroundColor: '#002447' }}>Save</Button>
-                        </Grid>
-                    </Grid>
-
-                </Box>
-                <Box sx={{ borderBottom: "1px solid lightGray", display:'flex', backgroundColor:'#f1f3f6' , marginTop:'35px',  marginLeft:'5px' ,marginRight:'5px' }}>
-                        <Typography
-                            variant="h6"
-                            sx={{
-                                fontWeight: "bold",
-                                color: "gray",
-                                fontSize: "3vh",
-                                margin: "10px",
-                                textAlign:'start'
-                            }}
-                        >
-                          Seacrh By Expese Name
-                        </Typography>
-                        <Box sx={{ display: "flex", padding: "5px",marginTop:'5px' }}>
-
-                            <input
-                                className="p-2 mb-3"
-                                type="search"
-                                placeholder="Seacrh Here"
-                                name=""
-                                id=""
-                            />
-                              <button style={{ backgroundColor: '#45c203 ', height:'40px' }} className='  text-light btn fw-bold ms-3'>Search</button>
-                        </Box>
-                    </Box>
-
-                <Paper sx={{ marginTop: '50px', paddingBottom: '5px', backgroundColor:'#f1f3f6'}}>
-                    <Box sx={{ borderBottom: '1px solid lightGray', display: 'flex' }}>
-                        <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'gray', fontSize: '3vh', margin: '10px', }}>
-                            Expense Item
-                        </Typography>
-                        
-                    </Box>
-                    <TableContainer component={Paper} sx={{ width: '97%', margin: '15px', border: '1px solid lightGray' }}>
-
-                        <Table aria-label="simple table">
-                            <TableHead sx={{ backgroundColor: '#002447' }}>
-                                <TableRow className="">
-
-                                    <TableCell sx={{ fontWeight: 'bold', color: 'white' }} align="center" >SL.</TableCell>
-                                    <TableCell sx={{ fontWeight: 'bold', color: 'white' }} align="center">Expense Item</TableCell>
-                                    <TableCell sx={{ fontWeight: 'bold', color: 'white' }} align="center">Action</TableCell>
-
-                                </TableRow>
-                            </TableHead>
-                            <TableBody >
-                                {expenses
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((expense) => (
-                                        <Row key={expense._id} expense={expense} />
-                                    ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Paper>
+            <Box sx={{ marginTop: 5 }} className={`${styles.tableContainer}`}>
+                <Typography sx={{ fontWeight: "bold", textAlign: "left" }}>
+                    Manage Expense
+                </Typography>
+                <hr />
+                <TableContainer
+                    component={Paper}
+                    sx={{ border: 1, borderColor: "grey.300" }}
+                >
+                    <Table aria-label="simple table">
+                        <TableHead className={`${styles.tableHeader}`}>
+                            <TableRow>
+                                <TableCell className={`${styles.tableCell}`}>SL.</TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Expense Name
+                                </TableCell>
+                                <TableCell align="center" className={`${styles.tableCell}`}>
+                                    Action
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {expenseItems
+                                ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((expItem, index) => (
+                                    <Row
+                                        key={expItem._id}
+                                        expItem={expItem}
+                                        serial={index}
+                                    // loading={loading}
+                                    // reload={reload}
+                                    // setReload={setReload}
+                                    />
+                                ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
                 <Typography className="mt-3">
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 15]}
                         component="div"
-                        count={expenses.length}
+                        count={expenseItems.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Typography>
-            </Container>
-        </Box>
+            </Box>
+        </Container>
     );
 };
 

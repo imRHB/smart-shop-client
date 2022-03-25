@@ -42,6 +42,15 @@
     margin-right: 15px !important;
   }
   
+  .searchBtn {
+    background-color: #003366 !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-right: 5px !important;
+  }
+  
   .designationBtn {
     background-color: #003366 !important;
     color: #fff !important;
@@ -74,3 +83,22 @@
     padding: 17px;
     border-radius: 5px;
   }
+  
+  .resetBtn {
+    background-color: #e7575e !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    margin-right: 5px !important;
+  }
+  
+  .saveBtn {
+    background-color: #003366 !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    margin-right: 5px !important;
+  }
+  

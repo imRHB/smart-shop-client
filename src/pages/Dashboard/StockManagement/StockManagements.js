@@ -16,6 +16,8 @@ import TablePagination from "@mui/material/TablePagination";
 import { Button, Container, TextField } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import styles from "./StockManagements.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { loadProducts } from "../../../store/products";
 
 function Row(props) {
     const { product } = props;
@@ -42,8 +44,8 @@ function Row(props) {
                 <TableCell align="center">{product.name}</TableCell>
                 <TableCell align="center">{product.category}</TableCell>
                 <TableCell align="center">{50}</TableCell>
-                <TableCell align="center">{product.salePrice}</TableCell>
-                <TableCell align="center">{product.price}</TableCell>
+                <TableCell align="center">{product.supplierPrice}</TableCell>
+                <TableCell align="center">{product.sellPrice}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -86,21 +88,34 @@ function Row(props) {
 
 const StockManagements = () => {
     const [page, setPage] = React.useState(0);
+    const dispatch = useDispatch();
     const [inputValue, setInputValue] = React.useState("");
-    const [productDisplayed, setProductDisplayed] = React.useState([]);
-    const [allProducts, setAllProducts] = React.useState([]);
+
+    // const [allProducts, setAllProducts] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    useEffect(() => {
-        fetch("https://zahidhasan2806.github.io/productData/products.json")
-            .then(res => res.json())
-            .then(data => {
+    // useEffect(() => {
+    //     fetch("https://zahidhasan2806.github.io/productData/products.json")
+    //         .then(res => res.json())
+    //         .then(data => {
 
-                setAllProducts(data)
-                setProductDisplayed(data)
-            })
-    }, [])
+    //             setAllProducts(data)
+    //             setProductDisplayed(data)
+    //         })
+    // }, [])
+
+    // Getting all product from store
+    const allProducts = useSelector(
+        (state) => state.entities.products.allProduct
+    );
+    const [productDisplayed, setProductDisplayed] = React.useState(allProducts);
+    // Load products from Database
+    useEffect(() => {
+        dispatch(loadProducts());
+    }, [dispatch, allProducts]);
+
+
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -116,16 +131,17 @@ const StockManagements = () => {
         setProductDisplayed(matchedProduct);
 
     }
+
     return (
         <Container sx={{ width: "100%", mb: 5 }}>
-            <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 1 }}>
+            <Box className={`${styles.topContainer}`} sx={{ display: "flex", my: 3 }}>
                 <Typography>
                     <AssignmentIcon className={`${styles.assignmentIcon}`} />{" "}
                 </Typography>
                 <Typography>
-                    <span style={{ fontSize: "26px" }}>
-                        Stock Report</span> <br />{" "}
-                    <span style={{ color: "#969494", marginRight: "31px" }}>All Stock Report</span>
+                    <span style={{ fontSize: "26px", marginLeft: "-60px" }}>
+                        Stock</span> <br />{" "}
+                    <span style={{ color: "#969494", marginRight: "31px" }}>Stock Report</span>
                 </Typography>
             </Box>
             <Box sx={{ textAlign: "left", mb: 1 }}>

@@ -7,8 +7,8 @@
     "productId": "0525509283",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1 kg",
-    "price": 18,
-    "salePrice": 15
+    "supplierPrice": 15,
+    "sellPrice": 18
   },
   {
     "_id": 2,
@@ -18,8 +18,8 @@
     "productId": "0525509284",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1 kg",
-    "price": 38,
-    "salePrice": 35
+    "supplierPrice": 35,
+    "sellPrice": 38
   },
   {
     "_id": 3,
@@ -29,8 +29,8 @@
     "productId": "0525509285",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "Per piece",
-    "price": 35,
-    "salePrice": 32
+    "supplierPrice": 32,
+    "sellPrice": 35
   },
   {
     "_id": 4,
@@ -40,8 +40,8 @@
     "productId": "0525509286",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1 kg",
-    "price": 135,
-    "salePrice": 120
+    "supplierPrice": 120,
+    "sellPrice": 135
   },
   {
     "_id": 5,
@@ -51,8 +51,8 @@
     "productId": "0525509287",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "Per piece",
-    "price": 9,
-    "salePrice": 8
+    "supplierPrice": 8,
+    "sellPrice": 9
   },
   {
     "_id": 6,
@@ -62,8 +62,8 @@
     "productId": "0525509288",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1 kg",
-    "price": 270,
-    "salePrice": 255
+    "supplierPrice": 255,
+    "sellPrice": 270
   },
   {
     "_id": 7,
@@ -73,8 +73,8 @@
     "productId": "0525509289",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1 kg",
-    "price": 380,
-    "salePrice": 370
+    "supplierPrice": 370,
+    "sellPrice": 380
   },
   {
     "_id": 8,
@@ -84,8 +84,8 @@
     "productId": "0525509290",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1 kg",
-    "price": 220,
-    "salePrice": 210
+    "supplierPrice": 210,
+    "sellPrice": 220
   },
   {
     "_id": 9,
@@ -95,8 +95,8 @@
     "productId": "0525509291",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1 kg",
-    "price": 270,
-    "salePrice": 260
+    "supplierPrice": 260,
+    "sellPrice": 270
   },
   {
     "_id": 10,
@@ -106,8 +106,8 @@
     "productId": "0525509292",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1 kg",
-    "price": 280,
-    "salePrice": 270
+    "supplierPrice": 270,
+    "sellPrice": 280
   },
   {
     "_id": 11,
@@ -117,8 +117,8 @@
     "productId": "0525509293",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1 kg",
-    "price": 600,
-    "salePrice": 590
+    "supplierPrice": 590,
+    "sellPrice": 600
   },
   {
     "_id": 12,
@@ -128,8 +128,8 @@
     "productId": "0525509294",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1 kg",
-    "price": 900,
-    "salePrice": 890
+    "supplierPrice": 890,
+    "sellPrice": 900
   },
   {
     "_id": 13,
@@ -139,8 +139,8 @@
     "productId": "0525509295",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1 kg",
-    "price": 750,
-    "salePrice": 720
+    "supplierPrice": 720,
+    "sellPrice": 750
   },
   {
     "_id": 14,
@@ -150,8 +150,8 @@
     "productId": "0525509296",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1 kg",
-    "price": 320,
-    "salePrice": 300
+    "supplierPrice": 300,
+    "sellPrice": 320
   },
   {
     "_id": 15,
@@ -161,8 +161,8 @@
     "productId": "0525509297",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "250 ml",
-    "price": 25,
-    "salePrice": 24
+    "supplierPrice": 24,
+    "sellPrice": 25
   },
   {
     "_id": 16,
@@ -172,8 +172,8 @@
     "productId": "0525509298",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "500 ml",
-    "price": 40,
-    "salePrice": 38
+    "supplierPrice": 38,
+    "sellPrice": 40
   },
   {
     "_id": 17,
@@ -183,8 +183,8 @@
     "productId": "0525509299",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "600 ml",
-    "price": 35,
-    "salePrice": 34
+    "supplierPrice": 34,
+    "sellPrice": 35
   },
   {
     "_id": 18,
@@ -194,8 +194,8 @@
     "productId": "0525509300",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "1.25 Ltr",
-    "price": 60,
-    "salePrice": 58
+    "supplierPrice": 58,
+    "sellPrice": 60
   },
   {
     "_id": 19,
@@ -205,8 +205,8 @@
     "productId": "0525509301",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "240 gm",
-    "price": 40,
-    "salePrice": 38
+    "supplierPrice": 38,
+    "sellPrice": 40
   },
   {
     "_id": 20,
@@ -216,8 +216,8 @@
     "productId": "0525509302",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "70±5 gm",
-    "price": 10,
-    "salePrice": 9
+    "supplierPrice": 9,
+    "sellPrice": 10
   },
   {
     "_id": 21,
@@ -227,7 +227,7 @@
     "productId": "0525509303",
     "description": "The image shown is a representation and may slightly vary from the actual product. Every effort is made to maintain the accuracy of all information displayed. However, actual product packaging and materials may contain more and/or different information.",
     "unit": "56 gm",
-    "price": 10,
-    "salePrice": 9
+    "supplierPrice": 9,
+    "sellPrice": 10
   }
 ]
