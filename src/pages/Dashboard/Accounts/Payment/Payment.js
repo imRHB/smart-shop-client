@@ -152,6 +152,8 @@ const Payment = () => {
                     >
                       <MenuItem value="supplier">Supplier</MenuItem>
                       <MenuItem value="employee">Employee</MenuItem>
+                      <MenuItem value="loan">Loan</MenuItem>
+                      <MenuItem value="office">Office Expense</MenuItem>
                     </Select>
                   </FormControl>
                 </Box>
